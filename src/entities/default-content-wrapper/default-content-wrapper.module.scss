@@ -1,8 +1,10 @@
 .wrapper {
-    padding: 34px 153px;
+    padding: 34px;
     overflow-x: scroll;
+    min-width: 1340px;
+    max-width: 1340px;
     background-color: #e3e3f3;
-    height: 90.5vh;
+    height: 100vh;
 
     width: fit-content;
 
