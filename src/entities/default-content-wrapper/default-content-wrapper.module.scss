@@ -1,0 +1,23 @@
+.wrapper {
+    padding: 34px 153px;
+    overflow-x: scroll;
+    background-color: #e3e3f3;
+    height: 90.5vh;
+
+    width: fit-content;
+
+    &__mobile {
+        --bs-gutter-y: 3rem;
+    }
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        background: transparent;
+    }
+
+    @media (max-width: 1500px) {
+        padding: 10px;
+    }
+}
+

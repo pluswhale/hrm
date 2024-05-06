@@ -1,0 +1,1 @@
+export {default as CandidatesList} from "./candidates-list";

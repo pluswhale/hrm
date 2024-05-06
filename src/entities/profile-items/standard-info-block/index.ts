@@ -1,0 +1,1 @@
+export { StandardInfoBlock } from './standard-info-block';

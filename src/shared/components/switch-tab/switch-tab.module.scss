@@ -1,0 +1,68 @@
+.tabContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.tab {
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+  line-height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    color: #6362e7;
+  }
+}
+
+.activeTab {
+  line-height: 24px;
+  font-size: 20px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6362e7;
+}
+
+.separator {
+  width: 1px;
+  height: 29px;
+  background-color: black;
+}
+
+.alternative .tab {
+  color: #6362e7;
+}
+
+.alternative .activeTab {
+  color: black;
+}
+
+.alternative .separator {
+  width: 1px;
+  height: 29px;
+  background-color: black;
+  transform: rotate(30deg);
+}
+.alternative .tab {
+  font-size: 25px;
+  font-weight: 500;
+  color: #8A8A8A;
+  line-height: 29.63px;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    color: black;
+  }
+}
+.alternative .activeTab {
+  color: black;
+  line-height: 29.63px;
+  font-size: 25px;
+}

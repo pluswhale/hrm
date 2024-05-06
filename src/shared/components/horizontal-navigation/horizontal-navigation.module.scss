@@ -1,0 +1,37 @@
+.horizontal_navigation {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &__back_wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        border-radius: 20px;
+        width: 75px;
+        height: 29px;
+    }
+
+    .horizontal_navigation__item,
+    .horizontal_navigation__item.active {
+        font-size: 25px;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .horizontal_navigation__item {
+        color: #8A8A8A;
+    }
+
+    .horizontal_navigation__item.active {
+        color: #6362E7;
+    }
+
+    &__slash {
+        font-size: 25px;
+        font-weight: 500;
+        text-decoration: none;
+        color: #8A8A8A;
+    }
+}

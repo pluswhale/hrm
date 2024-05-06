@@ -1,0 +1,41 @@
+.container{
+  width: 100%;
+  display: flex;
+  z-index: 9999;
+  background-color: white;
+
+  &__wrapper{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 50px;
+  }
+
+  &__profile{
+    display: flex;
+    gap: 25px;
+    align-items: center;
+  }
+
+  &__button{
+    height: 24px;
+    width: 24px;
+    border: none;
+    background: none;
+  }
+}
+
+@media (max-width: 1024px) {
+    .container{
+      &__burger{
+        display: none;
+      }
+    }
+}
+
+@media (max-width: 900px) {
+  .container{
+  position: fixed;
+}
+}

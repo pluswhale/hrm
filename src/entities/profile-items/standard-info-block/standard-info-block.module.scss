@@ -1,0 +1,46 @@
+.standard_info_block{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: flex-start;
+    background-color: white;
+    border-radius: 10px;
+    gap: 20px;
+
+    &__title {
+      color: black;
+      font-size: 20px;
+      line-height: 21px;
+    }
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &__row_title {
+      display: flex;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18.75px;
+      color: #707070;
+      gap: 10px;
+    }
+
+
+    &__row_value {
+      font-weight: 400;
+      font-size: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 5px;
+      display: flex;
+      line-height: 18.75px;
+      color: black;
+    }
+}
+
+ 
+
+

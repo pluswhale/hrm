@@ -1,0 +1,74 @@
+.container{
+    background-color: white;
+    border-radius: 10px ;
+    width: 100%;
+    padding: 5px 20px;
+
+    &__card{
+        padding: 15px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__head{
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
+    &__img{
+        width: 60px;
+        height: 60px;
+        border-radius: 100px;
+    }
+
+    &__name_prof{
+        width: 200px;
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    &__name{
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 17px;
+        color: black;
+    }
+
+    &__prof{
+        align-items: flex-start;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #707070;
+    }
+
+    &__status {
+        border-radius: 24px;
+        padding: 5px 15px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    &__meeting{
+        align-items: flex-start;
+        font-weight: 400;
+        font-size: 16px;
+        width: 200px;
+        display: flex;
+        line-height: 19px;
+        color: #2C323F;
+    }
+    &__data{
+        justify-content: center;
+        font-weight: 400;
+        font-size: 16px;
+        max-width: 200px;
+        display: flex;
+        line-height: 19px;
+        color: #2C323F;
+    }
+}

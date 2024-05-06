@@ -1,0 +1,33 @@
+.vacancy_candidates {
+    display: flex;
+    flex-direction: column;
+    margin-top: 55px;
+
+    &__count_and_buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__count {
+        font-size: 25px;
+        font-weight: 500;
+        line-height: 29.63px;
+        text-align: left;
+        color: #242934;
+    }
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-top: 24px;
+    }
+}
+

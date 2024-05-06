@@ -1,0 +1,42 @@
+.vacancy_candidate_card {
+    width: 277px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    border: 1px solid #6362e7;
+
+    &__container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    &__avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    &__title_and_info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        color: black;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 16.8px;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    &__info {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 18.75px;
+        text-align: left;
+        color: #707070;
+        white-space: nowrap;
+    }
+}
+
