@@ -1,0 +1,11 @@
+.practies_block {
+    width: 100%;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
