@@ -3,18 +3,23 @@
     border-radius: 10px ;
     width: 100%;
     padding: 5px 20px;
+    display: grid;
+    gap: 20px;
 
     &__card{
+        cursor: pointer;
         padding: 15px 0;
-        display: flex;
-        justify-content: space-between;
         align-items: center;
+        display: grid;
+        grid-template-columns: 0.5fr 0.6fr 0.5fr 0.2fr;
+        gap: 10px;
     }
 
     &__head{
-        display: flex;
+        display: grid;
         gap: 15px;
         align-items: center;
+        grid-template-columns: auto 1fr;
     }
 
     &__img{
@@ -26,8 +31,7 @@
     &__name_prof{
         width: 200px;
         align-items: flex-start;
-        display: flex;
-        flex-direction: column;
+        display: grid;
         gap: 5px;
     }
 
@@ -47,8 +51,12 @@
     }
 
     &__status {
+        display: flex;
+        justify-content: center;
         border-radius: 24px;
         padding: 5px 15px;
+        height: 26px;
+        width: 112px;
         font-size: 14px;
         font-weight: 500;
     }
@@ -57,18 +65,12 @@
         align-items: flex-start;
         font-weight: 400;
         font-size: 16px;
-        width: 200px;
-        display: flex;
-        line-height: 19px;
         color: #2C323F;
     }
     &__data{
         justify-content: center;
         font-weight: 400;
         font-size: 16px;
-        max-width: 200px;
-        display: flex;
-        line-height: 19px;
         color: #2C323F;
     }
 }

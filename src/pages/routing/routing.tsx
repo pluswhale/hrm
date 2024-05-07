@@ -8,6 +8,7 @@ import { VacanciesProfile } from "pages/vacancies-profile";
 import { VacanciesCandidate } from "pages/vacancies-candidate";
 import {RequestsList} from "../requests-list";
 import SurveyList from "../survey-list/survey-list";
+import { CreateSurvey } from '../create-survey';
 
 export const Routing = () => {
     return (
@@ -23,6 +24,7 @@ export const Routing = () => {
                 <Route path="vacancies/:id/:userId" element={<VacanciesCandidate />} />
                 <Route path="request" element={<RequestsList />} />
                 <Route path="survey" element={<SurveyList/>} />
+                <Route path="survey/create" element={<CreateSurvey/>} />
 
             </Route>
         </Routes>

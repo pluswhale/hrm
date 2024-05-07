@@ -26,9 +26,8 @@ const SurveyList = () => {
                         styles={{ width: 'fit-content' }}
                         text='Новый опрос'
                         type='default_bg_white'
-
+                        href='survey/create'
                     />
-                    
                 </div>
                 <div className={styles.vacancies__main_content}>
                     <div className={styles.vacancies__items}>

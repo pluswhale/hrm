@@ -14,36 +14,17 @@ export const SurveyCard: FC<SurveyCardProps> = (
     }
 ): ReactElement => {
 
-    const displayStatus = (status: string) => {
-        let color = '';
-
-        switch (status) {
-            case 'Закрыта': {
-                color = '#8A8A8A';
-                break;
-            }
-            case 'В работе': {
-                color = '#6362E7';
-                break;
-            }
-            default: color = '#6362E7';
-        }
-
-        return <span style={{ backgroundColor: color }} className={styles.survey_card__status}>{status}</span>
-    }
-
     return (
         <div className={styles.survey_card}>
             <div className={styles.survey_card__container}>
 
                 <div className={styles.survey_card__title_and_status}>
-                    <Link to={`/`}>
+                    <Link className={styles.survey_card__title} to={`/`}>
                         <h5 className={styles.survey_card__title}>
                             {title}
                         </h5>
                     </Link>
 
-                    {displayStatus(status)}
                 </div>
 
                 <div className={styles.survey_card__created_and_deadline}>
