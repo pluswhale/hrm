@@ -25,11 +25,10 @@ export const NavItemTree = ({ title, children, className }: NavItemTreeProps) =>
                 {isOpen ? <ChevronUp className={'mx-2'} /> : <ChevronDown className={'mx-2'} />}
             </div>
 
-            <div
-                className={`${style.navitem__text_click} mx-2 ${isOpen ? '' : style.navitem__text_click__active}`}
-            >
+            <div className={`${style.navitem__text_click} mx-2 ${isOpen ? '' : style.navitem__text_click__active}`}>
                 {children}
             </div>
         </div>
     );
 };
+
