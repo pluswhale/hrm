@@ -1,0 +1,1 @@
+export {VacanciesBlock} from './vacancies-block';
