@@ -1,68 +1,67 @@
+@import '../../../assets/styles/variables.scss';
 .tabContainer {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.tab,
+.activeTab {
+    font-family: 'Rubik', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 29.63px;
+    text-align: left;
+
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .tab {
-  font-size: 20px;
-  font-weight: 500;
-  color: black;
-  line-height: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    color: #6362e7;
-  }
+    color: $dimGray;
 }
 
 .activeTab {
-  line-height: 24px;
-  font-size: 20px;
-  font-weight: 500;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #6362e7;
+    color: $dimDark;
 }
 
 .separator {
-  width: 1px;
-  height: 29px;
-  background-color: black;
+    width: 1px;
+    height: 29px;
+    background-color: $dimDark;
 }
 
 .alternative .tab {
-  color: #6362e7;
+    color: $purple;
 }
 
 .alternative .activeTab {
-  color: black;
+    color: $dimDark;
 }
 
 .alternative .separator {
-  width: 1px;
-  height: 29px;
-  background-color: black;
-  transform: rotate(30deg);
+    width: 1px;
+    height: 29px;
+    background-color: $dimDark;
+    transform: rotate(30deg);
 }
 .alternative .tab {
-  font-size: 25px;
-  font-weight: 500;
-  color: #8A8A8A;
-  line-height: 29.63px;
-  background: none;
-  border: none;
-  cursor: pointer;
+    font-size: 25px;
+    font-weight: 500;
+    color: #8a8a8a;
+    line-height: 29.63px;
+    background: none;
+    border: none;
+    cursor: pointer;
 
-  &:hover {
-    color: black;
-  }
+    &:hover {
+        color: $dimDark;
+    }
 }
 .alternative .activeTab {
-  color: black;
-  line-height: 29.63px;
-  font-size: 25px;
+    color: $dimDark;
+    line-height: 29.63px;
+    font-size: 25px;
 }
+

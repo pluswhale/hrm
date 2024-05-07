@@ -3,15 +3,13 @@ import { SwitchTabProps } from './types';
 
 import style from './switch-tab.module.scss';
 
-const SwitchTab: FC<SwitchTabProps> = (
-    {   tabs,
-        onTabClick,
-        activeTab,
-        design = 'default',
-        onFirstButtonClick
-    }
-): ReactElement => {
-    
+const SwitchTab: FC<SwitchTabProps> = ({
+    tabs,
+    onTabClick,
+    activeTab,
+    design = 'default',
+    onFirstButtonClick,
+}): ReactElement => {
     const handleFirstButtonClick = () => {
         if (design === 'alternative' && activeTab === 0 && onFirstButtonClick) {
             onFirstButtonClick(); // Вызываем колбэк для первой кнопки в альтернативном дизайне
@@ -26,12 +24,14 @@ const SwitchTab: FC<SwitchTabProps> = (
                 <React.Fragment key={index}>
                     <button
                         className={activeTab === index ? style.activeTab : style.tab}
-                        onClick={() => index === 0 ? handleFirstButtonClick() : onTabClick(index)}
+                        onClick={() => (index === 0 ? handleFirstButtonClick() : onTabClick(index))}
                     >
                         {tab.label}
                     </button>
                     {index !== tabs.length - 1 && (
-                        <div className={`${style.separator} ${style[design === 'alternative' ? 'alternativeSeparator' : '']}`}>
+                        <div
+                            className={`${style.separator} ${style[design === 'alternative' ? 'alternativeSeparator' : '']}`}
+                        >
                             {design === 'alternative'}
                         </div>
                     )}
@@ -42,3 +42,4 @@ const SwitchTab: FC<SwitchTabProps> = (
 };
 
 export default SwitchTab;
+
