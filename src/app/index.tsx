@@ -1,15 +1,14 @@
-import './index.css';
-import {Routing} from "pages/routing";
-import {withProviders} from "./providers";
+import './index.scss';
+import { Routing } from 'pages/routing';
+import { withProviders } from './providers';
 
 function App() {
-  return (
-      <div className="App">
-        <div className={"d-flex flex-nowrap"}>
-          <Routing/>
+    return (
+        <div style={{ display: 'flex' }}>
+            <Routing />
         </div>
-      </div>
-  );
+    );
 }
 
 export default withProviders(App);
+

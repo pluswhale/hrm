@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { Header } from "./header";
-import { Sidebar } from "./sidebar";
-import { Outlet } from "react-router-dom";
-import styles from "./navigation.module.scss";
+import { useEffect, useState } from 'react';
+import { Header } from './header';
+import { Sidebar } from './sidebar';
+import { Outlet } from 'react-router-dom';
+import styles from './navigation.module.scss';
 
 export const Navigation = () => {
     const [isOpen, setOpen] = useState<boolean>(false);
@@ -21,10 +21,10 @@ export const Navigation = () => {
             }
         };
 
-        window.addEventListener("resize", handleResize);
+        window.addEventListener('resize', handleResize);
 
         return () => {
-            window.removeEventListener("resize", handleResize);
+            window.removeEventListener('resize', handleResize);
         };
     }, []);
 
@@ -39,15 +39,13 @@ export const Navigation = () => {
     return (
         <>
             <Sidebar isOpen={isOpen} setOpen={setOpen} isMobile={isMobile} closeSidebar={closeSidebar} />
-            <div
-                className={`${styles.scrollArea} ${styles.mainContent}`}
-                onClick={closeSidebar}
-            >
+            <div className={styles.main_content} onClick={closeSidebar}>
                 <Header toggleSidebar={toggleSidebar} isMobile={isMobile} />
-                <div className={"text-light"}>
+                <div className={styles.container}>
                     <Outlet />
                 </div>
             </div>
         </>
     );
 };
+

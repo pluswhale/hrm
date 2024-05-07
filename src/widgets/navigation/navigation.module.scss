@@ -1,8 +1,10 @@
-.mainContent {
+.main_content {
     width: 100%;
 }
 
-.scrollArea {
-    overflow-y: hidden;
-    background: #E3E3F3;
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
+
