@@ -1,0 +1,123 @@
+@import '../../assets/styles/variables.scss';
+
+.filter {
+    background-color: $white;
+    width: 360px;
+    min-width: 360px;
+    padding: 20px;
+    border-radius: 10px;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 18.75px;
+        text-align: left;
+        color: #2c323f;
+        margin-bottom: 0 !important;
+    }
+
+    &__input_wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        border: 1px solid #707070;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 25px;
+    }
+
+    &__input {
+        outline: none;
+        border: none;
+        width: 90%;
+        height: 100%;
+
+        font-family: 'Rubik', sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 17.78px;
+        text-align: left;
+        color: #707070;
+    }
+
+    &__sets {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+        width: 100%;
+        margin-top: 25px;
+    }
+
+    &__set {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        &_name {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 18.75px;
+            text-align: left;
+            color: #2c323f;
+            margin-bottom: 25px;
+        }
+
+        &_rows {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        &_row {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &__check,
+            &__check_active {
+                font-family: 'Roboto', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 18.75px;
+                text-align: left;
+            }
+
+            &__check {
+                color: #707070;
+            }
+
+            &__check_active {
+                color: $purple;
+            }
+
+            &__count {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 31px;
+                height: 23px;
+                text-align: center;
+                border-radius: 5px;
+                font-family: 'Roboto', sans-serif;
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 15.23px;
+                text-align: left;
+                background-color: $purple;
+                color: $white;
+            }
+        }
+    }
+}
+

@@ -1,62 +1,40 @@
-import { FC } from "react";
-import {
-    Badge,
-    Button,
-    Card,
-    CardBody,
-    CardTitle,
-    Col,
-    Form,
-    FormControl,
-    FormGroup,
-    InputGroup,
-    Row
-} from "react-bootstrap";
-import { Search } from "react-bootstrap-icons";
-import { FilterProps } from "./types";
+import { FC } from 'react';
+import { Search } from 'react-bootstrap-icons';
+import { FilterProps } from './types';
+
+import styles from './filter.module.scss';
 
 export const Filter: FC<FilterProps> = ({ title, filterSet, onClickSearch }) => {
     return (
-        <Col style={{ maxWidth: '360px', minWidth: '360px' }}>
-            <Card>
-                <CardBody>
-                    <CardTitle style={{ fontSize: '16px' , display: 'flex' , justifyContent: 'left'}}>{title}</CardTitle>
-                    <hr />
+        <div className={styles.filter}>
+            <div className={styles.filter__container}>
+                <h3 className={styles.filter__title}>{title}</h3>
 
-                    <Form>
-                        <FormGroup className={"text-start my-2"}>
-                            <InputGroup>
-                                <FormControl type={"text"} placeholder={"Поиск"} />
-                                <Button variant={"outline-secondary"}>
-                                    <Search />
-                                </Button>
-                            </InputGroup>
-                        </FormGroup>
-                        {filterSet
-                            ? filterSet.map((set) => (
-                            <FormGroup className={"text-start my-3"} key={set.id}>
-                                <h5>{set.title}</h5>
-                                {set.checkboxes.map((checkbox) => (
-                                    <Row className={"justify-content-between my-1"} key={checkbox.label}>
-                                        <Col xs={10}>
-                                            <div>{checkbox.label}</div>
-                                        </Col>
-                                        <Col>
-                                            <Row xs={2}>
-                                                <Badge>15</Badge>
-                                                {checkbox?.checked && <Form.Check />}
-                                            </Row>
-                                        </Col>
-                                    </Row>
-                                ))}
-                            </FormGroup>
-                            ))
-                            : null
-                        }
-                    </Form>
+                <div className={styles.filter__input_wrapper}>
+                    <input className={styles.filter__input} placeholder="Поиск" />
+                    <Search />
+                </div>
 
-                </CardBody>
-            </Card>
-        </Col>
+                {filterSet && (
+                    <div className={styles.filter__sets}>
+                        {filterSet.map((set) => (
+                            <div className={styles.filter__set}>
+                                <h5 className={styles.filter__set_name}>{set.title}</h5>
+
+                                <div className={styles.filter__set_rows}>
+                                    {set.checkboxes.map((checkbox) => (
+                                        <div className={styles.filter__set_row}>
+                                            <span className={styles.filter__set_row__check}>{checkbox.label}</span>
+                                            <span className={styles.filter__set_row__count}>23</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </div>
     );
 };
+

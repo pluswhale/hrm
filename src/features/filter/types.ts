@@ -1,15 +1,15 @@
 export type FilterProps = {
-    title: string,
-    filterSet?: FilterSet[],
-    onClickSearch?: () => void,
-
-}
+    title: string;
+    filterSet?: FilterSet[];
+    onClickSearch?: () => void;
+};
 
 export type FilterSet = {
-    id: number,
-    title: string,
+    id: number;
+    title: string;
     checkboxes: {
-        label: string,
-        checked: boolean
-    } []
-}
+        label: string;
+        checked: boolean;
+    }[];
+};
+
