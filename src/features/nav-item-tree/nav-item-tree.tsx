@@ -26,18 +26,10 @@ export const NavItemTree = ({ title, children, className }: NavItemTreeProps) =>
             </div>
 
             <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '10px',
-                    marginTop: '10px',
-                    marginBottom: '10px',
-                }}
-                className={isOpen ? 'tree-child mx-2' : 'tree-child mx-2 d-none'}
+                className={`${style.navitem__text_click} mx-2 ${isOpen ? '' : style.navitem__text_click__active}`}
             >
                 {children}
             </div>
         </div>
     );
 };
-

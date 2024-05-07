@@ -1,6 +1,17 @@
 .navitem {
     width: 100%;
 
+    &__text_click{
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        &__active{
+            display: flex;
+        }
+    }
+
     &__text {
         display: flex;
         align-items: center;

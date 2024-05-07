@@ -26,7 +26,7 @@ export const Header = ({ toggleSidebar, isMobile }: HeaderProps) => {
                     <div className={style.container__profile}>
                         <button className={style.container__button}><Bell height={24} width={24} /></button>
                         <a href="#" className={style.container__img}>
-                            <Image roundedCircle src={"https://github.com/mdo.png"} height={58} width={58} />
+                            <Image roundedCircle src={"https://github.com/mdo.png"} style={{borderRadius: '100px'}} height={58} width={58} />
                         </a>
                     </div>
                 </div>

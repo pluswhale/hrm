@@ -3,10 +3,17 @@
     flex-direction: column;
     margin: 0 auto;
     gap: 38px;
+    height: 100%;
     padding-top: 30px;
+    overflow-x: scroll;
     justify-content: center;
     max-width: 1339px;
 
+    &::-webkit-scrollbar-track{
+      width: 0;
+      
+    }
+    
     &__backLink{
       align-items: center;
       display: flex;
