@@ -3,6 +3,7 @@ export type VacancyInfoProps = {
 };
 
 export type Vacancy = {
+    id: number;
     title: string;
     created_at: string;
     deadline: string;
@@ -10,3 +11,4 @@ export type Vacancy = {
     description: string[];
     candidateRequirements: string[];
 };
+

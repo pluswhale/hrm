@@ -4,19 +4,32 @@ import styles from './create-vacancy-form.module.scss';
 import { Input } from 'shared/components/input';
 import { Textarea } from 'shared/components/textarea';
 import { Button } from 'shared/components/button/button';
-import { FC, useState } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { stagesSelector } from '../../redux/selectors/create-vacancy';
 import { useAppDispatch } from '../../redux/store';
-import { addNewStage, removeStage } from '../../redux/slices/create-vacancy';
-import { StageItemProps } from './types';
+import { addNewStage, removeStage, setStages } from '../../redux/slices/create-vacancy';
+import { EditVacancyFormProps, StageItemProps } from './types';
 import deleteIcon from '../../assets/DeleteOutlined.svg';
 
-export const CreateVacancyForm = () => {
+export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactElement => {
     const dispatch = useAppDispatch();
     const [newStage, setNewStage] = useState<string>('');
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm({
+        values: {
+            name: vacancy.title,
+            description: vacancy.description,
+            deadline: vacancy.deadline,
+            income_from: vacancy.preferredIncome.split('-')[0],
+            income_to: vacancy.preferredIncome.split('-')[1],
+            requirements: vacancy.candidateRequirements,
+        },
+    });
+
+    useEffect(() => {
+        if (vacancy.stages.length) dispatch(setStages({ stages: vacancy.stages }));
+    }, [vacancy]);
 
     const stages = useSelector(stagesSelector);
 
@@ -79,7 +92,7 @@ export const CreateVacancyForm = () => {
                         <Textarea
                             width={'100%'}
                             isRequired={false}
-                            name={'requirement'}
+                            name={'requirements'}
                             register={register}
                             placeholder={'Требования'}
                             label="Требования"

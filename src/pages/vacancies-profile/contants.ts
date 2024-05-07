@@ -2,7 +2,8 @@ import { CandidatesRow } from 'features/vacancy-candidates/types';
 import { Vacancy } from 'features/vacancy-info/types';
 
 export const VACANCY_DATA = {
-    title: 'Название вакансии ',
+    id: 1,
+    title: 'Менеджер Проектов',
     created_at: '10 августа 2022 г.',
     deadline: '10 сентября 2022 г.',
     preferredIncome: '80 000 - 160 000 руб.',

@@ -24,7 +24,7 @@ const VacanciesCandidate = () => {
         <DefaultContentWrapper>
             <div className={styles.vacancy_navigation}>
                 <HorizontalNavigation navigation={navigation} />
-                <Button text="Редактировать" type="default_bg_white" />
+                <Button text="Редактировать" view="default_bg_white" />
             </div>
         </DefaultContentWrapper>
     );

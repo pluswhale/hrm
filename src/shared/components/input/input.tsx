@@ -4,6 +4,8 @@ import { InputProps } from './types';
 import styles from './input.module.scss';
 
 export const Input: FC<InputProps> = ({
+    value,
+    onChange,
     width = '100%',
     name,
     isRequired,
@@ -14,6 +16,25 @@ export const Input: FC<InputProps> = ({
     customStyles,
     ...props
 }): ReactElement => {
+    const renderedInput = () => {
+        return onChange ? (
+            <input
+                value={value}
+                onChange={({ target }) => onChange(target.value)}
+                style={customStyles?.input || {}}
+                className={styles.input}
+                placeholder={placeholder}
+            /> // binded input
+        ) : (
+            <input
+                style={customStyles?.input || {}}
+                className={styles.input}
+                placeholder={placeholder}
+                {...register(name, { required: isRequired || false })}
+            /> // form controll input
+        );
+    };
+
     return (
         <div style={{ width }} className={styles.wrapper}>
             {label ? (
@@ -22,20 +43,10 @@ export const Input: FC<InputProps> = ({
                         {label} {isRequired && <span className={styles.required_symbol}>*</span>}
                     </span>
 
-                    <input
-                        style={customStyles?.input || {}}
-                        className={styles.input}
-                        placeholder={placeholder}
-                        {...register(name, { required: isRequired || false })}
-                    />
+                    {renderedInput()}
                 </label>
             ) : (
-                <input
-                    style={customStyles?.input || {}}
-                    className={styles.input}
-                    placeholder={placeholder}
-                    {...register(name, { required: isRequired || false })}
-                />
+                <>{renderedInput()}</>
             )}
         </div>
     );
