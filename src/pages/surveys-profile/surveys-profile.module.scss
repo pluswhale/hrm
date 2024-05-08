@@ -1,0 +1,20 @@
+.survey_navigation{
+  display: flex;
+  justify-content: space-between;
+
+  &__wrap{
+    display: flex;
+    gap: 20px;
+  }
+
+  &__container{
+    &__title {
+      color: black;
+      font-size: 25px;
+      line-height: 30px;
+      font-family: 'Rubik', sans-serif;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  }
+}

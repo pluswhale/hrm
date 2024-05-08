@@ -19,7 +19,7 @@ export const SurveyCard: FC<SurveyCardProps> = (
             <div className={styles.survey_card__container}>
 
                 <div className={styles.survey_card__title_and_status}>
-                    <Link className={styles.survey_card__title} to={`/`}>
+                    <Link className={styles.survey_card__title} to={`/survey/${id}`}>
                         <h5 className={styles.survey_card__title}>
                             {title}
                         </h5>

@@ -1,0 +1,58 @@
+.container{
+  &__title {
+    color: black;
+    font-size: 25px;
+    line-height: 30px;
+    font-family: 'Rubik', sans-serif;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  &__card{
+    width: 661px;
+    max-width: 661px;
+    padding: 20px 21px;
+    background: white;
+    border-radius: 10px;
+  }
+  &__created_and_deadline {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+  }
+
+  &__row {
+    display: flex;
+    gap: 5px;
+
+    &_label,
+    &_value {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 18.96px;
+      text-align: left;
+
+    }
+
+    &_label {
+      color: #242934;
+    }
+
+    &_value {
+      color: #707070;
+    }
+  }
+  &__card_info_wrapp{
+    display: flex;
+    gap: 20px;
+  }
+
+  &__card_block{
+    display: flex;
+    flex-direction: column;
+  }
+
+
+}

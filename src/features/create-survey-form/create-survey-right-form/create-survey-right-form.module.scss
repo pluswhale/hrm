@@ -6,4 +6,58 @@
     background-color: $white;
     border-radius: 10px;
     padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &__wrap{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    &__input_text{
+        font-weight: 400;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        line-height: 18.75px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    &__wrapper{
+        gap: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__span{
+        display: flex;
+        justify-content: space-between;
+        font-weight: 400;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        line-height: 18.75px;
+    }
+
+    &__content_wrapper_img{
+        display: flex;
+        gap: 15px;
+    }
+
+    &__content_agree_img{
+        height: 18px;
+    }
+
+    &__wrapper_radio{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    &__wrap_btn{
+        display: flex;
+        justify-content: flex-end;
+    }
 }

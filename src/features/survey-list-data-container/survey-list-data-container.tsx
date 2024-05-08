@@ -9,7 +9,7 @@ export const SurveyListContainer: FC<SurveyListContainerProps> = ({Survey}): Rea
                 ? Survey?.map((surv) =>
                     <SurveyCard
                         key={surv?.id}
-                        navigationUrl={`/vacancies/${surv.id}`}
+                        navigationUrl={`/survey/${surv.id}`}
                         title={surv?.title}
                         created_at={surv?.created_at}
                         deadline={surv?.deadline}
