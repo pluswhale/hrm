@@ -3,10 +3,11 @@ import BtnInfo from '../../shared/components/switch-tab/switch-tab';
 import { CommentItem } from '../../entities/comment-item';
 import { HistoryItem } from '../../entities/history-item';
 import AddIcon from './../../assets/Add pic - icon.svg';
-import style from './employee_profile_comment_history.module.scss';
 import Emodji from './../../assets/Frame 23459.svg';
 import AddImage from './../../assets/Vector.svg';
 import { Button } from '../../shared/components/button/button';
+
+import style from './comment-and-history-template.module.scss';
 
 const tabs = [{ label: 'Комментарии' }, { label: 'История' }];
 
@@ -25,7 +26,7 @@ const commentInfo = [
     },
 ];
 
-export const EmployeeProfileCommentHistory = () => {
+export const CommentAndHistoryTemplate = () => {
     const [activeTab, setActiveTab] = useState<number>(0);
 
     const handleTabClick = (index: number) => {
