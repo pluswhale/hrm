@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './surveys-profile.module.scss';
 import { DefaultContentWrapper } from '../../entities/default-content-wrapper/default-content-wrapper';
 import { HorizontalNavigation } from '../../shared/components/horizontal-navigation';
 import { Button } from '../../shared/components/button/button';
 import SurveyInfo from '../../features/survey-info/survey-info';
 import { leftColumnData, rightColumnData } from './constants';
+import { SwitchTab } from '../../shared/components/switch-tab';
 
 
 const SurveysProfile = () => {
+    const [activeTab, setActiveTab] = useState<number>(0);
+
+    const tabs = [{ label: "Вопросы" }, { label: "Результаты опроса" } , { label: "Участники" }];
 
     const navigation = [
         {
@@ -33,6 +37,12 @@ const SurveysProfile = () => {
                 <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
                 </div>
             </div>
+            <SwitchTab
+                tabs={tabs}
+                onTabClick={setActiveTab}
+                activeTab={activeTab}
+                design="default"
+            />
         </DefaultContentWrapper>
 );
 };
