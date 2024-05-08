@@ -1,40 +1,34 @@
 import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-content-wrapper';
-import { Button } from 'shared/components/button/button';
 import { HorizontalNavigation } from 'shared/components/horizontal-navigation';
+import { EditCandidateForm } from 'features/edit-candidate-form';
 
-import styles from './vacancies-candidate.module.scss';
-import { useNavigate } from 'react-router';
+import styles from './edit-candidate.module.scss';
 
-const VacanciesCandidate = () => {
-    const navigate = useNavigate();
+const EditCandidate = () => {
     const navigation = [
         {
             title: 'Активные вакансии',
             url: '/vacancies',
         },
         {
-            title: 'Название вакансии',
-            url: '/vacancies',
+            title: 'Рыбына Анастасия',
+            url: '/vacancies/1',
         },
         {
-            title: 'Рыбина Анастасия',
+            title: 'Редактирование кандидата',
             url: '/vacancies',
         },
     ];
-
-    const onNavigateToEditCandidate = () => {
-        navigate('/edit/candidate/1');
-    };
 
     return (
         <DefaultContentWrapper>
             <div className={styles.vacancy_navigation}>
                 <HorizontalNavigation navigation={navigation} />
-                <Button onClick={onNavigateToEditCandidate} text="Редактировать" view="default_bg_white" />
             </div>
+            <EditCandidateForm />
         </DefaultContentWrapper>
     );
 };
 
-export default VacanciesCandidate;
+export default EditCandidate;
 

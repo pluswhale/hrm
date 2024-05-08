@@ -11,6 +11,7 @@ import SurveyList from '../survey-list/survey-list';
 import { CreateVacancy } from 'pages/create-vacancy';
 import { EditVacancy } from 'pages/edit-vacancy';
 import { CreateCandidate } from 'pages/create-cadidate';
+import { EditCandidate } from 'pages/edit-cadidate';
 
 export const Routing = () => {
     return (
@@ -27,7 +28,7 @@ export const Routing = () => {
                 <Route path="create/vacancy" element={<CreateVacancy />} />
                 <Route path="edit/vacancy/:id" element={<EditVacancy />} />
                 <Route path="create/candidate" element={<CreateCandidate />} />
-                <Route path="edit/candidate/:id" element={<CreateVacancy />} />
+                <Route path="edit/candidate/:id" element={<EditCandidate />} />
                 <Route path="request" element={<RequestsList />} />
                 <Route path="survey" element={<SurveyList />} />
             </Route>
