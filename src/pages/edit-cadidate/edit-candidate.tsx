@@ -12,7 +12,7 @@ const EditCandidate = () => {
         },
         {
             title: 'Рыбына Анастасия',
-            url: '/vacancies/1',
+            url: '/vacancies/1/1',
         },
         {
             title: 'Редактирование кандидата',
