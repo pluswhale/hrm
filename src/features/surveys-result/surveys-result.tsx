@@ -2,7 +2,7 @@ import React from 'react';
 import style from './surveys-result.module.scss';
 
 const SurveysResult = ({ surveysResults }) => {
-    const lineWidth = percent + '%';
+    const lineWidth = surveysResults.percent + '%';
 
     return (
         <div className={style.container}>
