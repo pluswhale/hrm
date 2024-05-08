@@ -7,9 +7,10 @@ export const PractiesBlock: FC<PractiesBlockProps> = ({ practies }): ReactElemen
     return (
         <div className={styles.practies_block}>
             <div className={styles.practies_block__container}>
-                <p>Набор на практику</p>
+                <h4 className={styles.practies_block__title}>Набор на практику</h4>
                 {practies && practies.map((practicy) => <PracticyItem practicy={practicy} />)}
             </div>
         </div>
     );
 };
+

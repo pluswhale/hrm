@@ -1,9 +1,9 @@
 import { FC, ReactElement } from 'react';
 import styles from './practise-item.module.scss';
 import { PracticyItemProps } from './types';
+import testTaskIcon from '../../../assets/test_task_icon.svg';
 
-export const PracticyItem: FC<PracticyItemProps> = ({practicy}): ReactElement => {
-
+export const PracticyItem: FC<PracticyItemProps> = ({ practicy }): ReactElement => {
     const displayStatus = (status: string) => {
         let color = '';
 
@@ -16,12 +16,16 @@ export const PracticyItem: FC<PracticyItemProps> = ({practicy}): ReactElement =>
                 color = '#6362E7';
                 break;
             }
-            default: color = '#6362E7';
+            default:
+                color = '#6362E7';
         }
 
-        return <span style={{ backgroundColor: color }} className={styles.practicy_item__status}>{status}</span> 
-    }
-
+        return (
+            <span style={{ backgroundColor: color }} className={styles.practicy_item__status}>
+                {status}
+            </span>
+        );
+    };
 
     return (
         <div className={styles.practicy_item}>
@@ -32,15 +36,14 @@ export const PracticyItem: FC<PracticyItemProps> = ({practicy}): ReactElement =>
 
             <div className={styles.practicy_item__row}>
                 <span className={styles.practicy_item__row_label}>Тестовое задание</span>
-                <span className={styles.vacancy_item__row_value}>{practicy.testTask}</span>
+                <img src={testTaskIcon} />
             </div>
 
-            <div className={styles.practicy_item__row}>
+            <div className={styles.practicy_item__col}>
                 <span className={styles.practicy_item__row_label}>Комментарий:</span>
-                <span className={styles.vacancy_item__row_value}>{practicy.comment}</span>
+                <span className={styles.practicy_item__row_value}>{practicy.comment}</span>
             </div>
+        </div>
+    );
+};
 
-
-         </div>
-    )
-}
