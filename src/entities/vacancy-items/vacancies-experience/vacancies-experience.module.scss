@@ -1,0 +1,84 @@
+@import '../../../assets/styles/variables';
+.experience_block {
+    width: 100%;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+
+    &__title {
+        font-family: 'Rubik', sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 23.7px;
+        text-align: left;
+        color: $dimDark;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.experience_item {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    &__col {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        &_label,
+        &_value {
+            font-size: 16px;
+        }
+
+        &_label {
+            color: black;
+        }
+
+        &_value {
+            color: gray;
+        }
+    }
+
+    &:not(:last-child) {
+        border-bottom: 1px solid rgb(208, 207, 207);
+    }
+
+    &__link {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 18.75px;
+        text-align: left;
+        color: #707070;
+    }
+
+    &__exp {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 18.75px;
+        text-align: left;
+        color: $dimDark;
+    }
+
+    &__company_name {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 18.75px;
+        text-align: left;
+        color: $dimDark;
+    }
+}
+

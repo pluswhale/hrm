@@ -2,9 +2,7 @@ import { FC, ReactElement } from 'react';
 import styles from './vacancy-item.module.scss';
 import { VacancyItemProps } from './types';
 
-
-export const VacancyItem: FC<VacancyItemProps> = ({vacancy}): ReactElement => {
-
+export const VacancyItem: FC<VacancyItemProps> = ({ vacancy }): ReactElement => {
     const displayStatus = (status: string) => {
         let color = '';
 
@@ -17,11 +15,16 @@ export const VacancyItem: FC<VacancyItemProps> = ({vacancy}): ReactElement => {
                 color = '#6362E7';
                 break;
             }
-            default: color = '#6362E7';
+            default:
+                color = '#6362E7';
         }
 
-        return <span style={{ backgroundColor: color }} className={styles.vacancy_item__status}>{status}</span> 
-    }
+        return (
+            <span style={{ backgroundColor: color }} className={styles.vacancy_item__status}>
+                {status}
+            </span>
+        );
+    };
 
     return (
         <div className={styles.vacancy_item}>
@@ -44,12 +47,6 @@ export const VacancyItem: FC<VacancyItemProps> = ({vacancy}): ReactElement => {
                 <span className={styles.vacancy_item__row_label}>График работы:</span>
                 <span className={styles.vacancy_item__row_value}>{vacancy.schedule}</span>
             </div>
-
-
-            
-            
-            
-            
         </div>
-    )
-}
+    );
+};

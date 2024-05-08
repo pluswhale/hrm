@@ -6,7 +6,8 @@ export const NAV_LINKS = {
     ],
     personal: [
         { id: 4, title: 'Вакансии', url: '/vacancies' },
-        { id: 5, title: 'Набор на практику', url: '/appeal' },
+        { id: 5, title: 'Набор на практику', url: '/appeals' },
         { id: 6, title: 'Кандидаты', url: '/candidates' },
     ],
 };
+

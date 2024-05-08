@@ -1,0 +1,11 @@
+.appeal_description {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 24px;
+
+    @media (max-width: 1650px) {
+        flex-direction: column;
+    }
+}
+

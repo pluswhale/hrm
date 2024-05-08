@@ -7,24 +7,30 @@ import { Button } from 'shared/components/button/button';
 import { VacancyCandidates } from 'features/vacancy-candidates';
 
 import styles from './vacancy-profile.module.scss';
+import { useNavigate } from 'react-router';
 
 const VacanciesProfile = () => {
+    const navigate = useNavigate();
     const navigation = [
         {
             title: 'Активные вакансии',
             url: '/vacancies',
         },
         {
-            title: 'Название вакансии',
+            title: VACANCY_DATA.title,
             url: '/vacancies',
         },
     ];
+
+    const onNavigateToEditVacancy = () => {
+        navigate(`/edit/vacancy/${VACANCY_DATA?.id}`);
+    };
 
     return (
         <DefaultContentWrapper>
             <div className={styles.vacancy_navigation}>
                 <HorizontalNavigation navigation={navigation} />
-                <Button text="Редактировать" type="default_bg_white" />
+                <Button onClick={onNavigateToEditVacancy} text="Редактировать" view="default_bg_white" />
             </div>
             <VacancyInfo vacancy={VACANCY_DATA} />
             <VacancyCandidates candidateRows={CANDIDATES_ROWS} />
