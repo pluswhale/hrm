@@ -6,7 +6,7 @@ import styles from './filter.module.scss';
 
 export const Filter: FC<FilterProps> = ({ title, filterSet, onClickSearch }) => {
     return (
-        <div className={styles.filter}>
+        <div style={{ height: !filterSet ? '148px' : 'auto' }} className={styles.filter}>
             <div className={styles.filter__container}>
                 <h3 className={styles.filter__title}>{title}</h3>
 
