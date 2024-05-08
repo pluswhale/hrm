@@ -7,8 +7,10 @@ import { PopupWithDarkOverlay } from 'shared/components/portal/popup-with-dark-o
 import { VacancyRecruitingFunnel } from 'entities/vacancy-items/vacancy-modals/vacancy-recruting-funnel/vacancy-recruiting-funnel';
 
 import styles from './vacancy-candidates.module.scss';
+import { useNavigate } from 'react-router';
 
 export const VacancyCandidates: FC<VacancyCandidatesProps> = ({ candidateRows }): ReactElement => {
+    const navigate = useNavigate();
     const [isModalRecruitingFunnelOpened, setIsModalRecruitingFunnelOpened] = useState<boolean>(false);
 
     const candidatesCount = candidateRows ? candidateRows.reduce((acc, row) => row.count + acc, 0) : 0;
@@ -21,6 +23,10 @@ export const VacancyCandidates: FC<VacancyCandidatesProps> = ({ candidateRows })
         setIsModalRecruitingFunnelOpened(false);
     };
 
+    const onNavigateToCreateCandidate = () => {
+        navigate('/create/candidate');
+    };
+
     return (
         <>
             <div className={styles.vacancy_candidates}>
@@ -28,12 +34,11 @@ export const VacancyCandidates: FC<VacancyCandidatesProps> = ({ candidateRows })
                     <span className={styles.vacancy_candidates__count}>Кандидаты - {candidatesCount}</span>
                     <div className={styles.vacancy_candidates__buttons}>
                         <Button onClick={onOpenModalRecruitingFunnel} text="Воронка рекрутинга" view="default_bg" />
-                        <Button text="Добавить кандидата" view="default_bg" />
+                        <Button onClick={onNavigateToCreateCandidate} text="Добавить кандидата" view="default_bg" />
                     </div>
                 </div>
                 <div className={styles.vacancy_candidates__list}>
-                    {candidateRows &&
-                        candidateRows.map((candidateRow) => <VacancyCandidatesBlock candidatesRow={candidateRow} />)}
+                    <VacancyCandidatesBlock />
                 </div>
             </div>
             <PopupWithDarkOverlay onClose={onCloseModalRecruitingFunnel} isOpened={isModalRecruitingFunnelOpened}>
