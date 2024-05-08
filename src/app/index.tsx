@@ -1,10 +1,11 @@
 import './index.scss';
 import { Routing } from 'pages/routing';
 import { withProviders } from './providers';
+import { Navigation } from '../widgets/navigation';
 
 function App() {
     return (
-        <div style={{ display: 'flex' }}>
+        <div >
             <Routing />
         </div>
     );

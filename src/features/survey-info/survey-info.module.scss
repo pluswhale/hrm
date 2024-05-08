@@ -9,8 +9,8 @@
   }
 
   &__card{
-    width: 661px;
-    max-width: 661px;
+    width: 100%;
+    min-width: 583px;
     padding: 20px 21px;
     background: white;
     border-radius: 10px;
@@ -55,4 +55,12 @@
   }
 
 
+}
+
+@media (max-width: 1560px) {
+  .container{
+    &__card_info_wrapp{
+      justify-content: space-between;
+    }
+  }
 }

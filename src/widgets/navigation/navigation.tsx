@@ -8,25 +8,6 @@ export const Navigation = () => {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isMobile, setMobileTheme] = useState<boolean>(false);
 
-    useEffect(() => {
-        setMobileTheme(() => window.innerWidth <= 1024);
-        if (window.innerWidth <= 1024) {
-            setOpen(false); // Закрываем боковую панель при загрузке страницы, если isMobile === true
-        }
-
-        const handleResize = () => {
-            setMobileTheme(() => window.innerWidth <= 1024);
-            if (window.innerWidth <= 1024) {
-                setOpen(false); // Закрываем боковую панель при изменении размера экрана, если isMobile === true
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
 
     const toggleSidebar = () => {
         setOpen((prevState) => !prevState);
@@ -38,12 +19,9 @@ export const Navigation = () => {
 
     return (
         <>
-            <Sidebar isOpen={isOpen} setOpen={setOpen} isMobile={isMobile} closeSidebar={closeSidebar} />
-            <div className={styles.main_content} onClick={closeSidebar}>
-                <Header toggleSidebar={toggleSidebar} isMobile={isMobile} />
-                <div className={styles.container}>
-                    <Outlet />
-                </div>
+            <div className={styles.container__wrapeper}>
+                <Header toggleSidebar={toggleSidebar} isMobile={isMobile} isOpen={isOpen} closeSidebar={closeSidebar}/>
+                <Sidebar isOpen={isOpen} setOpen={setOpen} isMobile={isMobile} closeSidebar={closeSidebar} />
             </div>
         </>
     );

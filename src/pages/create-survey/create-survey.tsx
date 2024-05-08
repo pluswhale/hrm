@@ -22,7 +22,7 @@ const CreateSurvey = () => {
             <HorizontalNavigation navigation={navigation} />
             <div className={styles.container}>
                 <CreateSurveyForm />
-                <div>
+                <div className={styles.container__wrapper}>
                     <CreateSurveyRightForm />
                 </div>
 

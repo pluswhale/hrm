@@ -7,6 +7,7 @@ import { ArrowLeft } from "react-bootstrap-icons";
 
 import style from "./employee-profile.module.scss";
 import { HorizontalNavigation } from "shared/components/horizontal-navigation";
+import { DefaultContentWrapper } from '../../entities/default-content-wrapper/default-content-wrapper';
 
 
 const EmployeeProfile: FC = (): ReactElement => {
@@ -23,6 +24,7 @@ const EmployeeProfile: FC = (): ReactElement => {
     ];
 
     return (
+        <DefaultContentWrapper>
         <div className={style.container}>
             <div className={style.container__backLink}>
                 <HorizontalNavigation navigation={navigation}/>
@@ -37,6 +39,7 @@ const EmployeeProfile: FC = (): ReactElement => {
             </div>
 
         </div>
+            </DefaultContentWrapper>
     );
 };
 

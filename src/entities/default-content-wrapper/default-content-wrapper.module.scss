@@ -3,7 +3,8 @@
     overflow-x: scroll;
     max-width: 1340px;
     min-width: 1340px;
-    height: 100vh;
+    margin: 0 auto;
+    height: 90vh;
 
     width: fit-content;
 
@@ -19,6 +20,15 @@
 
     @media (max-width: 1660px) {
         min-width: unset;
+        .wrapper{
+            padding: 30px;
+        }
     }
 }
 
+@media (max-width: 1660px) {
+    .wrapper{
+        padding: 30px;
+        width: 100%;
+    }
+}

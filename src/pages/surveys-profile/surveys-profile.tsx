@@ -38,6 +38,7 @@ const SurveysProfile = () => {
                     {activeTab === 0 ? <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} /> : null}
                     {activeTab === 1 ? <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} /> : null}
                     {activeTab === 2 ? <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} /> : null}
+                    <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData}/>
                 </div>
             </div>
             <SwitchTab
