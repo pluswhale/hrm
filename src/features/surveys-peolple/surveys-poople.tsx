@@ -2,7 +2,7 @@ import React from 'react';
 import style from './surveys-poople.module.scss';
 import { Button } from '../../shared/components/button/button';
 import { Filter } from '../filter';
-import logo from '../../assets/Ellipse 1.svg'
+import logo from '../../assets/Ellipse 1.svg';
 
 const SurveysPoople = () => {
     const displayStatus = (status: string) => {
@@ -30,22 +30,18 @@ const SurveysPoople = () => {
     return (
         <div className={style.container}>
             <div className={style.container__wrapper}>
-                <Button
-                    styles={{ width: 'fit-content', height: '40px' }}
-                    text="Добавить частника"
-                    type="default_bg"
-                />
+                <Button styles={{ width: 'fit-content', height: '40px' }} text="Добавить частника" view="default_bg" />
                 <Button
                     styles={{ width: 'fit-content', height: '40px' }}
                     text="Напомнить об опросе"
-                    type="default_bg"
+                    view="default_bg"
                 />
             </div>
             <div className={style.container__wraper_bootom}>
                 <div className={style.container__wrapper_block}>
                     <div className={style.container__card}>
                         <div className={style.container__card_head}>
-                            <img src={logo} alt='logo' className={style.container__img} />
+                            <img src={logo} alt="logo" className={style.container__img} />
                             <div className={style.container__wrapper_card_title}>
                                 <h2 className={style.container__title}>Alesy Nickolayevna Dmitriyevna</h2>
                                 <span className={style.container__name}>UX/UI Designer</span>
@@ -55,7 +51,7 @@ const SurveysPoople = () => {
                     </div>
                     <div className={style.container__card}>
                         <div className={style.container__card_head}>
-                            <img src={logo} alt='logo' className={style.container__img} />
+                            <img src={logo} alt="logo" className={style.container__img} />
                             <div className={style.container__wrapper_card_title}>
                                 <h2 className={style.container__title}>Alesy Nickolayevna Dmitriyevna</h2>
                                 <span className={style.container__name}>UX/UI Designer</span>
@@ -65,7 +61,7 @@ const SurveysPoople = () => {
                     </div>
                     <div className={style.container__card}>
                         <div className={style.container__card_head}>
-                            <img src={logo} alt='logo' className={style.container__img} />
+                            <img src={logo} alt="logo" className={style.container__img} />
                             <div className={style.container__wrapper_card_title}>
                                 <h2 className={style.container__title}>Alesy Nickolayevna Dmitriyevna</h2>
                                 <span className={style.container__name}>UX/UI Designer</span>
@@ -81,3 +77,4 @@ const SurveysPoople = () => {
 };
 
 export default SurveysPoople;
+

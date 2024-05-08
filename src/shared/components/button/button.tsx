@@ -2,13 +2,14 @@ import { FC, ReactElement } from 'react';
 import { ButtonProps, dynamicStylesObject } from './types';
 
 export const Button: FC<ButtonProps> = ({
-    text = '',
+    view = '',
     type,
+    text,
     image,
     onClick,
     styles,
     disabled,
-                                            href,
+    href,
 }): ReactElement => {
     const Component = href ? 'a' : 'button';
     return (
@@ -16,7 +17,7 @@ export const Button: FC<ButtonProps> = ({
             href={href} // Add href attribute if it exists
             style={styles || {}}
             disabled={disabled}
-            className={type && dynamicStylesObject[type]}
+            className={view && dynamicStylesObject[view]}
             onClick={onClick}
         >
             {image && <img src={image} alt="" />}

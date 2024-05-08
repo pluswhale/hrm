@@ -10,18 +10,18 @@ const SurveysResult = ({ surveysResults }) => {
                 <span className={style.container__input_text}>
                     Вопрос с одним вариантом ответа
                     {surveysResults.map((result, index) => (
-                    <div className={style.container__wrapper_radio}>
-                        <div className={style.container__wrapper_line}>
-                            <div className={style.container__wrapper_left}>
-                                <span className={style.container__text}>{surveysResults.id}</span>
-                                <span className={style.container__text}>{surveysResults.percent}%</span>
-                            </div>
-                            <div className={style.container__wrapper_left}>
-                                <span className={style.container__text_name}>{surveysResults.name}</span>
-                                <div className={style.container__line} style={{ width: lineWidth }}></div>
+                        <div className={style.container__wrapper_radio}>
+                            <div className={style.container__wrapper_line}>
+                                <div className={style.container__wrapper_left}>
+                                    <span className={style.container__text}>{surveysResults.id}</span>
+                                    <span className={style.container__text}>{surveysResults.percent}%</span>
+                                </div>
+                                <div className={style.container__wrapper_left}>
+                                    <span className={style.container__text_name}>{surveysResults.name}</span>
+                                    <div className={style.container__line} style={{ width: lineWidth }}></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     ))}
                 </span>
             </div>
@@ -30,3 +30,4 @@ const SurveysResult = ({ surveysResults }) => {
 };
 
 export default SurveysResult;
+

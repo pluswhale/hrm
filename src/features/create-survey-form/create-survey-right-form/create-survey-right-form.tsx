@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './create-survey-right-form.module.scss'
+import styles from './create-survey-right-form.module.scss';
 import { Radio } from '../../../shared/components/radio';
 import redaction from '../../../assets/Редактировать.svg';
 import Delete from '../../../assets/Удалить.svg';
@@ -15,10 +15,9 @@ const CreateSurveyRightForm = () => {
     const [selectedValueBtn, setSelectedValueBtn] = useState<string>('');
     const [selectedValueInject, setSelectedValueInject] = useState<string>('');
 
-    const handleChange = (value:string) => {
+    const handleChange = (value: string) => {
         setSelectedValueBtn(value);
     };
-
 
     const handleRadioInjectChange = (value: any) => {
         setSelectedValueInject(value);
@@ -32,13 +31,13 @@ const CreateSurveyRightForm = () => {
             <div className={styles.container}>
                 <h2>Вопросы</h2>
                 <div className={styles.container__wrapper}>
-                <span className={styles.container__span}>
-                    Вопрос с одним вариантом ответа
-                    <div className={styles.container__content_wrapper_img}>
-                        <img className={styles.container__content_agree_img} src={redaction} alt="" />
-                        <img className={styles.container__content_agree_img} src={Delete} alt="" />
-                    </div>
-                </span>
+                    <span className={styles.container__span}>
+                        Вопрос с одним вариантом ответа
+                        <div className={styles.container__content_wrapper_img}>
+                            <img className={styles.container__content_agree_img} src={redaction} alt="" />
+                            <img className={styles.container__content_agree_img} src={Delete} alt="" />
+                        </div>
+                    </span>
                     <div className={styles.container__wrapper_radio}>
                         <Radio
                             value="option1"
@@ -48,28 +47,26 @@ const CreateSurveyRightForm = () => {
                         />
                         <Radio
                             value="option2"
-                            checked={selectedValue === "option2"}
+                            checked={selectedValue === 'option2'}
                             onChange={handleRadioChange}
                             label="Имя Фамилия"
                         />
                         <Radio
                             value="option3"
-                            checked={selectedValue === "option3"}
+                            checked={selectedValue === 'option3'}
                             onChange={handleRadioChange}
                             label="Имя Фамилия"
                         />
-
                     </div>
-
                 </div>
                 <div className={styles.container__wrapper}>
-                <span className={styles.container__span}>
-                    Вопрос с одним вариантом ответа
-                    <div className={styles.container__content_wrapper_img}>
-                        <img className={styles.container__content_agree_img} src={redaction} alt="" />
-                        <img className={styles.container__content_agree_img} src={Delete} alt="" />
-                    </div>
-                </span>
+                    <span className={styles.container__span}>
+                        Вопрос с одним вариантом ответа
+                        <div className={styles.container__content_wrapper_img}>
+                            <img className={styles.container__content_agree_img} src={redaction} alt="" />
+                            <img className={styles.container__content_agree_img} src={Delete} alt="" />
+                        </div>
+                    </span>
                     <div className={styles.container__wrapper_radio}>
                         <Radio
                             value="inject1"
@@ -79,26 +76,24 @@ const CreateSurveyRightForm = () => {
                         />
                         <Radio
                             value="inject2"
-                            checked={selectedValueInject === "inject2"}
+                            checked={selectedValueInject === 'inject2'}
                             onChange={handleRadioInjectChange}
                             label="Имя Фамилия"
                         />
                         <Radio
                             value="inject3"
-                            checked={selectedValueInject === "inject3"}
+                            checked={selectedValueInject === 'inject3'}
                             onChange={handleRadioInjectChange}
                             label="Имя Фамилия"
                         />
-
                     </div>
-
                 </div>
             </div>
             <div className={styles.container}>
-                    <span className={styles.container__input_text}>
-                Тип опроса
+                <span className={styles.container__input_text}>
+                    Тип опроса
                     <Selector options={options} value={selectedValueBtn} onChange={handleChange} />
-                    </span>
+                </span>
                 <Input
                     width={'100%'}
                     isRequired={false}
@@ -108,15 +103,10 @@ const CreateSurveyRightForm = () => {
                     label="Вопрос"
                 />
                 <div className={styles.container__wrap_btn}>
-                    <Button
-                        styles={{ width: 'fit-content', height: '40px' }}
-                        text="Добавить"
-                        type="default_bg"
-                    />
+                    <Button styles={{ width: 'fit-content', height: '40px' }} text="Добавить" view="default_bg" />
                 </div>
             </div>
         </div>
-
     );
 };
 

@@ -13,7 +13,7 @@ import { SurveysPoople } from '../../features/surveys-peolple';
 const SurveysProfile = () => {
     const [activeTab, setActiveTab] = useState(0);
 
-    const tabs = [{ label: "Вопросы" }, { label: "Результаты опроса" }, { label: "Участники" }];
+    const tabs = [{ label: 'Вопросы' }, { label: 'Результаты опроса' }, { label: 'Участники' }];
 
     const navigation = [
         {
@@ -30,22 +30,23 @@ const SurveysProfile = () => {
         <DefaultContentWrapper>
             <div className={styles.survey_navigation}>
                 <HorizontalNavigation navigation={navigation} />
-                <Button text="Редактировать" type="default_bg_white" />
+                <Button text="Редактировать" view="default_bg_white" />
             </div>
             <div className={styles.survey_navigation__container}>
                 <h2 className={styles.survey_navigation__container__title}>Название опроса</h2>
                 <div className={styles.survey_navigation__wrap}>
-                    {activeTab === 0 ? <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} /> : null}
-                    {activeTab === 1 ? <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} /> : null}
-                    {activeTab === 2 ? <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} /> : null}
+                    {activeTab === 0 ? (
+                        <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
+                    ) : null}
+                    {activeTab === 1 ? (
+                        <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
+                    ) : null}
+                    {activeTab === 2 ? (
+                        <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
+                    ) : null}
                 </div>
             </div>
-            <SwitchTab
-                tabs={tabs}
-                onTabClick={setActiveTab}
-                activeTab={activeTab}
-                design="default"
-            />
+            <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
             {activeTab === 0 && <SurveysQuestions />}
             {activeTab === 1 && <SurveysResult />}
             {activeTab === 2 && <SurveysPoople surveysResults={surveysResults} />}
@@ -54,3 +55,4 @@ const SurveysProfile = () => {
 };
 
 export default SurveysProfile;
+

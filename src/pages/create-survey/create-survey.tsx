@@ -15,7 +15,7 @@ const CreateSurvey = () => {
         {
             title: 'Создание опроса',
             url: '',
-        }
+        },
     ];
     return (
         <DefaultContentWrapper>
@@ -25,14 +25,9 @@ const CreateSurvey = () => {
                 <div>
                     <CreateSurveyRightForm />
                 </div>
-
             </div>
             <div className={styles.container__wrap_btn}>
-                <Button
-                    styles={{ width: 'fit-content', height: '40px' }}
-                    text="Создать опрос"
-                    type="default_bg"
-                />
+                <Button styles={{ width: 'fit-content', height: '40px' }} text="Создать опрос" view="default_bg" />
             </div>
         </DefaultContentWrapper>
     );

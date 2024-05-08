@@ -8,13 +8,12 @@ import { Radio } from '../../shared/components/radio';
 import { Selector } from '../../shared/components/selector';
 import { options } from './constants';
 
-
 export const CreateSurveyForm = () => {
     const { register, handleSubmit } = useForm();
     const [selectedValue, setSelectedValue] = useState<string>('');
     const [selectedValueRadio, setSelectedValueRadio] = useState<string>('');
 
-    const handleChange = (value:string) => {
+    const handleChange = (value: string) => {
         setSelectedValue(value);
     };
 
@@ -67,17 +66,17 @@ export const CreateSurveyForm = () => {
                     />
                     <Radio
                         value="option1"
-                        checked={selectedValueRadio === "option1"}
+                        checked={selectedValueRadio === 'option1'}
                         onChange={handleRadioChange}
                         label="Анонимный опрос"
                     />
                     <span className={styles.create_survey__input_text}>
-                Тип опроса
-                    <Selector options={options} value={selectedValue} onChange={handleChange} />
+                        Тип опроса
+                        <Selector options={options} value={selectedValue} onChange={handleChange} />
                     </span>
-
                 </form>
             </div>
         </div>
     );
 };
+
