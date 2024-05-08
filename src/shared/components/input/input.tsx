@@ -8,6 +8,7 @@ export const Input: FC<InputProps> = ({
     onChange,
     width = '100%',
     name,
+                                          height,
     isRequired,
     label,
     register,
@@ -31,12 +32,12 @@ export const Input: FC<InputProps> = ({
                 className={styles.input}
                 placeholder={placeholder}
                 {...register(name, { required: isRequired || false })}
-            /> // form controll input
+            />
         );
     };
 
     return (
-        <div style={{ width }} className={styles.wrapper}>
+        <div style={{ width , height}} className={styles.wrapper}>
             {label ? (
                 <label style={customStyles?.label || {}} className={styles.label} htmlFor={name}>
                     <span className={styles.label_text}>

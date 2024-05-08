@@ -9,6 +9,8 @@ import { VacanciesCandidate } from 'pages/vacancies-candidate';
 import { RequestsList } from '../requests-list';
 import SurveyList from '../survey-list/survey-list';
 import { CreateVacancy } from 'pages/create-vacancy';
+import { CreateSurvey } from '../create-survey';
+import { SurveysProfile } from '../surveys-profile';
 import { EditVacancy } from 'pages/edit-vacancy';
 import { CreateCandidate } from 'pages/create-cadidate';
 import { EditCandidate } from 'pages/edit-cadidate';
@@ -34,7 +36,10 @@ export const Routing = () => {
                 <Route path="appeals" element={<AppealsList />} />
                 <Route path="appeals/:id" element={<AppealsProfile />} />
                 <Route path="request" element={<RequestsList />} />
-                <Route path="survey" element={<SurveyList />} />
+                <Route path="survey" element={<SurveyList/>} />
+                <Route path="survey/create" element={<CreateSurvey/>} />
+                <Route path="survey/:id" element={<SurveysProfile/>} />
+
             </Route>
         </Routes>
     );

@@ -2,20 +2,14 @@ import styles from './button.module.scss';
 
 type InlineStyle = { [key: string]: any };
 
-type ButtonView =
-    | 'default_bg'
-    | 'default_bg_white'
-    | 'default_bg_gap'
-    | 'minor_bg'
-    | 'default_bg_none_there'
-    | 'default_bg_none_gray';
+type ButtonType = 'default_bg' | 'default_bg_white' | 'default_bg_white_purple' | 'minor_bg' | 'default_bg_none_there' | 'default_bg_none_gray';
 
 export type ButtonProps = {
     styles?: React.CSSProperties;
-    type?: 'button' | 'submit' | 'reset' | undefined;
-    view?: ButtonView;
+    type?: ButtonType;
     onClick?: () => void;
     text?: string;
+    href?: string;
     image?: string;
     disabled?: boolean;
 };
@@ -23,9 +17,8 @@ export type ButtonProps = {
 export const dynamicStylesObject = {
     default_bg: styles.default_bg,
     default_bg_white: styles.default_bg_white,
-    default_bg_gap: styles.default_bg_gap,
+    default_bg_white_purple: styles.default_bg_white_purple,
     minor_bg: styles.minor_bg,
     default_bg_none_there: styles.default_bg_none_there,
-    default_bg_none_gray: styles.default_bg_none_gray,
+    default_bg_none_gray: styles.default_bg_none_gray
 } as InlineStyle;
-

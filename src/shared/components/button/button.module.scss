@@ -24,10 +24,10 @@
     white-space: nowrap;
 
     &:hover {
-        background: #3dadff;
+        opacity: 0.8;
     }
     &:active {
-        background: #0f95f6;
+        opacity: 0.8;
     }
 }
 
@@ -44,7 +44,7 @@
     font-weight: 400;
     line-height: 120%;
     height: 40px;
-
+    text-decoration: none;
     white-space: nowrap;
 
     &:hover {
@@ -82,7 +82,7 @@
     }
 }
 
-.default_bg_gap {
+.default_bg_white_purple {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,25 +90,24 @@
     padding: 10.5px 20px;
     gap: 10px !important;
 
-    border: none;
+    border: 1px solid #6362e7;
     border-radius: 50px;
-    height: 54px;
 
-    color: #fff;
+    color: #6362e7;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: 120%;
 
-    background: #0d99ff;
+    background: white;
     box-shadow: 0px 4px 10px 0px #c9e5fc;
     cursor: pointer;
 
     &:hover {
-        background: #3dadff;
+      opacity: 0.8;
     }
     &:active {
-        background: #0f95f6;
+        opacity: 0.8;
     }
 }
 

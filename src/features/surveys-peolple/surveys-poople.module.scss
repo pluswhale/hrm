@@ -1,0 +1,96 @@
+.container{
+  display: flex;
+  padding-top: 20px;
+  gap: 20px;
+  flex-direction: column;
+
+  &__wraper_bootom{
+    display: flex;
+    gap: 20px;
+  }
+
+  &__wrapper_line{
+    display: flex;
+    gap: 5px;
+  }
+
+  &__wrapper_left{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 18.96px;
+    text-align: left;
+    color: black;
+  }
+
+  &__name{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 18.96px;
+    text-align: left;
+    color: #707070;
+  }
+
+  &__wrapper_card_title{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__img{
+    height: 58px;
+    width: 58px;
+  }
+
+  &__card_head{
+    align-items: center;
+    display: flex;
+    width: 100%;
+    gap: 10px;
+  }
+
+  &__card{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__wrapper_block{
+    border-radius: 10px;
+    padding: 20px;
+    gap: 20px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__wrapper{
+    display: flex;
+    gap: 20px;
+  }
+
+  &__status {
+    display: flex;
+    justify-content: center;
+    border-radius: 24px;
+    padding: 5px 15px;
+    height: 26px;
+    width: 112px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &__input_text{
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 18.75px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}

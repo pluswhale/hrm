@@ -8,19 +8,20 @@ export const Button: FC<ButtonProps> = ({
     onClick,
     styles,
     disabled,
-    view = '',
+                                            href,
 }): ReactElement => {
+    const Component = href ? 'a' : 'button';
     return (
-        <button
-            type={type}
+        <Component
+            href={href} // Add href attribute if it exists
             style={styles || {}}
-            disabled={disabled ? disabled : false}
-            className={view && dynamicStylesObject[view]}
+            disabled={disabled}
+            className={type && dynamicStylesObject[type]}
             onClick={onClick}
         >
             {image && <img src={image} alt="" />}
             {text}
-        </button>
+        </Component>
     );
 };
 

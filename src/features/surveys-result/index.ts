@@ -1,0 +1,1 @@
+export { default as SurveysQuestions } from './surveys-result';
