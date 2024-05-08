@@ -17,10 +17,11 @@ const SurveysResult = ({ surveysResults }) => {
                                     <span className={style.container__text}>{result.id}</span>
                                     <span className={style.container__text}>{result.percent}%</span>
                                 </div>
-                                <div className={style.container__wrapper_left}>
+                                <div className={style.container__wrapper_right}>
                                     <span className={style.container__text_name}>{result.name}</span>
                                     <div className={style.container__line}
                                          style={{ width: result.percent + '%' }}></div>
+
                                 </div>
                             </div>
                         </div>
