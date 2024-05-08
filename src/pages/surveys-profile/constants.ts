@@ -12,6 +12,10 @@ export const rightColumnData: ColumnData[] = [
     { title: "Другое название 3", createdAt: "2024-05-13" }
 ];
 
-
+export const surveysResults = [
+    { id: 1, name: 'Вопрос 1', percent: 50 },
+    { id: 2, name: 'Вопрос 2', percent: 30 },
+    { id: 3, name: 'Вопрос 3', percent: 70 }
+];
 
 

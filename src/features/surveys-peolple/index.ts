@@ -1,0 +1,1 @@
+export { default as SurveysPoople } from './surveys-poople';

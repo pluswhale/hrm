@@ -4,14 +4,16 @@ import { DefaultContentWrapper } from '../../entities/default-content-wrapper/de
 import { HorizontalNavigation } from '../../shared/components/horizontal-navigation';
 import { Button } from '../../shared/components/button/button';
 import SurveyInfo from '../../features/survey-info/survey-info';
-import { leftColumnData, rightColumnData } from './constants';
+import { leftColumnData, rightColumnData, surveysResults } from './constants';
 import { SwitchTab } from '../../shared/components/switch-tab';
-
+import { SurveysQuestions } from '../../features/surveys-questions';
+import SurveysResult from '../../features/surveys-result/surveys-result';
+import { SurveysPoople } from '../../features/surveys-peolple';
 
 const SurveysProfile = () => {
-    const [activeTab, setActiveTab] = useState<number>(0);
+    const [activeTab, setActiveTab] = useState(0);
 
-    const tabs = [{ label: "Вопросы" }, { label: "Результаты опроса" } , { label: "Участники" }];
+    const tabs = [{ label: "Вопросы" }, { label: "Результаты опроса" }, { label: "Участники" }];
 
     const navigation = [
         {
@@ -33,8 +35,9 @@ const SurveysProfile = () => {
             <div className={styles.survey_navigation__container}>
                 <h2 className={styles.survey_navigation__container__title}>Название опроса</h2>
                 <div className={styles.survey_navigation__wrap}>
-                <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
-                <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
+                    {activeTab === 0 ? <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} /> : null}
+                    {activeTab === 1 ? <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} /> : null}
+                    {activeTab === 2 ? <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} /> : null}
                 </div>
             </div>
             <SwitchTab
@@ -43,8 +46,11 @@ const SurveysProfile = () => {
                 activeTab={activeTab}
                 design="default"
             />
+            {activeTab === 0 && <SurveysQuestions />}
+            {activeTab === 1 && <SurveysResult />}
+            {activeTab === 2 && <SurveysPoople surveysResults={surveysResults} />}
         </DefaultContentWrapper>
-);
+    );
 };
 
 export default SurveysProfile;

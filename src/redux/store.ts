@@ -2,9 +2,11 @@ import { combineReducers } from 'redux';
 import { useDispatch } from 'react-redux';
 import { AnyAction, configureStore, createAction, ThunkDispatch } from '@reduxjs/toolkit';
 import createVacancy from './slices/create-vacancy';
+import createCandidate from './slices/create-candidate';
 
 const rootReducer = combineReducers({
     createVacancy,
+    createCandidate,
 });
 
 // Create the store

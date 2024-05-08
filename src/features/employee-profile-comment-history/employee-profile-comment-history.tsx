@@ -55,7 +55,7 @@ export const EmployeeProfileCommentHistory = () => {
                             <Button
                                 styles={{ width: 'fit-content', height: '40px' }}
                                 text="Опубликовать"
-                                type="default_bg"
+                                view="default_bg"
                             />
                         </div>
                     </div>

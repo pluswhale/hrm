@@ -1,9 +1,5 @@
 import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-content-wrapper';
-import { VacancyInfo } from 'features/vacancy-info';
 import { HorizontalNavigation } from 'shared/components/horizontal-navigation';
-
-import { VacancyCandidates } from 'features/vacancy-candidates';
-
 import styles from './create-vacancy.module.scss';
 import { CreateVacancyForm } from 'features/create-vacancy-form';
 
@@ -14,7 +10,7 @@ const CreateVacancy = () => {
             url: '/vacancies',
         },
         {
-            title: 'Название вакансии',
+            title: 'Создание вакансии',
             url: '/vacancies',
         },
     ];

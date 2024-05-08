@@ -1,3 +1,5 @@
+@import '../../../assets/styles/variables.scss';
+
 .default_bg {
     display: flex;
     justify-content: center;
@@ -16,8 +18,7 @@
     font-weight: 500;
     line-height: 120%;
 
-    background: #6362e7;
-    box-shadow: 0px 4px 10px 0px #c9e5fc;
+    background: $purple;
     cursor: pointer;
 
     white-space: nowrap;
@@ -33,10 +34,10 @@
 .default_bg_white {
     border-radius: 20px;
     border: none;
-    background-color: white;
+    background-color: $white;
     align-items: center;
     cursor: pointer;
-    color: #1d1d1f;
+    color: $dimDark;
     padding: 10px 25px;
     font-size: 16px;
     font-style: normal;
