@@ -47,8 +47,8 @@ const SurveysProfile = () => {
                 design="default"
             />
             {activeTab === 0 && <SurveysQuestions />}
-            {activeTab === 1 && <SurveysResult />}
-            {activeTab === 2 && <SurveysPoople surveysResults={surveysResults} />}
+            {activeTab === 1 && <SurveysResult surveysResults={surveysResults} />}
+            {activeTab === 2 && <SurveysPoople/>}
         </DefaultContentWrapper>
     );
 };
