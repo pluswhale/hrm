@@ -1,16 +1,16 @@
 import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-content-wrapper';
 import { HorizontalNavigation } from 'shared/components/horizontal-navigation';
 import styles from './create-vacancy.module.scss';
-import { CreateVacancyForm } from 'features/create-vacancy-form';
+import { CreateCandidateForm } from 'features/create-candidate-form';
 
-const CreateVacancy = () => {
+const CreateCandidate = () => {
     const navigation = [
         {
             title: 'Активные вакансии',
             url: '/vacancies',
         },
         {
-            title: 'Создание вакансии',
+            title: 'Создание кандидата',
             url: '/vacancies',
         },
     ];
@@ -20,10 +20,10 @@ const CreateVacancy = () => {
             <div className={styles.vacancy_navigation}>
                 <HorizontalNavigation navigation={navigation} />
             </div>
-            <CreateVacancyForm />
+            <CreateCandidateForm />
         </DefaultContentWrapper>
     );
 };
 
-export default CreateVacancy;
+export default CreateCandidate;
 
