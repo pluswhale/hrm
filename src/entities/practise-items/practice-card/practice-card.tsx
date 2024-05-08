@@ -40,7 +40,7 @@ export const PracticeCard: FC<PracticeCardProps> = ({
         <div className={styles.practice_card}>
             <div className={styles.practice_card__container}>
                 <div className={styles.practice_card__title_and_status}>
-                    <Link to={`/vacancies/${id}`}>
+                    <Link to={`/appeals/${id}`}>
                         <h5 className={styles.practice_card__title}>{title}</h5>
                     </Link>
 
