@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './surveys-poople.module.scss';
 import { Button } from '../../shared/components/button/button';
 import { Filter } from '../filter';
 import logo from '../../assets/Ellipse 1.svg';
+import { PopupWithDarkOverlay } from '../../shared/components/portal/popup-with-dark-overlay';
+import {
+    VacancyRecruitingFunnel
+} from '../../entities/vacancy-items/vacancy-modals/vacancy-recruting-funnel/vacancy-recruiting-funnel';
 
 const SurveysPoople = () => {
+    const [isModalRecruitingFunnelOpened, setIsModalRecruitingFunnelOpened] = useState(false);
+
     const displayStatus = (status: string) => {
-        let color = '';
+        let color;
         switch (status) {
             case 'Новый':
                 color = '#6362E7';
@@ -27,15 +33,23 @@ const SurveysPoople = () => {
             </span>
         );
     };
+
+
+
+    const onOpenModalRecruitingFunnel = () => {
+        setIsModalRecruitingFunnelOpened(true);
+    };
+
+    const onCloseModalRecruitingFunnel = () => {
+        setIsModalRecruitingFunnelOpened(false);
+    };
+
+
     return (
         <div className={style.container}>
             <div className={style.container__wrapper}>
                 <Button styles={{ width: 'fit-content', height: '40px' }} text="Добавить частника" view="default_bg" />
-                <Button
-                    styles={{ width: 'fit-content', height: '40px' }}
-                    text="Напомнить об опросе"
-                    view="default_bg"
-                />
+                <Button styles={{ width: 'fit-content', height: '40px' }} text="Напомнить об опросе" view="default_bg" onClick={onOpenModalRecruitingFunnel}/>
             </div>
             <div className={style.container__wraper_bootom}>
                 <div className={style.container__wrapper_block}>
@@ -72,9 +86,11 @@ const SurveysPoople = () => {
                 </div>
                 <Filter title="Найти сотрудника" />
             </div>
+            <PopupWithDarkOverlay onClose={onCloseModalRecruitingFunnel} isOpened={isModalRecruitingFunnelOpened}>
+                <VacancyRecruitingFunnel onClose={onCloseModalRecruitingFunnel} />
+            </PopupWithDarkOverlay>
         </div>
     );
 };
 
 export default SurveysPoople;
-

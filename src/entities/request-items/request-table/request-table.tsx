@@ -1,3 +1,4 @@
+
 import React, { FC, ReactElement, useState } from 'react';
 import style from './request-table.module.scss';
 import { RequestTableProps } from './types';
@@ -6,9 +7,10 @@ import { RequestModal } from '../request-modal/request-modal';
 
 const RequestTable: FC<RequestTableProps> = ({ requests }): ReactElement => {
     const [modalStatus, setModalStatus] = useState<string>('');
+    const [isModalRecruitingFunnelOpened, setIsModalRecruitingFunnelOpened] = useState(false);
 
     const displayStatus = (status: string) => {
-        let color = '';
+        let color;
         switch (status) {
             case 'Новый':
                 color = '#6362E7';
@@ -30,7 +32,6 @@ const RequestTable: FC<RequestTableProps> = ({ requests }): ReactElement => {
         );
     };
 
-    const [isModalRecruitingFunnelOpened, setIsModalRecruitingFunnelOpened] = useState<boolean>(false);
 
     const onOpenModalRequest = (status: string) => {
         setIsModalRecruitingFunnelOpened(true);
@@ -40,22 +41,25 @@ const RequestTable: FC<RequestTableProps> = ({ requests }): ReactElement => {
     const onCloseModalRequest= () => {
         setIsModalRecruitingFunnelOpened(false);
     };
+
     return (
         <div className={style.container}>
-            {requests.map((request) => (
-                <div key={request.id} className={style.container__card}
-                     onClick={() => onOpenModalRequest(request.status)}>
-                    <div className={style.container__head}>
-                        <img className={style.container__img} src={request.imageUrl} alt="" />
-                        <div className={style.container__name_prof}>
-                            <span className={style.container__name}>{request.name}</span>
-                            <span className={style.container__prof}>{request.profession}</span>
+            {requests.map((request, index) => (
+                <React.Fragment key={request.id}>
+                    <div className={style.container__card} onClick={() => onOpenModalRequest(request.status)}>
+                        <div className={style.container__head}>
+                            <img className={style.container__img} src={request.imageUrl} alt="" />
+                            <div className={style.container__name_prof}>
+                                <span className={style.container__name}>{request.name}</span>
+                                <span className={style.container__prof}>{request.profession}</span>
+                            </div>
                         </div>
+                        <span className={style.container__meeting}>{request.meeting}</span>
+                        <span className={style.container__data}>{request.data}</span>
+                        {displayStatus(request.status)}
                     </div>
-                    <span className={style.container__meeting}>{request.meeting}</span>
-                    <span className={style.container__data}>{request.data}</span>
-                    {displayStatus(request.status)}
-                </div>
+                    {index < requests.length - 1 && <hr className={style.container__divider} />}
+                </React.Fragment>
             ))}
             <PopupWithDarkOverlay onClose={onCloseModalRequest} isOpened={isModalRecruitingFunnelOpened}>
                 <RequestModal onClose={onCloseModalRequest} status={modalStatus}/>
@@ -65,4 +69,3 @@ const RequestTable: FC<RequestTableProps> = ({ requests }): ReactElement => {
 };
 
 export default RequestTable;
-
