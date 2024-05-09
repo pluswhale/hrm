@@ -5,9 +5,8 @@ import { Outlet } from 'react-router-dom';
 import styles from './navigation.module.scss';
 
 export const Navigation = () => {
-    const [isOpen, setOpen] = useState<boolean>(false);
+    const [isOpen, setOpen] = useState<boolean>(true);
     const [isMobile, setMobileTheme] = useState<boolean>(false);
-
 
     const toggleSidebar = () => {
         setOpen((prevState) => !prevState);
@@ -20,7 +19,7 @@ export const Navigation = () => {
     return (
         <>
             <div className={styles.container__wrapeper}>
-                <Header toggleSidebar={toggleSidebar} isMobile={isMobile} isOpen={isOpen} closeSidebar={closeSidebar}/>
+                <Header toggleSidebar={toggleSidebar} isMobile={isMobile} isOpen={isOpen} closeSidebar={closeSidebar} />
                 <Sidebar isOpen={isOpen} setOpen={setOpen} isMobile={isMobile} closeSidebar={closeSidebar} />
             </div>
         </>

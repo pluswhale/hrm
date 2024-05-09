@@ -1,58 +1,62 @@
 .container {
-  width: 100%;
-  display: flex;
-  background-color: white;
-
-  &__with_sidebar{
-    padding-left: 270px;
-  }
-
-  &__wrapper_logo{
-    align-items: center;
-    display: flex;
-    gap: 79px;
-  }
-
-  &__logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #e3e3f3;
-    border-radius: 40px;
-    text-decoration: none;
-    width: 215px;
-    height: 55.32px;
-
-    &_text {
-      font-size: 30px;
-      font-weight: 500;
-      line-height: 35.55px;
-      text-align: left;
-      color:  #6362e7;
-      margin-bottom: 0 !important;
-    }
-  }
-
-  &__wrapper {
-    display: flex;
     width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 70px;
-    padding: 11px 50px 11px 30px;
-  }
-
-  &__profile {
     display: flex;
-    gap: 25px;
-    align-items: center;
-  }
+    background-color: white;
 
-  &__button {
-    height: 24px;
-    width: 24px;
-    border: none;
-    background: none;
-  }
+    &__burger_icon {
+        cursor: pointer;
+    }
+
+    &__with_sidebar {
+        padding-left: 270px;
+    }
+
+    &__wrapper_logo {
+        align-items: center;
+        display: flex;
+        gap: 79px;
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #e3e3f3;
+        border-radius: 40px;
+        text-decoration: none;
+        width: 215px;
+        height: 55.32px;
+
+        &_text {
+            font-size: 30px;
+            font-weight: 500;
+            line-height: 35.55px;
+            text-align: left;
+            color: #6362e7;
+            margin-bottom: 0 !important;
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 70px;
+        padding: 11px 50px 11px 30px;
+    }
+
+    &__profile {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+    }
+
+    &__button {
+        height: 24px;
+        width: 24px;
+        border: none;
+        background: none;
+    }
 }
 

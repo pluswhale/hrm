@@ -14,6 +14,7 @@ export const Button: FC<ButtonProps> = ({
     const Component = href ? 'a' : 'button';
     return (
         <Component
+            type={type}
             href={href} // Add href attribute if it exists
             style={styles || {}}
             disabled={disabled}

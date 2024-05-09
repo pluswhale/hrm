@@ -14,15 +14,15 @@ import { SurveyResult } from '../../features/surveys-result/types';
 const SurveysProfile = () => {
     const [activeTab, setActiveTab] = useState(0);
 
-    const tabs = [{ label: "Вопросы" }, { label: "Результаты опроса" }, { label: "Участники" }];
+    const tabs = [{ label: 'Вопросы' }, { label: 'Результаты опроса' }, { label: 'Участники' }];
 
     const navigation = [
         {
-            title: 'Активные вакансии',
+            title: 'Текущие опросы',
             url: '/survey',
         },
         {
-            title: 'Название вакансии',
+            title: 'Название опроса',
             url: '',
         },
     ];
@@ -31,23 +31,24 @@ const SurveysProfile = () => {
         <DefaultContentWrapper>
             <div className={styles.survey_navigation}>
                 <HorizontalNavigation navigation={navigation} />
-                <Button text="Редактировать" type="default_bg_white" />
+                <Button text="Редактировать" view="default_bg_white" />
             </div>
             <div className={styles.survey_navigation__container}>
                 <h2 className={styles.survey_navigation__container__title}>Название опроса</h2>
                 <div className={styles.survey_navigation__wrap}>
-                    {activeTab === 0 && <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />}
-                    {activeTab === 1 && <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />}
-                    {activeTab === 2 && <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />}
-                    <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData}/>
+                    {activeTab === 0 && (
+                        <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
+                    )}
+                    {activeTab === 1 && (
+                        <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
+                    )}
+                    {activeTab === 2 && (
+                        <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
+                    )}
+                    <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
                 </div>
             </div>
-            <SwitchTab
-                tabs={tabs}
-                onTabClick={setActiveTab}
-                activeTab={activeTab}
-                design="default"
-            />
+            <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
             <div>
                 {activeTab === 0 && <SurveysQuestions />}
                 {activeTab === 1 && <SurveysResult surveysResults={surveysResults as SurveyResult[]} />}
@@ -58,3 +59,4 @@ const SurveysProfile = () => {
 };
 
 export default SurveysProfile;
+

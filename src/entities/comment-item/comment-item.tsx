@@ -10,13 +10,10 @@ export const CommentItem = ({ comment }: any) => {
         <Row className={style.container} key={author}>
             <div className={style.container__wrapper}>
                 <Col sm={1}>
-                    <Image
-                        roundedCircle
-                        height={52}
-                        width={52}
+                    <img
                         src={'https://images.hdqwalls.com/download/spaceman-4k-h0-3840x2400.jpg'}
-                        className={`border border-light`}
-                        style={{ objectFit: 'cover' }}
+                        style={{ objectFit: 'cover', borderRadius: '100%', height: '50px', width: '60px' }}
+                        alt="avatar"
                     />
                 </Col>
                 <Row className={style.container__card_title}>

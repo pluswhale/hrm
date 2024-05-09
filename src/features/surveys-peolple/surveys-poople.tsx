@@ -4,7 +4,7 @@ import { Button } from '../../shared/components/button/button';
 import { Filter } from '../filter';
 import logo from '../../assets/Ellipse 1.svg';
 import { PopupWithDarkOverlay } from '../../shared/components/portal/popup-with-dark-overlay';
-import { AddParticipant } from '../../entities/survey-items/survey-modal/add-participant/add-participant';
+import { AddParticipant } from '../../entities/add-participant/add-participant';
 import { AddParticipantProps } from './constants';
 
 const SurveysPoople = () => {
@@ -33,8 +33,6 @@ const SurveysPoople = () => {
         );
     };
 
-
-
     const onOpenModalRecruitingFunnel = () => {
         setIsModalRecruitingFunnelOpened(true);
     };
@@ -43,12 +41,20 @@ const SurveysPoople = () => {
         setIsModalRecruitingFunnelOpened(false);
     };
 
-
     return (
         <div className={style.container}>
             <div className={style.container__wrapper}>
-                <Button styles={{ width: 'fit-content', height: '40px' }} text="Добавить частника" view="default_bg" onClick={onOpenModalRecruitingFunnel}/>
-                <Button styles={{ width: 'fit-content', height: '40px' }} text="Напомнить об опросе" view="default_bg" />
+                <Button
+                    styles={{ width: 'fit-content', height: '40px' }}
+                    text="Добавить частника"
+                    view="default_bg"
+                    onClick={onOpenModalRecruitingFunnel}
+                />
+                <Button
+                    styles={{ width: 'fit-content', height: '40px' }}
+                    text="Напомнить об опросе"
+                    view="default_bg"
+                />
             </div>
             <div className={style.container__wraper_bootom}>
                 <div className={style.container__wrapper_block}>
@@ -93,3 +99,4 @@ const SurveysPoople = () => {
 };
 
 export default SurveysPoople;
+

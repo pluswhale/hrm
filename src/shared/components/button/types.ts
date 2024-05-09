@@ -13,7 +13,7 @@ type ButtonType =
 export type ButtonProps = {
     styles?: React.CSSProperties;
     view?: ButtonType;
-    type?: string;
+    type?: 'button' | 'reset' | 'submit' | undefined;
     onClick?: () => void;
     text?: string;
     href?: string;
@@ -29,3 +29,4 @@ export const dynamicStylesObject = {
     default_bg_none_there: styles.default_bg_none_there,
     default_bg_none_gray: styles.default_bg_none_gray,
 } as InlineStyle;
+
