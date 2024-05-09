@@ -12,9 +12,5 @@ body {
     background-color: $bgColor !important;
 }
 
-@media (max-width: 900px) {
-    body {
-        overflow: scroll;
-    }
-}
+
 

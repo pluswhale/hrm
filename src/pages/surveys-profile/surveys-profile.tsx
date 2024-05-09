@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './surveys-profile.module.scss';
 import { DefaultContentWrapper } from '../../entities/default-content-wrapper/default-content-wrapper';
 import { HorizontalNavigation } from '../../shared/components/horizontal-navigation';
@@ -44,12 +44,13 @@ const SurveysProfile = () => {
                     {activeTab === 2 ? (
                         <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
                     ) : null}
+                    <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
                 </div>
             </div>
             <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
             {activeTab === 0 && <SurveysQuestions />}
-            {activeTab === 1 && <SurveysResult />}
-            {activeTab === 2 && <SurveysPoople surveysResults={surveysResults} />}
+            {activeTab === 1 && <SurveysResult surveysResults={surveysResults} />}
+            {activeTab === 2 && <SurveysPoople />}
         </DefaultContentWrapper>
     );
 };

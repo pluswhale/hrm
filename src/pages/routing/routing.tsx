@@ -20,7 +20,7 @@ import { AppealsProfile } from 'pages/appeals-profile';
 export const Routing = () => {
     return (
         <Routes>
-            <Route path="/" element={<Navigation />}>
+            <Route path="/" element={<Navigation />} >
                 <Route index element={<EmployeesList />} />
                 <Route path="employees" element={<EmployeesList />} />
                 <Route path="employees/:id" element={<EmployeeProfile />} />

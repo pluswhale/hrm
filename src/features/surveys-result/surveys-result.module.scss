@@ -9,9 +9,56 @@
     gap: 5px;
   }
 
+  &__wrapper_right{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+
   &__wrapper_left{
     display: flex;
     flex-direction: column;
+    align-items: center;
+  }
+
+  &__line{
+    height: 20px;
+    width: 100%;
+    background-color: #8A8A8A;
+  }
+
+  &__card{
+    width: 37%;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__card_head{
+    align-items: center;
+    display: flex;
+    gap: 10px;
+  }
+
+  &__img{
+    height: 58px;
+    width: 58px;
+  }
+
+
+  &__wrapper_card_title{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 18.96px;
+    text-align: left;
+    color: black;
   }
 
   &__text{
@@ -40,6 +87,26 @@
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 18.75px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__input_text_req{
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    flex-wrap: nowrap;
+    display: flex;
+    line-height: 18.75px;
+  }
+
+  &__input_textmini{
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 18.75px;
+    color: #707070;
     display: flex;
     flex-direction: column;
     gap: 5px;

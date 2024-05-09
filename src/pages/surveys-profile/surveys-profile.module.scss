@@ -8,6 +8,10 @@
   }
 
   &__container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
     &__title {
       color: black;
       font-size: 25px;
@@ -15,6 +19,17 @@
       font-family: 'Rubik', sans-serif;
       text-decoration: none;
       font-weight: 500;
+    }
+  }
+}
+
+@media (max-width: 1560px) {
+  .survey_navigation{
+
+    &__wrap{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
   }
 }

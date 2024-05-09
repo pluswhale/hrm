@@ -35,3 +35,12 @@
     }
 }
 
+@media (max-width: 1700px) {
+    .create_survey {
+        width: 100%;
+
+        &__form_wrapper {
+            width: 100%;
+        }
+    }
+}
