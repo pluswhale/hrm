@@ -4,9 +4,8 @@ import { Button } from '../../shared/components/button/button';
 import { Filter } from '../filter';
 import logo from '../../assets/Ellipse 1.svg';
 import { PopupWithDarkOverlay } from '../../shared/components/portal/popup-with-dark-overlay';
-import {
-    VacancyRecruitingFunnel
-} from '../../entities/vacancy-items/vacancy-modals/vacancy-recruting-funnel/vacancy-recruiting-funnel';
+import { AddParticipant } from '../../entities/survey-items/survey-modal/add-participant/add-participant';
+import { AddParticipantProps } from './constants';
 
 const SurveysPoople = () => {
     const [isModalRecruitingFunnelOpened, setIsModalRecruitingFunnelOpened] = useState(false);
@@ -48,8 +47,8 @@ const SurveysPoople = () => {
     return (
         <div className={style.container}>
             <div className={style.container__wrapper}>
-                <Button styles={{ width: 'fit-content', height: '40px' }} text="Добавить частника" view="default_bg" />
-                <Button styles={{ width: 'fit-content', height: '40px' }} text="Напомнить об опросе" view="default_bg" onClick={onOpenModalRecruitingFunnel}/>
+                <Button styles={{ width: 'fit-content', height: '40px' }} text="Добавить частника" view="default_bg" onClick={onOpenModalRecruitingFunnel}/>
+                <Button styles={{ width: 'fit-content', height: '40px' }} text="Напомнить об опросе" view="default_bg" />
             </div>
             <div className={style.container__wraper_bootom}>
                 <div className={style.container__wrapper_block}>
@@ -87,7 +86,7 @@ const SurveysPoople = () => {
                 <Filter title="Найти сотрудника" />
             </div>
             <PopupWithDarkOverlay onClose={onCloseModalRecruitingFunnel} isOpened={isModalRecruitingFunnelOpened}>
-                <VacancyRecruitingFunnel onClose={onCloseModalRecruitingFunnel} />
+                <AddParticipant people={AddParticipantProps} onClose={onCloseModalRecruitingFunnel} />
             </PopupWithDarkOverlay>
         </div>
     );
