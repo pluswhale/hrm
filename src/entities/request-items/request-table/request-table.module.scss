@@ -1,47 +1,47 @@
-.container{
+.container {
     background-color: white;
-    border-radius: 10px ;
+    border-radius: 10px;
     width: 100%;
     padding: 5px 20px;
     display: grid;
 
-    &__card{
+    &__card {
         cursor: pointer;
         padding: 15px 0;
         align-items: center;
         display: grid;
-        grid-template-columns: 0.5fr 0.6fr 0.5fr 0.2fr;
+        grid-template-columns: minmax(60px, auto) repeat(3, minmax(0, 1fr)) minmax(112px, auto);
         gap: 10px;
     }
 
-    &__head{
+    &__head {
         display: grid;
         gap: 15px;
         align-items: center;
-        grid-template-columns: auto 1fr;
+        // grid-template-columns: auto 1fr;
     }
 
-    &__img{
+    &__img {
         width: 60px;
         height: 60px;
         border-radius: 100px;
     }
 
-    &__name_prof{
+    &__name_prof {
         width: 200px;
         align-items: flex-start;
         display: grid;
         gap: 5px;
     }
 
-    &__name{
+    &__name {
         font-weight: 500;
         font-size: 16px;
         line-height: 17px;
         color: black;
     }
 
-    &__prof{
+    &__prof {
         align-items: flex-start;
         font-weight: 400;
         font-size: 16px;
@@ -55,21 +55,27 @@
         border-radius: 24px;
         padding: 5px 15px;
         height: 26px;
-        width: 112px;
         font-size: 14px;
         font-weight: 500;
+        min-width: 112px; /* Minimum width to prevent content from overlapping */
     }
 
-    &__meeting{
+    &__meeting {
         align-items: flex-start;
         font-weight: 400;
         font-size: 16px;
-        color: #2C323F;
+        color: #2c323f;
     }
-    &__data{
+    &__data {
         justify-content: center;
         font-weight: 400;
         font-size: 16px;
-        color: #2C323F;
+        color: #2c323f;
+    }
+
+    &__divider {
+        height: 0.5px !important;
+        background-color: #242934;
     }
 }
+

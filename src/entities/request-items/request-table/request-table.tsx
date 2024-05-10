@@ -1,4 +1,3 @@
-
 import React, { FC, ReactElement, useState } from 'react';
 import style from './request-table.module.scss';
 import { RequestTableProps } from './types';
@@ -32,13 +31,12 @@ const RequestTable: FC<RequestTableProps> = ({ requests }): ReactElement => {
         );
     };
 
-
     const onOpenModalRequest = (status: string) => {
         setIsModalRecruitingFunnelOpened(true);
         setModalStatus(status);
     };
 
-    const onCloseModalRequest= () => {
+    const onCloseModalRequest = () => {
         setIsModalRecruitingFunnelOpened(false);
     };
 
@@ -47,8 +45,8 @@ const RequestTable: FC<RequestTableProps> = ({ requests }): ReactElement => {
             {requests.map((request, index) => (
                 <React.Fragment key={request.id}>
                     <div className={style.container__card} onClick={() => onOpenModalRequest(request.status)}>
+                        <img className={style.container__img} src={request.imageUrl} alt="" />
                         <div className={style.container__head}>
-                            <img className={style.container__img} src={request.imageUrl} alt="" />
                             <div className={style.container__name_prof}>
                                 <span className={style.container__name}>{request.name}</span>
                                 <span className={style.container__prof}>{request.profession}</span>
@@ -62,10 +60,11 @@ const RequestTable: FC<RequestTableProps> = ({ requests }): ReactElement => {
                 </React.Fragment>
             ))}
             <PopupWithDarkOverlay onClose={onCloseModalRequest} isOpened={isModalRecruitingFunnelOpened}>
-                <RequestModal onClose={onCloseModalRequest} status={modalStatus}/>
+                <RequestModal onClose={onCloseModalRequest} status={modalStatus} />
             </PopupWithDarkOverlay>
         </div>
     );
 };
 
 export default RequestTable;
+

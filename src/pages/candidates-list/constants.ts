@@ -1,5 +1,6 @@
 import { CandidatesDataContainerProps } from 'features/candidates-data-container/types';
 import { FilterSet } from 'features/filter/types';
+import avatar from '../../assets/Ellipse 1.svg';
 
 export const filterSet = [
     {
@@ -30,28 +31,28 @@ export const candidatesListData = {
     candidates: [
         {
             id: 1,
-            imageSrc: 'https://assets.materialup.com/uploads/9e891d99-30d7-4763-9b73-358cc8e8b2cc/preview.png',
+            imageSrc: avatar,
             name: 'Рыбина Анастасия Алексеевна',
             role: 'Ui/UX designer',
             skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
         },
         {
             id: 2,
-            imageSrc: 'https://assets.materialup.com/uploads/9e891d99-30d7-4763-9b73-358cc8e8b2cc/preview.png',
+            imageSrc: avatar,
             name: 'Рыбина Анастасия Алексеевна',
             role: 'Ui/UX designer',
             skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
         },
         {
             id: 3,
-            imageSrc: 'https://assets.materialup.com/uploads/9e891d99-30d7-4763-9b73-358cc8e8b2cc/preview.png',
+            imageSrc: avatar,
             name: 'Рыбина Анастасия Алексеевна',
             role: 'Ui/UX designer',
             skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
         },
         {
             id: 4,
-            imageSrc: 'https://assets.materialup.com/uploads/9e891d99-30d7-4763-9b73-358cc8e8b2cc/preview.png',
+            imageSrc: avatar,
             name: 'Рыбина Анастасия Алексеевна',
             role: 'Ui/UX designer',
             skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],

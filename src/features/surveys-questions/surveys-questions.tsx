@@ -2,10 +2,13 @@ import { useState } from 'react';
 import style from './surveys-questions.module.scss';
 import { Radio } from '../../shared/components/radio';
 import { Input } from '../../shared/components/input';
+import { FormProvider, useForm } from 'react-hook-form';
 
 const SurveysQuestions = () => {
     const [selectedSeveralValue, setSelectedSeveralValue] = useState<string>('');
     const [selectedValue, setSelectedValue] = useState<string>('');
+
+    const methods = useForm();
 
     const handleRadioSeveralChange = (value: any) => {
         setSelectedSeveralValue(value);
@@ -67,24 +70,39 @@ const SurveysQuestions = () => {
                     </div>
                 </span>
             </div>
-            <div className={style.container__wrapper}>
-                <span className={style.container__input_text}>
-                    Вопрос с одним варианто ответа
-                    <div className={style.container__wrapper_radio}>
-                        <Input width={'100%'} isRequired={false} name={'deadline'} placeholder={'Вопрос'} />
-                    </div>
-                </span>
-            </div>
-            <div className={style.container__wrapper}>
-                <span className={style.container__input_text}>
-                    Вопрос с одним варианто ответа
-                    <div className={style.container__wrapper_radio}>
-                        <Input width={'100%'} isRequired={false} name={'deadline'} placeholder={'Вопрос'} />
-                    </div>
-                </span>
-            </div>
+            <FormProvider {...methods}>
+                <div className={style.container__wrapper}>
+                    <span className={style.container__input_text}>
+                        Вопрос с одним варианто ответа
+                        <div className={style.container__wrapper_radio}>
+                            <Input
+                                onChange={() => console.log('1')}
+                                width={'100%'}
+                                isRequired={false}
+                                name={'deadline'}
+                                placeholder={'Вопрос'}
+                            />
+                        </div>
+                    </span>
+                </div>
+                <div className={style.container__wrapper}>
+                    <span className={style.container__input_text}>
+                        Вопрос с одним варианто ответа
+                        <div className={style.container__wrapper_radio}>
+                            <Input
+                                onChange={() => console.log('1')}
+                                width={'100%'}
+                                isRequired={false}
+                                name={'deadline'}
+                                placeholder={'Вопрос'}
+                            />
+                        </div>
+                    </span>
+                </div>
+            </FormProvider>
         </div>
     );
 };
 
 export default SurveysQuestions;
+

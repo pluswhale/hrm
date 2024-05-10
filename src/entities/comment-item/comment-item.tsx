@@ -2,6 +2,7 @@ import { Col, Image, Row } from 'react-bootstrap';
 import style from './comment_item.module.scss';
 import Delete from './../../assets/Удалить.svg';
 import Redact from './../../assets/Редактировать.svg';
+import avatar from '../../assets/Ellipse 1.svg';
 
 export const CommentItem = ({ comment }: any) => {
     const { author, date, text } = comment;
@@ -11,7 +12,7 @@ export const CommentItem = ({ comment }: any) => {
             <div className={style.container__wrapper}>
                 <Col sm={1}>
                     <img
-                        src={'https://images.hdqwalls.com/download/spaceman-4k-h0-3840x2400.jpg'}
+                        src={avatar}
                         style={{ objectFit: 'cover', borderRadius: '100%', height: '50px', width: '60px' }}
                         alt="avatar"
                     />
