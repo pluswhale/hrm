@@ -20,9 +20,7 @@ export const Sidebar = ({ isOpen, setOpen, isMobile, closeSidebar }: SidebarProp
         }
     }, [isMobile, setOpen]);
 
-    const handleLinkClick = () => {
-        closeSidebar();
-    };
+    const handleLinkClick = () => {};
 
     const handleCloseClick = () => {
         closeSidebar();

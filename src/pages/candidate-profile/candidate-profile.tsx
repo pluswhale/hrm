@@ -2,22 +2,17 @@ import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-
 import { Button } from 'shared/components/button/button';
 import { HorizontalNavigation } from 'shared/components/horizontal-navigation';
 
+import styles from './candidate-profile.module.scss';
 import { useNavigate } from 'react-router';
 import { CommentAndHistoryTemplate } from 'features/comment-and-history-template';
-import { VacancyCandidateInfo } from 'features/vacancy-candidate-info';
+import { CandidateProfileInfo } from 'features/candidate-profile-info';
 
-import styles from './vacancies-candidate.module.scss';
-
-const VacanciesCandidate = () => {
+const CandidateProfile = () => {
     const navigate = useNavigate();
     const navigation = [
         {
-            title: 'Активные вакансии',
-            url: '/vacancies',
-        },
-        {
-            title: 'Название вакансии',
-            url: '/vacancies',
+            title: 'Кандидаты',
+            url: '/candidates',
         },
         {
             title: 'Рыбина Анастасия',
@@ -31,13 +26,13 @@ const VacanciesCandidate = () => {
 
     return (
         <DefaultContentWrapper>
-            <div className={styles.vacancy_navigation}>
+            <div className={styles.candidate_profile_navigation}>
                 <HorizontalNavigation navigation={navigation} />
                 <Button onClick={onNavigateToEditCandidate} text="Редактировать" view="default_bg_white" />
             </div>
             <div className={styles.main_content}>
-                <div className={styles.vacancy_candidate_info}>
-                    <VacancyCandidateInfo />
+                <div className={styles.candidate_info}>
+                    <CandidateProfileInfo />
                 </div>
 
                 <CommentAndHistoryTemplate />
@@ -46,5 +41,5 @@ const VacanciesCandidate = () => {
     );
 };
 
-export default VacanciesCandidate;
+export default CandidateProfile;
 

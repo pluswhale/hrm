@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 
 import styles from './create-candidate-form.module.scss';
 import { Input } from 'shared/components/input';
@@ -15,7 +15,7 @@ import plusIcon from '../../assets/plus_icon.svg';
 import { addNewExperience, addNewEducation } from '../../redux/slices/create-candidate';
 
 export const CreateCandidateForm = () => {
-    const { register, handleSubmit } = useForm();
+    const methods = useForm();
 
     const onSubmit = (data: any) => {
         // Отпралвять запрос на сервер для сохранения
@@ -23,24 +23,20 @@ export const CreateCandidateForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.create_candidate}>
-            <div className={styles.create_candidate__container}>
-                <InfoAboutCandidate register={register} />
-                <Education register={register} />
-                <Experience register={register} />
-            </div>
-            <Button type={'submit'} styles={{ width: '189px' }} view={'default_bg'} text="Создать" />
-        </form>
+        <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_candidate}>
+                <div className={styles.create_candidate__container}>
+                    <InfoAboutCandidate />
+                    <Education />
+                    <Experience />
+                </div>
+                <Button type={'submit'} styles={{ width: '189px' }} view={'default_bg'} text="Создать" />
+            </form>
+        </FormProvider>
     );
 };
 
-type InfoAboutCandidateProps = {
-    register: any;
-};
-
-const InfoAboutCandidate = (props: InfoAboutCandidateProps) => {
-    const { register } = props;
-
+const InfoAboutCandidate = () => {
     return (
         <div className={styles.create_candidate__form_wrapper}>
             <h2 className={styles.create_candidate__title}>Инормация о кандидате</h2>
@@ -50,7 +46,11 @@ const InfoAboutCandidate = (props: InfoAboutCandidateProps) => {
                         width={'100%'}
                         isRequired={true}
                         name={'last_name'}
-                        register={register}
+                        pattern={{
+                            //@ts-ignore
+                            value: /^[а-яА-Я]+$/u,
+                            message: 'Введите фамилию кандидата на русской раскладке',
+                        }}
                         placeholder={'Фамилия'}
                         label="Фамилия"
                     />
@@ -58,7 +58,11 @@ const InfoAboutCandidate = (props: InfoAboutCandidateProps) => {
                         width={'100%'}
                         isRequired={true}
                         name={'first_name'}
-                        register={register}
+                        pattern={{
+                            //@ts-ignore
+                            value: /^[а-яА-Я]+$/u,
+                            message: 'Введите имя кандидата на русской раскладке',
+                        }}
                         placeholder={'Имя'}
                         label="Имя"
                     />
@@ -67,7 +71,11 @@ const InfoAboutCandidate = (props: InfoAboutCandidateProps) => {
                         width={'100%'}
                         isRequired={false}
                         name={'sur_name'}
-                        register={register}
+                        pattern={{
+                            //@ts-ignore
+                            value: /^[а-яА-Я]+$/u,
+                            message: 'Введите отчество кандидата на русской раскладке',
+                        }}
                         placeholder={'Отчество'}
                         label="Отчество"
                     />
@@ -77,7 +85,10 @@ const InfoAboutCandidate = (props: InfoAboutCandidateProps) => {
                         width={'32.3%'}
                         isRequired={false}
                         name={'birth_day'}
-                        register={register}
+                        pattern={{
+                            value: /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{2}$/,
+                            message: 'Введите дату рождения в формате д.мес.год',
+                        }}
                         placeholder={'Дата рождения'}
                         label="Дата рождения"
                     />
@@ -85,7 +96,11 @@ const InfoAboutCandidate = (props: InfoAboutCandidateProps) => {
                         width={'32.3%'}
                         isRequired={true}
                         name={'location'}
-                        register={register}
+                        pattern={{
+                            //@ts-ignore
+                            value: /^[а-яА-Я]+$/u,
+                            message: 'Введите место проживания на русской раскладке',
+                        }}
                         placeholder={'Место проживания'}
                         label="Место проживания"
                     />
@@ -95,7 +110,11 @@ const InfoAboutCandidate = (props: InfoAboutCandidateProps) => {
                         width={'100%'}
                         isRequired={true}
                         name={'email'}
-                        register={register}
+                        pattern={{
+                            //@ts-ignore
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            message: 'Введите корректный email',
+                        }}
                         placeholder={'Почта'}
                         label="Почта"
                     />
@@ -103,7 +122,10 @@ const InfoAboutCandidate = (props: InfoAboutCandidateProps) => {
                         width={'100%'}
                         isRequired={true}
                         name={'phone_number'}
-                        register={register}
+                        pattern={{
+                            value: /^\+(?:[0-9] ?){6,14}[0-9]$/,
+                            message: 'Введите номер телефона в формате +8234567890',
+                        }}
                         placeholder={'Номер телефона'}
                         label="Номер телефона"
                     />
@@ -111,7 +133,10 @@ const InfoAboutCandidate = (props: InfoAboutCandidateProps) => {
                         width={'100%'}
                         isRequired={false}
                         name={'telegram'}
-                        register={register}
+                        pattern={{
+                            value: /@[a-zA-Z0-9_]{5,32}/,
+                            message: 'Введите имя пользователя Telegram в формате @username',
+                        }}
                         placeholder={'Telegram'}
                         label="Telegram"
                     />
@@ -121,13 +146,8 @@ const InfoAboutCandidate = (props: InfoAboutCandidateProps) => {
     );
 };
 
-type EducationProps = {
-    register: any;
-};
-
-const Education = (props: EducationProps) => {
+const Education = () => {
     const dispatch = useAppDispatch();
-    const { register } = props;
 
     const educations = useSelector(educationsSelector);
 
@@ -147,7 +167,11 @@ const Education = (props: EducationProps) => {
                                     width={'100%'}
                                     isRequired={false}
                                     name={`university_name-${index + 1}`}
-                                    register={register}
+                                    pattern={{
+                                        //@ts-ignore
+                                        value: /^[а-яА-Я]+$/u,
+                                        message: 'Введите название вакансии на русской раскладке',
+                                    }}
                                     placeholder={'Название учебного заведения'}
                                     label="Название учебного заведения"
                                 />
@@ -155,7 +179,11 @@ const Education = (props: EducationProps) => {
                                     width={'100%'}
                                     isRequired={false}
                                     name={`faculty-${index + 1}`}
-                                    register={register}
+                                    pattern={{
+                                        //@ts-ignore
+                                        value: /^[а-яА-Я]+$/u,
+                                        message: 'Введите название вакансии на русской раскладке',
+                                    }}
                                     placeholder={'Имя'}
                                     label="Имя"
                                 />
@@ -165,7 +193,11 @@ const Education = (props: EducationProps) => {
                                     width={'49%'}
                                     isRequired={false}
                                     name={`specialization-${index + 1}`}
-                                    register={register}
+                                    pattern={{
+                                        //@ts-ignore
+                                        value: /^[а-яА-Я]+$/u,
+                                        message: 'Введите название вакансии на русской раскладке',
+                                    }}
                                     placeholder={'Дата рождения'}
                                     label="Дата рождения"
                                 />
@@ -173,7 +205,11 @@ const Education = (props: EducationProps) => {
                                     width={'20%'}
                                     isRequired={true}
                                     name={`end-date-${index + 1}`}
-                                    register={register}
+                                    pattern={{
+                                        //@ts-ignore
+                                        value: /^[а-яА-Я]+$/u,
+                                        message: 'Введите название вакансии на русской раскладке',
+                                    }}
                                     placeholder={'Год окончания'}
                                     label="Год окончания"
                                 />
@@ -191,13 +227,8 @@ const Education = (props: EducationProps) => {
     );
 };
 
-type ExperienceProps = {
-    register: any;
-};
-
-const Experience = (props: ExperienceProps) => {
+const Experience = () => {
     const dispatch = useAppDispatch();
-    const { register } = props;
 
     const experiences = useSelector(experiencesSelector);
 
@@ -217,7 +248,11 @@ const Experience = (props: ExperienceProps) => {
                                     width={'100%'}
                                     isRequired={false}
                                     name={`company-name-${index + 1}`}
-                                    register={register}
+                                    pattern={{
+                                        //@ts-ignore
+                                        value: /^[а-яА-Я]+$/u,
+                                        message: 'Введите название вакансии на русской раскладке',
+                                    }}
                                     placeholder={'Название компании'}
                                     label="Название компании"
                                 />
@@ -225,7 +260,11 @@ const Experience = (props: ExperienceProps) => {
                                     width={'100%'}
                                     isRequired={false}
                                     name={`job-title-${index + 1}`}
-                                    register={register}
+                                    pattern={{
+                                        //@ts-ignore
+                                        value: /^[а-яА-Я]+$/u,
+                                        message: 'Введите название вакансии на русской раскладке',
+                                    }}
                                     placeholder={'Должность'}
                                     label="Должность"
                                 />
@@ -235,7 +274,11 @@ const Experience = (props: ExperienceProps) => {
                                     width={'20%'}
                                     isRequired={false}
                                     name={`responsibilities-and-achievements-${index + 1}`}
-                                    register={register}
+                                    pattern={{
+                                        //@ts-ignore
+                                        value: /^[а-яА-Я]+$/u,
+                                        message: 'Введите название вакансии на русской раскладке',
+                                    }}
                                     placeholder={'Обязанности и достижения'}
                                     label="Обязанности и достижения"
                                 />
@@ -245,7 +288,11 @@ const Experience = (props: ExperienceProps) => {
                                     width={'20%'}
                                     isRequired={false}
                                     name={`start-job-date-${index + 1}`}
-                                    register={register}
+                                    pattern={{
+                                        //@ts-ignore
+                                        value: /^[а-яА-Я]+$/u,
+                                        message: 'Введите название вакансии на русской раскладке',
+                                    }}
                                     placeholder={'Дата начала работы'}
                                     label="Дата начала работы"
                                 />
@@ -253,7 +300,11 @@ const Experience = (props: ExperienceProps) => {
                                     width={'20%'}
                                     isRequired={true}
                                     name={`end-job-date-${index + 1}`}
-                                    register={register}
+                                    pattern={{
+                                        //@ts-ignore
+                                        value: /^[а-яА-Я]+$/u,
+                                        message: 'Введите название вакансии на русской раскладке',
+                                    }}
                                     placeholder={'Дата окончания работы'}
                                     label="Дата окончания работы"
                                 />

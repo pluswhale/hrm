@@ -16,7 +16,7 @@ const EditCandidate = () => {
         },
         {
             title: 'Редактирование кандидата',
-            url: '/vacancies',
+            url: undefined,
         },
     ];
 

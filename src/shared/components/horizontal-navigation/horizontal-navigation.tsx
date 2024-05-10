@@ -26,7 +26,7 @@ export const HorizontalNavigation: FC<HorizontalNavigationProps> = ({ navigation
                                 ${styles.horizontal_navigation__item} 
                                 ${navigation?.length - 1 === index ? styles.active : ''}
                             `}
-                            to={item.url}
+                            to={item.url || ''}
                         >
                             {item.title}
                         </Link>

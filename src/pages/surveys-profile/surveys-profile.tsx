@@ -23,7 +23,7 @@ const SurveysProfile = () => {
         },
         {
             title: 'Название опроса',
-            url: '',
+            url: undefined,
         },
     ];
 

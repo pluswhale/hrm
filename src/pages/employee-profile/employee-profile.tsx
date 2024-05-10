@@ -15,7 +15,7 @@ const EmployeeProfile: FC = (): ReactElement => {
         },
         {
             title: 'Рыбина Анастасия',
-            url: '',
+            url: undefined,
         },
     ];
 

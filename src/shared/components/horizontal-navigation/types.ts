@@ -1,8 +1,8 @@
 export type HorizontalNavigationProps = {
     navigation: NavigationItem[];
-}
+};
 
 type NavigationItem = {
-    title: string,
-    url: string,
-}
+    title: string;
+    url: string | undefined;
+};

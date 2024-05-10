@@ -14,7 +14,7 @@ const CreateSurvey = () => {
         },
         {
             title: 'Создание опроса',
-            url: '',
+            url: undefined,
         },
     ];
     return (
@@ -34,3 +34,4 @@ const CreateSurvey = () => {
 };
 
 export default CreateSurvey;
+

@@ -17,7 +17,7 @@ const EditVacancy = () => {
         },
         {
             title: 'Редактирование',
-            url: '/vacancies',
+            url: undefined,
         },
     ];
 

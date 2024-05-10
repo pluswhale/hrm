@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
-import style from './surveys-questions.module.scss'
+import { useState } from 'react';
+import style from './surveys-questions.module.scss';
 import { Radio } from '../../shared/components/radio';
 import { Input } from '../../shared/components/input';
-import { useForm } from 'react-hook-form';
 
 const SurveysQuestions = () => {
     const [selectedSeveralValue, setSelectedSeveralValue] = useState<string>('');
     const [selectedValue, setSelectedValue] = useState<string>('');
-    const { register, handleSubmit } = useForm();
 
     const handleRadioSeveralChange = (value: any) => {
         setSelectedSeveralValue(value);
@@ -31,13 +29,13 @@ const SurveysQuestions = () => {
                         />
                         <Radio
                             value="option2"
-                            checked={selectedValue === "option2"}
+                            checked={selectedValue === 'option2'}
                             onChange={handleRadioChange}
                             label="Имя Фамилия"
                         />
                         <Radio
                             value="option3"
-                            checked={selectedValue === "option3"}
+                            checked={selectedValue === 'option3'}
                             onChange={handleRadioChange}
                             label="Имя Фамилия"
                         />
@@ -56,13 +54,13 @@ const SurveysQuestions = () => {
                         />
                         <Radio
                             value="option2"
-                            checked={selectedSeveralValue === "option2"}
+                            checked={selectedSeveralValue === 'option2'}
                             onChange={handleRadioSeveralChange}
                             label="Имя Фамилия"
                         />
                         <Radio
                             value="option3"
-                            checked={selectedSeveralValue === "option3"}
+                            checked={selectedSeveralValue === 'option3'}
                             onChange={handleRadioSeveralChange}
                             label="Имя Фамилия"
                         />
@@ -73,13 +71,7 @@ const SurveysQuestions = () => {
                 <span className={style.container__input_text}>
                     Вопрос с одним варианто ответа
                     <div className={style.container__wrapper_radio}>
-                        <Input
-                            width={'100%'}
-                            isRequired={false}
-                            name={'deadline'}
-                            register={register}
-                            placeholder={'Вопрос'}
-                        />
+                        <Input width={'100%'} isRequired={false} name={'deadline'} placeholder={'Вопрос'} />
                     </div>
                 </span>
             </div>
@@ -87,13 +79,7 @@ const SurveysQuestions = () => {
                 <span className={style.container__input_text}>
                     Вопрос с одним варианто ответа
                     <div className={style.container__wrapper_radio}>
-                        <Input
-                            width={'100%'}
-                            isRequired={false}
-                            name={'deadline'}
-                            register={register}
-                            placeholder={'Вопрос'}
-                        />
+                        <Input width={'100%'} isRequired={false} name={'deadline'} placeholder={'Вопрос'} />
                     </div>
                 </span>
             </div>

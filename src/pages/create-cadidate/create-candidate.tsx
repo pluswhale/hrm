@@ -11,7 +11,7 @@ const CreateCandidate = () => {
         },
         {
             title: 'Создание кандидата',
-            url: '/vacancies',
+            url: undefined,
         },
     ];
 

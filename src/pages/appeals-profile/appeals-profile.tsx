@@ -18,7 +18,7 @@ const AppealsProfile = () => {
         },
         {
             title: APPEAl_DATA.title,
-            url: '/vacancies',
+            url: undefined,
         },
     ];
 

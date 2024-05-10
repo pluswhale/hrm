@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './create-survey-right-form.module.scss';
 import { Radio } from '../../../shared/components/radio';
 import redaction from '../../../assets/Редактировать.svg';
@@ -6,11 +6,9 @@ import Delete from '../../../assets/Удалить.svg';
 import { Selector } from '../../../shared/components/selector';
 import { options } from './constants';
 import { Input } from '../../../shared/components/input';
-import { useForm } from 'react-hook-form';
 import { Button } from '../../../shared/components/button/button';
 
 const CreateSurveyRightForm = () => {
-    const { register, handleSubmit } = useForm();
     const [selectedValue, setSelectedValue] = useState<string>('');
     const [selectedValueBtn, setSelectedValueBtn] = useState<string>('');
     const [selectedValueInject, setSelectedValueInject] = useState<string>('');
@@ -94,14 +92,7 @@ const CreateSurveyRightForm = () => {
                     Тип опроса
                     <Selector options={options} value={selectedValueBtn} onChange={handleChange} />
                 </span>
-                <Input
-                    width={'100%'}
-                    isRequired={false}
-                    name={'deadline'}
-                    register={register}
-                    placeholder={'Вопрос'}
-                    label="Вопрос"
-                />
+                <Input width={'100%'} isRequired={false} name={'deadline'} placeholder={'Вопрос'} label="Вопрос" />
                 <div className={styles.container__wrap_btn}>
                     <Button styles={{ width: 'fit-content', height: '40px' }} text="Добавить" view="default_bg" />
                 </div>
@@ -111,3 +102,4 @@ const CreateSurveyRightForm = () => {
 };
 
 export default CreateSurveyRightForm;
+
