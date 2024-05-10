@@ -1,2 +1,2 @@
-export {default as SurveysProfile} from "./surveys-profile";
+export { default as SurveysProfile } from './surveys-profile';
 

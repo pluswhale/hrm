@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './surveys-profile.module.scss';
 import { DefaultContentWrapper } from '../../entities/default-content-wrapper/default-content-wrapper';
 import { HorizontalNavigation } from '../../shared/components/horizontal-navigation';
 import { Button } from '../../shared/components/button/button';
 import SurveyInfo from '../../features/survey-info/survey-info';
-import { leftColumnData, rightColumnData, surveysResults } from './constants';
+import { leftColumnData, rightColumnData, SURVEY_DESCRIPTION_DATA, surveysResults } from './constants';
 import { SwitchTab } from '../../shared/components/switch-tab';
 import { SurveysQuestions } from '../../features/surveys-questions';
 import SurveysResult from '../../features/surveys-result/surveys-result';
 import { SurveysPoople } from '../../features/surveys-peolple';
 import { SurveyResult } from '../../features/surveys-result/types';
+import { SurveyDescription } from 'entities/survey-items/survey-description/survey-description';
 
 const SurveysProfile = () => {
     const [activeTab, setActiveTab] = useState(0);
@@ -36,16 +37,8 @@ const SurveysProfile = () => {
             <div className={styles.survey_navigation__container}>
                 <h2 className={styles.survey_navigation__container__title}>Название опроса</h2>
                 <div className={styles.survey_navigation__wrap}>
-                    {activeTab === 0 && (
-                        <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
-                    )}
-                    {activeTab === 1 && (
-                        <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
-                    )}
-                    {activeTab === 2 && (
-                        <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
-                    )}
                     <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
+                    <SurveyDescription title="Описание" content={SURVEY_DESCRIPTION_DATA} />
                 </div>
             </div>
             <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />

@@ -1,66 +1,64 @@
-.container{
-  &__title {
-    color: black;
-    font-size: 25px;
-    line-height: 30px;
-    font-family: 'Rubik', sans-serif;
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  &__card{
-    width: 100%;
-    min-width: 583px;
-    padding: 20px 21px;
-    background: white;
-    border-radius: 10px;
-  }
-  &__created_and_deadline {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
-  }
-
-  &__row {
-    display: flex;
-    gap: 5px;
-
-    &_label,
-    &_value {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 18.96px;
-      text-align: left;
-
+.container {
+    &__title {
+        font-family: 'Rubik', sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 23.7px;
+        text-align: left;
+        color: #242934;
+        // margin-bottom: 10px;
     }
 
-    &_label {
-      color: #242934;
+    &__card {
+        width: 100%;
+        min-width: 583px;
+        padding: 20px 21px;
+        background: white;
+        border-radius: 10px;
+    }
+    &__created_and_deadline {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
     }
 
-    &_value {
-      color: #707070;
+    &__row {
+        display: flex;
+        gap: 5px;
+
+        &_label,
+        &_value {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 18.96px;
+            text-align: left;
+        }
+
+        &_label {
+            color: #242934;
+        }
+
+        &_value {
+            color: #707070;
+        }
     }
-  }
-  &__card_info_wrapp{
-    display: flex;
-    gap: 20px;
-  }
+    &__card_info_wrapp {
+        display: flex;
+        gap: 20px;
+    }
 
-  &__card_block{
-    display: flex;
-    flex-direction: column;
-  }
-
-
+    &__card_block {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 1560px) {
-  .container{
-    &__card_info_wrapp{
-      justify-content: space-between;
+    .container {
+        &__card_info_wrapp {
+            justify-content: space-between;
+        }
     }
-  }
 }
+
