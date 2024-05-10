@@ -33,7 +33,7 @@ export const REQUESTS_DATA = [
         name: 'Ширяева Елена',
         profession: 'DevOps',
         status: 'Отклонен',
-        meeting: 'Произольная тема',
+        meeting: 'Произвольная тема',
         data: '7 апреля 2023',
         imageUrl: logo,
     },
