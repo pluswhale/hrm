@@ -5,8 +5,20 @@ import { Filter } from '../../features/filter';
 import { candidatesListData, filterSet } from './constants';
 import { FC, ReactElement } from 'react';
 import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-content-wrapper';
+import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { fetchAllCandidates } from 'shared/api/candidates/thunks';
+import { log } from 'console';
 
 const CandidatesList: FC = (): ReactElement => {
+    const queryParameters = {
+        queryKey: 'fetchAllCandidates',
+        queryThunk: fetchAllCandidates,
+    } as QueryParameters<any>;
+
+    const candidatesQuery = useFetchData(queryParameters);
+
+    console.log('query', candidatesQuery);
+
     return (
         <DefaultContentWrapper>
             <div className={style.container}>
