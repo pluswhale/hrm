@@ -13,13 +13,28 @@ import { experiencesSelector, educationsSelector } from '../../redux/selectors/c
 
 import plusIcon from '../../assets/plus_icon.svg';
 import { addNewExperience, addNewEducation } from '../../redux/slices/create-candidate';
+import { useCreateCandidate } from 'shared/api/candidates/mutations';
 
 export const CreateCandidateForm = () => {
     const methods = useForm();
+    const createCandidateMutation = useCreateCandidate();
 
     const onSubmit = (data: any) => {
         // Отпралвять запрос на сервер для сохранения
-        console.log(data);
+        const body = {
+            FirstName: data.first_name,
+            secondName: data.last_name,
+            surname: data.sur_name,
+        } as any;
+
+        if (data.email) body.email = data.email;
+        if (data.telegram) body.TgLogin = data.telegram;
+
+        const queryString = Object.keys(body)
+            .map((key) => `${key}=${body[key]}`)
+            .join('&');
+
+        createCandidateMutation.mutate('?' + queryString);
     };
 
     return (
@@ -94,7 +109,7 @@ const InfoAboutCandidate = () => {
                     />
                     <Input
                         width={'32.3%'}
-                        isRequired={true}
+                        isRequired={false}
                         name={'location'}
                         pattern={{
                             //@ts-ignore
@@ -108,7 +123,7 @@ const InfoAboutCandidate = () => {
                 <div className={styles.create_candidate__form_row}>
                     <Input
                         width={'100%'}
-                        isRequired={true}
+                        isRequired={false}
                         name={'email'}
                         pattern={{
                             //@ts-ignore
@@ -120,7 +135,7 @@ const InfoAboutCandidate = () => {
                     />
                     <Input
                         width={'100%'}
-                        isRequired={true}
+                        isRequired={false}
                         name={'phone_number'}
                         pattern={{
                             value: /^\+(?:[0-9] ?){6,14}[0-9]$/,
@@ -203,7 +218,7 @@ const Education = () => {
                                 />
                                 <Input
                                     width={'20%'}
-                                    isRequired={true}
+                                    isRequired={false}
                                     name={`end-date-${index + 1}`}
                                     pattern={{
                                         //@ts-ignore
@@ -298,7 +313,7 @@ const Experience = () => {
                                 />
                                 <Input
                                     width={'20%'}
-                                    isRequired={true}
+                                    isRequired={false}
                                     name={`end-job-date-${index + 1}`}
                                     pattern={{
                                         //@ts-ignore

@@ -27,36 +27,3 @@ export const filterSet = [
     },
 ] as FilterSet[];
 
-export const candidatesListData = {
-    candidates: [
-        {
-            id: 1,
-            imageSrc: avatar,
-            name: 'Рыбина Анастасия',
-            role: 'Ui/UX designer',
-            skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
-        },
-        {
-            id: 2,
-            imageSrc: avatar,
-            name: 'Рыбина Анастасия',
-            role: 'Ui/UX designer',
-            skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
-        },
-        {
-            id: 3,
-            imageSrc: avatar,
-            name: 'Рыбина Анастасия',
-            role: 'Ui/UX designer',
-            skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
-        },
-        {
-            id: 4,
-            imageSrc: avatar,
-            name: 'Рыбина Анастасия',
-            role: 'Ui/UX designer',
-            skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
-        },
-    ],
-} as CandidatesDataContainerProps;
-

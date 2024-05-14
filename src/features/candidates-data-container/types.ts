@@ -1,11 +1,14 @@
 export type CandidatesDataContainerProps = {
-    candidates: Candidate[],
-}
+    candidates: Candidate[];
+};
 
 type Candidate = {
-    id: number,
-    imageSrc: string,
-    name: string,
-    role: string,
-    skills: string[]
-}
+    email: string;
+    event: any | null;
+    firstName: string;
+    hrmUserId: string;
+    secondName: string;
+    surname: string;
+    tgLogn: string;
+    workYears: number;
+};

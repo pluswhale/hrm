@@ -3,12 +3,26 @@ import { Button } from 'shared/components/button/button';
 import { HorizontalNavigation } from 'shared/components/horizontal-navigation';
 
 import styles from './candidate-profile.module.scss';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { CommentAndHistoryTemplate } from 'features/comment-and-history-template';
 import { CandidateProfileInfo } from 'features/candidate-profile-info';
+import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { fetchCandidateById } from 'shared/api/candidates/thunks';
 
 const CandidateProfile = () => {
     const navigate = useNavigate();
+    const { id } = useParams();
+
+    const queryParameters = {
+        queryKey: 'fetchCandidateById',
+        queryThunk: fetchCandidateById,
+        queryThunkOptions: {
+            id,
+        },
+    } as QueryParameters<any>;
+
+    const candidateByIdQuery = useFetchData(queryParameters);
+
     const navigation = [
         {
             title: 'Кандидаты',

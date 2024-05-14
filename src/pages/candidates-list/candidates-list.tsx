@@ -1,13 +1,11 @@
 import style from './candidates-list.module.scss';
-import { Row } from 'react-bootstrap';
 import { CandidatesDataContainer } from '../../features/candidates-data-container';
 import { Filter } from '../../features/filter';
-import { candidatesListData, filterSet } from './constants';
+import { filterSet } from './constants';
 import { FC, ReactElement } from 'react';
 import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-content-wrapper';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { fetchAllCandidates } from 'shared/api/candidates/thunks';
-import { log } from 'console';
 
 const CandidatesList: FC = (): ReactElement => {
     const queryParameters = {
@@ -17,7 +15,7 @@ const CandidatesList: FC = (): ReactElement => {
 
     const candidatesQuery = useFetchData(queryParameters);
 
-    console.log('query', candidatesQuery);
+    console.log(candidatesQuery?.data?.data);
 
     return (
         <DefaultContentWrapper>
@@ -25,7 +23,7 @@ const CandidatesList: FC = (): ReactElement => {
                 <h5 className={style.container__title}>Кандидаты</h5>
 
                 <div className={style.container__wrapper}>
-                    <CandidatesDataContainer candidates={candidatesListData?.candidates} />
+                    <CandidatesDataContainer candidates={candidatesQuery?.data?.data} />
                     <Filter
                         title="Найти кандидата"
                         filterSet={filterSet}
