@@ -38,7 +38,7 @@ export const VacancyCandidates: FC<VacancyCandidatesProps> = ({ candidateRows })
                 <div className={styles.vacancy_candidates__count_and_buttons}>
                     <span className={styles.vacancy_candidates__count}>Кандидаты - {candidatesCount}</span>
                     <div className={styles.vacancy_candidates__buttons}>
-                        <Button onClick={onOpenModalRecruitingFunnel} text="Воронка рекрутинга" view="default_bg" />
+                        {/* <Button onClick={onOpenModalRecruitingFunnel} text="Воронка рекрутинга" view="default_bg" /> */}
                         <Button onClick={onOpenModalAddParticipants} text="Добавить кандидата" view="default_bg" />
                     </div>
                 </div>
@@ -50,7 +50,7 @@ export const VacancyCandidates: FC<VacancyCandidatesProps> = ({ candidateRows })
                 <VacancyRecruitingFunnel onClose={onCloseModalRecruitingFunnel} />
             </PopupWithDarkOverlay>
             <PopupWithDarkOverlay onClose={onCloseModalAddParticipants} isOpened={isModalAddParticipantsOpened}>
-                <AddParticipant people={AddParticipantProps} onClose={onCloseModalAddParticipants} />
+                <AddParticipant onClose={onCloseModalAddParticipants} />
             </PopupWithDarkOverlay>
         </>
     );

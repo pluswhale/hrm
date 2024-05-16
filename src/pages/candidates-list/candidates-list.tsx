@@ -24,11 +24,10 @@ const CandidatesList: FC = (): ReactElement => {
         <DefaultContentWrapper>
             <div className={style.container}>
                 <h5 className={style.container__title}>Кандидаты</h5>
-
                 <div className={style.container__wrapper}>
                     <CandidatesDataContainer
-                        candidates={candidatesQuery?.data?.data.filter((candidate: any) =>
-                            candidate.title.toLowerCase().includes(searchValue.toLowerCase()),
+                        candidates={candidatesQuery?.data?.filter((candidate: any) =>
+                            candidate?.firstName?.toLowerCase().includes(searchValue.toLowerCase()),
                         )}
                     />
                     <Filter

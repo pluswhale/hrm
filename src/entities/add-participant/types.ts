@@ -5,5 +5,5 @@ export interface People {
 
 export type AddParticipantProps = {
     onClose: () => void;
-    people: People[];
 };
+

@@ -1,10 +1,10 @@
 import { candidatesApi } from '.';
 
-export const fetchAllCandidates = () => {
+export const fetchAllCandidates = async () => {
     try {
-        const res = candidatesApi.getAllCandidates();
+        const res = await candidatesApi.getAllCandidates();
         if (res) {
-            return res;
+            return res.data;
         }
 
         return null;
@@ -13,11 +13,11 @@ export const fetchAllCandidates = () => {
     }
 };
 
-export const fetchCandidateById = (queryOptions: any) => {
+export const fetchCandidateById = async (queryOptions: any) => {
     try {
-        const res = candidatesApi.getCandidateById(queryOptions?.id);
+        const res = await candidatesApi.getCandidateById(queryOptions?.id);
         if (res) {
-            return res;
+            return res.data;
         }
 
         return null;

@@ -15,7 +15,7 @@ export const CandidatesDataContainer: FC<CandidatesDataContainerProps> = ({ cand
                         imageSrc={''}
                         name={candidate?.firstName + ' ' + candidate?.surname}
                         role={''}
-                        skills={['']}
+                        skills={candidate.skills}
                     />
                 ))
             ) : (

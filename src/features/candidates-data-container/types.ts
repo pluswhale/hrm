@@ -11,4 +11,11 @@ type Candidate = {
     surname: string;
     tgLogn: string;
     workYears: number;
+    skills: Skill[];
 };
+
+export type Skill = {
+    id: string;
+    name: string;
+};
+

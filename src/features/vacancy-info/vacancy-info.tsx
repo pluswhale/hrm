@@ -9,14 +9,14 @@ export const VacancyInfo: FC<VacancyInfoProps> = ({ vacancy }): ReactElement => 
     return (
         <>
             <VacancyHeader
-                title={vacancy.title}
-                createdAt={vacancy.created_at}
-                deadline={vacancy.deadline}
-                preferredIncome={vacancy.preferredIncome}
+                title={vacancy?.name}
+                createdAt={vacancy?.createdAt}
+                deadline={vacancy?.expiredAt}
+                preferredIncome={vacancy?.salary}
             />
             <div className={styles.vacancy_description}>
-                <VacancyDescriptionCard title="Описание вакансии" content={vacancy.description} />
-                <VacancyDescriptionCard title="Требования к кандидату" content={vacancy.candidateRequirements} />
+                <VacancyDescriptionCard title="Описание вакансии" content={vacancy?.description?.split(';')} />
+                <VacancyDescriptionCard title="Требования к кандидату" content={vacancy?.description?.split(';')} />
             </div>
         </>
     );

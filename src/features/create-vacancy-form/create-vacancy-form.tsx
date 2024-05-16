@@ -4,16 +4,15 @@ import styles from './create-vacancy-form.module.scss';
 import { Input } from 'shared/components/input';
 import { Textarea } from 'shared/components/textarea';
 import { Button } from 'shared/components/button/button';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { stagesSelector } from '../../redux/selectors/create-vacancy';
 import { useAppDispatch } from '../../redux/store';
-import { addNewStage, removeStage } from '../../redux/slices/create-vacancy';
+import { addNewStage, removeStage, setStages } from '../../redux/slices/create-vacancy';
 import { StageItemProps } from './types';
 import deleteIcon from '../../assets/DeleteOutlined.svg';
 import { useCreateVacancy } from 'shared/api/vacancies/mutations';
-import { v4 as uuidv4 } from 'uuid';
 
 export const CreateVacancyForm = () => {
     const dispatch = useAppDispatch();
@@ -23,9 +22,14 @@ export const CreateVacancyForm = () => {
 
     const stages = useSelector(stagesSelector);
 
+    useEffect(() => {
+        return () => {
+            dispatch(setStages({ stages: [] as any }));
+        };
+    }, []);
+
     const onSubmit = (data: any) => {
         // Отпралвять запрос на сервер для сохранения
-        console.log(data);
 
         const body = {
             Description: data.description,
@@ -35,13 +39,13 @@ export const CreateVacancyForm = () => {
             IsActive: true,
         } as any;
 
-        if (stages.length > 0) body.Stages = JSON.stringify(stages);
+        if (stages.length > 0) body.Stages = stages;
 
-        const queryString = Object.keys(body)
-            .map((key) => `${key}=${encodeURIComponent(body[key])}`)
-            .join('&');
+        // const queryString = Object.keys(body)
+        //     .map((key) => `${key}=${encodeURIComponent(body[key])}`)
+        //     .join('&');
 
-        createVacancyMutation.mutate('?' + queryString);
+        createVacancyMutation.mutate(body);
     };
 
     const onAddStage = () => {
@@ -151,6 +155,7 @@ export const CreateVacancyForm = () => {
                                     placeholder={'Новый этап'}
                                 />
                                 <Button
+                                    type="button"
                                     styles={{ width: '122px' }}
                                     view={'default_bg'}
                                     text="Добавить"

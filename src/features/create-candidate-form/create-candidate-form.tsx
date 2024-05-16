@@ -28,13 +28,13 @@ export const CreateCandidateForm = () => {
         } as any;
 
         if (data.email) body.email = data.email;
-        if (data.telegram) body.TgLogin = data.telegram;
+        if (data.telegram) body.TgLogn = data.telegram;
 
-        const queryString = Object.keys(body)
-            .map((key) => `${key}=${body[key]}`)
-            .join('&');
+        // const queryString = Object.keys(body)
+        //     .map((key) => `${key}=${body[key]}`)
+        //     .join('&');
 
-        createCandidateMutation.mutate('?' + queryString);
+        createCandidateMutation.mutate(body);
     };
 
     return (

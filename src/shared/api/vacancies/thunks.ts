@@ -13,3 +13,16 @@ export const fetchAllVacancies = (options: any) => {
     }
 };
 
+export const fetchVacancyById = async (options: any) => {
+    try {
+        const res = await vacanciesApi.getVacancyById(options?.vacancyId);
+        if (res) {
+            return res.data;
+        }
+
+        return null;
+    } catch (error) {
+        console.error(error);
+    }
+};
+

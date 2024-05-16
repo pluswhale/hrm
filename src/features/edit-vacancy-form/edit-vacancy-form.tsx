@@ -12,29 +12,48 @@ import { useAppDispatch } from '../../redux/store';
 import { addNewStage, removeStage, setStages } from '../../redux/slices/create-vacancy';
 import { EditVacancyFormProps, StageItemProps } from './types';
 import deleteIcon from '../../assets/DeleteOutlined.svg';
+import { useCreateVacancy } from 'shared/api/vacancies/mutations';
 
-export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactElement => {
+export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy, stages }): ReactElement => {
     const dispatch = useAppDispatch();
+    const updateVacancyMutation = useCreateVacancy();
     const [newStage, setNewStage] = useState<string>('');
     const methods = useForm({
         values: {
-            name: vacancy.title,
-            description: vacancy.description,
-            deadline: vacancy.deadline,
-            income_from: vacancy.preferredIncome.split('-')[0],
-            income_to: vacancy.preferredIncome.split('-')[1],
-            requirements: vacancy.candidateRequirements,
+            name: vacancy?.name,
+            description: vacancy?.description,
+            deadline: vacancy?.deadline,
+            income_from: vacancy?.salary?.split('-')?.[0],
+            income_to: vacancy?.salary?.split('-')?.[1],
+            requirements: vacancy?.description,
         },
     });
 
     useEffect(() => {
-        if (vacancy.stages.length) dispatch(setStages({ stages: vacancy.stages }));
-    }, [vacancy]);
+        if (stages?.length) dispatch(setStages({ stages: stages }));
+    }, [stages]);
 
-    const stages = useSelector(stagesSelector);
+    const currentStages = useSelector(stagesSelector);
 
     const onSubmit = (data: any) => {
         // Отпралвять запрос на сервер для сохранения
+
+        const body = {
+            Id: vacancy.id,
+            Description: data.description,
+            Name: data.name,
+            Salary: String(data.income_from) + '-' + String(data.income_to),
+            Deadline: '2024-06-17T18:39:48.553Z', //data.deadline.replaceAll('.', '-') + 'T00:00:00.000Z'
+            IsActive: true,
+        } as any;
+
+        if (stages.length > 0) body.Stages = stages;
+
+        // const queryString = Object.keys(body)
+        //     .map((key) => `${key}=${encodeURIComponent(body[key])}`)
+        //     .join('&');
+
+        updateVacancyMutation.mutate(body);
         console.log(data);
     };
 
@@ -61,7 +80,7 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
                                 name={'name'}
                                 pattern={{
                                     //@ts-ignore
-                                    value: /^[а-яА-Я]+$/u,
+                                    value: /^[а-яА-Я\s]+$/u,
                                     message: 'Введите название вакансии на русской раскладке',
                                 }}
                                 placeholder={'Название вакансии'}
@@ -103,7 +122,7 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
                                 />
                             </div>
 
-                            <Textarea
+                            {/* <Textarea
                                 width={'100%'}
                                 isRequired={false}
                                 name={'requirements'}
@@ -114,16 +133,11 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
                                 }}
                                 placeholder={'Требования'}
                                 label="Требования"
-                            />
+                            /> */}
                             <Textarea
                                 width={'100%'}
                                 isRequired={false}
                                 name={'description'}
-                                pattern={{
-                                    //@ts-ignore
-                                    value: /^[а-яА-Я]+$/u,
-                                    message: 'Введите описание вакансии на русской раскладке',
-                                }}
                                 placeholder={'Описание'}
                                 label="Описание"
                             />
@@ -135,8 +149,8 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
                         <div className={styles.create_vacancy__stages}>
                             <span className={styles.create_vacancy__stages__title}>Этапы</span>
                             <div className={styles.create_vacancy__stages__list}>
-                                {stages?.length ? (
-                                    stages.map((stage) => <StageItem onDelete={onRemoveStage} stage={stage} />)
+                                {currentStages?.length ? (
+                                    currentStages.map((stage) => <StageItem onDelete={onRemoveStage} stage={stage} />)
                                 ) : (
                                     <p>Добавьте новые этапы</p>
                                 )}
@@ -159,7 +173,12 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
                         </div>
                     </div>
                 </div>
-                <Button type={'submit'} styles={{ width: '189px' }} view={'default_bg'} text="Создать вакансию" />
+                <Button
+                    type={'submit'}
+                    styles={{ width: '250px' }}
+                    view={'default_bg'}
+                    text="Отредактировать вакансию"
+                />
             </form>
         </FormProvider>
     );
@@ -170,7 +189,7 @@ const StageItem: FC<StageItemProps> = ({ stage, onDelete }) => {
         <div className={styles.create_vacancy__stage}>
             <div className={styles.create_vacancy__stage__container}>
                 <span className={styles.create_vacancy__stage__name}>
-                    {stage.id}.{stage.name}
+                    {stage.position}.{stage.name}
                 </span>
                 <img
                     onClick={() => onDelete(stage.id)}
