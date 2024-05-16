@@ -12,17 +12,36 @@ import { useAppDispatch } from '../../redux/store';
 import { addNewStage, removeStage } from '../../redux/slices/create-vacancy';
 import { StageItemProps } from './types';
 import deleteIcon from '../../assets/DeleteOutlined.svg';
+import { useCreateVacancy } from 'shared/api/vacancies/mutations';
+import { v4 as uuidv4 } from 'uuid';
 
 export const CreateVacancyForm = () => {
     const dispatch = useAppDispatch();
     const [newStage, setNewStage] = useState<string>('');
     const methods = useForm({ mode: 'onChange' });
+    const createVacancyMutation = useCreateVacancy();
 
     const stages = useSelector(stagesSelector);
 
     const onSubmit = (data: any) => {
         // Отпралвять запрос на сервер для сохранения
         console.log(data);
+
+        const body = {
+            Description: data.description,
+            Name: data.name,
+            Salary: String(data.income_from) + '-' + String(data.income_to),
+            Deadline: '2024-06-17T18:39:48.553Z', //data.deadline.replaceAll('.', '-') + 'T00:00:00.000Z'
+            IsActive: true,
+        } as any;
+
+        if (stages.length > 0) body.Stages = JSON.stringify(stages);
+
+        const queryString = Object.keys(body)
+            .map((key) => `${key}=${encodeURIComponent(body[key])}`)
+            .join('&');
+
+        createVacancyMutation.mutate('?' + queryString);
     };
 
     const onAddStage = () => {
@@ -30,7 +49,7 @@ export const CreateVacancyForm = () => {
         setNewStage('');
     };
 
-    const onRemoveStage = (stageId: number) => {
+    const onRemoveStage = (stageId: string) => {
         dispatch(removeStage({ stageId }));
     };
 
@@ -48,7 +67,7 @@ export const CreateVacancyForm = () => {
                                 name={'name'}
                                 pattern={{
                                     //@ts-ignore
-                                    value: /^[а-яА-Я]+$/u,
+                                    value: /^[а-яА-Я\s]+$/u,
                                     message: 'Введите название вакансии на русской раскладке',
                                 }}
                                 placeholder={'Название вакансии'}
@@ -56,7 +75,7 @@ export const CreateVacancyForm = () => {
                             />
                             <Input
                                 width={'45%'}
-                                isRequired={false}
+                                isRequired={true}
                                 name={'deadline'}
                                 pattern={{
                                     value: /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{2}$/,
@@ -68,7 +87,7 @@ export const CreateVacancyForm = () => {
                             <div className={styles.create_vacancy__income}>
                                 <Input
                                     width={'45%'}
-                                    isRequired={false}
+                                    isRequired={true}
                                     name={'income_from'}
                                     pattern={{
                                         value: /^(?:[0-9]|[1-9][0-9]{1,6}|10000000)$/,
@@ -84,13 +103,13 @@ export const CreateVacancyForm = () => {
                                         value: /^(?:[0-9]|[1-9][0-9]{1,6}|10000000)$/,
                                         message: 'Введите число от 0 до 10,000,000',
                                     }}
-                                    isRequired={false}
+                                    isRequired={true}
                                     name={'income_to'}
                                     placeholder={'до'}
                                 />
                             </div>
 
-                            <Textarea
+                            {/* <Textarea
                                 width={'100%'}
                                 isRequired={false}
                                 name={'requirement'}
@@ -101,17 +120,12 @@ export const CreateVacancyForm = () => {
                                     message: 'Введите требования вакансии на русской раскладке',
                                 }}
                                 label="Требования"
-                            />
+                            /> */}
                             <Textarea
                                 width={'100%'}
-                                isRequired={false}
+                                isRequired={true}
                                 name={'description'}
                                 placeholder={'Описание'}
-                                pattern={{
-                                    //@ts-ignore
-                                    value: /^[а-яА-Я]+$/u,
-                                    message: 'Введите описание вакансии на русской раскладке',
-                                }}
                                 label="Описание"
                             />
                         </div>

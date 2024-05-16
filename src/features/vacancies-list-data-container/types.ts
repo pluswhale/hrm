@@ -1,13 +1,14 @@
 export type VacanciesDataContainerProps = {
-    vacancies: Vacancy[],
-}
+    vacancies: Vacancy[];
+};
 
 type Vacancy = {
-    id: number,
-    title: string,
-    navigationUrl: string,
-    candidatesCount: number,
-    created_at: string,
-    deadline: string,
-    status: string,
-}
+    id: number;
+    title: string;
+    navigationUrl: string;
+    candidateCount: number;
+    createdAt: string;
+    deadline: string;
+    status: string;
+};
+

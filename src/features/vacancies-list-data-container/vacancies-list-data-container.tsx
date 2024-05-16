@@ -1,26 +1,28 @@
-import { FC, ReactElement } from "react";
-import { VacanciesDataContainerProps } from "./types";
+import { FC, ReactElement } from 'react';
+import { VacanciesDataContainerProps } from './types';
 
-import { VacancyCard } from "entities/vacancy-items/vacancy-card/vacancy-card";
+import { VacancyCard } from 'entities/vacancy-items/vacancy-card/vacancy-card';
 
-export const VacanciesDataContainer: FC<VacanciesDataContainerProps> = ({vacancies}): ReactElement => {
+export const VacanciesDataContainer: FC<VacanciesDataContainerProps> = ({ vacancies }): ReactElement => {
     return (
         <>
-            {vacancies?.length
-                ? vacancies?.map((vacancy) =>
+            {vacancies?.length ? (
+                vacancies?.map((vacancy) => (
                     <VacancyCard
                         key={vacancy?.id}
                         navigationUrl={`/vacancies/${vacancy.id}`}
                         title={vacancy?.title}
-                        created_at={vacancy?.created_at}
+                        created_at={vacancy?.createdAt}
                         deadline={vacancy?.deadline}
-                        candidatesCount={vacancy?.candidatesCount}
+                        candidatesCount={vacancy?.candidateCount}
                         id={vacancy?.id}
-                        status={vacancy?.status}                            
+                        status={vacancy?.status}
                     />
-                )
-                : <p>Нет сотрудников</p>
-            } 
+                ))
+            ) : (
+                <p>Нет вакансий</p>
+            )}
         </>
     );
 };
+

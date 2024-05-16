@@ -15,11 +15,12 @@ export type Vacancy = {
 
 export type StageItemProps = {
     stage: StageItem;
-    onDelete: (stageId: number) => void;
+    onDelete: (stageId: string) => void;
 };
 
 export type StageItem = {
-    id: number;
+    id: string;
     name: string;
+    position: number;
 };
 

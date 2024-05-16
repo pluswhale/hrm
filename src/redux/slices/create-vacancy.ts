@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
     stages: [],
@@ -9,8 +10,9 @@ type initialStateType = {
 };
 
 type Stage = {
-    id: number;
+    id: string;
     name: string;
+    position: number;
 };
 
 const createVacancySlice = createSlice({
@@ -25,15 +27,19 @@ const createVacancySlice = createSlice({
             if (isItStageExists) return;
 
             state.stages.push({
-                id: state.stages.length + 1,
+                id: uuidv4(),
                 name: action.payload.stageName,
+                position: state.stages.length + 1,
             });
         },
-        removeStage: (state, action: PayloadAction<{ stageId: number }>) => {
+        removeStage: (state, action: PayloadAction<{ stageId: string }>) => {
             state.stages = state.stages.filter((stage) => stage.id !== action.payload.stageId);
         },
 
-        setStages: (state, action: PayloadAction<{ stages: Array<{ id: number; name: string }> }>) => {
+        setStages: (
+            state,
+            action: PayloadAction<{ stages: Array<{ id: string; name: string; position: number }> }>,
+        ) => {
             state.stages = action.payload.stages;
         },
     },

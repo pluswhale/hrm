@@ -1,5 +1,4 @@
 import { candidatesApi } from '.';
-import { useCreateCandidate } from './mutations';
 
 export const fetchAllCandidates = () => {
     try {

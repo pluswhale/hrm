@@ -43,7 +43,7 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
         setNewStage('');
     };
 
-    const onRemoveStage = (stageId: number) => {
+    const onRemoveStage = (stageId: string) => {
         dispatch(removeStage({ stageId }));
     };
 

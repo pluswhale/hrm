@@ -4,14 +4,29 @@ import { FilterProps } from './types';
 
 import styles from './filter.module.scss';
 
-export const Filter: FC<FilterProps> = ({ title, filterSet, onClickSearch }) => {
+export const Filter: FC<FilterProps> = ({ title, filterSet, value, onChangeValue, onClickSearch }) => {
+    const renderedInput = () => {
+        if (!onChangeValue) {
+            return <input className={styles.filter__input} placeholder="Поиск" />;
+        } else {
+            return (
+                <input
+                    value={value}
+                    onChange={({ target }) => onChangeValue(target.value)}
+                    className={styles.filter__input}
+                    placeholder="Поиск"
+                />
+            );
+        }
+    };
+
     return (
         <div style={{ height: !filterSet ? '148px' : 'fit-content' }} className={styles.filter}>
             <div className={styles.filter__container}>
                 <h3 className={styles.filter__title}>{title}</h3>
 
                 <div className={styles.filter__input_wrapper}>
-                    <input className={styles.filter__input} placeholder="Поиск" />
+                    {renderedInput()}
                     <Search />
                 </div>
 
