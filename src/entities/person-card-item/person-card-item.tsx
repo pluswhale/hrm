@@ -21,7 +21,7 @@ export const PersonCard: FC<PersonCardProps> = ({ imageSrc, navigationUrl, name,
                 <div className={styles.person_card__skill_wrapper}>
                     {skills?.map((value, index) => (
                         <div className={styles.person_card__skill} key={`skill-${index}-${value}`}>
-                            {value.name}
+                            {value}
                         </div>
                     ))}
                 </div>

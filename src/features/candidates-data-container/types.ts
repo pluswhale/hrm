@@ -1,8 +1,8 @@
 export type CandidatesDataContainerProps = {
-    candidates: Candidate[];
+    candidates: CandidateHc[];
 };
 
-type Candidate = {
+type CandidateBe = {
     email: string;
     event: any | null;
     firstName: string;
@@ -12,6 +12,14 @@ type Candidate = {
     tgLogn: string;
     workYears: number;
     skills: Skill[];
+};
+
+type CandidateHc = {
+    id: number;
+    imageSrc: string;
+    name: string;
+    role: string;
+    skills: string[];
 };
 
 export type Skill = {

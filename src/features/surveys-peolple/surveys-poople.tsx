@@ -92,7 +92,7 @@ const SurveysPoople = () => {
                 <Filter title="Найти сотрудника" />
             </div>
             <PopupWithDarkOverlay onClose={onCloseModalRecruitingFunnel} isOpened={isModalRecruitingFunnelOpened}>
-                <AddParticipant people={AddParticipantProps} onClose={onCloseModalRecruitingFunnel} />
+                <AddParticipant onClose={onCloseModalRecruitingFunnel} />
             </PopupWithDarkOverlay>
         </div>
     );

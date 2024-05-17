@@ -5,5 +5,6 @@ export type PersonCardProps = {
     name: string;
     navigationUrl: string;
     role: string | undefined;
-    skills: Skill[];
+    skills: string[];
 };
+

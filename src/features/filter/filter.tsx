@@ -39,8 +39,8 @@ export const Filter: FC<FilterProps> = ({ title, filterSet, value, onChangeValue
                                 <div className={styles.filter__set_rows}>
                                     {set.checkboxes.map((checkbox) => (
                                         <div className={styles.filter__set_row}>
-                                            <span className={styles.filter__set_row__check}>{checkbox.label}</span>
-                                            <span className={styles.filter__set_row__count}>23</span>
+                                            <span className={styles.filter__set_row__check}>{checkbox.name}</span>
+                                            <span className={styles.filter__set_row__count}>1</span>
                                         </div>
                                     ))}
                                 </div>

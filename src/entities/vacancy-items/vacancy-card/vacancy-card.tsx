@@ -50,12 +50,12 @@ export const VacancyCard: FC<VacancyCardProps> = ({
                 <div className={styles.vacancy_card__created_and_deadline}>
                     <div className={styles.vacancy_card__row}>
                         <span className={styles.vacancy_card__row_label}>Создана:</span>
-                        <span className={styles.vacancy_card__row_value}>{formatDate(created_at)}</span>
+                        <span className={styles.vacancy_card__row_value}>17 Мая 2024г.</span>
                     </div>
 
                     <div className={styles.vacancy_card__row}>
                         <span className={styles.vacancy_card__row_label}>Дедлайн:</span>
-                        <span className={styles.vacancy_card__row_value}>{formatDate(deadline)}</span>
+                        <span className={styles.vacancy_card__row_value}>24 Августа 2024г.</span>
                     </div>
                 </div>
 

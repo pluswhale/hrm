@@ -69,11 +69,6 @@ export const CreateVacancyForm = () => {
                                 width={'100%'}
                                 isRequired={true}
                                 name={'name'}
-                                pattern={{
-                                    //@ts-ignore
-                                    value: /^[а-яА-Я\s]+$/u,
-                                    message: 'Введите название вакансии на русской раскладке',
-                                }}
                                 placeholder={'Название вакансии'}
                                 label="Название вакансии"
                             />
@@ -176,7 +171,7 @@ const StageItem: FC<StageItemProps> = ({ stage, onDelete }) => {
         <div className={styles.create_vacancy__stage}>
             <div className={styles.create_vacancy__stage__container}>
                 <span className={styles.create_vacancy__stage__name}>
-                    {stage.id}.{stage.name}
+                    {stage.position}.{stage.name}
                 </span>
                 <img
                     onClick={() => onDelete(stage.id)}

@@ -10,8 +10,9 @@ export type FilterSet = {
     id: number;
     title: string;
     checkboxes: {
-        label: string;
-        checked: boolean;
+        name: string;
+        isActive: boolean;
+        id: number;
     }[];
 };
 
