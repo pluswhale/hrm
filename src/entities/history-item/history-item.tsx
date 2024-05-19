@@ -11,7 +11,6 @@ const data = [
     { value: '21 мая  2023', label: 'Одобрение запроса на предложение' },
     { value: '24 сентбря  2023', label: 'Отправление запроса на отпуск' },
     { value: '25 сентбря  2023', label: 'Отклонение запроса на отпуск' },
-    { value: '25 сентября 2023', label: 'Увольнение' },
 ];
 
 export const HistoryItem = ({ userName }: HistoryItemProps) => {
