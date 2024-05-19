@@ -4,13 +4,13 @@ import { Filter } from '../../features/filter';
 import { candidatesListData, filterSet } from './constants';
 import { FC, ReactElement, useEffect, useState } from 'react';
 import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-content-wrapper';
-import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { QueryParameters } from 'shared/hooks/useFetchData';
 import { fetchAllCandidates } from 'shared/api/candidates/thunks';
-import { log } from 'console';
 import { useSelector } from 'react-redux';
 import { rolesInFilterSelector, skillsInFilterSelector } from '../../redux/selectors/filter';
 import { useAppDispatch } from '../../redux/store';
 import { setFilters } from '../../redux/slices/filter';
+import { CandidateHc } from 'features/candidates-data-container/types';
 
 const CandidatesList: FC = (): ReactElement => {
     const dispatch = useAppDispatch();
@@ -18,10 +18,11 @@ const CandidatesList: FC = (): ReactElement => {
     const skillsForFilter = useSelector(skillsInFilterSelector);
     const rolesForFilter = useSelector(rolesInFilterSelector);
 
-    const queryParameters = {
-        queryKey: 'fetchAllCandidates',
-        queryThunk: fetchAllCandidates,
-    } as QueryParameters<any>;
+    // query for candidates list
+    // const queryParameters = {
+    //     queryKey: 'fetchAllCandidates',
+    //     queryThunk: fetchAllCandidates,
+    // } as QueryParameters<any>;
 
     // const candidatesQuery = useFetchData(queryParameters);
 
@@ -47,18 +48,6 @@ const CandidatesList: FC = (): ReactElement => {
         dispatch(setFilters({ roles: rolesForFilterFromData, skills: skillsForFilterFromData }));
     }, []);
 
-    const filteredData = () => {
-        if (searchValue) {
-            return candidatesListData?.candidates?.filter((candidate: any) =>
-                candidate?.name?.toLowerCase().includes(searchValue.toLowerCase()),
-            );
-        } else {
-            return candidatesListData?.candidates?.filter((candidate: any) =>
-                candidate?.name?.toLowerCase().includes(searchValue.toLowerCase()),
-            );
-        }
-    };
-
     const dataIntoFilter = filterSet.map((filterRow) => {
         if (filterRow.id === 1) {
             return { ...filterRow, checkboxes: rolesForFilter };
@@ -66,6 +55,19 @@ const CandidatesList: FC = (): ReactElement => {
             return { ...filterRow, checkboxes: skillsForFilter };
         }
     });
+
+    const filteredData = () => {
+        if (searchValue) {
+            return candidatesListData?.candidates?.filter((candidate: CandidateHc) =>
+                candidate?.name?.toLowerCase().includes(searchValue.toLowerCase()),
+            );
+        } else {
+            // логика по фильтрации чекбоксов
+
+            //заглушка
+            return candidatesListData.candidates;
+        }
+    };
 
     return (
         <DefaultContentWrapper>

@@ -10,17 +10,14 @@
     &__main_content {
         display: flex;
         gap: 24px;
-
         margin-top: 50px;
-
     }
 
     &__items {
         display: flex;
         flex-wrap: wrap;
         gap: 24px;
+        flex: 1;
     }
 }
-
-
 

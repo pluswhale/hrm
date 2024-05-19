@@ -6,22 +6,12 @@ export const filterSet = [
     {
         id: 1,
         title: 'По должности',
-        checkboxes: [
-            { label: 'UX/UI designer', checked: true },
-            { label: 'Backend-разработчик', checked: false },
-            { label: 'Frontend-разработчик', checked: true },
-            { label: 'CI/CD', checked: true },
-        ],
+        checkboxes: [],
     },
     {
         id: 2,
         title: 'По навыкам',
-        checkboxes: [
-            { label: 'bootstrap', checked: true },
-            { label: 'react', checked: false },
-            { label: 'ASP.NET', checked: true },
-            { label: 'docker', checked: true },
-        ],
+        checkboxes: [],
     },
 ] as FilterSet[];
 

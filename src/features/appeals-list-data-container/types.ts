@@ -2,7 +2,7 @@ export type AppealsDataContainerProps = {
     appeals: Appeal[];
 };
 
-type Appeal = {
+export type Appeal = {
     id: number;
     title: string;
     created_at: string;

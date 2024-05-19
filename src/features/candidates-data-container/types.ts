@@ -14,7 +14,7 @@ type CandidateBe = {
     skills: Skill[];
 };
 
-type CandidateHc = {
+export type CandidateHc = {
     id: number;
     imageSrc: string;
     name: string;
