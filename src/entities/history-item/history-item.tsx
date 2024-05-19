@@ -1,40 +1,24 @@
-import {Card, CardBody, CardText, CardTitle, Row} from "react-bootstrap";
-import {ReactElement} from "react";
+import { TimelineItemBase } from 'entities/timeline';
+import styles from './history-item.module.scss';
 
 type HistoryItemProps = {
-    icon: ReactElement,
-    title : string,
-    value : string,
-    userName: string,
-    isFirst : boolean,
-    isLast : boolean
+    userName: string;
+};
 
-}
+const data = [
+    { value: '12 декабря 2022', label: 'Устройство' },
+    { value: '20 мая  2023', label: 'Отправление запроса на предложение' },
+    { value: '21 мая  2023', label: 'Одобрение запроса на предложение' },
+    { value: '24 сентбря  2023', label: 'Отправление запроса на отпуск' },
+    { value: '25 сентбря  2023', label: 'Отклонение запроса на отпуск' },
+    { value: '25 сентября 2023', label: 'Увольнение' },
+];
 
-export const HistoryItem = ({icon, title, value, userName, isFirst = false, isLast = false} : HistoryItemProps) => {
-    return(
-        <Row>
-            <div className="col-auto text-center flex-column d-none d-lg-flex">
-                <Row className="h-50">
-                    <div className={`col ${isFirst ? "" : "border-end"}`}>&nbsp;</div>
-                    <div className="col">&nbsp;</div>
-                </Row>
-                <h5 className="m-2">
-                    {icon}
-                </h5>
-                <div className="row h-50">
-                    <div className={`col ${isLast ? "" : "border-end"}`}>&nbsp;</div>
-                    <div className="col">&nbsp;</div>
-                </div>
-            </div>
-            <div className="col py-2">
-                <Card>
-                    <CardBody>
-                        <CardTitle className={""}><h4>{title}</h4></CardTitle>
-                        <CardText>{value}</CardText>
-                    </CardBody>
-                </Card>
-            </div>
-        </Row>
-    )
-}
+export const HistoryItem = ({ userName }: HistoryItemProps) => {
+    return (
+        <div className={styles.history_item}>
+            <TimelineItemBase position="left" items={data} />
+        </div>
+    );
+};
+

@@ -67,14 +67,7 @@ export const CommentAndHistoryTemplate = () => {
             )}
             {activeTab === 1 && (
                 <div>
-                    <HistoryItem
-                        icon={<img src={AddIcon} alt="Add" />}
-                        title="Your Title"
-                        value="Your Value"
-                        userName="User Name"
-                        isFirst={true}
-                        isLast={true}
-                    />
+                    <HistoryItem userName="Рыбина Анастасия" />
                 </div>
             )}
         </div>
