@@ -4,9 +4,11 @@ import { AnyAction, configureStore, createAction, ThunkDispatch } from '@reduxjs
 import createVacancy from './slices/create-vacancy';
 import createCandidate from './slices/create-candidate';
 import filter from './slices/filter';
+import createAppeal from './slices/create-appeal';
 
 const rootReducer = combineReducers({
     createVacancy,
+    createAppeal,
     createCandidate,
     filter,
 });

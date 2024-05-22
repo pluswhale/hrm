@@ -17,6 +17,7 @@ import { EditCandidate } from 'pages/edit-cadidate';
 import { AppealsList } from 'pages/appeals-list';
 import { AppealsProfile } from 'pages/appeals-profile';
 import CandidateProfile from 'pages/candidate-profile/candidate-profile';
+import { CreateAppeal } from 'pages/create-appeal/';
 
 export const Routing = () => {
     return (
@@ -36,6 +37,7 @@ export const Routing = () => {
                 <Route path="edit/candidate/:id" element={<EditCandidate />} />
                 <Route path="appeals" element={<AppealsList />} />
                 <Route path="appeals/:id" element={<AppealsProfile />} />
+                <Route path="create/appeal" element={<CreateAppeal />} />
                 <Route path="request" element={<RequestsList />} />
                 <Route path="survey" element={<SurveyList />} />
                 <Route path="survey/create" element={<CreateSurvey />} />

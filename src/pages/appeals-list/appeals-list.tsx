@@ -20,7 +20,7 @@ const AppealsList = () => {
     };
 
     const onNavigateToCreateVacancy = () => {
-        navigate('/create/vacancy');
+        navigate('/create/appeal');
     };
 
     const filteredData = () => {
