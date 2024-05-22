@@ -4,8 +4,6 @@ import { Filter } from '../../features/filter';
 import { candidatesListData, filterSet } from './constants';
 import { FC, ReactElement, useEffect, useState } from 'react';
 import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-content-wrapper';
-import { QueryParameters } from 'shared/hooks/useFetchData';
-import { fetchAllCandidates } from 'shared/api/candidates/thunks';
 import { useSelector } from 'react-redux';
 import { rolesInFilterSelector, skillsInFilterSelector } from '../../redux/selectors/filter';
 import { useAppDispatch } from '../../redux/store';
@@ -18,7 +16,7 @@ const CandidatesList: FC = (): ReactElement => {
     const skillsForFilter = useSelector(skillsInFilterSelector);
     const rolesForFilter = useSelector(rolesInFilterSelector);
 
-    // query for candidates list
+    //query for candidates list
     // const queryParameters = {
     //     queryKey: 'fetchAllCandidates',
     //     queryThunk: fetchAllCandidates,

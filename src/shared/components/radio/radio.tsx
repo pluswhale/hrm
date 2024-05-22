@@ -3,12 +3,7 @@ import { RadioProps } from './types';
 
 import styles from './radio.module.scss';
 
-export const Radio: FC<RadioProps> = ({
-                                          value,
-                                          checked,
-                                          onChange,
-                                          label
-                                      }): ReactElement => {
+export const Radio: FC<RadioProps> = ({ value, checked, onChange, label }): ReactElement => {
     const handleClick = () => {
         onChange && onChange(value);
     };
@@ -26,3 +21,4 @@ export const Radio: FC<RadioProps> = ({
         </label>
     );
 };
+

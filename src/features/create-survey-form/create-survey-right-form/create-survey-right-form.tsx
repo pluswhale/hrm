@@ -7,8 +7,10 @@ import { Selector } from '../../../shared/components/selector';
 import { options } from './constants';
 import { Input } from '../../../shared/components/input';
 import { Button } from '../../../shared/components/button/button';
+import { FormProvider, useForm } from 'react-hook-form';
 
 const CreateSurveyRightForm = () => {
+    const methods = useForm();
     const [selectedValue, setSelectedValue] = useState<string>('');
     const [selectedValueBtn, setSelectedValueBtn] = useState<string>('');
     const [selectedValueInject, setSelectedValueInject] = useState<string>('');
@@ -87,16 +89,19 @@ const CreateSurveyRightForm = () => {
                     </div>
                 </div>
             </div>
-            <div className={styles.container}>
-                <span className={styles.container__input_text}>
-                    Тип опроса
-                    <Selector options={options} value={selectedValueBtn} onChange={handleChange} />
-                </span>
-                <Input width={'100%'} isRequired={false} name={'deadline'} placeholder={'Вопрос'} label="Вопрос" />
-                <div className={styles.container__wrap_btn}>
-                    <Button styles={{ width: 'fit-content', height: '40px' }} text="Добавить" view="default_bg" />
+            <FormProvider {...methods}>
+                <div className={styles.container}>
+                    <span className={styles.container__input_text}>
+                        Тип опроса
+                        <Selector options={options} value={selectedValueBtn} onChange={handleChange} />
+                    </span>
+
+                    <Input width={'100%'} isRequired={false} name={'deadline'} placeholder={'Вопрос'} label="Вопрос" />
+                    <div className={styles.container__wrap_btn}>
+                        <Button styles={{ width: 'fit-content', height: '40px' }} text="Добавить" view="default_bg" />
+                    </div>
                 </div>
-            </div>
+            </FormProvider>
         </div>
     );
 };

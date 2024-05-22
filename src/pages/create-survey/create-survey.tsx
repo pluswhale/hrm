@@ -23,7 +23,8 @@ const CreateSurvey = () => {
             <div className={styles.container}>
                 <CreateSurveyForm />
                 <div className={styles.container__wrapper}>
-                    <CreateSurveyRightForm />
+                    {' '}
+                    <CreateSurveyRightForm />{' '}
                 </div>
             </div>
             <div className={styles.container__wrap_btn}>
