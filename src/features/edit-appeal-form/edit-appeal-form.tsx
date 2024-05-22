@@ -1,23 +1,32 @@
 import { FormProvider, useForm } from 'react-hook-form';
 
-import styles from './create-appeal-form.module.scss';
+import styles from './edit-appeal-form.module.scss';
 import { Input } from 'shared/components/input';
 import { Textarea } from 'shared/components/textarea';
 import { Button } from 'shared/components/button/button';
-import { FC, useEffect, useState } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { stagesSelector } from '../../redux/selectors/create-appeal';
 import { useAppDispatch } from '../../redux/store';
 import { addNewStage, removeStage, setStages } from '../../redux/slices/create-appeal';
-import { StageItemProps } from './types';
+import { EditAppealProps, StageItemProps } from './types';
 import deleteIcon from '../../assets/DeleteOutlined.svg';
 import { useCreateAppeal } from 'shared/api/appeals/mutations';
 
-export const CreateAppealForm = () => {
+export const EditAppealForm: FC<EditAppealProps> = ({ appeal }): ReactElement => {
     const dispatch = useAppDispatch();
     const [newStage, setNewStage] = useState<string>('');
-    const methods = useForm({ mode: 'onChange' });
+    const methods = useForm({
+        mode: 'onChange',
+        defaultValues: {
+            description: appeal.description.join(''),
+            name: appeal.title,
+            requirement: appeal.requirements.join(''),
+            countPlaces: appeal.seats,
+            deadline: appeal.deadline,
+        },
+    });
     const createAppealMutation = useCreateAppeal();
 
     const stages = useSelector(stagesSelector);
@@ -54,11 +63,11 @@ export const CreateAppealForm = () => {
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_appeal}>
-                <div className={styles.create_appeal__container}>
-                    <div className={styles.create_appeal__form_wrapper}>
-                        <h2 className={styles.create_appeal__title}>Информация о направлении практики</h2>
-                        <div className={styles.create_appeal__form}>
+            <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.edit_appeal}>
+                <div className={styles.edit_appeal__container}>
+                    <div className={styles.edit_appeal__form_wrapper}>
+                        <h2 className={styles.edit_appeal__title}>Информация о направлении практики</h2>
+                        <div className={styles.edit_appeal__form}>
                             <Input
                                 width={'100%'}
                                 isRequired={true}
@@ -102,18 +111,18 @@ export const CreateAppealForm = () => {
                         </div>
                     </div>
 
-                    <div className={styles.create_appeal__form_wrapper}>
-                        <h2 className={styles.create_appeal__title}>Доска рекрутинга</h2>
-                        <div className={styles.create_appeal__stages}>
-                            <span className={styles.create_appeal__stages__title}>Этапы</span>
-                            <div className={styles.create_appeal__stages__list}>
+                    <div className={styles.edit_appeal__form_wrapper}>
+                        <h2 className={styles.edit_appeal__title}>Доска рекрутинга</h2>
+                        <div className={styles.edit_appeal__stages}>
+                            <span className={styles.edit_appeal__stages__title}>Этапы</span>
+                            <div className={styles.edit_appeal__stages__list}>
                                 {stages?.length ? (
                                     stages.map((stage) => <StageItem onDelete={onRemoveStage} stage={stage} />)
                                 ) : (
                                     <p>Добавьте новые этапы</p>
                                 )}
                             </div>
-                            <div className={styles.create_appeal__stages__new}>
+                            <div className={styles.edit_appeal__stages__new}>
                                 <Input
                                     value={newStage}
                                     onChange={setNewStage}
@@ -140,14 +149,14 @@ export const CreateAppealForm = () => {
 
 const StageItem: FC<StageItemProps> = ({ stage, onDelete }) => {
     return (
-        <div className={styles.create_appeal__stage}>
-            <div className={styles.create_appeal__stage__container}>
-                <span className={styles.create_appeal__stage__name}>
+        <div className={styles.edit_appeal__stage}>
+            <div className={styles.edit_appeal__stage__container}>
+                <span className={styles.edit_appeal__stage__name}>
                     {stage.position}.{stage.name}
                 </span>
                 <img
                     onClick={() => onDelete(stage.id)}
-                    className={styles.create_appeal__stage__delete_icon}
+                    className={styles.edit_appeal__stage__delete_icon}
                     src={deleteIcon}
                     alt="delete icon"
                 />

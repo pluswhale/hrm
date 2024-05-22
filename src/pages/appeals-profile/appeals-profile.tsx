@@ -22,7 +22,7 @@ const AppealsProfile = () => {
         },
     ];
 
-    const onNavigateToEditVacancy = () => {
+    const onNavigateToEditAppeal = () => {
         navigate(`/edit/appeal/${APPEAl_DATA?.id}`);
     };
 
@@ -30,7 +30,7 @@ const AppealsProfile = () => {
         <DefaultContentWrapper>
             <div className={styles.vacancy_navigation}>
                 <HorizontalNavigation navigation={navigation} />
-                <Button text="Редактировать" view="default_bg_white" />
+                <Button onClick={onNavigateToEditAppeal} text="Редактировать" view="default_bg_white" />
             </div>
             <AppealInfo appeal={APPEAl_DATA} />
             <AppealCandidates candidateRows={CANDIDATES_ROWS} />
