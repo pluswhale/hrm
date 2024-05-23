@@ -9,9 +9,13 @@ import { rolesInFilterSelector, skillsInFilterSelector } from '../../redux/selec
 import { useAppDispatch } from '../../redux/store';
 import { setFilters } from '../../redux/slices/filter';
 import { CandidateHc } from 'features/candidates-data-container/types';
+import { useNavigate } from 'react-router';
+import { Button } from 'shared/components/button/button';
 
 const CandidatesList: FC = (): ReactElement => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
     const [searchValue, setSearchValue] = useState<string>('');
     const skillsForFilter = useSelector(skillsInFilterSelector);
     const rolesForFilter = useSelector(rolesInFilterSelector);
@@ -67,10 +71,22 @@ const CandidatesList: FC = (): ReactElement => {
         }
     };
 
+    const onNavigateToCreateVacancy = () => {
+        navigate('/create/candidate');
+    };
+
     return (
         <DefaultContentWrapper>
             <div className={style.container}>
-                <h5 className={style.container__title}>Кандидаты</h5>
+                <div className={style.action_buttons}>
+                    <h5 className={style.container__title}>Кандидаты</h5>
+                    <Button
+                        onClick={onNavigateToCreateVacancy}
+                        styles={{ width: 'fit-content' }}
+                        text="Создать кандидата"
+                        view="default_bg"
+                    />
+                </div>
                 <div className={style.container__wrapper}>
                     <CandidatesDataContainer candidates={filteredData()} />
                     <Filter
