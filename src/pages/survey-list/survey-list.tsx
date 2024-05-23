@@ -14,8 +14,8 @@ const SurveyList = () => {
 
     return (
         <DefaultContentWrapper>
-            <div className={styles.vacancies}>
-                <div className={styles.vacancies__action_buttons}>
+            <div className={styles.survey}>
+                <div className={styles.survey__action_buttons}>
                     <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
                     <Button
                         styles={{ width: 'fit-content' }}
@@ -24,8 +24,8 @@ const SurveyList = () => {
                         href="survey/create"
                     />
                 </div>
-                <div className={styles.vacancies__main_content}>
-                    <div className={styles.vacancies__items}>
+                <div className={styles.survey__main_content}>
+                    <div className={styles.survey__items}>
                         <SurveyListContainer Survey={surveyListData?.Survey} />
                     </div>
                     <Filter title="Найти опрос" onClickSearch={() => console.log('заглушка')} />
@@ -36,3 +36,4 @@ const SurveyList = () => {
 };
 
 export default SurveyList;
+
