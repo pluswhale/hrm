@@ -11,8 +11,10 @@ import SurveysResult from '../../features/surveys-result/surveys-result';
 import { SurveysPoople } from '../../features/surveys-peolple';
 import { SurveyResult } from '../../features/surveys-result/types';
 import { SurveyDescription } from 'entities/survey-items/survey-description/survey-description';
+import { useNavigate } from 'react-router';
 
 const SurveysProfile = () => {
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState(0);
 
     const tabs = [{ label: 'Вопросы' }, { label: 'Результаты опроса' }, { label: 'Участники' }];
@@ -28,11 +30,15 @@ const SurveysProfile = () => {
         },
     ];
 
+    const onNavigateToEditSurveyPage = () => {
+        navigate('/survey/edit/1');
+    };
+
     return (
         <DefaultContentWrapper>
             <div className={styles.survey_navigation}>
                 <HorizontalNavigation navigation={navigation} />
-                <Button text="Редактировать" view="default_bg_white" />
+                <Button onClick={onNavigateToEditSurveyPage} text="Редактировать" view="default_bg_white" />
             </div>
             <div className={styles.survey_navigation__container}>
                 <h2 className={styles.survey_navigation__container__title}>Название опроса</h2>

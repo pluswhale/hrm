@@ -46,7 +46,7 @@ const SurveysPoople = () => {
             <div className={style.container__wrapper}>
                 <Button
                     styles={{ width: 'fit-content', height: '40px' }}
-                    text="Добавить частника"
+                    text="Добавить участника"
                     view="default_bg"
                     onClick={onOpenModalRecruitingFunnel}
                 />
