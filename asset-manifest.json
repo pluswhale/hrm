@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/hrm/static/css/main.eeb510d5.css",
+    "main.js": "/hrm/static/js/main.acb2a426.js",
+    "static/media/Frame 23459.svg": "/hrm/static/media/Frame 23459.fa5c5be50ee7bdef3963a726b128e537.svg",
+    "static/media/Add pic - icon.svg": "/hrm/static/media/Add pic - icon.7304513af07e28ffdf630473dc51f33a.svg",
+    "static/media/Редактировать.svg": "/hrm/static/media/Редактировать.27092fe333d7171c16115707bac444b0.svg",
+    "static/media/Бургер.svg": "/hrm/static/media/Бургер.1ca2a0633c0107bff38bb04c0c5bee62.svg",
+    "static/media/Vector.svg": "/hrm/static/media/Vector.4973892d51fd4b8699b502318498b66f.svg",
+    "static/media/Удалить.svg": "/hrm/static/media/Удалить.b6e117eeba6aec3401999d30ea6b5062.svg",
+    "static/media/DeleteOutlined.svg": "/hrm/static/media/DeleteOutlined.d2747bf52b72b13845faed1de54f84e0.svg",
+    "static/media/close_icon.svg": "/hrm/static/media/close_icon.57b8156e5ad1ddab49f2ba96e72e2035.svg",
+    "index.html": "/hrm/index.html",
+    "static/media/test_task_icon.svg": "/hrm/static/media/test_task_icon.16fea86c8feff7bd7143b67b30a3311b.svg",
+    "static/media/back_arrow.svg": "/hrm/static/media/back_arrow.c8d93f3bcafa46f3b23ca2218272589d.svg",
+    "static/media/plus_icon.svg": "/hrm/static/media/plus_icon.8934bde27d6b2f82000d40a4ccb02996.svg",
+    "static/media/Vector 2.svg": "/hrm/static/media/Vector 2.fe44451449a05f96d0fa.svg",
+    "static/media/Ellipse 1.svg": "/hrm/static/media/Ellipse 1.c6581d5ddb88145da1a098d23ad0a71c.svg",
+    "main.eeb510d5.css.map": "/hrm/static/css/main.eeb510d5.css.map",
+    "main.acb2a426.js.map": "/hrm/static/js/main.acb2a426.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eeb510d5.css",
+    "static/js/main.acb2a426.js"
+  ]
+}
