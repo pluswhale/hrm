@@ -9,6 +9,7 @@ export const SkillsBlock: FC<SkillsBlockProps> = ({ skills }): ReactElement => {
             <div className={styles.skills_block__skills_wrapper}>
                 {skills?.map((skill, index) => (
                     <span key={index} className={styles.skills_block__skill}>
+                        {/*@ts-ignore */}
                         {skill?.name}
                     </span>
                 ))}
