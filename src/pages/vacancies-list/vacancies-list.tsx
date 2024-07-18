@@ -54,12 +54,12 @@ const VacanciesList = () => {
                             )}
                         />
                     </div>
-                    <Filter
+                    {/* <Filter
                         value={searchValue}
                         onChangeValue={onSearchData}
                         title="Поиск вакансий"
                         onClickSearch={() => console.log('заглушка')}
-                    />
+                    /> */}
                 </div>
             </div>
         </DefaultContentWrapper>

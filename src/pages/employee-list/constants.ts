@@ -15,36 +15,36 @@ export const filterSet = [
     },
 ] as FilterSet[];
 
-export const employeeListData = {
-    employees: [
-        {
-            id: 1,
-            imageSrc: avatar,
-            name: 'Рыбина Анастасия',
-            role: 'Ui/UX designer',
-            skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
-        },
-        {
-            id: 2,
-            imageSrc: avatar,
-            name: 'Рыбина Анастасия',
-            role: 'Ui/UX designer',
-            skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
-        },
-        {
-            id: 3,
-            imageSrc: avatar,
-            name: 'Рыбина Анастасия',
-            role: 'Ui/UX designer',
-            skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
-        },
-        {
-            id: 4,
-            imageSrc: avatar,
-            name: 'Рыбина Анастасия',
-            role: 'Ui/UX designer',
-            skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
-        },
-    ],
-} as EmployeesDataContainerProps;
+// export const employeeListData = {
+//     employees: [
+//         {
+//             id: 1,
+//             imageSrc: avatar,
+//             name: 'Рыбина Анастасия',
+//             role: 'Ui/UX designer',
+//             skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
+//         },
+//         {
+//             id: 2,
+//             imageSrc: avatar,
+//             name: 'Рыбина Анастасия',
+//             role: 'Ui/UX designer',
+//             skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
+//         },
+//         {
+//             id: 3,
+//             imageSrc: avatar,
+//             name: 'Рыбина Анастасия',
+//             role: 'Ui/UX designer',
+//             skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
+//         },
+//         {
+//             id: 4,
+//             imageSrc: avatar,
+//             name: 'Рыбина Анастасия',
+//             role: 'Ui/UX designer',
+//             skills: ['Figma', 'Adobe Illustrator', 'Adobe Photoshop', 'bootstrap'],
+//         },
+//     ],
+// } as EmployeesDataContainerProps;
 

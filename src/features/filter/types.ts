@@ -1,18 +1,20 @@
 export type FilterProps = {
     title: string;
     filterSet?: FilterSet[];
-    onClickSearch?: () => void;
-    value?: string;
-    onChangeValue?: (value: string) => void;
+    searchValue?: string;
+    onToggleCheckboxInFilter: (filterSetName: string, checkboxId: number) => void;
+    onChangeSearchValue?: (value: string) => void;
 };
 
 export type FilterSet = {
     id: number;
     title: string;
     checkboxes: {
-        name: string;
+        name?: string;
+        title?: string;
         isActive: boolean;
         id: number;
+        count: number;
     }[];
 };
 

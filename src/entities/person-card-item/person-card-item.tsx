@@ -15,13 +15,13 @@ export const PersonCard: FC<PersonCardProps> = ({ imageSrc, navigationUrl, name,
                     <Link to={navigationUrl} className={styles.person_card__name}>
                         {name}
                     </Link>
-                    <span className={styles.person_card__role}>{role || 'Менджер проектов'}</span>
+                    <span className={styles.person_card__role}>{role?.title || 'Менджер проектов'}</span>
                 </div>
                 <div className={styles.person_card__decor_line}></div>
                 <div className={styles.person_card__skill_wrapper}>
-                    {skills?.map((value, index) => (
-                        <div className={styles.person_card__skill} key={`skill-${index}-${value}`}>
-                            {value}
+                    {skills?.map((skill) => (
+                        <div className={styles.person_card__skill} key={`skill-${skill.id}`}>
+                            {skill.name}
                         </div>
                     ))}
                 </div>

@@ -14,8 +14,8 @@ export const CandidatesDataContainer: FC<CandidatesDataContainerProps> = ({ cand
                         navigationUrl={`/candidates/${candidate?.id}`}
                         imageSrc={''}
                         name={candidate?.name}
-                        role={candidate?.role}
-                        skills={candidate?.skills}
+                        role={candidate?.role as any}
+                        skills={candidate?.skills as any}
                     />
                 ))
             ) : (

@@ -45,12 +45,12 @@ const AppealsList = () => {
                     <div className={styles.vacancies__items}>
                         <AppealsDataContainer appeals={filteredData()} />
                     </div>
-                    <Filter
+                    {/* <Filter
                         value={searchValue}
                         onChangeValue={onSearchData}
                         title="Найти направление практики"
                         onClickSearch={() => console.log('заглушка')}
-                    />
+                    /> */}
                 </div>
             </div>
         </DefaultContentWrapper>

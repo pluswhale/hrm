@@ -28,7 +28,7 @@ const SurveyList = () => {
                     <div className={styles.survey__items}>
                         <SurveyListContainer Survey={surveyListData?.Survey} />
                     </div>
-                    <Filter title="Найти опрос" onClickSearch={() => console.log('заглушка')} />
+                    {/* <Filter title="Найти опрос"  /> */}
                 </div>
             </div>
         </DefaultContentWrapper>

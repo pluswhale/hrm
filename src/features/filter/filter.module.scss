@@ -56,7 +56,6 @@
         gap: 25px;
         width: 100%;
         margin-top: 25px;
-        overflow-y: scroll;
         max-height: 500px;
     }
 
@@ -66,6 +65,23 @@
         flex-direction: column;
         overflow-y: scroll;
         height: 100%;
+
+        &::-webkit-scrollbar {
+            width: 4px; /* Width of the scrollbar */
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #e3e3f3; /* Light gray background for the scrollbar track */
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #e3e3f3; /* Darker gray for the scrollbar thumb */
+            border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555; /* Darker gray when hovered */
+        }
 
         &_name {
             font-family: 'Roboto', sans-serif;

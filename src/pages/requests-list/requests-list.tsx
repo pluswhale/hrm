@@ -12,9 +12,9 @@ const RequestsList = () => {
         <DefaultContentWrapper>
             <h2 className={style.container__title}>Запросы</h2>
             <div className={style.container}>
-                {isLaptop && <Filter filterSet={filterSet} title="Найти запрос" />}
+                {/* {isLaptop && <Filter filterSet={filterSet} title="Найти запрос" />} */}
                 <RequestTable requests={REQUESTS_DATA} />
-                {!isLaptop && <Filter filterSet={filterSet} title="Найти запрос" />}
+                {/* {!isLaptop && <Filter filterSet={filterSet} title="Найти запрос" />} */}
             </div>
         </DefaultContentWrapper>
     );

@@ -46,9 +46,9 @@ const CandidatesList: FC = (): ReactElement => {
         });
     });
 
-    useEffect(() => {
-        dispatch(setFilters({ roles: rolesForFilterFromData, skills: skillsForFilterFromData }));
-    }, []);
+    // useEffect(() => {
+    //     dispatch(setFilters({ roles: rolesForFilterFromData, skills: skillsForFilterFromData }));
+    // }, []);
 
     const dataIntoFilter = filterSet.map((filterRow) => {
         if (filterRow.id === 1) {
@@ -89,13 +89,13 @@ const CandidatesList: FC = (): ReactElement => {
                 </div>
                 <div className={style.container__wrapper}>
                     <CandidatesDataContainer candidates={filteredData()} />
-                    <Filter
+                    {/* <Filter
                         value={searchValue}
                         onChangeValue={onSearchData}
                         title="Найти кандидата"
                         filterSet={dataIntoFilter}
                         onClickSearch={() => console.log('заглушка')}
-                    />
+                    /> */}
                 </div>
             </div>
         </DefaultContentWrapper>
