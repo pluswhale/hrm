@@ -8,29 +8,58 @@ import AddImage from './../../assets/Vector.svg';
 import { Button } from '../../shared/components/button/button';
 
 import style from './comment-and-history-template.module.scss';
+import { fetchCommentsByEmployee } from 'shared/api/comments/thunks';
+import { useParams } from 'react-router';
+import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { useCreateComment, useDeleteComment, useUpdateComment } from 'shared/api/comments/mutations';
+import { CreateCommentBody } from 'shared/api/comments/types';
+import { useSelector } from 'react-redux';
+import { userDataSelector } from '../../redux/selectors/auth';
 
 const tabs = [{ label: 'Комментарии' }, { label: 'История' }];
 
-const commentInfo = [
-    {
-        id: 1,
-        author: 'Эйчар Менеджер',
-        date: '31 марта 2024 13:40',
-        text: 'Текст комментария. Это большой комментарий. Тут много разных замечаний, предположений, представим, что тут действительного много этого. На него нужно обратить внимание.',
-    },
-    {
-        id: 2,
-        author: 'Эйчар Менеджер',
-        date: '31 марта 2024 13:40',
-        text: 'Текст комментария. Это большой комментарий. Тут много разных замечаний, предположений, представим, что тут действительного много этого. На него нужно обратить внимание.',
-    },
-];
-
 export const CommentAndHistoryTemplate = () => {
     const [activeTab, setActiveTab] = useState<number>(0);
+    const createCommentMutation = useCreateComment();
+    const deleteCommentMutation = useDeleteComment();
+    const updateCommentMutation = useUpdateComment();
+    const userData = useSelector(userDataSelector);
+    const [commentText, setCommentText] = useState<string>('');
+
+    const { id: targetUserId } = useParams();
+
+    const queryParameters = {
+        queryKey: 'fetchCommentsByEmployee',
+        queryThunk: fetchCommentsByEmployee,
+        queryThunkOptions: {
+            id: targetUserId,
+        },
+    } as QueryParameters<any>;
+
+    const commentsQuery = useFetchData(queryParameters);
 
     const handleTabClick = (index: number) => {
         setActiveTab(index);
+    };
+
+    const onCreateComment = () => {
+        if (targetUserId) {
+            const body = {
+                authorId: userData.id,
+                employeeId: Number(targetUserId),
+                text: commentText,
+            } as CreateCommentBody;
+
+            createCommentMutation.mutate(body);
+        }
+    };
+
+    const onDeleteComment = (commentId: number) => {
+        deleteCommentMutation.mutate(String(commentId));
+    };
+
+    const onEditComment = (commentId: number, text: string) => {
+        updateCommentMutation.mutate({ commentId: String(commentId), updatedText: { text } });
     };
 
     return (
@@ -40,6 +69,8 @@ export const CommentAndHistoryTemplate = () => {
                 <div className={style.container__wrapper}>
                     <div className={style.container__card_comment}>
                         <textarea
+                            value={commentText}
+                            onChange={({ target }) => setCommentText(target.value)}
                             placeholder="Новый комментарий..."
                             style={{
                                 backgroundImage: `url(${Emodji})`,
@@ -54,14 +85,20 @@ export const CommentAndHistoryTemplate = () => {
                                 <img className={style.container__card_img} src={AddIcon} alt="AddIcon" />
                             </div>
                             <Button
+                                onClick={onCreateComment}
                                 styles={{ width: 'fit-content', height: '40px' }}
                                 text="Опубликовать"
                                 view="default_bg"
                             />
                         </div>
                     </div>
-                    {commentInfo.map((comment) => (
-                        <CommentItem key={comment.id} comment={comment} />
+                    {commentsQuery?.data?.map((comment: any) => (
+                        <CommentItem
+                            onEditComment={onEditComment}
+                            onDeleteComment={onDeleteComment}
+                            key={comment.id}
+                            comment={comment}
+                        />
                     ))}
                 </div>
             )}
