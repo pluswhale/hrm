@@ -1,4 +1,6 @@
 export type RequestModalProps = {
     onClose: () => void;
-    status: string;
+    requestData: any;
+    setCurrentRequestObjectForModal: any;
 };
+

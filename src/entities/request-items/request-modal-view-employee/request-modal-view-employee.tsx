@@ -40,7 +40,7 @@ export const RequestModalViewEmployee: FC<RequestModalProps> = ({
         }
 
         return (
-            <span style={{ backgroundColor: color, color: 'white' }} className={styles.container__status}>
+            <span style={{ backgroundColor: color, color: 'white' }} className={styles.request_modal__status}>
                 {text}
             </span>
         );

@@ -10,4 +10,8 @@ export interface Request {
 
 export interface RequestTableProps {
     requests: Request[];
+    currentRequestObjectForModal: any;
+    onOpenCreateRequestModal: any;
+    setCurrentRequestObjectForModal: any;
 }
+

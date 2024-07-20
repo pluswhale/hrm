@@ -3,37 +3,70 @@ import style from './request-table.module.scss';
 import { RequestTableProps } from './types';
 import { PopupWithDarkOverlay } from '../../../shared/components/portal/popup-with-dark-overlay';
 import { RequestModal } from '../request-modal/request-modal';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
+dayjs.locale('ru');
 
-const RequestTable: FC<RequestTableProps> = ({ requests }): ReactElement => {
-    const [modalStatus, setModalStatus] = useState<string>('');
+const RequestTable: FC<RequestTableProps> = ({
+    requests,
+    onOpenCreateRequestModal,
+    currentRequestObjectForModal,
+    setCurrentRequestObjectForModal,
+}): ReactElement => {
     const [isModalRecruitingFunnelOpened, setIsModalRecruitingFunnelOpened] = useState(false);
+
+    const formatDate = (date: string) => {
+        return dayjs(date).format('D MMMM YYYY HH:mm');
+    };
 
     const displayStatus = (status: string) => {
         let color;
+        let text;
+
         switch (status) {
             case 'new':
                 color = '#6362E7';
+                text = 'Новый';
                 break;
             case 'approved':
                 color = '#81C314';
+                text = 'Одобрен';
                 break;
             case 'rejected':
                 color = '#DD5555';
+                text = 'Отклонен';
                 break;
             default:
                 color = '#E7D10D';
+                text = 'Просмотрен';
         }
 
         return (
             <span style={{ backgroundColor: color, color: 'white' }} className={style.container__status}>
-                {status}
+                {text}
             </span>
         );
     };
 
-    const onOpenModalRequest = (status: string) => {
+    const displayType = (type: string) => {
+        switch (type) {
+            case 'meeting with management':
+                return 'Встреча с руководством';
+            case 'vacation':
+                return 'Отпуск';
+            case 'compensation':
+                return 'Компенсация';
+            case 'offer':
+                return 'Предложение';
+
+            default:
+                return 'Другое';
+        }
+    };
+
+    const onOpenModalRequest = (request: any) => {
         setIsModalRecruitingFunnelOpened(true);
-        setModalStatus(status);
+        setCurrentRequestObjectForModal(request);
     };
 
     const onCloseModalRequest = () => {
@@ -44,23 +77,29 @@ const RequestTable: FC<RequestTableProps> = ({ requests }): ReactElement => {
         <div className={style.container}>
             {requests?.map((request, index) => (
                 <React.Fragment key={request.id}>
-                    <div className={style.container__card} onClick={() => onOpenModalRequest(request.status)}>
+                    <div className={style.container__card} onClick={() => onOpenModalRequest(request)}>
                         <img className={style.container__img} src={''} alt="" />
                         <div className={style.container__head}>
                             <div className={style.container__name_prof}>
-                                <span className={style.container__name}>{request.name}</span>
-                                <span className={style.container__prof}>{request.profession}</span>
+                                <span className={style.container__name}>
+                                    {request?.author?.last_name + ' ' + request?.author?.first_name + ' '}
+                                </span>
+                                <span className={style.container__prof}>{request?.author?.sub_position?.title}</span>
                             </div>
                         </div>
-                        <span className={style.container__meeting}>{request.meeting}</span>
-                        <span className={style.container__data}>{request.data}</span>
+                        <span className={style.container__meeting}>{displayType(request?.type)}</span>
+                        <span className={style.container__data}>{formatDate(request.data)}</span>
                         {displayStatus(request.status)}
                     </div>
                     {index < requests.length - 1 && <hr className={style.container__divider} />}
                 </React.Fragment>
             ))}
             <PopupWithDarkOverlay onClose={onCloseModalRequest} isOpened={isModalRecruitingFunnelOpened}>
-                <RequestModal onClose={onCloseModalRequest} status={modalStatus} />
+                <RequestModal
+                    onClose={onCloseModalRequest}
+                    requestData={currentRequestObjectForModal}
+                    setCurrentRequestObjectForModal={setCurrentRequestObjectForModal}
+                />
             </PopupWithDarkOverlay>
         </div>
     );

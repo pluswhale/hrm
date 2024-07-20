@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { CreateRequestBody, UpdateRequestBody } from './types';
+import { CreateRequestBody, UpdateRequestBody, UpdateRequestByHRManagerBody } from './types';
 import { requestsApi } from '.';
 
 export const useCreateRequest = () => {
@@ -31,15 +31,52 @@ export const useDeleteRequest = () => {
     return useMutation({
         mutationFn: (requestId: number) => requestsApi.deleteRequest(requestId),
         onSuccess: () => {
-            qc.invalidateQueries({
-                queryKey: ['fetchAllRequestsForEmployees'],
-            });
-            qc.invalidateQueries({
-                queryKey: ['fetchThemesForRequestFilterSet'],
-            });
-            qc.invalidateQueries({
-                queryKey: ['fetchStatusesForRequestFilterSet'],
-            });
+            Promise.all([
+                qc.invalidateQueries({
+                    queryKey: ['fetchAllRequestsForEmployees'],
+                }),
+                qc.invalidateQueries({
+                    queryKey: ['fetchThemesForRequestFilterSet'],
+                }),
+                qc.invalidateQueries({
+                    queryKey: ['fetchStatusesForRequestFilterSet'],
+                }),
+            ]);
+        },
+    });
+};
+
+export const useMakeSeenRequest = () => {
+    const qc = useQueryClient();
+    return useMutation({
+        mutationFn: (requestId: number) => requestsApi.makeSeen(requestId),
+        onSuccess: () => {
+            Promise.all([
+                qc.invalidateQueries({
+                    queryKey: ['fetchAllRequests'],
+                }),
+                qc.invalidateQueries({ queryKey: ['fetchThemesForRequestFilterSet'] }),
+                qc.invalidateQueries({ queryKey: ['fetchStatusesForRequestFilterSet'] }),
+            ]);
+        },
+    });
+};
+
+export const useUpdateRequestByHRManager = () => {
+    const qc = useQueryClient();
+    return useMutation({
+        mutationFn: (body: UpdateRequestByHRManagerBody) => {
+            const { requestId, ...rest } = body;
+            return requestsApi.answerRequestByHR(requestId, rest as UpdateRequestByHRManagerBody);
+        },
+        onSuccess: () => {
+            Promise.all([
+                qc.invalidateQueries({
+                    queryKey: ['fetchAllRequests'],
+                }),
+                qc.invalidateQueries({ queryKey: ['fetchThemesForRequestFilterSet'] }),
+                qc.invalidateQueries({ queryKey: ['fetchStatusesForRequestFilterSet'] }),
+            ]);
         },
     });
 };

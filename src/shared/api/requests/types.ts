@@ -11,3 +11,10 @@ export type UpdateRequestBody = {
     manage_by?: string;
 };
 
+export type UpdateRequestByHRManagerBody = {
+    requestId: number;
+    answer: string;
+    decision: string;
+    manageById: number;
+};
+
