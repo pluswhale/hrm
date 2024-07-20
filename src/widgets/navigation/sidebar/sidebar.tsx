@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { Dash } from 'react-bootstrap-icons';
+import { useEffect } from 'react';
 import { X } from 'react-bootstrap-icons';
 import styles from './sidebar.module.scss';
-import { NavItemTree } from '../../../features/nav-item-tree';
 import { Link } from 'react-router-dom';
-import { NAV_LINKS } from './constants';
+import { useSelector } from 'react-redux';
+import { userDataSelector } from '../../../redux/selectors/auth';
+import { HRManagerSet } from './nav-sets/hr-manager/hr-manager-set';
+import { EmployeeSet } from './nav-sets/employee/employee-set';
 
 type SidebarProps = {
     isOpen: boolean;
@@ -14,13 +15,13 @@ type SidebarProps = {
 };
 
 export const Sidebar = ({ isOpen, setOpen, isMobile, closeSidebar }: SidebarProps) => {
+    const userRole = useSelector(userDataSelector)?.role;
+
     useEffect(() => {
         if (isMobile) {
             setOpen(false);
         }
     }, [isMobile, setOpen]);
-
-    const handleLinkClick = () => {};
 
     const handleCloseClick = () => {
         closeSidebar();
@@ -41,34 +42,8 @@ export const Sidebar = ({ isOpen, setOpen, isMobile, closeSidebar }: SidebarProp
                     <Link to="/" className={styles.sidebar__logo}>
                         <h2 className={styles.sidebar__logo_text}>HRM</h2>
                     </Link>
-                </div>
-                <div className={styles.sidebar__nav}>
-                    <NavItemTree title={'Компания'} className={styles.sidebar__navLink}>
-                        {NAV_LINKS.company.map((link) => (
-                            <Link
-                                key={link.id}
-                                to={link.url}
-                                className={styles.sidebar__navLink_text}
-                                onClick={handleLinkClick}
-                            >
-                                <Dash className={'mx-2'} />
-                                {link.title}
-                            </Link>
-                        ))}
-                    </NavItemTree>
-                    <NavItemTree title={'Подбор персонала'} className={styles.sidebar__navLink}>
-                        {NAV_LINKS.personal.map((link) => (
-                            <Link
-                                key={link.id}
-                                to={link.url}
-                                className={styles.sidebar__navLink_text}
-                                onClick={handleLinkClick}
-                            >
-                                <Dash className={'mx-2'} />
-                                {link.title}
-                            </Link>
-                        ))}
-                    </NavItemTree>
+
+                    {userRole === 'HRManager' ? <HRManagerSet /> : <EmployeeSet />}
                 </div>
             </div>
             <button className={styles.sidebar__button}>Перейти в Astrum</button>
