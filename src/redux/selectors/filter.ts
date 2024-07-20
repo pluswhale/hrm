@@ -8,3 +8,11 @@ export const rolesInFilterSelector = (state: RootState) => {
     return state.filter.roles;
 };
 
+export const themesInFilterSelector = (state: RootState) => {
+    return state.filter.themes;
+};
+
+export const statusesInFilterSelector = (state: RootState) => {
+    return state.filter.statuses;
+};
+

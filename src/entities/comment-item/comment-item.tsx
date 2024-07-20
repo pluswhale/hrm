@@ -1,4 +1,3 @@
-import { Col, Image, Row } from 'react-bootstrap';
 import style from './comment_item.module.scss';
 import Delete from './../../assets/Удалить.svg';
 import Redact from './../../assets/Редактировать.svg';

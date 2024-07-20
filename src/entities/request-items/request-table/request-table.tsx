@@ -11,13 +11,13 @@ const RequestTable: FC<RequestTableProps> = ({ requests }): ReactElement => {
     const displayStatus = (status: string) => {
         let color;
         switch (status) {
-            case 'Новый':
+            case 'new':
                 color = '#6362E7';
                 break;
-            case 'Утвержден':
+            case 'approved':
                 color = '#81C314';
                 break;
-            case 'Отклонен':
+            case 'rejected':
                 color = '#DD5555';
                 break;
             default:
@@ -42,10 +42,10 @@ const RequestTable: FC<RequestTableProps> = ({ requests }): ReactElement => {
 
     return (
         <div className={style.container}>
-            {requests.map((request, index) => (
+            {requests?.map((request, index) => (
                 <React.Fragment key={request.id}>
                     <div className={style.container__card} onClick={() => onOpenModalRequest(request.status)}>
-                        <img className={style.container__img} src={request.imageUrl} alt="" />
+                        <img className={style.container__img} src={''} alt="" />
                         <div className={style.container__head}>
                             <div className={style.container__name_prof}>
                                 <span className={style.container__name}>{request.name}</span>

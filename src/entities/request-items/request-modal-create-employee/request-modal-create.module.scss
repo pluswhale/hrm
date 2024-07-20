@@ -1,0 +1,125 @@
+.request_modal {
+    max-width: 800px;
+    width: 800px;
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+
+    &__content_agree {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__status {
+        border-radius: 24px;
+        padding: 5px 15px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: 100%;
+    }
+
+    &__title_and_close {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    &__title {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        font-size: 25px;
+        font-weight: 500;
+        line-height: 29.63px;
+        text-align: left;
+        color: #242934;
+    }
+
+    &__close {
+        cursor: pointer;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    &__wrapper_text {
+        display: flex;
+        gap: 5px;
+    }
+
+    &__titles {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 29.63px;
+        text-align: left;
+        color: #242934;
+    }
+
+    &__wrapper_title {
+        font-size: 16px;
+        font-weight: 400;
+        font-family: 'Roboto', sans-serif;
+        line-height: 18.75px;
+        text-align: left;
+        color: #242934;
+    }
+
+    &__wrapper_info {
+        font-size: 16px;
+        font-weight: 400;
+        font-family: 'Roboto', sans-serif;
+        line-height: 18.75px;
+        text-align: left;
+        color: #707070;
+    }
+
+    &__wrapper_comment {
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+    }
+
+    &__textarea {
+        width: 100%;
+        border-radius: 10px;
+        border-color: #999999;
+        height: 100px;
+        resize: none;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: 400;
+        font-family: 'Roboto', sans-serif;
+        line-height: 18.75px;
+        text-align: left;
+        color: black;
+
+        &::placeholder {
+            color: #999999;
+        }
+    }
+
+    &__wrappper_card {
+        justify-content: flex-end;
+        display: flex;
+        gap: 10px;
+    }
+
+    &__content_wrapper_img {
+        display: flex;
+        gap: 15px;
+    }
+
+    &__content_agree_img {
+        height: 18px;
+    }
+}
+

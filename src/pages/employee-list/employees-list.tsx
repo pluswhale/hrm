@@ -13,11 +13,12 @@ import { useAppDispatch } from '../../redux/store';
 import style from './employees-list.module.scss';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { fetchAllEmployees } from 'shared/api/employees/thunks';
+
+import parseUriParams from 'shared/libs/parseUriParams';
 import {
     queryParametersForKeySkillsEmployeeFilterSet,
     queryParametersForPositionsEmployeeFilterSet,
-} from 'shared/api/filters/employee.queries';
-import parseUriParams from 'shared/libs/parseUriParams';
+} from 'shared/api/filters/filters.queries';
 
 export const EmployeesList: FC = (): ReactElement => {
     const dispatch = useAppDispatch();
