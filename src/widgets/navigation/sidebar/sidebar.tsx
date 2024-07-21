@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import { userDataSelector } from '../../../redux/selectors/auth';
 import { HRManagerSet } from './nav-sets/hr-manager/hr-manager-set';
 import { EmployeeSet } from './nav-sets/employee/employee-set';
+import { Button } from 'shared/components/button/button';
+import { removeAllCookies } from 'shared/libs/cookies';
 
 type SidebarProps = {
     isOpen: boolean;
@@ -27,6 +29,11 @@ export const Sidebar = ({ isOpen, setOpen, isMobile, closeSidebar }: SidebarProp
         closeSidebar();
     };
 
+    const onLogoutFromProfile = () => {
+        removeAllCookies();
+        window.location.pathname = '/';
+    };
+
     return (
         <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
             <div className={styles.sidebar__wrapper}>
@@ -44,6 +51,13 @@ export const Sidebar = ({ isOpen, setOpen, isMobile, closeSidebar }: SidebarProp
                     </Link>
 
                     {userRole === 'HRManager' ? <HRManagerSet /> : <EmployeeSet />}
+
+                    <Button
+                        styles={{ marginTop: '10%' }}
+                        text="Выйти"
+                        onClick={onLogoutFromProfile}
+                        view="default_bg"
+                    />
                 </div>
             </div>
             <button className={styles.sidebar__button}>Перейти в Astrum</button>
