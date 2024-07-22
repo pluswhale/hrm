@@ -1,6 +1,7 @@
 export type CreateCommentBody = {
     authorId: number;
-    employeeId: number;
+    employeeId?: number;
+    candidateId?: number;
     text: string;
 };
 

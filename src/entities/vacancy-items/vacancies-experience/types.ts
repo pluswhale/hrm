@@ -3,7 +3,7 @@ export type VacanciesExperienceProps = {
 };
 
 export type ExperienceItemProps = {
-    experience: Experience;
+    experience: any;
 };
 
 export type Experience = {

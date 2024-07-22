@@ -7,7 +7,7 @@ export const useCreateComment = () => {
     return useMutation({
         mutationFn: (body: CreateCommentBody) => commentsApi.create(body),
         onSuccess: () => {
-            qc.invalidateQueries({ queryKey: ['fetchCommentsByEmployee'] });
+            qc.invalidateQueries({ queryKey: ['fetchCommentsByUser'] });
         },
     });
 };
@@ -17,7 +17,7 @@ export const useDeleteComment = () => {
     return useMutation({
         mutationFn: (commentId: string) => commentsApi.delete(commentId),
         onSuccess: () => {
-            qc.invalidateQueries({ queryKey: ['fetchCommentsByEmployee'] });
+            qc.invalidateQueries({ queryKey: ['fetchCommentsByUser'] });
         },
     });
 };
@@ -28,7 +28,7 @@ export const useUpdateComment = () => {
         mutationFn: (body: { commentId: string; updatedText: UpdateCommentBody }) =>
             commentsApi.edit(body.commentId, body.updatedText),
         onSuccess: () => {
-            qc.invalidateQueries({ queryKey: ['fetchCommentsByEmployee'] });
+            qc.invalidateQueries({ queryKey: ['fetchCommentsByUser'] });
         },
     });
 };

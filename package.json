@@ -63,6 +63,7 @@
         ]
     },
     "devDependencies": {
+        "@hookform/devtools": "^4.3.1",
         "@types/compose-function": "^0.0.33",
         "@types/js-cookie": "^3.0.6",
         "@types/react-beautiful-dnd": "^13.1.8",
@@ -79,4 +80,3 @@
         "uuid": "^9.0.1"
     }
 }
-

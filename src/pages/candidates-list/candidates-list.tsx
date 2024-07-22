@@ -11,6 +11,8 @@ import { setFilters } from '../../redux/slices/filter';
 import { CandidateHc } from 'features/candidates-data-container/types';
 import { useNavigate } from 'react-router';
 import { Button } from 'shared/components/button/button';
+import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { fetchAllCandidates } from 'shared/api/candidates/thunks';
 
 const CandidatesList: FC = (): ReactElement => {
     const dispatch = useAppDispatch();
@@ -21,12 +23,15 @@ const CandidatesList: FC = (): ReactElement => {
     const rolesForFilter = useSelector(rolesInFilterSelector);
 
     //query for candidates list
-    // const queryParameters = {
-    //     queryKey: 'fetchAllCandidates',
-    //     queryThunk: fetchAllCandidates,
-    // } as QueryParameters<any>;
+    const queryParameters = {
+        queryKey: 'fetchAllCandidates',
+        queryThunk: fetchAllCandidates,
+        queryThunkOptions: {
+            search: searchValue,
+        },
+    } as QueryParameters<any>;
 
-    // const candidatesQuery = useFetchData(queryParameters);
+    const candidatesQuery = useFetchData(queryParameters);
 
     const onSearchData = (value: string) => {
         setSearchValue(value); // Update search value state
@@ -37,39 +42,6 @@ const CandidatesList: FC = (): ReactElement => {
         name: candidate.role,
         isActive: false,
     }));
-
-    const skillsForFilterFromData: { id: number; name: string; isActive: boolean }[] = [];
-
-    candidatesListData.candidates.forEach((candidate, index: number) => {
-        candidate.skills.forEach((skill, index) => {
-            skillsForFilterFromData.push({ id: index + 1, name: skill, isActive: false });
-        });
-    });
-
-    // useEffect(() => {
-    //     dispatch(setFilters({ roles: rolesForFilterFromData, skills: skillsForFilterFromData }));
-    // }, []);
-
-    const dataIntoFilter = filterSet.map((filterRow) => {
-        if (filterRow.id === 1) {
-            return { ...filterRow, checkboxes: rolesForFilter };
-        } else {
-            return { ...filterRow, checkboxes: skillsForFilter };
-        }
-    });
-
-    const filteredData = () => {
-        if (searchValue) {
-            return candidatesListData?.candidates?.filter((candidate: CandidateHc) =>
-                candidate?.name?.toLowerCase().includes(searchValue.toLowerCase()),
-            );
-        } else {
-            // логика по фильтрации чекбоксов
-
-            //заглушка
-            return candidatesListData.candidates;
-        }
-    };
 
     const onNavigateToCreateVacancy = () => {
         navigate('/create/candidate');
@@ -88,14 +60,15 @@ const CandidatesList: FC = (): ReactElement => {
                     />
                 </div>
                 <div className={style.container__wrapper}>
-                    <CandidatesDataContainer candidates={filteredData()} />
-                    {/* <Filter
-                        value={searchValue}
-                        onChangeValue={onSearchData}
+                    <CandidatesDataContainer candidates={candidatesQuery?.data} />
+                    <Filter
+                        searchValue={searchValue}
+                        onChangeSearchValue={onSearchData}
                         title="Найти кандидата"
-                        filterSet={dataIntoFilter}
-                        onClickSearch={() => console.log('заглушка')}
-                    /> */}
+                        onToggleCheckboxInFilter={function (filterSetName: string, checkboxId: number): void {
+                            throw new Error('Function not implemented.');
+                        }}
+                    />
                 </div>
             </div>
         </DefaultContentWrapper>

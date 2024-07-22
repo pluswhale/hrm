@@ -1,8 +1,8 @@
 import { commentsApi } from '.';
 
-export const fetchCommentsByEmployee = async (options: any) => {
+export const fetchCommentsByUser = async (options: any) => {
     try {
-        const res = await commentsApi.getCommentsByEmployee(options?.id);
+        const res = await commentsApi.getCommentsByUser(options?.typeUser, options?.id);
         if (res) {
             return res.data;
         }

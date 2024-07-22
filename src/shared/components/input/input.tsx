@@ -23,8 +23,6 @@ export const Input: FC<InputProps> = ({
         formState: { errors },
     } = useFormContext();
 
-    console.log('errors', errors);
-
     const renderedInput = () => {
         return onChange ? (
             <input

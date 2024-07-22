@@ -28,9 +28,29 @@ const createCandidateSlice = createSlice({
         addNewEducation: (state) => {
             state.educations.push({ id: state.educations.length + 1 });
         },
+        setCurrentExperience: (state, action: PayloadAction<{ experiencesLength: number }>) => {
+            const { experiencesLength } = action.payload;
+
+            if (experiencesLength) {
+                state.experiences = Array.from({ length: experiencesLength }, (_, index) => ({
+                    id: index + 1,
+                }));
+            }
+        },
+
+        setCurrentEducations: (state, action: PayloadAction<{ educationsLength: number }>) => {
+            const { educationsLength } = action.payload;
+
+            if (educationsLength) {
+                state.educations = Array.from({ length: educationsLength }, (_, index) => ({
+                    id: index + 1,
+                }));
+            }
+        },
     },
 });
 
-export const { addNewExperience, addNewEducation } = createCandidateSlice.actions;
+export const { addNewExperience, addNewEducation, setCurrentEducations, setCurrentExperience } =
+    createCandidateSlice.actions;
 export default createCandidateSlice.reducer;
 

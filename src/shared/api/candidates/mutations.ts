@@ -7,3 +7,9 @@ export const useCreateCandidate = () => {
     });
 };
 
+export const useUpdateCandidate = () => {
+    return useMutation({
+        mutationFn: (body: any) => candidatesApi.updateCandidate(body),
+    });
+};
+
