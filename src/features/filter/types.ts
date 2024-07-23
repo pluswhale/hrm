@@ -2,7 +2,7 @@ export type FilterProps = {
     title: string;
     filterSet?: FilterSet[];
     searchValue?: string;
-    onToggleCheckboxInFilter: (filterSetName: string, checkboxId: number) => void;
+    onToggleCheckboxInFilter?: (filterSetName: string, checkboxId: number) => void;
     onChangeSearchValue?: (value: string) => void;
 };
 

@@ -1,10 +1,10 @@
 import { vacanciesApi } from '.';
 
-export const fetchAllVacancies = (options: any) => {
+export const fetchAllVacancies = async (options: any) => {
     try {
-        const res = vacanciesApi.getAllVacancies(options?.isActive);
+        const res = await vacanciesApi.getAllVacancies(options?.isActive, options?.name);
         if (res) {
-            return res;
+            return res.data;
         }
 
         return null;

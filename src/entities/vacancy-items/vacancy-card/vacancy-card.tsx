@@ -5,14 +5,7 @@ import styles from './vacancy-card.module.scss';
 import { Link } from 'react-router-dom';
 import { formatDate } from 'shared/libs/dateFormater';
 
-export const VacancyCard: FC<VacancyCardProps> = ({
-    title,
-    created_at,
-    candidatesCount,
-    id,
-    deadline,
-    status,
-}): ReactElement => {
+export const VacancyCard: FC<any> = ({ title, created_at, candidatesCount, id, deadline, status }): ReactElement => {
     const displayStatus = (status: string) => {
         let color = '';
 
@@ -50,12 +43,12 @@ export const VacancyCard: FC<VacancyCardProps> = ({
                 <div className={styles.vacancy_card__created_and_deadline}>
                     <div className={styles.vacancy_card__row}>
                         <span className={styles.vacancy_card__row_label}>Создана:</span>
-                        <span className={styles.vacancy_card__row_value}>17 Мая 2024г.</span>
+                        <span className={styles.vacancy_card__row_value}>{created_at}</span>
                     </div>
 
                     <div className={styles.vacancy_card__row}>
                         <span className={styles.vacancy_card__row_label}>Дедлайн:</span>
-                        <span className={styles.vacancy_card__row_value}>24 Августа 2024г.</span>
+                        <span className={styles.vacancy_card__row_value}>{deadline}</span>
                     </div>
                 </div>
 

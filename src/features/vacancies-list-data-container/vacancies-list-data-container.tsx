@@ -4,6 +4,8 @@ import { VacanciesDataContainerProps } from './types';
 import { VacancyCard } from 'entities/vacancy-items/vacancy-card/vacancy-card';
 
 export const VacanciesDataContainer: FC<VacanciesDataContainerProps> = ({ vacancies }): ReactElement => {
+    console.log('Vacancies', vacancies);
+
     return (
         <>
             {vacancies?.length ? (
@@ -11,10 +13,10 @@ export const VacanciesDataContainer: FC<VacanciesDataContainerProps> = ({ vacanc
                     <VacancyCard
                         key={vacancy?.id}
                         navigationUrl={`/vacancies/${vacancy.id}`}
-                        title={vacancy?.title}
-                        created_at={vacancy?.createdAt}
+                        title={vacancy?.name}
+                        created_at={vacancy?.created_at}
                         deadline={vacancy?.deadline}
-                        candidatesCount={vacancy?.candidateCount}
+                        candidatesCount={vacancy?.candidates?.length}
                         id={vacancy?.id}
                         status={vacancy?.status}
                     />

@@ -12,6 +12,17 @@
         gap: 24px;
     }
 
+    &__vertical_block {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    &__horizontal_block {
+        display: flex;
+        align-items: center;
+    }
+
     &__title {
         font-family: 'Rubik', sans-serif;
         font-size: 20px;
@@ -95,8 +106,7 @@
 }
 
 @media (max-width: 1700px) {
-    .create_vacancy{
-
+    .create_vacancy {
         &__container {
             width: 100%;
         }
@@ -104,6 +114,6 @@
         &__form_wrapper {
             width: 100%;
         }
-
     }
 }
+

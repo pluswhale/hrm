@@ -5,12 +5,14 @@ import { Button } from 'shared/components/button/button';
 import { useParams } from 'react-router-dom';
 import { fetchVacancyById } from 'shared/api/vacancies/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
-import { fetchKanbanBoardForVacancy } from 'shared/api/kanban/thunks';
 
 import styles from './edit-vacancy.module.scss';
+import { useDeleteVacancy, useSetVacancyStatus } from 'shared/api/vacancies/mutations';
 
 const EditVacancy = () => {
     const { id: vacancyId } = useParams();
+    const deleteVacancyMutation = useDeleteVacancy();
+    const setVacancyStatusMutation = useSetVacancyStatus();
 
     const queryParameters = {
         queryKey: 'fetchVacancyById',
@@ -21,16 +23,6 @@ const EditVacancy = () => {
     } as QueryParameters<any>;
 
     const vacancyByIdQuery = useFetchData(queryParameters);
-
-    const queryParametersForKanbanBoard = {
-        queryKey: 'fetchKanbanBoardForVacancy',
-        queryThunk: fetchKanbanBoardForVacancy,
-        queryThunkOptions: {
-            vacancyId,
-        },
-    } as QueryParameters<any>;
-
-    const kanbanBoardQuery = useFetchData(queryParametersForKanbanBoard);
 
     const navigation = [
         {
@@ -47,22 +39,29 @@ const EditVacancy = () => {
         },
     ];
 
-    const stagesFromKanbanBoard = kanbanBoardQuery?.data?.stages?.map((board: any) => ({
-        id: board.stageId,
-        name: board.name,
-        position: board.position,
-    }));
-
     return (
         <DefaultContentWrapper>
             <div className={styles.vacancy_navigation}>
                 <HorizontalNavigation navigation={navigation} />
                 <div className={styles.vacancy_navigation__buttons}>
-                    <Button view="default_bg_white" text="Остановить" />
-                    <Button view="default_bg_white" text="Удалить" />
+                    <Button
+                        onClick={() =>
+                            setVacancyStatusMutation.mutate({
+                                vacancyId: vacancyByIdQuery?.data?.id,
+                                status: !vacancyByIdQuery?.data?.is_active,
+                            })
+                        }
+                        view="default_bg_white"
+                        text={vacancyByIdQuery?.data?.is_active ? 'Остановить' : 'Активировать'}
+                    />
+                    <Button
+                        onClick={() => deleteVacancyMutation.mutate(vacancyByIdQuery?.data?.id)}
+                        view="default_bg_white"
+                        text="Удалить"
+                    />
                 </div>
             </div>
-            <EditVacancyForm stages={stagesFromKanbanBoard} vacancy={vacancyByIdQuery?.data} />
+            <EditVacancyForm vacancy={vacancyByIdQuery?.data} />
         </DefaultContentWrapper>
     );
 };

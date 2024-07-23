@@ -4,7 +4,6 @@ import { SwitchTab } from 'shared/components/switch-tab';
 import { useState } from 'react';
 import { Button } from 'shared/components/button/button';
 import { VacanciesDataContainer } from 'features/vacancies-list-data-container/vacancies-list-data-container';
-import { vacanciesListData } from './constants';
 import { Filter } from 'features/filter';
 import { useNavigate } from 'react-router';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
@@ -19,6 +18,7 @@ const VacanciesList = () => {
         queryKey: 'fetchAllVacancies',
         queryThunk: fetchAllVacancies,
         queryThunkOptions: {
+            name: searchValue,
             isActive: activeTab === 0 ? true : false,
         },
     } as QueryParameters<any>;
@@ -48,18 +48,16 @@ const VacanciesList = () => {
                 </div>
                 <div className={styles.vacancies__main_content}>
                     <div className={styles.vacancies__items}>
-                        <VacanciesDataContainer
-                            vacancies={vacanciesQuery?.data?.data.filter((vacancy: any) =>
-                                vacancy.title.toLowerCase().includes(searchValue.toLowerCase()),
-                            )}
-                        />
+                        <VacanciesDataContainer vacancies={vacanciesQuery?.data} />
                     </div>
-                    {/* <Filter
-                        value={searchValue}
-                        onChangeValue={onSearchData}
+                    <Filter
+                        searchValue={searchValue}
+                        onChangeSearchValue={onSearchData}
                         title="Поиск вакансий"
-                        onClickSearch={() => console.log('заглушка')}
-                    /> */}
+                        onToggleCheckboxInFilter={function (filterSetName: string, checkboxId: number): void {
+                            throw new Error('Function not implemented.');
+                        }}
+                    />
                 </div>
             </div>
         </DefaultContentWrapper>

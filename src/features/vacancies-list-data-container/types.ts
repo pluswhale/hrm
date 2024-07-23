@@ -1,5 +1,5 @@
 export type VacanciesDataContainerProps = {
-    vacancies: Vacancy[];
+    vacancies: any[];
 };
 
 type Vacancy = {

@@ -1,6 +1,5 @@
 export type EditVacancyFormProps = {
-    vacancy: Vacancy;
-    stages: { id: string; name: string; position: number }[];
+    vacancy: any;
 };
 
 export type Vacancy = {

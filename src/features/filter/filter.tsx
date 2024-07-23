@@ -44,7 +44,11 @@ export const Filter: FC<FilterProps> = ({
                                 <div className={styles.filter__set_rows}>
                                     {set?.checkboxes?.map((checkbox) => (
                                         <div
-                                            onClick={() => onToggleCheckboxInFilter(set.title, checkbox.id)}
+                                            onClick={
+                                                onToggleCheckboxInFilter
+                                                    ? () => onToggleCheckboxInFilter(set.title, checkbox.id)
+                                                    : undefined
+                                            }
                                             className={styles.filter__set_row}
                                         >
                                             <span

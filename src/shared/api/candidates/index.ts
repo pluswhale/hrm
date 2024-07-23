@@ -14,5 +14,6 @@ export const candidatesApi = {
         return Instance.patch(`candidates/${candidateId}`, rest);
     },
     getAllCompetences: () => Instance.get(`candidates/get/competences`),
+    addNewCompetence: (body: { name: string }) => Instance.post(`candidates/add/competences`, body),
 };
 
