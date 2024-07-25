@@ -1,5 +1,5 @@
 export type VacancyInfoProps = {
-    vacancy: Vacancy;
+    vacancy: any;
 };
 
 export type Vacancy = {

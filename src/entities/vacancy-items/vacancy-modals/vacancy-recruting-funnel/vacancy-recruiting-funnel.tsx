@@ -19,11 +19,9 @@ export const VacancyRecruitingFunnel: FC<VacancyRecruitingFunnelProps> = ({ vaca
     const conversionQuery = useFetchData(queryParameters);
 
     const sortedConversion = conversionQuery?.data?.sort((a: any, b: any) => {
-        // Convert relativeConversion to numbers for comparison
         const relativeA = parseFloat(a.relativeConversion);
         const relativeB = parseFloat(b.relativeConversion);
 
-        // Sort in descending order
         return relativeB - relativeA;
     });
 
@@ -50,7 +48,7 @@ export const VacancyRecruitingFunnel: FC<VacancyRecruitingFunnelProps> = ({ vaca
                             Относительная <br /> конверсия
                         </div>
                     </div>
-                    {sortedConversion.map((item: any, index: number) => (
+                    {sortedConversion?.map((item: any, index: number) => (
                         <div className={styles.row} key={index}>
                             <div className={`${styles.value} ${styles.large}`}>
                                 <p className={styles.stage_value}>{item.stageName}</p>
