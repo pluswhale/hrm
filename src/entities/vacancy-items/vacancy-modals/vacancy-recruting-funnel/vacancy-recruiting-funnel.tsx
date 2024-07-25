@@ -4,8 +4,29 @@ import { VacancyRecruitingFunnelProps } from './types';
 
 import styles from './vacancy-recruiting-funnel.module.scss';
 import { colorPalette, RECRUITING_FUNNEL_DATA } from './constants';
+import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { fetchConversionByVacancyId } from 'shared/api/vacancies/thunks';
 
-export const VacancyRecruitingFunnel: FC<VacancyRecruitingFunnelProps> = ({ onClose }): ReactElement => {
+export const VacancyRecruitingFunnel: FC<VacancyRecruitingFunnelProps> = ({ vacancyId, onClose }): ReactElement => {
+    const queryParameters = {
+        queryKey: 'fetchConversionForVacancy',
+        queryThunk: fetchConversionByVacancyId,
+        queryThunkOptions: {
+            vacancyId,
+        },
+    } as QueryParameters<any>;
+
+    const conversionQuery = useFetchData(queryParameters);
+
+    const sortedConversion = conversionQuery?.data?.sort((a: any, b: any) => {
+        // Convert relativeConversion to numbers for comparison
+        const relativeA = parseFloat(a.relativeConversion);
+        const relativeB = parseFloat(b.relativeConversion);
+
+        // Sort in descending order
+        return relativeB - relativeA;
+    });
+
     return (
         <div className={styles.vacancy_recruiting_funnel}>
             <div className={styles.vacancy_recruiting_funnel__container}>
@@ -29,16 +50,16 @@ export const VacancyRecruitingFunnel: FC<VacancyRecruitingFunnelProps> = ({ onCl
                             Относительная <br /> конверсия
                         </div>
                     </div>
-                    {RECRUITING_FUNNEL_DATA.map((item, index) => (
+                    {sortedConversion.map((item: any, index: number) => (
                         <div className={styles.row} key={index}>
                             <div className={`${styles.value} ${styles.large}`}>
-                                <p className={styles.stage_value}>{item.stage}</p>
-                                <span style={{ backgroundColor: colorPalette[item.value] }} className={styles.color_bg}>
-                                    {item.value}
+                                <p className={styles.stage_value}>{item.stageName}</p>
+                                <span style={{ backgroundColor: colorPalette(index) }} className={styles.color_bg}>
+                                    {item?.candidateCount}
                                 </span>
                             </div>
-                            <div className={styles.value}>{item.absolute}</div>
-                            <div className={styles.value}>{item.relative}</div>
+                            <div className={styles.value}>{item.absoluteConversion}</div>
+                            <div className={styles.value}>{item.relativeConversion}</div>
                         </div>
                     ))}
                 </div>

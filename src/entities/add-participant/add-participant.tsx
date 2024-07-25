@@ -5,21 +5,12 @@ import { AddParticipantProps } from './types';
 import { Search } from 'react-bootstrap-icons';
 import { Button } from '../../shared/components/button/button';
 import { useLocation, useNavigate } from 'react-router';
-import { fetchAllCandidates } from 'shared/api/candidates/thunks';
-import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import mockAvatar from '../../assets/Ellipse 1.svg';
 
-export const AddParticipant: FC<AddParticipantProps> = ({ onClose }): ReactElement => {
+export const AddParticipant: FC<AddParticipantProps> = ({ personsData, onAddInModal, onClose }): ReactElement => {
     const location = useLocation();
     const navigate = useNavigate();
-    const [pickedCandidatesIds, setPickedCandidatesIds] = useState<string[]>([]);
-
-    const queryParameters = {
-        queryKey: 'fetchAllCandidates',
-        queryThunk: fetchAllCandidates,
-    } as QueryParameters<any>;
-
-    const candidatesQuery = useFetchData(queryParameters);
+    const [pickedPersonsIds, setPickedPersonIds] = useState<string[]>([]);
 
     const isVacanciesPages = location.pathname.includes('vacancies');
 
@@ -28,8 +19,8 @@ export const AddParticipant: FC<AddParticipantProps> = ({ onClose }): ReactEleme
     };
 
     const onPickCandidate = (candidateId: string) => {
-        if (!pickedCandidatesIds.some((cur) => cur === candidateId)) {
-            setPickedCandidatesIds((prev) => [...prev, candidateId]);
+        if (!pickedPersonsIds.some((cur) => cur === candidateId)) {
+            setPickedPersonIds((prev) => [...prev, candidateId]);
         } else {
             return;
         }
@@ -46,7 +37,7 @@ export const AddParticipant: FC<AddParticipantProps> = ({ onClose }): ReactEleme
                 <Search />
             </div>
             <div className={styles.container__wrapper}>
-                {candidatesQuery?.data?.map((person: any, index: number) => (
+                {personsData?.map((person: any, index: number) => (
                     <div className={styles.container__people} key={index}>
                         <input
                             value={person?.id}
@@ -59,7 +50,7 @@ export const AddParticipant: FC<AddParticipantProps> = ({ onClose }): ReactEleme
                             alt={'candidate avatar'}
                             className={styles.container__img}
                         />
-                        {person.firstName + ' ' + person.surname}
+                        {person.last_name + ' ' + person.first_name}
                     </div>
                 ))}
             </div>
@@ -72,7 +63,13 @@ export const AddParticipant: FC<AddParticipantProps> = ({ onClose }): ReactEleme
                         view="default_bg"
                     />
                 )} */}
-                <Button type="button" styles={{ width: '167px', height: '40px' }} text="Добавить" view="default_bg" />
+                <Button
+                    onClick={() => onAddInModal(pickedPersonsIds?.map((id) => Number(id)))}
+                    type="button"
+                    styles={{ width: '167px', height: '40px' }}
+                    text="Добавить"
+                    view="default_bg"
+                />
             </div>
         </div>
     );

@@ -26,3 +26,16 @@ export const fetchVacancyById = async (options: any) => {
     }
 };
 
+export const fetchConversionByVacancyId = async (options: any) => {
+    try {
+        const res = await vacanciesApi.getConversionByVacancyId(options?.vacancyId);
+        if (res) {
+            return res.data;
+        }
+
+        return null;
+    } catch (error) {
+        console.error(error);
+    }
+};
+

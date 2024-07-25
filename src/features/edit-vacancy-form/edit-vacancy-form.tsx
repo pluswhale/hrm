@@ -73,6 +73,12 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
             body.competences = competence.map((competence) => competence.id).filter(Boolean);
         }
 
+        if (stages?.length) {
+            body.stages = stages.map((stage) => {
+                return { name: stage.name };
+            });
+        }
+
         updateVacancyMutation.mutate(body);
     };
 

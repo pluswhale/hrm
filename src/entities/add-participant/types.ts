@@ -5,5 +5,7 @@ export interface People {
 
 export type AddParticipantProps = {
     onClose: () => void;
+    onAddInModal: (personsIds: number[]) => void;
+    personsData: any[];
 };
 

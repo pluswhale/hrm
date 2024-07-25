@@ -24,6 +24,8 @@ const VacanciesProfile = () => {
 
     const vacancyByIdQuery = useFetchData(queryParameters);
 
+    console.log(vacancyByIdQuery?.data);
+
     const navigate = useNavigate();
 
     const navigation = [
@@ -48,7 +50,7 @@ const VacanciesProfile = () => {
                 <Button onClick={onNavigateToEditVacancy} text="Редактировать" view="default_bg_white" />
             </div>
             <VacancyInfo vacancy={vacancyByIdQuery?.data} />
-            <VacancyCandidates candidateRows={CANDIDATES_ROWS} />
+            <VacancyCandidates stages={vacancyByIdQuery?.data?.stages} />
         </DefaultContentWrapper>
     );
 };

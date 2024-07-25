@@ -1,9 +1,17 @@
-export const colorPalette = {
-    1: '#B3B3B3',
-    2: '#959595',
-    3: '#6C6B6B',
-    4: '#4D4D4D',
-} as { [key: number]: string };
+export const colorPalette = (index: number) => {
+    switch (index) {
+        case 0:
+            return '#DCDBFC';
+        case 1:
+            return '#B4B3FC';
+        case 2:
+            return '#9494F1';
+        case 3:
+            return '#7776E7';
+        default:
+            return '#7776E7';
+    }
+};
 
 export const RECRUITING_FUNNEL_DATA = [
     { stage: 'Новые', value: 1, absolute: '100%', relative: '100%' },

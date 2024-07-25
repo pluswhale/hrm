@@ -53,3 +53,29 @@ export const useSetVacancyStatus = () => {
     });
 };
 
+export const useBindCandidateToVacancy = () => {
+    const qc = useQueryClient();
+    return useMutation({
+        mutationFn: (body: { vacancyId: string; candidateIds: number[] }) => {
+            const { vacancyId, ...rest } = body;
+            return vacanciesApi.bindCandidatesToVacancy(vacancyId, rest);
+        },
+        onSuccess: () => {
+            qc.invalidateQueries({ queryKey: ['fetchVacancyById'] });
+        },
+    });
+};
+
+export const useMoveCandidateInStage = () => {
+    const qc = useQueryClient();
+    return useMutation({
+        mutationFn: (body: { vacancyId: string; candidateId: number; fromStageId: number; toStageId: number }) => {
+            const { vacancyId, candidateId, ...rest } = body;
+            return vacanciesApi.moveCandidateInStages(vacancyId, candidateId, rest);
+        },
+        onSuccess: () => {
+            qc.invalidateQueries({ queryKey: ['fetchVacancyById'] });
+        },
+    });
+};
+
