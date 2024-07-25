@@ -40,7 +40,7 @@ const VacanciesCandidate = () => {
                     <VacancyCandidateInfo />
                 </div>
 
-                <CommentAndHistoryTemplate />
+                {/* <CommentAndHistoryTemplate  /> */}
             </div>
         </DefaultContentWrapper>
     );

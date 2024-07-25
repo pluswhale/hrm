@@ -1,2 +1,2 @@
-export { VacancyAboutBlock } from './vacancy-competences-block';
+export { VacancyCompetencesBlock } from './vacancy-competences-block';
 

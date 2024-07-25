@@ -42,9 +42,9 @@ export const AppealCandidates: FC<VacancyCandidatesProps> = ({ candidateRows }):
                     <AppealCandidatesBlock />
                 </div>
             </div>
-            <PopupWithDarkOverlay onClose={onCloseModalRecruitingFunnel} isOpened={isModalRecruitingFunnelOpened}>
+            {/* <PopupWithDarkOverlay onClose={onCloseModalRecruitingFunnel} isOpened={isModalRecruitingFunnelOpened}>
                 <VacancyRecruitingFunnel onClose={onCloseModalRecruitingFunnel} />
-            </PopupWithDarkOverlay>
+            </PopupWithDarkOverlay>  */}
         </>
     );
 };

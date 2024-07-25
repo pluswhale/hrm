@@ -14,7 +14,6 @@ import { DescriptionVacancy } from 'entities/create-vacancy-form/description-vac
 
 import styles from './create-vacancy-form.module.scss';
 import { Stages } from 'entities/create-vacancy-form/stages/stages';
-import { states } from 'shared/states';
 
 const queryParametersForFetchAllCompetences = {
     queryKey: 'fetchAllCompetencesForCreatingVacancy',

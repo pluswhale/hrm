@@ -91,9 +91,9 @@ const SurveysPoople = () => {
                 </div>
                 {/* <Filter title="Найти сотрудника" /> */}
             </div>
-            <PopupWithDarkOverlay onClose={onCloseModalRecruitingFunnel} isOpened={isModalRecruitingFunnelOpened}>
+            {/* <PopupWithDarkOverlay onClose={onCloseModalRecruitingFunnel} isOpened={isModalRecruitingFunnelOpened}>
                 <AddParticipant onClose={onCloseModalRecruitingFunnel} />
-            </PopupWithDarkOverlay>
+            </PopupWithDarkOverlay> */}
         </div>
     );
 };
