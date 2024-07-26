@@ -5,16 +5,33 @@ import { Button } from 'shared/components/button/button';
 import { PopupWithDarkOverlay } from 'shared/components/portal/popup-with-dark-overlay';
 import { VacancyRecruitingFunnel } from 'entities/vacancy-items/vacancy-modals/vacancy-recruting-funnel/vacancy-recruiting-funnel';
 
-import { useNavigate } from 'react-router';
+import { useParams } from 'react-router';
 import { AppealCandidatesBlock } from 'entities/practise-items/appeal-candidates-block';
 
 import styles from './appeal-candidates.module.scss';
+import { useBindCandidateToAppeal } from 'shared/api/appeals/mutations';
+import { AddParticipant } from 'entities/add-participant/add-participant';
+import { fetchAllCandidates } from 'shared/api/candidates/thunks';
+import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 
-export const AppealCandidates: FC<VacancyCandidatesProps> = ({ candidateRows }): ReactElement => {
-    const navigate = useNavigate();
+export const AppealCandidates: FC<VacancyCandidatesProps> = ({ stages }): ReactElement => {
+    const { id: appealId } = useParams();
     const [isModalRecruitingFunnelOpened, setIsModalRecruitingFunnelOpened] = useState<boolean>(false);
+    const [isModalAddParticipantsOpened, setIsModalAddParticipantsOpened] = useState<boolean>(false);
+    const bindCandidatesToAppealMutation = useBindCandidateToAppeal();
 
-    const candidatesCount = candidateRows ? candidateRows.reduce((acc, row) => row.count + acc, 0) : 0;
+    const queryParameters = {
+        queryKey: 'fetchAllCandidates',
+        queryThunk: fetchAllCandidates,
+    } as QueryParameters<any>;
+
+    const candidatesQuery = useFetchData(queryParameters);
+
+    const candidatesCount = stages ? stages.reduce((acc, row) => row.candidates?.length + acc, 0) : 0;
+    const candidateIdsInStages = stages?.flatMap((stage) => stage.candidates)?.map((candidate) => candidate.id);
+    const availableCandidates = candidatesQuery?.data?.filter(
+        (candidate: any) => !candidateIdsInStages?.includes(candidate.id),
+    );
 
     const onOpenModalRecruitingFunnel = () => {
         setIsModalRecruitingFunnelOpened(true);
@@ -24,8 +41,16 @@ export const AppealCandidates: FC<VacancyCandidatesProps> = ({ candidateRows }):
         setIsModalRecruitingFunnelOpened(false);
     };
 
-    const onNavigateToCreateCandidate = () => {
-        navigate('/create/candidate');
+    const onOpenModalAddParticipants = () => {
+        setIsModalAddParticipantsOpened(true);
+    };
+
+    const onCloseModalAddParticipants = () => {
+        setIsModalAddParticipantsOpened(false);
+    };
+
+    const onAddInModal = (candidateIds: number[]) => {
+        bindCandidatesToAppealMutation.mutate({ appealId: appealId || '', candidateIds });
     };
 
     return (
@@ -35,16 +60,23 @@ export const AppealCandidates: FC<VacancyCandidatesProps> = ({ candidateRows }):
                     <span className={styles.vacancy_candidates__count}>Кандидаты - {candidatesCount}</span>
                     <div className={styles.vacancy_candidates__buttons}>
                         <Button onClick={onOpenModalRecruitingFunnel} text="Воронка рекрутинга" view="default_bg" />
-                        <Button onClick={onNavigateToCreateCandidate} text="Добавить кандидата" view="default_bg" />
+                        <Button onClick={onOpenModalAddParticipants} text="Добавить кандидата" view="default_bg" />
                     </div>
                 </div>
                 <div className={styles.vacancy_candidates__list}>
-                    <AppealCandidatesBlock />
+                    {stages && <AppealCandidatesBlock stages={stages} />}
                 </div>
             </div>
-            {/* <PopupWithDarkOverlay onClose={onCloseModalRecruitingFunnel} isOpened={isModalRecruitingFunnelOpened}>
-                <VacancyRecruitingFunnel onClose={onCloseModalRecruitingFunnel} />
-            </PopupWithDarkOverlay>  */}
+            <PopupWithDarkOverlay onClose={onCloseModalRecruitingFunnel} isOpened={isModalRecruitingFunnelOpened}>
+                <VacancyRecruitingFunnel onClose={onCloseModalRecruitingFunnel} vacancyId={appealId || ''} />
+            </PopupWithDarkOverlay>
+            <PopupWithDarkOverlay onClose={onCloseModalAddParticipants} isOpened={isModalAddParticipantsOpened}>
+                <AddParticipant
+                    personsData={availableCandidates}
+                    onAddInModal={onAddInModal}
+                    onClose={onCloseModalAddParticipants}
+                />
+            </PopupWithDarkOverlay>
         </>
     );
 };

@@ -10,14 +10,13 @@ export const AppealsDataContainer: FC<AppealsDataContainerProps> = ({ appeals })
                 appeals?.map((appeal) => (
                     <PracticeCard
                         key={appeal?.id}
-                        navigationUrl={`/appeals/${appeal?.id}`}
-                        title={appeal?.title}
+                        navUrl={`/appeals/${appeal?.id}`}
+                        name={appeal?.name}
                         created_at={appeal?.created_at}
                         deadline={appeal?.deadline}
-                        seats={appeal.seats}
-                        accepted={appeal?.accepted}
+                        desired_count_candidates={appeal.desired_count_candidates}
                         id={appeal?.id}
-                        status={appeal?.status}
+                        is_active={appeal?.is_active}
                     />
                 ))
             ) : (

@@ -1,5 +1,5 @@
 export type VacancyCandidatesProps = {
-    candidateRows: CandidatesRow[];
+    stages: any[];
 };
 
 export type CandidatesRow = {

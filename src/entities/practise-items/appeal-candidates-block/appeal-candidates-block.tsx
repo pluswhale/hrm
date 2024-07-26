@@ -1,17 +1,21 @@
 import { FC, ReactElement, useEffect, useState } from 'react';
-import { VacancyCandidatesBlockProps } from './types';
+import { AppealCandidatesBlockProps } from './types';
 
 import styles from './appeal-candidates-block.module.scss';
 
 import { columnsFromBackend } from './canban/constants';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { VacancyCandidateCard } from 'entities/vacancy-items/vacancy-candidate-card';
+import { useMoveCandidateInStage } from 'shared/api/appeals/mutations';
+import { useParams } from 'react-router-dom';
 
-export const AppealCandidatesBlock: FC<VacancyCandidatesBlockProps> = ({}): ReactElement => {
-    const [columns, setColumns] = useState(columnsFromBackend);
+export const AppealCandidatesBlock: FC<AppealCandidatesBlockProps> = ({ stages }): ReactElement => {
+    const { id: appealId } = useParams();
+    const [columns, setColumns] = useState(stages);
+    const moveCandidateInStageMutation = useMoveCandidateInStage();
 
     useEffect(() => {
-        setColumns(columnsFromBackend); // Сетаем колонки с данными с бека
+        setColumns(stages); // Сетаем колонки с данными с бека
     }, []);
 
     const onDragEnd = (result: any, columns: any, setColumns: any) => {
@@ -20,31 +24,41 @@ export const AppealCandidatesBlock: FC<VacancyCandidatesBlockProps> = ({}): Reac
         if (source.droppableId !== destination.droppableId) {
             const sourceColumn = columns[source.droppableId];
             const destColumn = columns[destination.droppableId];
-            const sourceItems = [...sourceColumn.items];
-            const destItems = [...destColumn.items];
+            const sourceItems = [...sourceColumn.candidates];
+            const destItems = [...destColumn.candidates];
             const [removed] = sourceItems.splice(source.index, 1);
+
             destItems.splice(destination.index, 0, removed);
             setColumns({
                 ...columns,
                 [source.droppableId]: {
                     ...sourceColumn,
-                    items: sourceItems,
+                    candidates: sourceItems,
                 },
                 [destination.droppableId]: {
                     ...destColumn,
-                    items: destItems,
+                    candidates: destItems,
                 },
             });
+
+            const body = {
+                appealId: appealId || '',
+                candidateId: removed?.id,
+                fromStageId: sourceColumn?.id,
+                toStageId: destColumn?.id,
+            };
+
+            moveCandidateInStageMutation.mutate(body);
         } else {
             const column = columns[source.droppableId];
-            const copiedItems = [...column.items];
+            const copiedItems = [...column.candidates];
             const [removed] = copiedItems.splice(source.index, 1);
             copiedItems.splice(destination.index, 0, removed);
             setColumns({
                 ...columns,
                 [source.droppableId]: {
                     ...column,
-                    items: copiedItems,
+                    candidates: copiedItems,
                 },
             });
         }
@@ -58,7 +72,7 @@ export const AppealCandidatesBlock: FC<VacancyCandidatesBlockProps> = ({}): Reac
                         {(provided, snapshot) => (
                             <div className={styles.vacancy_candidates_block}>
                                 <span className={styles.vacancy_candidates_block__count}>
-                                    {column.title}-{column.items.length}
+                                    {column?.name}-{column?.candidates?.length}
                                 </span>
                                 <div
                                     ref={provided.innerRef}
@@ -66,8 +80,12 @@ export const AppealCandidatesBlock: FC<VacancyCandidatesBlockProps> = ({}): Reac
                                     className={styles.vacancy_candidates_block__card}
                                 >
                                     <div className={styles.vacancy_candidates_block__card_container}>
-                                        {column.items.map((item, index) => (
-                                            <VacancyCandidateCard candidate={item} index={index} />
+                                        {column?.candidates?.map((candidate: any, index: any) => (
+                                            <VacancyCandidateCard
+                                                key={candidate?.id}
+                                                candidate={candidate}
+                                                index={index}
+                                            />
                                         ))}
                                     </div>
                                 </div>

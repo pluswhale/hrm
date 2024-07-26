@@ -24,8 +24,6 @@ const VacanciesProfile = () => {
 
     const vacancyByIdQuery = useFetchData(queryParameters);
 
-    console.log(vacancyByIdQuery?.data);
-
     const navigate = useNavigate();
 
     const navigation = [

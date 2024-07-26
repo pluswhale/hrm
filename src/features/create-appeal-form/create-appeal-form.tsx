@@ -1,26 +1,34 @@
 import { FormProvider, useForm } from 'react-hook-form';
 
 import styles from './create-appeal-form.module.scss';
-import { Input } from 'shared/components/input';
-import { Textarea } from 'shared/components/textarea';
 import { Button } from 'shared/components/button/button';
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { stagesSelector } from '../../redux/selectors/create-appeal';
 import { useAppDispatch } from '../../redux/store';
 import { addNewStage, removeStage, setStages } from '../../redux/slices/create-appeal';
-import { StageItemProps } from './types';
-import deleteIcon from '../../assets/DeleteOutlined.svg';
 import { useCreateAppeal } from 'shared/api/appeals/mutations';
+import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { fetchAllCompetences } from 'shared/api/candidates/thunks';
+import { Stages } from 'entities/create-appeal-form/stages/stages';
+import { Competences } from 'entities/create-appeal-form/competences/competences';
+import { InfoAboutAppeal } from 'entities/create-appeal-form/info-about-appeal/info-about-appeal';
+
+const queryParametersForFetchAllCompetences = {
+    queryKey: 'fetchAllCompetencesForCreatingAppeal',
+    queryThunk: fetchAllCompetences,
+} as QueryParameters<any>;
 
 export const CreateAppealForm = () => {
     const dispatch = useAppDispatch();
     const [newStage, setNewStage] = useState<string>('');
     const methods = useForm({ mode: 'onChange' });
     const createAppealMutation = useCreateAppeal();
-
+    const [competence, setCompetence] = useState<any[]>([]);
     const stages = useSelector(stagesSelector);
+
+    const competencesQuery = useFetchData(queryParametersForFetchAllCompetences);
 
     useEffect(() => {
         return () => {
@@ -28,17 +36,35 @@ export const CreateAppealForm = () => {
         };
     }, []);
 
+    const addCompetence = (newCompetence: any) => {
+        if (typeof newCompetence === 'string') {
+            //@ts-ignore
+            setCompetence((prev) => [...prev, { name: newCompetence }]);
+        } else {
+            setCompetence(newCompetence);
+        }
+    };
+
     const onSubmit = (data: any) => {
         // Отпралвять запрос на сервер для сохранения
-        const body = {
-            Description: data.description,
-            Requirements: data.requirement,
-            Name: data.name,
-            CountPlaces: data.countPlaces,
-            Deadline: data.deadline,
-        } as any;
 
-        if (stages.length > 0) body.Stages = stages;
+        let body: any = {};
+
+        for (const key in data) {
+            if (data[key] !== null && data[key] !== undefined && data[key] !== '') {
+                body[key] = data[key];
+            }
+        }
+
+        if (competence?.length) {
+            body.competences = competence.map((competence) => competence.id).filter(Boolean);
+        }
+
+        if (stages?.length) {
+            body.stages = stages.map((stage) => {
+                return { name: stage.name };
+            });
+        }
 
         createAppealMutation.mutate(body);
     };
@@ -56,103 +82,26 @@ export const CreateAppealForm = () => {
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_appeal}>
                 <div className={styles.create_appeal__container}>
-                    <div className={styles.create_appeal__form_wrapper}>
-                        <h2 className={styles.create_appeal__title}>Информация о направлении практики</h2>
-                        <div className={styles.create_appeal__form}>
-                            <Input
-                                width={'100%'}
-                                isRequired={true}
-                                name={'name'}
-                                placeholder={'Название направления практики'}
-                                label="Название направления практики"
-                            />
-                            <Input
-                                width={'45%'}
-                                isRequired={false}
-                                name={'deadline'}
-                                pattern={{
-                                    value: /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{2}$/,
-                                    message: 'Введите дату в формате д.мес.год',
-                                }}
-                                placeholder={'Дата завершения'}
-                                label="Дата завершения"
-                            />
-                            <Input
-                                width={'45%'}
-                                isRequired={false}
-                                name={'countPlaces'}
-                                placeholder={'0'}
-                                label="Количество мест"
-                            />
-
-                            <Textarea
-                                width={'45%'}
-                                isRequired={false}
-                                name={'requirement'}
-                                placeholder={'Требования'}
-                                label="Требования"
-                            />
-                            <Textarea
-                                width={'45%'}
-                                isRequired={false}
-                                name={'description'}
-                                placeholder={'Описание'}
-                                label="Описание"
-                            />
-                        </div>
+                    <div className={styles.create_appeal__vertical_block}>
+                        <InfoAboutAppeal />
+                        <Competences
+                            competence={competence}
+                            competencesOptions={competencesQuery?.data}
+                            addCompetence={addCompetence}
+                        />
                     </div>
-
-                    <div className={styles.create_appeal__form_wrapper}>
-                        <h2 className={styles.create_appeal__title}>Доска рекрутинга</h2>
-                        <div className={styles.create_appeal__stages}>
-                            <span className={styles.create_appeal__stages__title}>Этапы</span>
-                            <div className={styles.create_appeal__stages__list}>
-                                {stages?.length ? (
-                                    stages.map((stage) => <StageItem onDelete={onRemoveStage} stage={stage} />)
-                                ) : (
-                                    <p>Добавьте новые этапы</p>
-                                )}
-                            </div>
-                            <div className={styles.create_appeal__stages__new}>
-                                <Input
-                                    value={newStage}
-                                    onChange={setNewStage}
-                                    width={'100%'}
-                                    name={'new_stage'}
-                                    placeholder={'Новый этап'}
-                                />
-                                <Button
-                                    type="button"
-                                    styles={{ width: '122px' }}
-                                    view={'default_bg'}
-                                    text="Добавить"
-                                    onClick={onAddStage}
-                                />
-                            </div>
-                        </div>
+                    <div className={styles.create_appeal__vertical_block}>
+                        <Stages stages={stages} />
                     </div>
                 </div>
-                <Button type={'submit'} styles={{ width: '189px' }} view={'default_bg'} text="Создать направление" />
+                <Button
+                    type={'submit'}
+                    styles={{ width: '189px', alignSelf: 'flex-end' }}
+                    view={'default_bg'}
+                    text="Создать направление"
+                />
             </form>
         </FormProvider>
-    );
-};
-
-const StageItem: FC<StageItemProps> = ({ stage, onDelete }) => {
-    return (
-        <div className={styles.create_appeal__stage}>
-            <div className={styles.create_appeal__stage__container}>
-                <span className={styles.create_appeal__stage__name}>
-                    {stage.position}.{stage.name}
-                </span>
-                <img
-                    onClick={() => onDelete(stage.id)}
-                    className={styles.create_appeal__stage__delete_icon}
-                    src={deleteIcon}
-                    alt="delete icon"
-                />
-            </div>
-        </div>
     );
 };
 

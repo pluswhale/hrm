@@ -2,13 +2,31 @@ import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-
 import { HorizontalNavigation } from 'shared/components/horizontal-navigation';
 import styles from './edit-appeal.module.scss';
 import { EditAppealForm } from 'features/edit-appeal-form';
-import { APPEAl_DATA } from './constants';
+import { useParams } from 'react-router-dom';
+import { useDeleteAppeal, useSetAppealStatus } from 'shared/api/appeals/mutations';
+import { fetchAppealById } from 'shared/api/appeals/thunks';
+import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { Button } from 'shared/components/button/button';
 
 const EditAppeal = () => {
+    const { id: appealId } = useParams();
+    const deleteAppealMutation = useDeleteAppeal();
+    const setAppealStatusMutation = useSetAppealStatus();
+
+    const queryParameters = {
+        queryKey: 'fetchAppealById',
+        queryThunk: fetchAppealById,
+        queryThunkOptions: {
+            appealId,
+        },
+    } as QueryParameters<any>;
+
+    const appealByIdQuery = useFetchData(queryParameters);
+
     const navigation = [
         {
-            title: 'Frontend-разработка',
-            url: '/appeals/1',
+            title: appealByIdQuery?.data?.name,
+            url: `/appeals/${appealId}`,
         },
         {
             title: 'Редактирование направления практики',
@@ -20,8 +38,25 @@ const EditAppeal = () => {
         <DefaultContentWrapper>
             <div className={styles.appeal_navigation}>
                 <HorizontalNavigation navigation={navigation} />
+                <div className={styles.appeal_navigation__buttons}>
+                    <Button
+                        onClick={() =>
+                            setAppealStatusMutation.mutate({
+                                appealId: appealByIdQuery?.data?.id,
+                                status: !appealByIdQuery?.data?.is_active,
+                            })
+                        }
+                        view="default_bg_white"
+                        text={appealByIdQuery?.data?.is_active ? 'Остановить' : 'Активировать'}
+                    />
+                    <Button
+                        onClick={() => deleteAppealMutation.mutate(appealByIdQuery?.data?.id)}
+                        view="default_bg_white"
+                        text="Удалить"
+                    />
+                </div>
             </div>
-            <EditAppealForm appeal={APPEAl_DATA} />
+            <EditAppealForm appeal={appealByIdQuery?.data} />
         </DefaultContentWrapper>
     );
 };

@@ -1,5 +1,5 @@
 export type AppealInfoProps = {
-    appeal: Appeal;
+    appeal: any;
 };
 
 type Appeal = {

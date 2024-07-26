@@ -10,7 +10,7 @@ export type StageItem = {
 };
 
 export type EditAppealProps = {
-    appeal: Appeal;
+    appeal: any;
 };
 
 type Appeal = {
@@ -25,3 +25,4 @@ type Appeal = {
     description: string[];
     requirements: string[];
 };
+

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Image } from 'react-bootstrap';
 import { Bell, List } from 'react-bootstrap-icons';
 import burger from '../../../assets/Бургер.svg';

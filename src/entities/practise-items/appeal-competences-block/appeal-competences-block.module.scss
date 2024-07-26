@@ -1,0 +1,51 @@
+.appeal_competences {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__title {
+        font-family: 'Rubik', sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 23.7px;
+        text-align: left;
+
+        color: #242934;
+        margin-bottom: 25px;
+    }
+
+    &__card_wrapper {
+        background-color: #ffffff;
+        padding: 20px 40px;
+        border-radius: 10px;
+        max-width: 658px;
+        min-width: 658px;
+        height: fit-content;
+        &__content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__element {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 18.75px;
+            text-align: left;
+            color: #242934;
+        }
+    }
+
+    &__row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        &_value {
+            border-radius: 5px;
+            border: 1px solid #929292;
+            padding: 5px 10px 5px 10px;
+            color: #929292;
+        }
+    }
+}
+

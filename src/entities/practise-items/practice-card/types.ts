@@ -1,11 +1,10 @@
 export type PracticeCardProps = {
+    navUrl: string;
     id: number;
-    title: string;
-    navigationUrl: string;
+    name: string;
     created_at: string;
     deadline: string;
-    status: string;
-    seats: string;
-    accepted: string;
+    is_active: boolean;
+    desired_count_candidates: string;
 };
 

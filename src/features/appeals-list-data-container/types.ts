@@ -4,12 +4,12 @@ export type AppealsDataContainerProps = {
 
 export type Appeal = {
     id: number;
-    title: string;
+    name: string;
     created_at: string;
-    navigationUrl: string;
     deadline: string;
-    status: string;
-    seats: string;
-    accepted: string;
+    is_active: boolean;
+    desired_count_candidates: string;
+    responsibilities: string;
+    requirements: string;
 };
 

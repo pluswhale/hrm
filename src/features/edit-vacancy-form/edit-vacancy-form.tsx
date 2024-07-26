@@ -40,7 +40,12 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
             key !== 'competences' &&
             key !== 'candidates'
         ) {
-            formState[key] = vacancy[key];
+            if (key === 'deadline') {
+                const mirroredDate = vacancy?.[key]?.split('-')?.reverse()?.join('.');
+                formState[key] = mirroredDate;
+            } else {
+                formState[key] = vacancy[key];
+            }
         }
     }
 

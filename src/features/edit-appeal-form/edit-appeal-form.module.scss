@@ -1,15 +1,24 @@
 @import '../../assets/styles/variables.scss';
 
-.edit_appeal {
+.create_appeal {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 30px;
     margin-top: 30px;
 
     &__container {
         display: flex;
         gap: 24px;
+        width: 100%;
+    }
+
+    &__vertical_block {
+        max-width: 658px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: 50%;
     }
 
     &__title {
@@ -105,3 +114,4 @@
         }
     }
 }
+
