@@ -7,20 +7,84 @@ import { Textarea } from 'shared/components/textarea';
 import { Radio } from '../../shared/components/radio';
 import { Selector } from '../../shared/components/selector';
 import { options } from './constants';
+import { FormControlLabel, Switch } from '@mui/material';
+import { Option } from 'shared/components/selector/types';
+import { PopupWithDarkOverlay } from 'shared/components/portal/popup-with-dark-overlay';
+import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { AddParticipant } from 'entities/add-participant/add-participant';
+import { fetchAllEmployees } from 'shared/api/employees/thunks';
+import { Button } from 'shared/components/button/button';
+import { CreateSurveyEmployeesList } from 'entities/survey-items/create-survey-employees-list/create-survey-employees-list';
 
 export const CreateSurveyForm = () => {
     const methods = useForm();
-    const [selectedValue, setSelectedValue] = useState<string>('');
-    const [selectedValueRadio, setSelectedValueRadio] = useState<string>('');
+    const [surveyType, setSurveyType] = useState<Option | null>({ value: 'common', label: 'Общий' });
+    const [checkedAnonymous, setCheckedAnonymous] = useState<boolean>(false);
+    const [isModalAddParticipantsOpened, setIsModalAddParticipantsOpened] = useState<boolean>(false);
+    const [addedEmployeesIds, setAddedEmployeesIds] = useState<number[]>([]);
+    const [addedEmployees, setAddedEmployees] = useState<any[]>([]);
 
-    const handleChange = (value: string) => {
-        setSelectedValue(value);
+    const queryParameters = {
+        queryKey: 'fetchAllEmployees',
+        queryThunk: fetchAllEmployees,
+        queryThunkOptions: {
+            status: 'current',
+        },
+    } as QueryParameters<any>;
+
+    const employeesQuery = useFetchData(queryParameters);
+
+    const availableEmployees = employeesQuery?.data?.filter(
+        (employee: any) => !addedEmployeesIds?.includes(employee.id),
+    );
+
+    const onOpenModalAddParticipants = () => {
+        setIsModalAddParticipantsOpened(true);
     };
 
-    const onSubmit = (data: any) => {};
+    const onCloseModalAddParticipants = () => {
+        setIsModalAddParticipantsOpened(false);
+    };
 
-    const handleRadioChange = (value: any) => {
-        setSelectedValueRadio(value);
+    const handleChangeAnonymousSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCheckedAnonymous(event.target.checked);
+    };
+
+    const handleChangeSurveyType = (value: Option) => {
+        setSurveyType(value);
+    };
+
+    const onSubmit = (data: any) => {
+        let body: any = {
+            type: surveyType?.value,
+        };
+
+        for (const key in data) {
+            if (data[key] !== null && data[key] !== undefined && data[key] !== '') {
+                body[key] = data[key];
+            }
+        }
+
+        if (surveyType?.value === 'personal' && addedEmployeesIds?.length) {
+            body.employeesIds = addedEmployeesIds;
+        }
+    };
+
+    const onDeleteEmployee = (employeeId: number) => {
+        const filteredEmployeesId = addedEmployeesIds.filter((id: number) => id !== employeeId);
+        const filteredEmployees = addedEmployees.filter((e: any) => e.id !== employeeId);
+
+        setAddedEmployees(filteredEmployees);
+        setAddedEmployeesIds(filteredEmployeesId);
+    };
+
+    const onAddInModal = (employeesIds: number[]) => {
+        setAddedEmployeesIds(addedEmployeesIds.concat(employeesIds));
+        const employees = employeesQuery?.data?.filter((employee: any) => employeesIds.includes(employee.id));
+
+        setAddedEmployees(addedEmployees.concat(employees));
+
+        onCloseModalAddParticipants();
     };
 
     return (
@@ -46,7 +110,7 @@ export const CreateSurveyForm = () => {
                             <Input
                                 width={'50%'}
                                 isRequired={false}
-                                name={'deadline'}
+                                name={'deadline_from'}
                                 pattern={{
                                     value: /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{2}$/,
                                     message: 'Введите дату в формате д.мес.год',
@@ -57,7 +121,7 @@ export const CreateSurveyForm = () => {
                             <Input
                                 width={'50%'}
                                 isRequired={false}
-                                name={'deadline'}
+                                name={'deadline_to'}
                                 pattern={{
                                     value: /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{2}$/,
                                     message: 'Введите дату в формате д.мес.год',
@@ -70,7 +134,7 @@ export const CreateSurveyForm = () => {
                         <Textarea
                             width={'100%'}
                             isRequired={false}
-                            name={'requirement'}
+                            name={'description'}
                             pattern={{
                                 //@ts-ignore
                                 value: /^[а-яА-Я]+$/u,
@@ -79,16 +143,47 @@ export const CreateSurveyForm = () => {
                             placeholder={'Описание...'}
                             label="Описание"
                         />
-                        <Radio
-                            value="option1"
-                            checked={selectedValueRadio === 'option1'}
-                            onChange={handleRadioChange}
+                        <FormControlLabel
+                            value="top"
+                            control={
+                                <Switch
+                                    checked={checkedAnonymous}
+                                    onChange={handleChangeAnonymousSwitch}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                            }
                             label="Анонимный опрос"
+                            labelPlacement="end"
                         />
+
                         <span className={styles.create_survey__input_text}>
-                            Тип опроса
-                            <Selector options={options} value={selectedValue} onChange={handleChange} />
+                            <span className={styles.create_survey__input_text__selector}>
+                                Тип опроса
+                                <Selector options={options} value={surveyType} onChange={handleChangeSurveyType} />
+                            </span>
+
+                            {surveyType?.value === 'personal' && (
+                                <Button
+                                    onClick={onOpenModalAddParticipants}
+                                    view="default_bg"
+                                    text="Добавить участников"
+                                    styles={{ width: 'fit-content' }}
+                                />
+                            )}
                         </span>
+                        {surveyType?.value === 'personal' && addedEmployeesIds?.length ? (
+                            <CreateSurveyEmployeesList employees={addedEmployees} onDeleteEmployee={onDeleteEmployee} />
+                        ) : null}
+                        <PopupWithDarkOverlay
+                            onClose={onCloseModalAddParticipants}
+                            isOpened={isModalAddParticipantsOpened}
+                        >
+                            <AddParticipant
+                                personsData={availableEmployees}
+                                onAddInModal={onAddInModal}
+                                onClose={onCloseModalAddParticipants}
+                            />
+                        </PopupWithDarkOverlay>
                     </form>
                 </FormProvider>
             </div>

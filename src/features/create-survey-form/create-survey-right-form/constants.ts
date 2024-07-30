@@ -1,14 +1,13 @@
-
 export const options = [
     {
         id: 1,
         placeholder: 'Тип опроса',
         options: [
-            { value: '1', label: 'Option 1' },
-            { value: '2', label: 'Option 2' },
-            { value: '3', label: 'Option 3' }
-        ]
-    }
+            { value: 'one_variant', label: 'Один из списка' },
+            { value: 'multiple_variants', label: 'Несколько из списка' },
+            { value: 'short_text', label: 'Текст(строка)' },
+            { value: 'long_text', label: 'Текст(абзац)' },
+        ],
+    },
 ];
-
 

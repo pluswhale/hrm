@@ -1,30 +1,32 @@
 .container {
-  &__input {
-    width: 250px;
-    border-radius: 10px;
-    border: 2px solid black;
-    padding: 12px 15px;
-    display: flex;
-    justify-content: space-between;
-    background-image: url('../../../assets/Vector 2.svg');
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-origin: content-box;
-    transition: transform 0.3s ease;
-  }
+    &__input {
+        width: 250px;
+        border-radius: 10px;
+        border: 2px solid black;
+        padding: 12px 15px;
+        display: flex;
+        justify-content: space-between;
+        background-image: url('../../../assets/Vector 2.svg');
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-origin: content-box;
+        transition: transform 0.3s ease;
+        outline: none;
+    }
 
-  &__optionPanel{
-    position: relative;
-    top: -12px;
-    background-color: white;
-    border-radius: 0 0 10px 10px;
-    border-left: 2px solid;
-    border-right: 2px solid;
-    border-bottom: 2px solid;
-    width: 250px;
-  }
+    &__optionPanel {
+        position: relative;
+        top: -12px;
+        background-color: white;
+        border-radius: 0 0 10px 10px;
+        border-left: 2px solid;
+        border-right: 2px solid;
+        border-bottom: 2px solid;
+        width: 250px;
+    }
 
-  &__option{
-    padding: 10px;
-  }
+    &__option {
+        padding: 10px;
+    }
 }
+

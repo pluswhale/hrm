@@ -1,4 +1,3 @@
-// seller role
 import { RootState } from '../store';
 
 export const experiencesSelector = (state: RootState) => {
@@ -8,3 +7,4 @@ export const experiencesSelector = (state: RootState) => {
 export const educationsSelector = (state: RootState) => {
     return state.createCandidate.educations;
 };
+

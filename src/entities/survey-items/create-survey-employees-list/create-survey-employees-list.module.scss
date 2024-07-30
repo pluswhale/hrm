@@ -1,0 +1,46 @@
+.employee_list {
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 15px;
+        width: 100%;
+    }
+
+    &__employee {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        &__avatar {
+            height: 60px;
+        }
+
+        &__avatar_and_name {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        &__info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            &_name {
+                font-weight: 400;
+                font-family: 'Roboto', sans-serif;
+                font-size: 16px;
+                line-height: 18.75px;
+            }
+
+            &_position {
+                font-weight: 400;
+                font-family: 'Roboto', sans-serif;
+                font-size: 16px;
+                line-height: 18.75px;
+            }
+        }
+    }
+}
+

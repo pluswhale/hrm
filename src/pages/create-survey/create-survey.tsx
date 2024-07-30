@@ -28,7 +28,12 @@ const CreateSurvey = () => {
                 </div>
             </div>
             <div className={styles.container__wrap_btn}>
-                <Button styles={{ width: 'fit-content', height: '40px' }} text="Создать опрос" view="default_bg" />
+                <Button
+                    type="submit"
+                    styles={{ width: 'fit-content', height: '40px' }}
+                    text="Создать опрос"
+                    view="default_bg"
+                />
             </div>
         </DefaultContentWrapper>
     );

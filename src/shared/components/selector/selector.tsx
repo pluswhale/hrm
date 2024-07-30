@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useState } from 'react';
 import styles from './selector.module.scss';
 import { SelectorProps, Option } from './types';
-import arrow from '../../../assets/Vector 2.svg'
+import arrow from '../../../assets/Vector 2.svg';
 
 export const Selector: FC<SelectorProps> = ({ onChange, value, options }): ReactElement => {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +10,7 @@ export const Selector: FC<SelectorProps> = ({ onChange, value, options }): React
         setIsOpen(!isOpen);
     };
 
-    const handleOptionClick = (selectedValue: string) => {
+    const handleOptionClick = (selectedValue: Option) => {
         onChange(selectedValue);
         setIsOpen(false);
     };
@@ -21,7 +21,7 @@ export const Selector: FC<SelectorProps> = ({ onChange, value, options }): React
                 <div key={optionGroup.id} className={styles.container__optionGroup}>
                     <input
                         type="text"
-                        value={value}
+                        value={value?.label}
                         onClick={handleToggle}
                         placeholder={optionGroup.placeholder}
                         className={styles.container__input}
@@ -33,7 +33,7 @@ export const Selector: FC<SelectorProps> = ({ onChange, value, options }): React
                                 <div
                                     key={option.value}
                                     className={styles.container__option}
-                                    onClick={() => handleOptionClick(option.value)}
+                                    onClick={() => handleOptionClick(option)}
                                 >
                                     {option.label}
                                 </div>
@@ -45,3 +45,4 @@ export const Selector: FC<SelectorProps> = ({ onChange, value, options }): React
         </div>
     );
 };
+

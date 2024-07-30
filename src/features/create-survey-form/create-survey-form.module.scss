@@ -9,7 +9,7 @@
         background-color: $white;
         border-radius: 10px;
         padding: 25px;
-        height: 497px;
+        height: fit-content;
     }
 
     &__form {
@@ -19,17 +19,27 @@
         margin-top: 30px;
     }
 
-    &__input_text{
+    &__input_text {
         font-weight: 400;
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
         line-height: 18.75px;
         display: flex;
-        flex-direction: column;
         gap: 5px;
+        align-items: flex-end;
+
+        &__selector {
+            font-weight: 400;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            line-height: 18.75px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
     }
 
-    &__wrapper_imput{
+    &__wrapper_imput {
         display: flex;
         gap: 64px;
     }
@@ -44,3 +54,4 @@
         }
     }
 }
+

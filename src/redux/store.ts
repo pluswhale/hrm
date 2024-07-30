@@ -5,6 +5,7 @@ import createVacancy from './slices/create-vacancy';
 import createCandidate from './slices/create-candidate';
 import filter from './slices/filter';
 import createAppeal from './slices/create-appeal';
+import createSurvey from './slices/create-survey';
 import authSlice from './slices/auth';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     createVacancy,
     createAppeal,
     createCandidate,
+    createSurvey,
     filter,
 });
 

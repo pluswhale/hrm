@@ -1,6 +1,6 @@
 export interface SelectorProps {
-    onChange: (value: string) => void;
-    value: string;
+    onChange: (value: Option) => void;
+    value: Option | null;
     options: OptionGroup[];
 }
 
@@ -14,3 +14,4 @@ export interface Option {
     value: string;
     label: string;
 }
+
