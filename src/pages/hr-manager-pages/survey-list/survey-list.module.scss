@@ -1,0 +1,23 @@
+.survey {
+    max-width: 1340px;
+
+    &__action_buttons {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    &__main_content {
+        display: flex;
+        gap: 24px;
+
+        margin-top: 50px;
+    }
+
+    &__items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+}
+

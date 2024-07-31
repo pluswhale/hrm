@@ -22,7 +22,7 @@ type Props = {
 
 export const QuestionList: FC<Props> = ({ questions }): ReactElement => {
     const dispatch = useAppDispatch();
-    const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
+    const inputRefs = useRef<{ [key: string]: any }>({});
     const [editState, setEditState] = useState<{ questionPosition: number; optionPosition: number | string }>({
         questionPosition: -1,
         optionPosition: '',
@@ -57,11 +57,11 @@ export const QuestionList: FC<Props> = ({ questions }): ReactElement => {
                         <div key={index + 'question'} className={styles.question_list__container}>
                             <span className={styles.question_list__question}>
                                 {question?.mode === 'read' ? (
-                                    <span>{question?.question}</span>
+                                    <span>{question?.title}</span>
                                 ) : (
                                     <Input
-                                        ref={(el) => (inputRefs.current[`${question.position}-`] = el)}
-                                        value={question?.question}
+                                        ref={(el) => (inputRefs.current[`${question?.position}-`] = el)}
+                                        value={question?.title}
                                         onChange={({ target }) =>
                                             dispatch(
                                                 editQuestion({
@@ -111,7 +111,7 @@ export const QuestionList: FC<Props> = ({ questions }): ReactElement => {
                                                 ref={(el) =>
                                                     (inputRefs.current[`${question.position}-${option.position}`] = el)
                                                 }
-                                                value={option?.option_name}
+                                                value={option?.optionName}
                                                 onChange={({ target }) =>
                                                     dispatch(
                                                         editQuestion({
@@ -144,11 +144,11 @@ export const QuestionList: FC<Props> = ({ questions }): ReactElement => {
                                     } else {
                                         switch (option.type) {
                                             case 'one_variant': {
-                                                variant = <span>O {option?.option_name}</span>;
+                                                variant = <span>O {option?.optionName}</span>;
                                                 break;
                                             }
                                             case 'multiple_variants': {
-                                                variant = <span>M {option?.option_name}</span>;
+                                                variant = <span>M {option?.optionName}</span>;
                                                 break;
                                             }
                                             case 'long_text': {

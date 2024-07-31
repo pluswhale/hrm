@@ -4,19 +4,10 @@ import styles from './add-participant.module.scss';
 import { AddParticipantProps } from './types';
 import { Search } from 'react-bootstrap-icons';
 import { Button } from '../../shared/components/button/button';
-import { useLocation, useNavigate } from 'react-router';
 import mockAvatar from '../../assets/Ellipse 1.svg';
 
 export const AddParticipant: FC<AddParticipantProps> = ({ personsData, onAddInModal, onClose }): ReactElement => {
-    const location = useLocation();
-    const navigate = useNavigate();
     const [pickedPersonsIds, setPickedPersonIds] = useState<string[]>([]);
-
-    const isVacanciesPages = location.pathname.includes('vacancies');
-
-    const onNavigateToCreateCandidate = () => {
-        navigate('/create/candidate');
-    };
 
     const onPickCandidate = (candidateId: string) => {
         if (!pickedPersonsIds.some((cur) => cur === candidateId)) {
@@ -55,14 +46,6 @@ export const AddParticipant: FC<AddParticipantProps> = ({ personsData, onAddInMo
                 ))}
             </div>
             <div className={styles.container__wrapper_btn}>
-                {/* {isVacanciesPages && (
-                    <Button
-                        onClick={onNavigateToCreateCandidate}
-                        styles={{ width: '167px', height: '40px' }}
-                        text="Создать кандидата"
-                        view="default_bg"
-                    />
-                )} */}
                 <Button
                     onClick={() => onAddInModal(pickedPersonsIds?.map((id) => Number(id)))}
                     type="button"

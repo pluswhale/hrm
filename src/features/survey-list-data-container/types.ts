@@ -1,13 +1,13 @@
 export type SurveyListContainerProps = {
-    Survey: Survey[],
-}
+    surveys: any[];
+};
 
 type Survey = {
-    id: number,
-    title: string,
-    navigationUrl: string,
-    candidatesCount: string,
-    created_at: string,
-    deadline: string,
-    status: string,
-}
+    id: number;
+    title: string;
+    navigationUrl: string;
+    candidatesCount: string;
+    created_at: string;
+    deadline: string;
+    status: string;
+};

@@ -24,7 +24,7 @@ export const AddQuestion = () => {
 
     const onAddQuestion = () => {
         const question = {
-            question: questionValue,
+            title: questionValue,
             mode: 'read',
             type: typeQuestion?.value,
         } as Question_SURVEY;

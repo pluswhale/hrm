@@ -1,0 +1,17 @@
+@import '../../../assets/styles/variables.scss';
+
+.container {
+    padding-top: 20px;
+    display: flex;
+    gap: 20px;
+
+    &__wrapper {
+        width: 100%;
+    }
+
+    &__wrap_btn {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 30px;
+    }
+}

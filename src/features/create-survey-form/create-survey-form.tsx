@@ -15,6 +15,10 @@ import { AddParticipant } from 'entities/add-participant/add-participant';
 import { fetchAllEmployees } from 'shared/api/employees/thunks';
 import { Button } from 'shared/components/button/button';
 import { CreateSurveyEmployeesList } from 'entities/survey-items/create-survey-employees-list/create-survey-employees-list';
+import { useSelector } from 'react-redux';
+import { questionsInCreateSurveySelector } from '../../redux/selectors/create-survey';
+import { useCreateSurvey } from 'shared/api/surveys/mutations';
+import { userDataSelector } from '../../redux/selectors/auth';
 
 export const CreateSurveyForm = () => {
     const methods = useForm();
@@ -23,6 +27,9 @@ export const CreateSurveyForm = () => {
     const [isModalAddParticipantsOpened, setIsModalAddParticipantsOpened] = useState<boolean>(false);
     const [addedEmployeesIds, setAddedEmployeesIds] = useState<number[]>([]);
     const [addedEmployees, setAddedEmployees] = useState<any[]>([]);
+    const questions = useSelector(questionsInCreateSurveySelector);
+    const createSurveyMutation = useCreateSurvey();
+    const userId = useSelector(userDataSelector)?.id;
 
     const queryParameters = {
         queryKey: 'fetchAllEmployees',
@@ -57,6 +64,9 @@ export const CreateSurveyForm = () => {
     const onSubmit = (data: any) => {
         let body: any = {
             type: surveyType?.value,
+            authorId: userId,
+            participantsCount: 10,
+            takenCount: surveyType?.value === 'personal' ? addedEmployeesIds?.length : employeesQuery?.data?.length,
         };
 
         for (const key in data) {
@@ -65,9 +75,31 @@ export const CreateSurveyForm = () => {
             }
         }
 
+        body.anonymous = checkedAnonymous;
+
         if (surveyType?.value === 'personal' && addedEmployeesIds?.length) {
-            body.employeesIds = addedEmployeesIds;
+            body.targetedEmployeeIds = addedEmployeesIds;
         }
+
+        if (questions?.length) {
+            const questionsModifiedBody = questions?.map((question) => {
+                if (question?.type === 'multiple_variants' || question?.type === 'one_variant') {
+                    const { type, title, options } = question;
+
+                    const modifiedOptions = options.map((option) => ({
+                        optionName: option.optionName,
+                        type: option.type,
+                    }));
+
+                    return { type, title, options: modifiedOptions };
+                } else {
+                    return { title: question.title, type: question.type };
+                }
+            });
+            body.questions = questionsModifiedBody;
+        }
+
+        createSurveyMutation.mutate(body);
     };
 
     const onDeleteEmployee = (employeeId: number) => {
@@ -98,11 +130,6 @@ export const CreateSurveyForm = () => {
                             width={'100%'}
                             isRequired={true}
                             name={'name'}
-                            pattern={{
-                                //@ts-ignore
-                                value: /^[а-яА-Я]+$/u,
-                                message: 'Введите название опроса на русской раскладке',
-                            }}
                             placeholder={'Название опроса'}
                             label="Название опроса"
                         />
@@ -110,7 +137,7 @@ export const CreateSurveyForm = () => {
                             <Input
                                 width={'50%'}
                                 isRequired={false}
-                                name={'deadline_from'}
+                                name={'deadlineFrom'}
                                 pattern={{
                                     value: /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{2}$/,
                                     message: 'Введите дату в формате д.мес.год',
@@ -121,7 +148,7 @@ export const CreateSurveyForm = () => {
                             <Input
                                 width={'50%'}
                                 isRequired={false}
-                                name={'deadline_to'}
+                                name={'deadlineTo'}
                                 pattern={{
                                     value: /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{2}$/,
                                     message: 'Введите дату в формате д.мес.год',
@@ -135,11 +162,6 @@ export const CreateSurveyForm = () => {
                             width={'100%'}
                             isRequired={false}
                             name={'description'}
-                            pattern={{
-                                //@ts-ignore
-                                value: /^[а-яА-Я]+$/u,
-                                message: 'Введите описание опроса на русской раскладке',
-                            }}
                             placeholder={'Описание...'}
                             label="Описание"
                         />
@@ -164,6 +186,7 @@ export const CreateSurveyForm = () => {
 
                             {surveyType?.value === 'personal' && (
                                 <Button
+                                    type="button"
                                     onClick={onOpenModalAddParticipants}
                                     view="default_bg"
                                     text="Добавить участников"
@@ -184,6 +207,12 @@ export const CreateSurveyForm = () => {
                                 onClose={onCloseModalAddParticipants}
                             />
                         </PopupWithDarkOverlay>
+                        <Button
+                            type="submit"
+                            styles={{ width: 'fit-content', height: '40px' }}
+                            text="Создать опрос"
+                            view="default_bg"
+                        />
                     </form>
                 </FormProvider>
             </div>

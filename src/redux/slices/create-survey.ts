@@ -10,7 +10,7 @@ type initialStateType = {
 
 export type Question_SURVEY = {
     position: number;
-    question: string;
+    title: string;
     mode: 'read' | 'edit';
     type: OptionType_SURVEY_OPTION;
     options: Option_SURVEY_QUESTION[];
@@ -19,7 +19,7 @@ export type Question_SURVEY = {
 export type Option_SURVEY_QUESTION = {
     position: number;
     type: OptionType_SURVEY_OPTION;
-    option_name?: string;
+    optionName?: string;
     mode: 'read' | 'edit';
 };
 
@@ -43,7 +43,7 @@ const createSurveySlice = createSlice({
             if (questionPosition && !optionPosition) {
                 state.questions = state.questions.map((question) => {
                     if (question.position === questionPosition) {
-                        return { ...question, question: value || '' };
+                        return { ...question, title: value || '' };
                     } else return question;
                 });
             } else if (questionPosition && optionPosition) {
@@ -51,7 +51,7 @@ const createSurveySlice = createSlice({
                     if (question.position === questionPosition) {
                         const changedOptions = (question.options = question.options.map((option) => {
                             if (option.position === optionPosition) {
-                                return { ...option, option_name: value };
+                                return { ...option, optionName: value };
                             } else return option;
                         }));
                         return { ...question, options: changedOptions };
@@ -99,7 +99,7 @@ const createSurveySlice = createSlice({
                             position: question.options.length + 1,
                             type: optionType || 'one_variant',
                             mode: 'read',
-                            option_name: 'Вариант',
+                            optionName: 'Вариант' + question?.options?.length + 1,
                         } as Option_SURVEY_QUESTION;
                         const updatedOptions = [...question.options, newOption];
                         return { ...question, options: updatedOptions };

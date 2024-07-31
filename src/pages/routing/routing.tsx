@@ -1,29 +1,30 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Navigation } from 'widgets/navigation';
-import { EmployeesList } from 'pages/employee-list/employees-list';
-import { EmployeeProfile } from 'pages/employee-profile';
-import { CandidatesList } from 'pages/candidates-list';
-import { VacanciesList } from 'pages/vacancies-list';
-import { VacanciesProfile } from 'pages/vacancies-profile';
-import { VacanciesCandidate } from 'pages/vacancies-candidate';
-import { RequestsList } from '../requests-list';
-import SurveyList from '../survey-list/survey-list';
-import { CreateVacancy } from 'pages/create-vacancy';
-import { CreateSurvey } from '../create-survey';
-import { SurveysProfile } from '../surveys-profile';
-import { EditVacancy } from 'pages/edit-vacancy';
-import { CreateCandidate } from 'pages/create-cadidate';
-import { EditCandidate } from 'pages/edit-cadidate';
-import { AppealsList } from 'pages/appeals-list';
-import { AppealsProfile } from 'pages/appeals-profile';
-import CandidateProfile from 'pages/candidate-profile/candidate-profile';
-import { CreateAppeal } from 'pages/create-appeal/';
-import { EditAppeal } from 'pages/edit-appeal';
-import { EditSurvey } from 'pages/edit-survey';
+import { EmployeesList } from 'pages/hr-manager-pages/employee-list/employees-list';
+import { EmployeeProfile } from 'pages/hr-manager-pages/employee-profile';
+import { CandidatesList } from 'pages/hr-manager-pages/candidates-list';
+import { VacanciesList } from 'pages/hr-manager-pages/vacancies-list';
+import { VacanciesProfile } from 'pages/hr-manager-pages/vacancies-profile';
+import { VacanciesCandidate } from 'pages/hr-manager-pages/vacancies-candidate';
+import { RequestsList } from '../hr-manager-pages/requests-list';
+import SurveyList from '../hr-manager-pages/survey-list/survey-list';
+import { CreateVacancy } from 'pages/hr-manager-pages/create-vacancy';
+import { CreateSurvey } from '../hr-manager-pages/create-survey';
+import { SurveysProfile } from '../hr-manager-pages/surveys-profile';
+import { EditVacancy } from 'pages/hr-manager-pages/edit-vacancy';
+import { CreateCandidate } from 'pages/hr-manager-pages/create-cadidate';
+import { EditCandidate } from 'pages/hr-manager-pages/edit-cadidate';
+import { AppealsList } from 'pages/hr-manager-pages/appeals-list';
+import { AppealsProfile } from 'pages/hr-manager-pages/appeals-profile';
+import CandidateProfile from 'pages/hr-manager-pages/candidate-profile/candidate-profile';
+import { CreateAppeal } from 'pages/hr-manager-pages/create-appeal/';
+import { EditAppeal } from 'pages/hr-manager-pages/edit-appeal';
+import { EditSurvey } from 'pages/hr-manager-pages/edit-survey';
 import { useSelector } from 'react-redux';
 import { userDataSelector } from '../../redux/selectors/auth';
 import { useEffect } from 'react';
-import { RequestsListEmployee } from 'pages/requests-list-employee';
+import { RequestsListEmployee } from 'pages/employee-pages/requests-list-employee';
+import SurveyListEmployee from 'pages/employee-pages/survey-list-employee/survey-list-employee';
 
 export const Routing = () => {
     const navigate = useNavigate();
@@ -65,7 +66,12 @@ export const Routing = () => {
                     </>
                 ) : null}
 
-                <Route path="request/employee" element={<RequestsListEmployee />} />
+                {userRole === 'Employee' ? (
+                    <>
+                        <Route path="request/employee" element={<RequestsListEmployee />} />
+                        <Route path="survey/employee" element={<SurveyListEmployee />} />
+                    </>
+                ) : null}
             </Route>
         </Routes>
     );
