@@ -3,15 +3,17 @@ import styles from './survey-list.module.scss';
 import { SwitchTab } from 'shared/components/switch-tab';
 import { useState } from 'react';
 import { Button } from 'shared/components/button/button';
-import { surveyListData } from './constants';
 import { Filter } from 'features/filter';
 import { SurveyListContainer } from '../../../features/survey-list-data-container';
 import { fetchAllSurveysForHR } from 'shared/api/surveys/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { useSelector } from 'react-redux';
+import { userDataSelector } from '../../../redux/selectors/auth';
 
 const SurveyList = () => {
     const [activeTab, setActiveTab] = useState<number>(0);
     const [searchValue, setSearchValue] = useState<string>('');
+    const userId = useSelector(userDataSelector)?.id;
 
     const tabs = [{ label: 'Текущие опросы' }, { label: 'Завершенные опросы' }];
 
@@ -19,6 +21,7 @@ const SurveyList = () => {
         queryKey: 'fetchAllSurveysForHR',
         queryThunk: fetchAllSurveysForHR,
         queryThunkOptions: {
+            hrManagerId: userId,
             search: searchValue,
             sort: activeTab === 0 ? 'current' : 'completed',
         },

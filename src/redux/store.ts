@@ -7,8 +7,10 @@ import filter from './slices/filter';
 import createAppeal from './slices/create-appeal';
 import createSurvey from './slices/create-survey';
 import authSlice from './slices/auth';
+import answerSurveySlice from './slices/answer-survey';
 
 const rootReducer = combineReducers({
+    answerSurveySlice,
     authSlice,
     createVacancy,
     createAppeal,

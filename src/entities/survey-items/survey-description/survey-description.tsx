@@ -8,10 +8,7 @@ export const SurveyDescription: FC<SurveyDescriptionProps> = ({ title, content }
             <div className={styles.survey_description__card_wrapper}>
                 <h4 className={styles.survey_description__title}>{title}</h4>
                 <ul className={styles.survey_description__card_wrapper__content}>
-                    {content &&
-                        content.map((row) => (
-                            <li className={styles.survey_description__card_wrapper__element}>{row}</li>
-                        ))}
+                    {content && <li className={styles.survey_description__card_wrapper__element}>{content}</li>}
                 </ul>
             </div>
         </div>

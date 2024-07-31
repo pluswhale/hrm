@@ -14,7 +14,7 @@ export const NAV_LINKS_FOR_HR_MANAGER = {
 export const NAV_LINKS_FOR_EMPLOYEE = {
     company: [
         { id: 1, title: 'Запросы', url: '/request/employee' },
-        { id: 2, title: 'Опросы', url: '/survey/employee' },
+        { id: 2, title: 'Опросы', url: '/survey/employee/current' },
     ],
     main: [
         { id: 1, title: 'Личный кабинет', url: '' },

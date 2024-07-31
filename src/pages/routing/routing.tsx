@@ -25,6 +25,7 @@ import { userDataSelector } from '../../redux/selectors/auth';
 import { useEffect } from 'react';
 import { RequestsListEmployee } from 'pages/employee-pages/requests-list-employee';
 import SurveyListEmployee from 'pages/employee-pages/survey-list-employee/survey-list-employee';
+import SurveyByIdEmployee from 'pages/employee-pages/survey-by-id-employee/survey-by-id-employee';
 
 export const Routing = () => {
     const navigate = useNavigate();
@@ -69,7 +70,8 @@ export const Routing = () => {
                 {userRole === 'Employee' ? (
                     <>
                         <Route path="request/employee" element={<RequestsListEmployee />} />
-                        <Route path="survey/employee" element={<SurveyListEmployee />} />
+                        <Route path="survey/employee/:sort" element={<SurveyListEmployee />} />
+                        <Route path="survey/employee/:sort/:id" element={<SurveyByIdEmployee />} />
                     </>
                 ) : null}
             </Route>

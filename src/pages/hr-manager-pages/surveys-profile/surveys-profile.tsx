@@ -13,7 +13,7 @@ import { SurveyResult } from '../../../features/surveys-result/types';
 import { SurveyDescription } from 'entities/survey-items/survey-description/survey-description';
 import { useNavigate } from 'react-router';
 
-const SurveyByIdEmployee = () => {
+const SurveysProfile = () => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState(0);
 
@@ -44,7 +44,7 @@ const SurveyByIdEmployee = () => {
                 <h2 className={styles.survey_navigation__container__title}>Название опроса</h2>
                 <div className={styles.survey_navigation__wrap}>
                     <SurveyInfo leftColumnData={leftColumnData} rightColumnData={rightColumnData} />
-                    <SurveyDescription title="Описание" content={SURVEY_DESCRIPTION_DATA} />
+                    {/* <SurveyDescription title="Описание" content={SURVEY_DESCRIPTION_DATA} /> */}
                 </div>
             </div>
             <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
@@ -57,5 +57,5 @@ const SurveyByIdEmployee = () => {
     );
 };
 
-export default SurveyByIdEmployee;
+export default SurveysProfile;
 

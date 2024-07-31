@@ -1,7 +1,7 @@
 import { FC, ReactElement } from 'react';
 import { SurveyCardProps } from './types';
 import styles from './survey-card.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export const SurveyCard: FC<SurveyCardProps> = ({
     title,
@@ -10,12 +10,13 @@ export const SurveyCard: FC<SurveyCardProps> = ({
     id,
     deadlineFrom,
     deadlineTo,
+    navigationUrl,
 }): ReactElement => {
     return (
         <div className={styles.survey_card}>
             <div className={styles.survey_card__container}>
                 <div className={styles.survey_card__title_and_status}>
-                    <Link className={styles.survey_card__title} to={`/survey/${id}`}>
+                    <Link className={styles.survey_card__title} to={navigationUrl}>
                         <h5 className={styles.survey_card__title}>{title}</h5>
                     </Link>
                 </div>
