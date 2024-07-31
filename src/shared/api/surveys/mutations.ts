@@ -29,3 +29,19 @@ export const useSubmitSurvey = () => {
     });
 };
 
+export const useUpdateSurvey = () => {
+    const navigate = useNavigate();
+    const qc = useQueryClient();
+    return useMutation({
+        mutationFn: async (body: any) => {
+            const { surveyId, ...rest } = body;
+            return surveysApi.updateSurvey(surveyId, rest).then(() => surveyId);
+        },
+        onSuccess: (data: any, context: any) => {
+            qc.invalidateQueries({ queryKey: ['fetchSurveyByIdForHR'] });
+
+            navigate(`/survey/${context?.surveyId}`);
+        },
+    });
+};
+

@@ -144,19 +144,33 @@ export const QuestionList: FC<Props> = ({ questions }): ReactElement => {
                                     } else {
                                         switch (option.type) {
                                             case 'one_variant': {
-                                                variant = <span>O {option?.optionName}</span>;
+                                                variant = (
+                                                    <span className={styles.question_list__option}>
+                                                        <span className={styles.question_list__option_circle}></span>
+                                                        {option?.optionName}
+                                                    </span>
+                                                );
                                                 break;
                                             }
                                             case 'multiple_variants': {
-                                                variant = <span>M {option?.optionName}</span>;
+                                                variant = (
+                                                    <span className={styles.question_list__option}>
+                                                        <span className={styles.question_list__option_quad}></span>
+                                                        {option?.optionName}
+                                                    </span>
+                                                );
                                                 break;
                                             }
                                             case 'long_text': {
-                                                variant = <span>Длинный текст</span>;
+                                                variant = (
+                                                    <span className={styles.question_list__option}>Длинный текст</span>
+                                                );
                                                 break;
                                             }
                                             case 'short_text': {
-                                                variant = <span>Короткий текст</span>;
+                                                variant = (
+                                                    <span className={styles.question_list__option}>Короткий текст</span>
+                                                );
                                                 break;
                                             }
                                             default:

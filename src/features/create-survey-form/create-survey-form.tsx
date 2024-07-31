@@ -6,7 +6,7 @@ import { Input } from 'shared/components/input';
 import { Textarea } from 'shared/components/textarea';
 import { Radio } from '../../shared/components/radio';
 import { Selector } from '../../shared/components/selector';
-import { options } from './constants';
+import { SURVEY_TYPE_OPTIONS } from './constants';
 import { FormControlLabel, Switch } from '@mui/material';
 import { Option } from 'shared/components/selector/types';
 import { PopupWithDarkOverlay } from 'shared/components/portal/popup-with-dark-overlay';
@@ -22,7 +22,7 @@ import { userDataSelector } from '../../redux/selectors/auth';
 
 export const CreateSurveyForm = () => {
     const methods = useForm();
-    const [surveyType, setSurveyType] = useState<Option | null>({ value: 'common', label: 'Общий' });
+    const [surveyType, setSurveyType] = useState<Option | null>({ value: 'general', label: 'Общий' });
     const [checkedAnonymous, setCheckedAnonymous] = useState<boolean>(false);
     const [isModalAddParticipantsOpened, setIsModalAddParticipantsOpened] = useState<boolean>(false);
     const [addedEmployeesIds, setAddedEmployeesIds] = useState<number[]>([]);
@@ -181,7 +181,11 @@ export const CreateSurveyForm = () => {
                         <span className={styles.create_survey__input_text}>
                             <span className={styles.create_survey__input_text__selector}>
                                 Тип опроса
-                                <Selector options={options} value={surveyType} onChange={handleChangeSurveyType} />
+                                <Selector
+                                    options={SURVEY_TYPE_OPTIONS}
+                                    value={surveyType}
+                                    onChange={handleChangeSurveyType}
+                                />
                             </span>
 
                             {surveyType?.value === 'personal' && (

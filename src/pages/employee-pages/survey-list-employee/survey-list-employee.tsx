@@ -2,7 +2,6 @@ import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-
 import styles from './survey-list-employee.module.scss';
 import { SwitchTab } from 'shared/components/switch-tab';
 import { useEffect, useState } from 'react';
-import { Button } from 'shared/components/button/button';
 import { Filter } from 'features/filter';
 import { fetchAllSurveysForEmployee } from 'shared/api/surveys/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';

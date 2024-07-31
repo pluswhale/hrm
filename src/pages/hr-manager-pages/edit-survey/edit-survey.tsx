@@ -4,33 +4,50 @@ import styles from './edit-survey.module.scss';
 import { Button } from '../../../shared/components/button/button';
 import { EditSurveyForm } from 'features/edit-survey-form';
 import { EditSurveyRightForm } from 'features/edit-survey-form/edit-survey-right-form';
+import { fetchSurveyByIdForHR } from 'shared/api/surveys/thunks';
+import { useParams } from 'react-router';
+import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../../../redux/store';
+import { setQuestions } from '../../../redux/slices/create-survey';
 
 const EditSurvey = () => {
+    const dispatch = useAppDispatch();
+    const { id: surveyId } = useParams();
+
+    const queryParameters = {
+        queryKey: 'fetchSurveyByIdForHR',
+        queryThunk: fetchSurveyByIdForHR,
+        queryThunkOptions: {
+            surveyId,
+        },
+    } as QueryParameters<any>;
+
+    const surveyQuery = useFetchData(queryParameters);
+
+    useEffect(() => {
+        if (surveyQuery?.data?.questions) dispatch(setQuestions({ questions: surveyQuery?.data?.questions }));
+    }, [surveyQuery?.data?.questions]);
+
     const navigation = [
         {
-            title: 'Опрос',
-            url: '/survey',
+            title: surveyQuery?.data?.name,
+            url: `/survey/${surveyQuery?.data?.id}`,
         },
         {
-            title: 'Создание опроса',
+            title: 'Редактирование опроса',
             url: undefined,
         },
     ];
+
     return (
         <DefaultContentWrapper>
             <HorizontalNavigation navigation={navigation} />
             <div className={styles.container}>
-                <EditSurveyForm />
+                <EditSurveyForm surveyData={surveyQuery?.data} />
                 <div className={styles.container__wrapper}>
                     <EditSurveyRightForm />
                 </div>
-            </div>
-            <div className={styles.container__wrap_btn}>
-                <Button
-                    styles={{ width: 'fit-content', height: '40px' }}
-                    text="Отредактировать опрос"
-                    view="default_bg"
-                />
             </div>
         </DefaultContentWrapper>
     );

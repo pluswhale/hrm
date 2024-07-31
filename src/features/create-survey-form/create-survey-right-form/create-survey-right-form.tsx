@@ -9,12 +9,14 @@ const CreateSurveyRightForm = () => {
     const questions = useSelector(questionsInCreateSurveySelector);
 
     return (
-        <div className={styles.container__wrap}>
-            <div className={styles.container}>
-                <h2>Вопросы</h2>
-                <QuestionList questions={questions} />
-                <AddQuestion />
-            </div>
+        <div className={styles.right_form}>
+            {questions?.length ? (
+                <div className={styles.right_form__container}>
+                    <h4 className={styles.right_form__title}>Вопросы</h4>
+                    <QuestionList questions={questions} />
+                </div>
+            ) : null}
+            <AddQuestion />
         </div>
     );
 };

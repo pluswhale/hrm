@@ -1,9 +1,9 @@
-export const options = [
+export const SURVEY_TYPE_OPTIONS = [
     {
         id: 1,
         placeholder: 'Тип опроса',
         options: [
-            { value: 'common', label: 'Общий' },
+            { value: 'general', label: 'Общий' },
             { value: 'personal', label: 'Персональный' },
         ],
     },

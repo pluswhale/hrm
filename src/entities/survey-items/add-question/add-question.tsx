@@ -32,12 +32,15 @@ export const AddQuestion = () => {
         question.options = DEFAULT_OPTIONS[typeQuestion?.value || 'one_variant'];
 
         dispatch(addQuestion({ question }));
+
+        setQuestionValue('');
     };
 
     return (
         <FormProvider {...methods}>
-            <div className={styles.container}>
-                <span className={styles.container__input_text}>
+            <div className={styles.add_question}>
+                <h4 className={styles.add_question__title}>Добавить вопрос</h4>
+                <span className={styles.add_question__type_question}>
                     Тип опроса
                     <Selector options={options} value={typeQuestion} onChange={handleChangeTypeQuestion} />
                 </span>
@@ -46,19 +49,18 @@ export const AddQuestion = () => {
                     value={questionValue}
                     onChange={setQuestionValue}
                     width={'100%'}
-                    isRequired={false}
+                    isRequired={true}
                     name={'deadline'}
                     placeholder={'Вопрос'}
                     label="Вопрос"
                 />
-                <div className={styles.container__wrap_btn}>
-                    <Button
-                        onClick={onAddQuestion}
-                        styles={{ width: 'fit-content', height: '40px' }}
-                        text="Добавить"
-                        view="default_bg"
-                    />
-                </div>
+                <Button
+                    disabled={!questionValue || !typeQuestion}
+                    onClick={onAddQuestion}
+                    styles={{ width: 'fit-content', height: '40px', marginTop: '24px' }}
+                    text="Добавить"
+                    view="default_bg"
+                />
             </div>
         </FormProvider>
     );

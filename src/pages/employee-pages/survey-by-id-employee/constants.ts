@@ -1,13 +1,12 @@
-import { ColumnData } from '../../../features/survey-info/types';
 import { SurveyResult } from '../../../features/surveys-result/types';
 
-export const leftColumnData: ColumnData[] = [
+export const leftColumnData: any[] = [
     { title: 'Создан:', createdAt: '10 августа 2022 г.' },
     { title: 'Дата начала:', createdAt: '10 августа 2022 г.' },
     { title: 'Дата завершения:', createdAt: '10 августа 2022 г.' },
 ];
 
-export const rightColumnData: ColumnData[] = [
+export const rightColumnData: any[] = [
     { title: 'Прошедшие опрос:', createdAt: '2 из 10' },
     { title: 'Другое название 2', createdAt: '2024-05-12' },
     { title: 'Другое название 3', createdAt: '2024-05-13' },

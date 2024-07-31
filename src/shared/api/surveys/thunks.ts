@@ -39,3 +39,16 @@ export const fetchSurveyByIdForEmployee = async (options: any) => {
     }
 };
 
+export const fetchSurveyByIdForHR = async (options: any) => {
+    try {
+        const res = await surveysApi.getSurveyByIdForHR(options?.surveyId);
+        if (res) {
+            return res.data;
+        }
+
+        return null;
+    } catch (error) {
+        console.error(error);
+    }
+};
+

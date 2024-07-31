@@ -29,6 +29,23 @@ const createSurveySlice = createSlice({
     name: 'createSurvey',
     initialState,
     reducers: {
+        setQuestions: (state, action: PayloadAction<{ questions: any }>) => {
+            const { questions } = action.payload;
+            const questionsWithPositions = questions?.map((question: any, index: number) => {
+                if (question?.options?.length) {
+                    const modifiedOptions = question?.options?.map((option: any, index: number) => ({
+                        ...option,
+                        position: index + 1,
+                    }));
+
+                    return { ...question, position: index + 1, mode: 'read', options: modifiedOptions };
+                } else {
+                    return { ...question, position: index + 1, mode: 'read' };
+                }
+            });
+            state.questions = questionsWithPositions;
+        },
+
         addQuestion: (state, action: PayloadAction<{ question: Question_SURVEY }>) => {
             const { question } = action.payload;
             const questionWithPosition = { ...question, position: state.questions.length + 1 };
@@ -99,7 +116,7 @@ const createSurveySlice = createSlice({
                             position: question.options.length + 1,
                             type: optionType || 'one_variant',
                             mode: 'read',
-                            optionName: 'Вариант' + question?.options?.length + 1,
+                            optionName: 'Вариант ' + Number(question?.options?.length + 1),
                         } as Option_SURVEY_QUESTION;
                         const updatedOptions = [...question.options, newOption];
                         return { ...question, options: updatedOptions };
@@ -125,6 +142,7 @@ const createSurveySlice = createSlice({
 });
 
 export const {
+    setQuestions,
     addQuestion,
     addNewOptionInQuestion,
     changeModeInQuestionOrOption,
