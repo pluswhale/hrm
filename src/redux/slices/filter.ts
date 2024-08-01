@@ -26,6 +26,7 @@ type Role = {
     name: string;
     isActive: boolean;
     count: number;
+    value?: string;
 };
 
 const filterSlice = createSlice({
@@ -51,7 +52,7 @@ const filterSlice = createSlice({
         setToggleCheckboxInFilter: (state, action: PayloadAction<{ filterSetName: string; checkboxId: number }>) => {
             const { filterSetName, checkboxId } = action.payload;
 
-            if (filterSetName === 'По должности') {
+            if (filterSetName === 'По должности' || filterSetName === 'По типу') {
                 state.roles = state.roles.map((role) => {
                     if (role.id === checkboxId) {
                         return { ...role, isActive: !role.isActive };
@@ -59,7 +60,7 @@ const filterSlice = createSlice({
                         return role;
                     }
                 });
-            } else if (filterSetName === 'По навыкам') {
+            } else if (filterSetName === 'По навыкам' || filterSetName === 'По компетенциям') {
                 state.skills = state.skills.map((skill) => {
                     if (skill.id === checkboxId) {
                         return { ...skill, isActive: !skill.isActive };

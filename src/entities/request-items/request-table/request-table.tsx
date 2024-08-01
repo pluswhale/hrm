@@ -3,6 +3,7 @@ import style from './request-table.module.scss';
 import { RequestTableProps } from './types';
 import { PopupWithDarkOverlay } from '../../../shared/components/portal/popup-with-dark-overlay';
 import { RequestModal } from '../request-modal/request-modal';
+import fakeAvatar from '../../../assets/Ellipse 1.svg';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 dayjs.locale('ru');
@@ -78,7 +79,7 @@ const RequestTable: FC<RequestTableProps> = ({
             {requests?.map((request, index) => (
                 <React.Fragment key={request.id}>
                     <div className={style.container__card} onClick={() => onOpenModalRequest(request)}>
-                        <img className={style.container__img} src={''} alt="" />
+                        <img className={style.container__img} src={fakeAvatar} alt="" />
                         <div className={style.container__head}>
                             <div className={style.container__name_prof}>
                                 <span className={style.container__name}>

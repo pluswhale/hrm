@@ -116,9 +116,6 @@ const RequestsList = () => {
     const onOpenCreateRequestModal = () => {
         setIsModalCreateRequestOpened(true);
     };
-    const onCloseModalCreateRequest = () => {
-        setIsModalCreateRequestOpened(false);
-    };
 
     return (
         <DefaultContentWrapper>

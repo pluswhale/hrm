@@ -40,3 +40,29 @@ export const fetchFilterSetForRequests = async (options: any) => {
     }
 };
 
+export const fetchFilterSetForCandidateCompetences = async (options: any) => {
+    try {
+        const res = await filtersApi.getCompetencesFilterSet();
+        if (res) {
+            return res.data;
+        }
+
+        return null;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const fetchFilterSetForCandidatesCountOfType = async (options: any) => {
+    try {
+        const res = await filtersApi.getCountOfTypesForCandidates();
+        if (res) {
+            return res.data;
+        }
+
+        return null;
+    } catch (error) {
+        console.error(error);
+    }
+};
+

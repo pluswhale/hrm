@@ -5,5 +5,5 @@ export interface SurveyResult {
 }
 
 export interface Props {
-    surveysResults: SurveyResult[];
+    questions: any[];
 }

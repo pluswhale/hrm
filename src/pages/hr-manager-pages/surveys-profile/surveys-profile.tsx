@@ -8,12 +8,12 @@ import { leftColumnData, rightColumnData, surveysResults } from './constants';
 import { SwitchTab } from '../../../shared/components/switch-tab';
 import { SurveysQuestions } from '../../../features/surveys-questions';
 import SurveysResult from '../../../features/surveys-result/surveys-result';
-import { SurveysPoople } from '../../../features/surveys-peolple';
 import { SurveyResult } from '../../../features/surveys-result/types';
 import { SurveyDescription } from 'entities/survey-items/survey-description/survey-description';
 import { useNavigate, useParams } from 'react-router';
 import { fetchSurveyByIdForHR } from 'shared/api/surveys/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { SurveysPeople } from 'features/surveys-peolple';
 
 const SurveysProfile = () => {
     const { id: surveyId } = useParams();
@@ -63,8 +63,8 @@ const SurveysProfile = () => {
             <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
             <div>
                 {activeTab === 0 && <SurveysQuestions questions={surveyQuery?.data?.questions} />}
-                {activeTab === 1 && <SurveysResult surveysResults={surveysResults as SurveyResult[]} />}
-                {activeTab === 2 && <SurveysPoople />}
+                {activeTab === 1 && <SurveysResult questions={surveyQuery?.data?.questions} />}
+                {activeTab === 2 && <SurveysPeople participants={surveyQuery?.data?.targetedEmployees} />}
             </div>
         </DefaultContentWrapper>
     );

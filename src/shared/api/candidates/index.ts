@@ -1,10 +1,10 @@
 import { Instance } from '../api-config';
 
 export const candidatesApi = {
-    getAllCandidates: (search = '', competences?: string) =>
+    getAllCandidates: (search = '', competences?: string, type?: 'vacancy' | 'appeal') =>
         Instance.get(
-            `candidates
-            ${search ? `?search=${search}` : ''} 
+            `candidates?type=${type}
+            ${search ? `&search=${search}` : ''} 
             ${competences ? `&competences=${competences}` : ''}`,
         ),
     getCandidateById: (id: string) => Instance.get(`candidates/${id}`),

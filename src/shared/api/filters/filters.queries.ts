@@ -1,5 +1,11 @@
 import { QueryParameters } from 'shared/hooks/useFetchData';
-import { fetchFilterSetForRequests, fetchKeySkillsFilterSet, fetchPositionsFilterSet } from './filters.thunks';
+import {
+    fetchFilterSetForCandidateCompetences,
+    fetchFilterSetForCandidatesCountOfType,
+    fetchFilterSetForRequests,
+    fetchKeySkillsFilterSet,
+    fetchPositionsFilterSet,
+} from './filters.thunks';
 
 export const queryParametersForPositionsEmployeeFilterSet = {
     queryKey: 'fetchPositionsForEmployeesFilterSet',
@@ -25,5 +31,17 @@ export const queryParametersForStatusesRequestsFilterSet = {
     queryThunkOptions: {
         type: 'status',
     },
+} as QueryParameters<any>;
+
+export const queryParametersForCountByTypeInCandidatesFilterSet = {
+    queryKey: 'fetchFilterSetForCandidatesCountOfType',
+    queryThunk: fetchFilterSetForCandidatesCountOfType,
+    queryThunkOptions: {},
+} as QueryParameters<any>;
+
+export const queryParametersForCompetencesInCandidatesFilterSet = {
+    queryKey: 'fetchFilterSetForCandidateCompetences',
+    queryThunk: fetchFilterSetForCandidateCompetences,
+    queryThunkOptions: {},
 } as QueryParameters<any>;
 

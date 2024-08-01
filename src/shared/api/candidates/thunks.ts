@@ -1,8 +1,10 @@
 import { candidatesApi } from '.';
 
 export const fetchAllCandidates = async (options: any) => {
+    console.log('type', options);
+
     try {
-        const res = await candidatesApi.getAllCandidates(options?.search, options?.competences);
+        const res = await candidatesApi.getAllCandidates(options?.search, options?.competences, options?.type);
         if (res) {
             return res.data;
         }

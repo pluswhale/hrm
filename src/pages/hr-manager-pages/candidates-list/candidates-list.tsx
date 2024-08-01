@@ -1,8 +1,8 @@
 import style from './candidates-list.module.scss';
 import { CandidatesDataContainer } from '../../../features/candidates-data-container';
 import { Filter } from '../../../features/filter';
-import { candidatesListData } from './constants';
-import { FC, ReactElement, useState } from 'react';
+import { filterSet } from './constants';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-content-wrapper';
 import { useSelector } from 'react-redux';
 import { rolesInFilterSelector, skillsInFilterSelector } from '../../../redux/selectors/filter';
@@ -11,35 +11,87 @@ import { useNavigate } from 'react-router';
 import { Button } from 'shared/components/button/button';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { fetchAllCandidates } from 'shared/api/candidates/thunks';
+import { setFilters, setToggleCheckboxInFilter } from '../../../redux/slices/filter';
+import {
+    queryParametersForCompetencesInCandidatesFilterSet,
+    queryParametersForCountByTypeInCandidatesFilterSet,
+} from 'shared/api/filters/filters.queries';
 
 const CandidatesList: FC = (): ReactElement => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
+    const tabs = [{ label: 'Текущие сотрудники' }, { label: 'Бывшие сотрудники' }];
+
+    const [activeTab, setActiveTab] = useState<number>(0);
     const [searchValue, setSearchValue] = useState<string>('');
-    const skillsForFilter = useSelector(skillsInFilterSelector);
-    const rolesForFilter = useSelector(rolesInFilterSelector);
+    const competencesForFilter = useSelector(skillsInFilterSelector);
+    const typesForFilter = useSelector(rolesInFilterSelector);
+    const competencesFilterSet = useFetchData(queryParametersForCompetencesInCandidatesFilterSet);
+    const countByTypeFilterSet = useFetchData(queryParametersForCountByTypeInCandidatesFilterSet);
 
     //query for candidates list
     const queryParameters = {
         queryKey: 'fetchAllCandidates',
         queryThunk: fetchAllCandidates,
         queryThunkOptions: {
-            search: searchValue,
+            search: searchValue || undefined,
+            competences: getCurrentActiveCompetencesIds(),
+            type: getCurrentType(),
         },
     } as QueryParameters<any>;
 
     const candidatesQuery = useFetchData(queryParameters);
 
-    const onSearchData = (value: string) => {
-        setSearchValue(value); // Update search value state
-    };
+    useEffect(() => {
+        if (countByTypeFilterSet?.data) {
+            dispatch(
+                setFilters({
+                    //@ts-ignore
+                    roles: Object.entries(countByTypeFilterSet?.data).map(([key, value], index: number) => {
+                        return {
+                            id: index + 1,
+                            title: key === 'vacancy' ? 'Вакансии' : 'Практика',
+                            count: value,
+                            isActive: false,
+                            value: key,
+                        };
+                    }),
+                    skills: competencesFilterSet?.data?.map((keySkills: any) => ({ ...keySkills, isActive: false })),
+                }),
+            );
+        }
+    }, [dispatch, competencesFilterSet?.data, countByTypeFilterSet?.data]);
 
-    const rolesForFilterFromData = candidatesListData.candidates.map((candidate, index: number) => ({
-        id: index + 1,
-        name: candidate.role,
-        isActive: false,
-    }));
+    const filterRowsData = filterSet.map((filterRow) => {
+        if (filterRow.id === 1) {
+            return { ...filterRow, checkboxes: typesForFilter };
+        } else {
+            return { ...filterRow, checkboxes: competencesForFilter };
+        }
+    });
+
+    function getCurrentActiveCompetencesIds(): string | null {
+        const activeCompetences = competencesForFilter
+            ?.map((competence) => (competence.isActive ? competence.id : null))
+            .filter(Boolean)
+            .join(',');
+        return activeCompetences?.length ? activeCompetences : null;
+    }
+
+    function getCurrentType(): string | null {
+        const activeType = typesForFilter
+            ?.map((type) => (type.isActive ? type.value : null))
+            .filter(Boolean)
+            .join(',');
+        return activeType?.length ? activeType : null;
+    }
+
+    console.log('getCurrentType', getCurrentType());
+
+    const onToggleCheckboxInFilter = (filterSetName: string, checkboxId: number) => {
+        dispatch(setToggleCheckboxInFilter({ filterSetName, checkboxId }));
+    };
 
     const onNavigateToCreateVacancy = () => {
         navigate('/create/candidate');
@@ -61,11 +113,10 @@ const CandidatesList: FC = (): ReactElement => {
                     <CandidatesDataContainer candidates={candidatesQuery?.data} />
                     <Filter
                         searchValue={searchValue}
-                        onChangeSearchValue={onSearchData}
-                        title="Найти кандидата"
-                        onToggleCheckboxInFilter={function (filterSetName: string, checkboxId: number): void {
-                            throw new Error('Function not implemented.');
-                        }}
+                        onChangeSearchValue={setSearchValue}
+                        onToggleCheckboxInFilter={onToggleCheckboxInFilter}
+                        title="Поиск кандидата"
+                        filterSet={filterRowsData}
                     />
                 </div>
             </div>

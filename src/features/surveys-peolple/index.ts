@@ -1,1 +1,1 @@
-export { default as SurveysPoople } from './surveys-poople';
+export { default as SurveysPeople } from './surveys-people';
