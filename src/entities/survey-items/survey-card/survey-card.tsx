@@ -2,6 +2,7 @@ import { FC, ReactElement } from 'react';
 import { SurveyCardProps } from './types';
 import styles from './survey-card.module.scss';
 import { Link, useParams } from 'react-router-dom';
+import { formatDate } from 'shared/libs/dateFormater';
 
 export const SurveyCard: FC<SurveyCardProps> = ({
     title,
@@ -24,12 +25,12 @@ export const SurveyCard: FC<SurveyCardProps> = ({
                 <div className={styles.survey_card__created_and_deadline}>
                     <div className={styles.survey_card__row}>
                         <span className={styles.survey_card__row_label}>Дата начала:</span>
-                        <span className={styles.survey_card__row_value}>{deadlineFrom}</span>
+                        <span className={styles.survey_card__row_value}>{formatDate(deadlineFrom)}</span>
                     </div>
 
                     <div className={styles.survey_card__row}>
                         <span className={styles.survey_card__row_label}>Дата завершения:</span>
-                        <span className={styles.survey_card__row_value}>{deadlineTo}</span>
+                        <span className={styles.survey_card__row_value}>{formatDate(deadlineTo)}</span>
                     </div>
                 </div>
 

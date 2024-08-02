@@ -1,3 +1,5 @@
+@import '../../../assets/styles/variables.scss';
+
 .wrapper {
     .label_text {
         display: flex;
@@ -6,7 +8,7 @@
         font-weight: 400;
         line-height: 18.75px;
         text-align: left;
-        color: #2c323f;
+        color: $text;
     }
 
     .label {
@@ -22,14 +24,14 @@
         border-radius: 5px;
         height: 80px;
         padding: 10px;
-        border: 1px solid #999999;
+        border: 1px solid $border;
         outline: none;
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
         font-weight: 400;
         line-height: 18.75px;
         text-align: left;
-        color: #2c323f;
+        color: $header;
 
         resize: none;
 
@@ -39,7 +41,7 @@
             font-weight: 400;
             line-height: 18.75px;
             text-align: left;
-            color: #cdcdcd;
+            color: $border;
         }
 
         &__error {
@@ -48,8 +50,12 @@
             font-weight: 400;
             line-height: 18.75px;
             text-align: left;
-            color: rgb(255, 146, 146);
+            color: $red;
         }
+    }
+
+    .textarea.textarea__error {
+        border: 1px solid $red;
     }
 }
 

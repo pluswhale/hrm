@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import { questionsInCreateSurveySelector } from '../../../redux/selectors/create-survey';
 import { AddQuestion } from 'entities/survey-items/add-question/add-question';
 import { QuestionList } from 'entities/survey-items/questions-list/qustions-list';
+import { FC, ReactElement } from 'react';
 
-const CreateSurveyRightForm = () => {
+const CreateSurveyRightForm: FC = (): ReactElement => {
     const questions = useSelector(questionsInCreateSurveySelector);
 
     return (

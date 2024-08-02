@@ -1,9 +1,11 @@
+@import '../../assets/styles/variables.scss';
+
 .history_item {
     padding: 25px;
     gap: 20px;
     display: flex;
     flex-direction: column;
-    background: white;
+    background: $white;
     border-radius: 10px;
     max-width: 509px;
     position: relative;

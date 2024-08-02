@@ -37,7 +37,7 @@ export const RequestModal: FC<RequestModalProps> = ({
 
         switch (status) {
             case 'new':
-                color = '#6362E7';
+                color = '$purple';
                 text = 'Новый';
                 break;
             case 'approved':
@@ -54,7 +54,7 @@ export const RequestModal: FC<RequestModalProps> = ({
         }
 
         return (
-            <span style={{ backgroundColor: color, color: 'white' }} className={styles.request_modal__status}>
+            <span style={{ backgroundColor: color, color: '$white' }} className={styles.request_modal__status}>
                 {text}
             </span>
         );
@@ -112,6 +112,7 @@ export const RequestModal: FC<RequestModalProps> = ({
                         view="default_bg_white_purple"
                     />
                     <Button
+                        disabled={!answerValue}
                         onClick={() => onAnswerByHR('approved')}
                         styles={{ width: 'fit-content', height: '40px' }}
                         text="Утвердить"

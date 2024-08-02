@@ -1,33 +1,36 @@
+@import '../../../assets/styles/variables.scss';
+
 .skills_block {
     max-width: 806px;
     display: flex;
     flex-direction: column;
     padding: 20px;
     justify-self: start;
-    background-color: white;
+    background-color: $white;
     border-radius: 10px;
     gap: 15px;
-    
+
     &__title {
         text-align: start;
-        color: black;
+        color: $header;
         font-size: 20px;
         line-height: 21px;
     }
 
-    &__skills_wrapper{
+    &__skills_wrapper {
         gap: 10px;
         flex-wrap: wrap;
         display: flex;
     }
 
-    &__skill{
+    &__skill {
         padding: 5px 10px;
         border-radius: 5px;
-        border: 1px solid gray;
+        border: 1px solid $border;
         font-weight: 400;
         font-size: 14px;
         line-height: 16.41px;
-        color: #707070;
+        color: $text;
     }
 }
+

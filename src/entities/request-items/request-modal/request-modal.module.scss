@@ -1,11 +1,13 @@
+@import '../../../assets/styles/variables.scss';
+
 .request_modal {
     max-width: 800px;
     width: 800px;
-    background-color: white;
+    background-color: $white;
     padding: 50px;
     border-radius: 10px;
 
-    &__content_agree{
+    &__content_agree {
         display: flex;
         justify-content: space-between;
     }
@@ -38,60 +40,60 @@
         font-weight: 500;
         line-height: 29.63px;
         text-align: left;
-        color: #242934;
+        color: $header;
     }
 
     &__close {
         cursor: pointer;
     }
 
-    &__content{
+    &__content {
         display: flex;
         flex-direction: column;
         gap: 15px;
     }
 
-    &__wrapper_text{
+    &__wrapper_text {
         display: flex;
         gap: 5px;
     }
 
-    &__titles{
+    &__titles {
         font-size: 20px;
         font-weight: 500;
         line-height: 29.63px;
         text-align: left;
-        color: #242934;
+        color: $header;
     }
 
-    &__wrapper_title{
+    &__wrapper_title {
         font-size: 16px;
         font-weight: 400;
         font-family: 'Roboto', sans-serif;
         line-height: 18.75px;
         text-align: left;
-        color: #242934;
+        color: $header;
     }
 
-    &__wrapper_info{
+    &__wrapper_info {
         font-size: 16px;
         font-weight: 400;
         font-family: 'Roboto', sans-serif;
         line-height: 18.75px;
         text-align: left;
-        color: #707070;
+        color: $text;
     }
 
-    &__wrapper_comment{
+    &__wrapper_comment {
         display: flex;
         gap: 5px;
         flex-direction: column;
     }
 
-    &__textarea{
+    &__textarea {
         width: 100%;
         border-radius: 10px;
-        border-color: #999999;
+        border-color: $icons;
         height: 100px;
         resize: none;
         padding: 10px;
@@ -100,25 +102,27 @@
         font-family: 'Roboto', sans-serif;
         line-height: 18.75px;
         text-align: left;
-        color: black;
+        color: $header;
 
-        &::placeholder{
-            color: #999999;
+        outline: none;
+
+        &::placeholder {
+            color: $icons;
         }
     }
 
-    &__wrappper_card{
+    &__wrappper_card {
         justify-content: flex-end;
         display: flex;
         gap: 10px;
     }
 
-    &__content_wrapper_img{
+    &__content_wrapper_img {
         display: flex;
         gap: 15px;
     }
 
-    &__content_agree_img{
+    &__content_agree_img {
         height: 18px;
     }
 }

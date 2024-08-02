@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC, ReactElement, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import styles from './create-survey-form.module.scss';
@@ -20,7 +20,11 @@ import { questionsInCreateSurveySelector } from '../../redux/selectors/create-su
 import { useCreateSurvey } from 'shared/api/surveys/mutations';
 import { userDataSelector } from '../../redux/selectors/auth';
 
-export const CreateSurveyForm = () => {
+type Props = {
+    formRef: any;
+};
+
+export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
     const methods = useForm();
     const [surveyType, setSurveyType] = useState<Option | null>({ value: 'general', label: 'Общий' });
     const [checkedAnonymous, setCheckedAnonymous] = useState<boolean>(false);
@@ -125,7 +129,11 @@ export const CreateSurveyForm = () => {
                 <h2>Информация об опросе</h2>
 
                 <FormProvider {...methods}>
-                    <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_survey__form}>
+                    <form
+                        ref={formRef}
+                        onSubmit={methods.handleSubmit(onSubmit)}
+                        className={styles.create_survey__form}
+                    >
                         <Input
                             width={'100%'}
                             isRequired={true}
@@ -136,7 +144,7 @@ export const CreateSurveyForm = () => {
                         <div className={styles.create_survey__wrapper_imput}>
                             <Input
                                 width={'50%'}
-                                isRequired={false}
+                                isRequired={true}
                                 name={'deadlineFrom'}
                                 pattern={{
                                     value: /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{2}$/,
@@ -147,7 +155,7 @@ export const CreateSurveyForm = () => {
                             />
                             <Input
                                 width={'50%'}
-                                isRequired={false}
+                                isRequired={true}
                                 name={'deadlineTo'}
                                 pattern={{
                                     value: /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{2}$/,
@@ -211,12 +219,6 @@ export const CreateSurveyForm = () => {
                                 onClose={onCloseModalAddParticipants}
                             />
                         </PopupWithDarkOverlay>
-                        <Button
-                            type="submit"
-                            styles={{ width: 'fit-content', height: '40px' }}
-                            text="Создать опрос"
-                            view="default_bg"
-                        />
                     </form>
                 </FormProvider>
             </div>

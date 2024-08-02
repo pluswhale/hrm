@@ -23,13 +23,13 @@ export const PracticeCard: FC<PracticeCardProps> = ({
                 break;
             }
             case true: {
-                color = '#6362E7';
+                color = '$purple';
                 statusText = 'В работе';
                 break;
             }
             default:
                 statusText = 'В работе';
-                color = '#6362E7';
+                color = '$purple';
         }
 
         return (

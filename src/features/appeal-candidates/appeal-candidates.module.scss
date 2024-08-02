@@ -1,3 +1,5 @@
+@import '../../assets/styles/variables.scss';
+
 .vacancy_candidates {
     display: flex;
     flex-direction: column;
@@ -14,7 +16,7 @@
         font-weight: 500;
         line-height: 29.63px;
         text-align: left;
-        color: #242934;
+        color: $header;
     }
 
     &__buttons {

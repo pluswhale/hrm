@@ -1,7 +1,8 @@
-import React, { FC, ReactElement, useState } from 'react';
+import { FC, ReactElement, useState } from 'react';
 import styles from './selector.module.scss';
 import { SelectorProps, Option } from './types';
-import arrow from '../../../assets/Vector 2.svg';
+import chevronUp from '../../../assets/chevron_up.svg';
+import chevronDown from '../../../assets/chevron_down.svg';
 
 export const Selector: FC<SelectorProps> = ({ onChange, value, options }): ReactElement => {
     const [isOpen, setIsOpen] = useState(false);
@@ -16,23 +17,24 @@ export const Selector: FC<SelectorProps> = ({ onChange, value, options }): React
     };
 
     return (
-        <div className={styles.container}>
+        <div className={styles.selector}>
             {options.map((optionGroup) => (
-                <div key={optionGroup.id} className={styles.container__optionGroup}>
+                <div key={optionGroup.id} className={styles.selector__wrapper}>
                     <input
                         type="text"
                         value={value?.label}
                         onClick={handleToggle}
                         placeholder={optionGroup.placeholder}
-                        className={styles.container__input}
+                        className={styles.selector__input}
                         readOnly
                     />
+                    <img onClick={handleToggle} src={isOpen ? chevronUp : chevronDown} alt="selector icon" />
                     {isOpen && (
-                        <div className={styles.container__optionPanel}>
+                        <div className={styles.selector__optionPanel}>
                             {optionGroup.options.map((option: Option) => (
                                 <div
                                     key={option.value}
-                                    className={styles.container__option}
+                                    className={`${styles.selector__option} ${value?.value === option.value ? styles.active : ''}`}
                                     onClick={() => handleOptionClick(option)}
                                 >
                                     {option.label}

@@ -23,6 +23,8 @@ export const Input: FC<InputProps> = ({
         formState: { errors },
     } = useFormContext();
 
+    console.log('errors', errors);
+
     const renderedInput = () => {
         return onChange ? (
             <input
@@ -35,7 +37,7 @@ export const Input: FC<InputProps> = ({
         ) : (
             <input
                 style={customStyles?.input || {}}
-                className={styles.input}
+                className={`${styles.input} ${errors?.[name] ? styles.input__error : ''} `}
                 placeholder={placeholder}
                 {...register(name, {
                     required: isRequired || false,
@@ -58,8 +60,9 @@ export const Input: FC<InputProps> = ({
             ) : (
                 <>{renderedInput()}</>
             )}
-            {/* @ts-ignore */}
-            {errors[name] && <p className={styles.input__error}>{errors[name].message}</p>}
+            {errors?.[name] && (
+                <p className={styles.input__error}>{(errors?.[name]?.message as string) || 'Обязательное поле'}</p>
+            )}
         </div>
     );
 };

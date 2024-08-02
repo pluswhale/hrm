@@ -1,8 +1,9 @@
 @import '../../../assets/styles/variables.scss';
+
 .practies_block {
     width: 100%;
     padding: 20px;
-    background-color: rgb(255, 255, 255);
+    background-color: $white;
     border-radius: 10px;
 
     &__title {
@@ -11,7 +12,7 @@
         font-weight: 500;
         line-height: 23.7px;
         text-align: left;
-        color: $dimDark;
+        color: $header;
     }
 
     &__container {

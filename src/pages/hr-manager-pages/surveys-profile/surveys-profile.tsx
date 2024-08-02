@@ -4,11 +4,9 @@ import { DefaultContentWrapper } from '../../../entities/default-content-wrapper
 import { HorizontalNavigation } from '../../../shared/components/horizontal-navigation';
 import { Button } from '../../../shared/components/button/button';
 import SurveyInfo from '../../../features/survey-info/survey-info';
-import { leftColumnData, rightColumnData, surveysResults } from './constants';
 import { SwitchTab } from '../../../shared/components/switch-tab';
 import { SurveysQuestions } from '../../../features/surveys-questions';
 import SurveysResult from '../../../features/surveys-result/surveys-result';
-import { SurveyResult } from '../../../features/surveys-result/types';
 import { SurveyDescription } from 'entities/survey-items/survey-description/survey-description';
 import { useNavigate, useParams } from 'react-router';
 import { fetchSurveyByIdForHR } from 'shared/api/surveys/thunks';

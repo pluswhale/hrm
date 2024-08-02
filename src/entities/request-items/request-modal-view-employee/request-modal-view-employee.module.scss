@@ -1,7 +1,9 @@
+@import '../../../assets/styles/variables.scss';
+
 .request_modal {
     max-width: 800px;
     width: 800px;
-    background-color: white;
+    background-color: $white;
     padding: 50px;
     border-radius: 10px;
 
@@ -38,7 +40,7 @@
         font-weight: 500;
         line-height: 29.63px;
         text-align: left;
-        color: #242934;
+        color: $header;
     }
 
     &__close {
@@ -61,7 +63,7 @@
         font-weight: 500;
         line-height: 29.63px;
         text-align: left;
-        color: #242934;
+        color: $header;
     }
 
     &__wrapper_title {
@@ -70,7 +72,7 @@
         font-family: 'Roboto', sans-serif;
         line-height: 18.75px;
         text-align: left;
-        color: #242934;
+        color: $header;
     }
 
     &__wrapper_info {
@@ -79,7 +81,7 @@
         font-family: 'Roboto', sans-serif;
         line-height: 18.75px;
         text-align: left;
-        color: #707070;
+        color: $text;
     }
 
     &__wrapper_comment {
@@ -91,7 +93,7 @@
     &__textarea {
         width: 100%;
         border-radius: 10px;
-        border-color: #999999;
+        border-color: $icons;
         height: 100px;
         resize: none;
         padding: 10px;
@@ -100,10 +102,10 @@
         font-family: 'Roboto', sans-serif;
         line-height: 18.75px;
         text-align: left;
-        color: black;
+        color: $header;
 
         &::placeholder {
-            color: #999999;
+            color: $icons;
         }
     }
 

@@ -1,3 +1,5 @@
+@import '../../../assets/styles/variables.scss';
+
 .appeal_competences {
     display: flex;
     flex-direction: column;
@@ -10,12 +12,12 @@
         line-height: 23.7px;
         text-align: left;
 
-        color: #242934;
+        color: $header;
         margin-bottom: 25px;
     }
 
     &__card_wrapper {
-        background-color: #ffffff;
+        background-color: $white;
         padding: 20px 40px;
         border-radius: 10px;
         max-width: 658px;
@@ -31,7 +33,7 @@
             font-weight: 400;
             line-height: 18.75px;
             text-align: left;
-            color: #242934;
+            color: $header;
         }
     }
 
@@ -42,9 +44,9 @@
 
         &_value {
             border-radius: 5px;
-            border: 1px solid #929292;
+            border: 1px solid $border;
             padding: 5px 10px 5px 10px;
-            color: #929292;
+            color: $text;
         }
     }
 }

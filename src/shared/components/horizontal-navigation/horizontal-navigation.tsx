@@ -21,7 +21,7 @@ export const HorizontalNavigation: FC<HorizontalNavigationProps> = ({ navigation
                 navigation.map((item, index) => (
                     <>
                         <Link
-                            key={index}
+                            key={item.title}
                             className={`
                                 ${styles.horizontal_navigation__item} 
                                 ${navigation?.length - 1 === index ? styles.active : ''}

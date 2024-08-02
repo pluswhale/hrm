@@ -20,17 +20,17 @@
 }
 
 .tab {
-    color: $dimGray;
+    color: $header;
 }
 
 .activeTab {
-    color: $dimDark;
+    color: $purple;
 }
 
 .separator {
     width: 1px;
     height: 29px;
-    background-color: $dimDark;
+    background-color: $header;
 }
 
 .alternative .tab {
@@ -38,13 +38,13 @@
 }
 
 .alternative .activeTab {
-    color: $dimDark;
+    color: $purple;
 }
 
 .alternative .separator {
     width: 1px;
     height: 29px;
-    background-color: $dimDark;
+    background-color: $header;
     transform: rotate(30deg);
 }
 .alternative .tab {
@@ -57,11 +57,11 @@
     cursor: pointer;
 
     &:hover {
-        color: $dimDark;
+        color: $header;
     }
 }
 .alternative .activeTab {
-    color: $dimDark;
+    color: $header;
     line-height: 29.63px;
     font-size: 25px;
 }

@@ -19,7 +19,7 @@ export const VacancyCard: FC<any> = ({ title, created_at, candidatesCount, id, d
                 break;
             }
             default:
-                color = '#6362E7';
+                color = '$purple';
         }
 
         return (

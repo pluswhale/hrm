@@ -1,12 +1,14 @@
+@import '../../../assets/styles/variables.scss';
+
 .survey_card {
     width: 466px;
     max-width: 466px;
     padding: 20px 21px;
-    background: white;
+    background: $white;
     border-radius: 10px;
 
-    &__count{
-        padding-top:15px;
+    &__count {
+        padding-top: 15px;
     }
 
     &__container {
@@ -23,7 +25,7 @@
     }
 
     &__title {
-        color: black;
+        color: $header;
         font-size: 20px;
         text-decoration: none;
         font-weight: 500;
@@ -41,7 +43,6 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
-
     }
 
     &__row {
@@ -54,23 +55,22 @@
             font-weight: 400;
             line-height: 18.96px;
             text-align: left;
-
         }
 
         &_label {
-            color: #242934;
+            color: $header;
         }
 
         &_value {
-            color: #707070;
+            color: $text;
         }
     }
-
 }
 
 @media (max-width: 1200px) {
-    .survey_card{
+    .survey_card {
         width: 100%;
         max-width: none;
     }
 }
+

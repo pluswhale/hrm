@@ -1,7 +1,9 @@
+@import '../../../../assets/styles/variables';
+
 .vacancy_recruiting_funnel {
     max-width: 1027px;
     width: 1027px;
-    background-color: white;
+    background-color: $white;
     padding: 50px;
     border-radius: 10px;
 
@@ -21,7 +23,7 @@
         font-weight: 500;
         line-height: 29.63px;
         text-align: left;
-        color: #242934;
+        color: $header;
     }
 
     &__close {
@@ -49,7 +51,7 @@
             justify-content: center;
             width: 501px;
             height: 40px;
-            background-color: gray;
+            background-color: $text;
         }
 
         .column {

@@ -13,11 +13,11 @@ export const PracticyItem: FC<PracticyItemProps> = ({ practicy }): ReactElement 
                 break;
             }
             case 'В работе': {
-                color = '#6362E7';
+                color = '$purple';
                 break;
             }
             default:
-                color = '#6362E7';
+                color = '$purple';
         }
 
         return (

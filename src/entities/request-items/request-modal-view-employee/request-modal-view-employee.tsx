@@ -23,7 +23,7 @@ export const RequestModalViewEmployee: FC<RequestModalProps> = ({
 
         switch (status) {
             case 'new':
-                color = '#6362E7';
+                color = '$purple';
                 text = 'Новый';
                 break;
             case 'approved':
@@ -40,7 +40,7 @@ export const RequestModalViewEmployee: FC<RequestModalProps> = ({
         }
 
         return (
-            <span style={{ backgroundColor: color, color: 'white' }} className={styles.request_modal__status}>
+            <span style={{ backgroundColor: color, color: '$white' }} className={styles.request_modal__status}>
                 {text}
             </span>
         );

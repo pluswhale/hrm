@@ -1,13 +1,15 @@
-.container{
+@import '../../../assets/styles/variables.scss';
+
+.container {
     display: flex;
     align-items: center;
     gap: 10px;
     font-weight: 400;
-    font-size: 16px ;
+    font-size: 16px;
     font-family: 'Roboto', sans-serif;
     line-height: 18.75px;
 
-    &__radioButton{
+    &__radioButton {
         height: 18px;
         width: 18px;
     }

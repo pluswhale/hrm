@@ -52,7 +52,7 @@
             font-weight: 400;
             line-height: 18.75px;
             text-align: left;
-            color: #2c323f;
+            color: $header;
         }
 
         &__list {
@@ -73,7 +73,7 @@
 
     &__stage {
         border-radius: 5px;
-        border: 1px solid $dimDark;
+        border: 1px solid $header;
         padding: 10px 15px;
 
         &__name {
@@ -82,7 +82,7 @@
             font-weight: 400;
             line-height: 18.75px;
             text-align: left;
-            color: $dimDark;
+            color: $header;
         }
 
         &__container {
@@ -94,10 +94,8 @@
     }
 }
 
-
 @media (max-width: 1680px) {
-    .create_vacancy{
-
+    .create_vacancy {
         &__container {
             width: 100%;
         }
@@ -110,3 +108,4 @@
         }
     }
 }
+

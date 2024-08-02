@@ -1,36 +1,38 @@
-.survey_navigation{
-  display: flex;
-  justify-content: space-between;
+@import '../../../assets/styles/variables.scss';
 
-  &__wrap{
+.survey_navigation {
     display: flex;
-    gap: 20px;
-  }
+    justify-content: space-between;
 
-  &__container{
-    padding-top: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-bottom: 20px;
-    &__title {
-      color: black;
-      font-size: 25px;
-      line-height: 30px;
-      font-family: 'Rubik', sans-serif;
-      text-decoration: none;
-      font-weight: 500;
+    &__wrap {
+        display: flex;
+        gap: 20px;
     }
-  }
+
+    &__container {
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-bottom: 20px;
+        &__title {
+            color: $header;
+            font-size: 25px;
+            line-height: 30px;
+            font-family: 'Rubik', sans-serif;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    }
 }
 
 @media (max-width: 1560px) {
-  .survey_navigation{
-
-    &__wrap{
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+    .survey_navigation {
+        &__wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
     }
-  }
 }
+

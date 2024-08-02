@@ -1,3 +1,5 @@
+@import '../../../assets/styles/variables.scss';
+
 .horizontal_navigation {
     display: flex;
     align-items: center;
@@ -7,11 +9,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: white;
+        background-color: $white;
         border-radius: 20px;
         width: 75px;
         height: 29px;
         cursor: pointer;
+    }
+
+    &__back_icon {
     }
 
     .horizontal_navigation__item,
@@ -26,7 +31,7 @@
     }
 
     .horizontal_navigation__item.active {
-        color: #6362e7;
+        color: $purple;
     }
 
     &__slash {
@@ -36,3 +41,4 @@
         color: #8a8a8a;
     }
 }
+

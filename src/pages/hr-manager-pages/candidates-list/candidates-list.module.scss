@@ -1,6 +1,8 @@
+@import '../../../assets/styles/variables';
+
 .container {
     overflow-x: scroll;
-    background-color: #e3e3f3;
+    background-color: $bgColor;
 
     .action_buttons {
         display: flex;
@@ -21,7 +23,7 @@
     &__title {
         font-weight: 500;
         font-size: 25px;
-        color: black;
+        color: $header;
         line-height: 29.63px;
     }
 

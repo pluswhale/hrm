@@ -30,7 +30,7 @@ export const Textarea: FC<InputProps> = ({
 
                     <textarea
                         style={customStyles?.textarea || {}}
-                        className={styles.textarea}
+                        className={`${styles.textarea} ${errors?.[name] ? styles.textarea__error : ''} `}
                         placeholder={placeholder}
                         {...register(name, { required: isRequired || false, pattern })}
                     />
@@ -38,13 +38,14 @@ export const Textarea: FC<InputProps> = ({
             ) : (
                 <textarea
                     style={customStyles?.textarea || {}}
-                    className={styles.textarea}
+                    className={`${styles.textarea} ${errors?.[name] ? styles.textarea__error : ''} `}
                     placeholder={placeholder}
                     {...register(name, { required: isRequired || false })}
                 />
             )}
-            {/* @ts-ignore */}
-            {errors[name] && <p className={styles.textarea__error}>{errors[name].message}</p>}
+            {errors?.[name] && (
+                <p className={styles.textarea__error}>{(errors?.[name]?.message as string) || 'Обязательное поле'}</p>
+            )}
         </div>
     );
 };

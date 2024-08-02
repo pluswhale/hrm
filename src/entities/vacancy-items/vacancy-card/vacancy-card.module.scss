@@ -1,8 +1,10 @@
+@import '../../../assets/styles/variables';
+
 .vacancy_card {
     width: 466px;
     max-width: 466px;
     padding: 20px 21px;
-    background: white;
+    background: $white;
     border-radius: 10px;
 
     &__container {
@@ -23,7 +25,7 @@
     }
 
     &__title {
-        color: black;
+        color: $header;
         font-size: 20px;
         font-weight: 500;
     }
@@ -33,7 +35,7 @@
         padding: 5px 15px;
         font-size: 14px;
         font-weight: 500;
-        color: white;
+        color: $white;
     }
 
     &__created_and_deadline {
@@ -56,11 +58,11 @@
         }
 
         &_label {
-            color: #242934;
+            color: $header;
         }
 
         &_value {
-            color: #707070;
+            color: $text;
         }
     }
 

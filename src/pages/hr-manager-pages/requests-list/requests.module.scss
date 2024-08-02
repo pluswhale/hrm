@@ -1,3 +1,5 @@
+@import '../../../assets/styles/variables.scss';
+
 .container {
     display: flex;
     padding-top: 30px;
@@ -14,7 +16,7 @@
         font-weight: 500;
         font-size: 25px;
         line-height: 30px;
-        color: black;
+        color: $header;
     }
 }
 
