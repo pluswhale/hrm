@@ -4,8 +4,6 @@ import { VacanciesDataContainerProps } from './types';
 import { VacancyCard } from 'entities/vacancy-items/vacancy-card/vacancy-card';
 
 export const VacanciesDataContainer: FC<VacanciesDataContainerProps> = ({ vacancies }): ReactElement => {
-    console.log('Vacancies', vacancies);
-
     return (
         <>
             {vacancies?.length ? (

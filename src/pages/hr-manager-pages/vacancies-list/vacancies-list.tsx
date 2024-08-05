@@ -43,7 +43,7 @@ const VacanciesList = () => {
                         onClick={onNavigateToCreateVacancy}
                         styles={{ width: 'fit-content' }}
                         text="Новая вакансия"
-                        view="default_bg"
+                        view="default_bg_white"
                     />
                 </div>
                 <div className={styles.vacancies__main_content}>

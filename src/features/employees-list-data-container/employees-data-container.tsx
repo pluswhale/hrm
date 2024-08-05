@@ -1,4 +1,3 @@
-import { Col, Row } from 'react-bootstrap';
 import { PersonCard } from '../../entities/person-card-item';
 import { FC, ReactElement } from 'react';
 import { EmployeesDataContainerProps } from './types';

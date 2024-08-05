@@ -23,7 +23,7 @@ const SurveyInfo: React.FC<Props> = ({ surveyData }) => {
                     {leftColumnData.map((data, index) => (
                         <div key={index} className={style.container__created_and_deadline}>
                             <div className={style.container__row}>
-                                <span className={style.container__row_label}>{data.title}</span>
+                                <span className={style.container__row_label}>{data.title}:</span>
                                 <span className={style.container__row_value}>{data.value}</span>
                             </div>
                         </div>
@@ -33,7 +33,7 @@ const SurveyInfo: React.FC<Props> = ({ surveyData }) => {
                     {rightColumnData.map((data, index) => (
                         <div key={index} className={style.container__created_and_deadline}>
                             <div className={style.container__row}>
-                                <span className={style.container__row_label}>{data.title}</span>
+                                <span className={style.container__row_label}>{data.title}:</span>
                                 <span className={style.container__row_value}>{data.value}</span>
                             </div>
                         </div>

@@ -7,9 +7,9 @@ export const SurveyDescription: FC<SurveyDescriptionProps> = ({ title, content }
         <div className={styles.survey_description}>
             <div className={styles.survey_description__card_wrapper}>
                 <h4 className={styles.survey_description__title}>{title}</h4>
-                <ul className={styles.survey_description__card_wrapper__content}>
-                    {content && <li className={styles.survey_description__card_wrapper__element}>{content}</li>}
-                </ul>
+                <div className={styles.survey_description__card_wrapper__content}>
+                    {content && <span className={styles.survey_description__card_wrapper__element}>{content}</span>}
+                </div>
             </div>
         </div>
     );

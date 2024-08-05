@@ -5,26 +5,37 @@ import styles from './vacancy-card.module.scss';
 import { Link } from 'react-router-dom';
 import { formatDate } from 'shared/libs/dateFormater';
 
-export const VacancyCard: FC<any> = ({ title, created_at, candidatesCount, id, deadline, status }): ReactElement => {
-    const displayStatus = (status: string) => {
-        let color = '';
+export const VacancyCard: FC<any> = ({
+    title,
+    created_at,
+    candidatesCount,
+    id,
+    deadline,
+    status,
+    is_active,
+}): ReactElement => {
+    const displayStatus = (isActive: boolean) => {
+        let color = '#6362E7';
+        let text = 'В работе';
 
         switch (status) {
-            case 'Закрыта': {
-                color = 'red';
+            case false: {
+                color = '#DD5555';
+                text = 'Закрыта';
                 break;
             }
-            case 'В работе': {
-                color = '#8A8A8A';
+            case true: {
+                color = '#6362E7';
+                text = 'В работа';
                 break;
             }
             default:
-                color = '$purple';
+                color = '#6362E7';
         }
 
         return (
             <span style={{ backgroundColor: color }} className={styles.vacancy_card__status}>
-                {status}
+                {text}
             </span>
         );
     };
@@ -37,18 +48,18 @@ export const VacancyCard: FC<any> = ({ title, created_at, candidatesCount, id, d
                         <h5 className={styles.vacancy_card__title}>{title}</h5>
                     </Link>
 
-                    {displayStatus('В работе')}
+                    {displayStatus(is_active)}
                 </div>
 
                 <div className={styles.vacancy_card__created_and_deadline}>
                     <div className={styles.vacancy_card__row}>
                         <span className={styles.vacancy_card__row_label}>Создана:</span>
-                        <span className={styles.vacancy_card__row_value}>{created_at}</span>
+                        <span className={styles.vacancy_card__row_value}>{formatDate(created_at)}</span>
                     </div>
 
                     <div className={styles.vacancy_card__row}>
                         <span className={styles.vacancy_card__row_label}>Дедлайн:</span>
-                        <span className={styles.vacancy_card__row_value}>{deadline}</span>
+                        <span className={styles.vacancy_card__row_value}>{formatDate(deadline)}</span>
                     </div>
                 </div>
 

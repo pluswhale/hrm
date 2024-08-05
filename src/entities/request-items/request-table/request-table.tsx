@@ -26,7 +26,7 @@ const RequestTable: FC<RequestTableProps> = ({
 
         switch (status) {
             case 'new':
-                color = '$purple';
+                color = '#6362E7';
                 text = 'Новый';
                 break;
             case 'approved':
@@ -43,7 +43,7 @@ const RequestTable: FC<RequestTableProps> = ({
         }
 
         return (
-            <span style={{ backgroundColor: color, color: '$white' }} className={style.container__status}>
+            <span style={{ backgroundColor: color, color: '#fff' }} className={style.container__status}>
                 {text}
             </span>
         );
