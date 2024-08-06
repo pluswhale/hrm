@@ -5,6 +5,7 @@ export type QueryParameters<T> = {
     queryThunk: (options: any) => Promise<T>;
     queryThunkOptions?: any;
     queryPageSize?: number;
+    refetchInterval?: number;
 };
 
 export type ReturnedQueryType<T> = {
@@ -15,10 +16,11 @@ export type ReturnedQueryType<T> = {
 };
 
 export const useFetchData = <T>(queryParameters: QueryParameters<T>): ReturnedQueryType<T> => {
-    const { queryKey, queryThunk, queryThunkOptions, queryPageSize } = queryParameters;
+    const { queryKey, queryThunk, queryThunkOptions, queryPageSize, refetchInterval } = queryParameters;
 
     const { data, isFetching, isFetched, isFetchedAfterMount } = useQuery({
         queryKey: [queryKey, queryThunkOptions],
+        refetchInterval: refetchInterval || false,
         queryFn: () => queryThunk(queryThunkOptions),
         enabled: queryThunkOptions?.enabled ? queryThunkOptions?.enabled : true,
     });

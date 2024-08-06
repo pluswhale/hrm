@@ -1,28 +1,51 @@
-import { Image } from 'react-bootstrap';
-import { Bell, List } from 'react-bootstrap-icons';
+import { List } from 'react-bootstrap-icons';
 import burger from '../../../assets/Бургер.svg';
 import style from './header.module.scss';
+import notificationsIcon from '../../../assets/notification_icon.svg';
 import { Outlet } from 'react-router-dom';
+import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { fetchNotifications } from 'shared/api/notifications/thunks';
+import { useSelector } from 'react-redux';
+import { userDataSelector } from '../../../redux/selectors/auth';
+import Notifications from 'widgets/notifications/notifications';
+import { useState } from 'react';
 
 type HeaderProps = {
     toggleSidebar: () => void;
     isMobile: boolean;
     isOpen: boolean;
-    closeSidebar: () => void; // Добавляем функцию для закрытия боковой панели
+    closeSidebar: () => void;
 };
 
 export const Header = ({ toggleSidebar, isMobile, isOpen, closeSidebar }: HeaderProps) => {
-    const handleBurgerClick = () => {
-        if (isOpen) {
-            closeSidebar(); // Если боковая панель открыта, закрываем ее
-        } else {
-            toggleSidebar(); // Иначе открываем боковую панель
-        }
-    };
+    const userData = useSelector(userDataSelector);
+    const [openNotifications, setOpenNotifications] = useState<boolean>(false);
+
+    const queryParams = {
+        queryKey: 'fetchNotifications',
+        queryThunk: fetchNotifications,
+        queryThunkOptions: {
+            type: userData?.role === 'HRManager' ? 'hrManager' : 'employee',
+            id: userData?.id,
+        },
+        refetchInterval: 1000,
+    } as QueryParameters<any>;
+
+    const notificationsQuery = useFetchData(queryParams);
+
+    const isUnseenNotifications = notificationsQuery?.data?.some((notification: any) => !notification.is_seen);
 
     const handleContainerClick = () => {
         if (isOpen && isMobile) {
-            closeSidebar(); // Если боковая панель открыта и мобильное устройство, закрываем ее при клике на контейнер Header
+            closeSidebar();
+        }
+    };
+
+    const handleBurgerClick = () => {
+        if (isOpen) {
+            closeSidebar();
+        } else {
+            toggleSidebar();
         }
     };
 
@@ -40,16 +63,31 @@ export const Header = ({ toggleSidebar, isMobile, isOpen, closeSidebar }: Header
                         />
                     </div>
                     <div className={style.container__profile}>
-                        <button className={style.container__button}>
-                            <Bell height={24} width={24} />
+                        <button
+                            onClick={() => setOpenNotifications((prev) => !prev)}
+                            className={style.container__button}
+                        >
+                            <div className={style.notification_wrapper}>
+                                <img
+                                    className={style.notification_icon}
+                                    src={notificationsIcon}
+                                    alt="notification icon"
+                                />
+                                {isUnseenNotifications && <div className={style.notification_badge}></div>}
+                            </div>
+
+                            {openNotifications ? (
+                                <Notifications
+                                    notifications={notificationsQuery?.data}
+                                    setOpenNotifications={setOpenNotifications}
+                                />
+                            ) : null}
                         </button>
                         <a href="#" className={style.container__img}>
-                            <Image
-                                roundedCircle
+                            <img
                                 src={'https://github.com/mdo.png'}
-                                style={{ borderRadius: '100px' }}
-                                height={58}
-                                width={58}
+                                style={{ borderRadius: '100px', height: '58px', width: '58px∂' }}
+                                alt="avatar"
                             />
                         </a>
                     </div>

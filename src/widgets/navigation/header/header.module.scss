@@ -6,6 +6,11 @@
     background-color: $white;
     box-shadow: 5px 0px 20px 0px rgba(0, 0, 0, 0.25);
 
+    .notification_icon {
+        height: 24px;
+        width: 24px;
+    }
+
     &__burger_icon {
         cursor: pointer;
     }
@@ -60,6 +65,28 @@
         width: 24px;
         border: none;
         background: none;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .notification_wrapper {
+        position: relative;
+
+        .notification_icon {
+            width: 24px; // Adjust size as needed
+            height: 24px; // Adjust size as needed
+        }
+
+        .notification_badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 10px; // Adjust size as needed
+            height: 10px; // Adjust size as needed
+            background-color: red;
+            border-radius: 50%;
+            border: 2px solid white; // Optional: to create a border around the badge
+        }
     }
 }
 

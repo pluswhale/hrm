@@ -9,7 +9,7 @@ export const useCreateSurvey = () => {
         mutationFn: (body: any) => surveysApi.createSurvey(body),
         onSuccess: () => {
             qc.invalidateQueries({ queryKey: ['fetchAllSurveysByHR'] });
-            navigate('/surveys');
+            navigate('/survey');
         },
     });
 };
