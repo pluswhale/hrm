@@ -1,11 +1,12 @@
 export type PracticyItemProps = {
-    practicy: Practice;
-}
+    practicy: any;
+};
 
 export type Practice = {
-    id: number,
-    title: string,
-    testTask: string,
-    comment: string,
-    status: string,
-}
+    id: number;
+    title: string;
+    testTask: string;
+    comment: string;
+    status: string;
+};
+

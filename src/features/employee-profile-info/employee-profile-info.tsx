@@ -42,6 +42,7 @@ export const EmployeeProfileInfo: FC<Props> = ({ employeeData }) => {
     return (
         <>
             <HeaderBlock
+                isDisplayAge={false}
                 name={`${employeeData?.last_name} ${employeeData?.first_name} ${employeeData?.sur_name}`}
                 profession={employeeData?.sub_position?.title}
                 avatar={mockUser?.avatar}

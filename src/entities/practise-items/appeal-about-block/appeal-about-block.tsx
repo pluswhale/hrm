@@ -2,6 +2,7 @@ import { FC, ReactElement } from 'react';
 import styles from './appeal-about-block.module.scss';
 import { AppealAboutBlockProps } from './types';
 import { formatDate } from 'shared/libs/dateFormater';
+import linkIcon from '../../../assets/test_task_icon.svg';
 
 export const AppealAboutBlock: FC<AppealAboutBlockProps> = ({ appealData }): ReactElement => {
     return (
@@ -28,11 +29,10 @@ export const AppealAboutBlock: FC<AppealAboutBlockProps> = ({ appealData }): Rea
                     </div>
 
                     <div className={styles.appeal_about__row}>
-                        <span className={styles.appeal_about__row_title}>Тестовое задание:</span>
+                        <span className={styles.appeal_about__row_title}>Тестовое задание</span>
                         <span className={styles.appeal_about__row_value}>
                             <a href={appealData?.test_task_link} target="_blank" rel="noreferrer">
-                                {' '}
-                                Link{' '}
+                                <img src={linkIcon} />
                             </a>
                         </span>
                     </div>

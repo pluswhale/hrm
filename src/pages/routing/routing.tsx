@@ -50,7 +50,6 @@ export const Routing = () => {
                         <Route path="candidates/:id" element={<CandidateProfile />} />
                         <Route path="vacancies" element={<VacanciesList />} />
                         <Route path="vacancies/:id" element={<VacanciesProfile />} />
-                        <Route path="vacancies/:id/:userId" element={<VacanciesCandidate />} />
                         <Route path="create/vacancy" element={<CreateVacancy />} />
                         <Route path="edit/vacancy/:id" element={<EditVacancy />} />
                         <Route path="create/candidate" element={<CreateCandidate />} />

@@ -10,12 +10,12 @@ export const AppealDescriptionCard: FC<AppealDescriptionCardProps> = ({ title, c
                 <ul className={styles.appeal_description__card_wrapper__content}>
                     {content &&
                         content.map((row) => (
-                            <ul>
-                                <span>{row.title}</span>
+                            <div className={styles.appeal_description__row}>
+                                <span className={styles.appeal_description__row_title}>{row.title}</span>
                                 {row?.data?.map((text: any) => (
-                                    <li className={styles.vacancy_description__card_wrapper__element}>{row.title}</li>
+                                    <span className={styles.appeal_description__row_value}>{row.title}</span>
                                 ))}
-                            </ul>
+                            </div>
                         ))}
                 </ul>
             </div>

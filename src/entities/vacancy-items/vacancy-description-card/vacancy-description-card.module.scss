@@ -6,7 +6,7 @@
     align-items: flex-start;
 
     &__title {
-        font-family: 'Rubik', sans-serif;
+        font-family: 'Roboto', sans-serif;
         font-size: 20px;
         font-weight: 500;
         line-height: 23.7px;
@@ -14,6 +14,36 @@
 
         color: $header;
         margin-bottom: 25px;
+    }
+
+    &__row {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        &:not(:last-child) {
+            margin-bottom: 24px;
+        }
+
+        &_title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 23.7px;
+            text-align: left;
+
+            color: $header;
+        }
+
+        &_value {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 23.7px;
+            text-align: left;
+
+            color: $text;
+        }
     }
 
     &__card_wrapper {
@@ -24,7 +54,6 @@
         min-width: 658px;
 
         min-height: 211px;
-        max-height: 211px;
 
         &__content {
             display: flex;

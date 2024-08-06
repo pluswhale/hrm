@@ -4,5 +4,6 @@ export type HeaderBlockProps = {
     home_address?: string;
     birthday_date?: string;
     avatar: string;
+    isDisplayAge: boolean;
 };
 

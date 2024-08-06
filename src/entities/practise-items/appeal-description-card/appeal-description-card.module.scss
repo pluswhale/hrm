@@ -16,6 +16,36 @@
         margin-bottom: 10px;
     }
 
+    &__row {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        &:not(:last-child) {
+            margin-bottom: 24px;
+        }
+
+        &_title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 23.7px;
+            text-align: left;
+
+            color: $header;
+        }
+
+        &_value {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 23.7px;
+            text-align: left;
+
+            color: $text;
+        }
+    }
+
     &__card_wrapper {
         background-color: $white;
         padding: 20px 40px;

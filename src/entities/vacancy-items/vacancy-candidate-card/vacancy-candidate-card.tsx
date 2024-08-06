@@ -21,7 +21,7 @@ export const VacancyCandidateCard: FC<VacancyCandidateCardProps> = ({ candidate,
                                 alt="candidate avatar"
                             />
                             <div className={styles.vacancy_candidate_card__title_and_info}>
-                                <Link to={`/vacancies/${vacancyId}/${candidate.id}`}>
+                                <Link to={`/candidates/${candidate.id}`}>
                                     <h5 className={styles.vacancy_candidate_card__title}>
                                         {candidate.last_name + ' ' + candidate?.first_name}
                                     </h5>

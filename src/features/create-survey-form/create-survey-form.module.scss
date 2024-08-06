@@ -27,6 +27,7 @@
         display: flex;
         gap: 5px;
         align-items: flex-end;
+        justify-content: space-between;
 
         &__selector {
             font-weight: 400;

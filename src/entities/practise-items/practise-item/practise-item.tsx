@@ -4,25 +4,28 @@ import { PracticyItemProps } from './types';
 import testTaskIcon from '../../../assets/test_task_icon.svg';
 
 export const PracticyItem: FC<PracticyItemProps> = ({ practicy }): ReactElement => {
-    const displayStatus = (status: string) => {
-        let color = '';
+    const displayStatus = (status: boolean) => {
+        let color = '#6362e7';
+        let text = 'В работе';
 
         switch (status) {
-            case 'Закрыта': {
+            case false: {
                 color = '#8A8A8A';
+                text = 'Закрыта';
                 break;
             }
-            case 'В работе': {
-                color = '$purple';
+            case true: {
+                color = '#6362e7';
+                text = 'В работе';
                 break;
             }
             default:
-                color = '$purple';
+                color = '#6362e7';
         }
 
         return (
             <span style={{ backgroundColor: color }} className={styles.practicy_item__status}>
-                {status}
+                {text}
             </span>
         );
     };
@@ -30,18 +33,20 @@ export const PracticyItem: FC<PracticyItemProps> = ({ practicy }): ReactElement 
     return (
         <div className={styles.practicy_item}>
             <div className={styles.practicy_item__title_and_status}>
-                <h4 className={styles.practicy_item__title}>{practicy.title}</h4>
-                {displayStatus(practicy?.status)}
+                <h4 className={styles.practicy_item__title}>{practicy.name}</h4>
+                {displayStatus(practicy?.is_active)}
             </div>
 
             <div className={styles.practicy_item__row}>
-                <span className={styles.practicy_item__row_label}>Тестовое задание</span>
+                <a href={practicy?.test_task_link} className={styles.practicy_item__row_label} target="_blank">
+                    Тестовое задание
+                </a>
                 <img src={testTaskIcon} />
             </div>
 
             <div className={styles.practicy_item__col}>
                 <span className={styles.practicy_item__row_label}>Комментарий:</span>
-                <span className={styles.practicy_item__row_value}>{practicy.comment}</span>
+                <span className={styles.practicy_item__row_value}>Урфу</span>
             </div>
         </div>
     );

@@ -8,7 +8,7 @@ export const VacanciesBlock: FC<VacanciesBlockProps> = ({ vacancies }): ReactEle
         <div className={styles.vacancies_block}>
             <div className={styles.vacancies_block__container}>
                 <h4 className={styles.vacancies_block__title}>Вакансии</h4>
-                {vacancies && vacancies.map((vacancy) => <VacancyItem vacancy={vacancy} />)}
+                {vacancies && vacancies?.map((stage: any) => <VacancyItem vacancy={stage?.vacancy} />)}
             </div>
         </div>
     );

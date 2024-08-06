@@ -28,3 +28,16 @@ export const getUserDataThunk = () => (dispatch: Dispatch<any>) => {
         });
 };
 
+export const fetchEmployeeHistory = async (options: any) => {
+    try {
+        const res = await userApi.getEmployeeHistory(options?.employeeId);
+        if (res) {
+            return res.data;
+        }
+
+        return null;
+    } catch (error) {
+        console.error(error);
+    }
+};
+

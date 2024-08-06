@@ -8,7 +8,7 @@ export const PractiesBlock: FC<PractiesBlockProps> = ({ practies }): ReactElemen
         <div className={styles.practies_block}>
             <div className={styles.practies_block__container}>
                 <h4 className={styles.practies_block__title}>Набор на практику</h4>
-                {practies && practies.map((practicy) => <PracticyItem practicy={practicy} />)}
+                {practies && practies.map((stage: any) => <PracticyItem practicy={stage?.appeal} />)}
             </div>
         </div>
     );

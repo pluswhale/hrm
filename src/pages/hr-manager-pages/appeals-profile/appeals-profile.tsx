@@ -1,6 +1,5 @@
 import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-content-wrapper';
 import { HorizontalNavigation } from 'shared/components/horizontal-navigation';
-import { APPEAl_DATA, CANDIDATES_ROWS } from './contants';
 import { Button } from 'shared/components/button/button';
 
 import { useNavigate, useParams } from 'react-router';

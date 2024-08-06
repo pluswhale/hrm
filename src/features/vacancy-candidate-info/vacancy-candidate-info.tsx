@@ -11,7 +11,7 @@ export const VacancyCandidateInfo = () => {
     //TODO: запрос на пользователя по ID
     return (
         <>
-            <HeaderBlock name={mockUser?.name} profession={mockUser?.role} avatar={mockUser?.avatar} />
+            {/* <HeaderBlock name={mockUser?.name} profession={mockUser?.role} avatar={mockUser?.avatar} /> */}
             <StandardInfoBlock title="Контанты" rows={mockUser?.info?.contacts} />
             <VacanciesBlock vacancies={VACANCIES_DATA} />
             <PractiesBlock practies={PRACTICES_DATA} />

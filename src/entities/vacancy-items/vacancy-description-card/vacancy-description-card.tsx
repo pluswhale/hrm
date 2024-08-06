@@ -10,12 +10,12 @@ export const VacancyDescriptionCard: FC<VacancyDescriptionCardProps> = ({ title,
                 <div className={styles.vacancy_description__card_wrapper__content}>
                     {content &&
                         content.map((row) => (
-                            <ul>
-                                <span>{row.title}</span>
+                            <div className={styles.vacancy_description__row}>
+                                <span className={styles.vacancy_description__row_title}>{row.title}</span>
                                 {row?.data?.map((text) => (
-                                    <li className={styles.vacancy_description__card_wrapper__element}>{row.title}</li>
+                                    <span className={styles.vacancy_description__row_value}>{row.title}</span>
                                 ))}
-                            </ul>
+                            </div>
                         ))}
                 </div>
             </div>

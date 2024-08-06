@@ -24,14 +24,15 @@ export const CandidateProfileInfo: FC<Props> = ({ candidateData }): ReactElement
     return (
         <>
             <HeaderBlock
+                isDisplayAge={true}
                 name={candidateFullName}
                 birthday_date={candidateData?.birthday_date}
                 home_address={candidateData?.home_address}
                 avatar={mockUser?.avatar}
             />
             <StandardInfoBlock title="Контанты" rows={contacts} />
-            <VacanciesBlock vacancies={VACANCIES_DATA} />
-            <PractiesBlock practies={PRACTICES_DATA} />
+            <VacanciesBlock vacancies={candidateData?.stages} />
+            <PractiesBlock practies={candidateData?.stageAppeals} />
             <VacanciesExperience experiences={candidateData?.experiences} />
             <SkillsBlock skills={candidateData?.competences} />
         </>
