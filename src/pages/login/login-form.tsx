@@ -33,6 +33,7 @@ export const LoginForm = () => {
                     id="outlined-basic"
                     label="Пароль"
                     variant="outlined"
+                    type="password"
                 />
                 <Button disabled={!email || !password} onClick={onLogin} variant="contained">
                     Войти

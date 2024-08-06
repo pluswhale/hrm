@@ -3,6 +3,7 @@ import { PracticeCardProps } from './types';
 
 import styles from './practice-card.module.scss';
 import { Link } from 'react-router-dom';
+import { formatDate } from 'shared/libs/dateFormater';
 
 export const PracticeCard: FC<PracticeCardProps> = ({
     name,
@@ -53,12 +54,12 @@ export const PracticeCard: FC<PracticeCardProps> = ({
                 <div className={styles.practice_card__created_and_deadline}>
                     <div className={styles.practice_card__row}>
                         <span className={styles.practice_card__row_label}>Создана:</span>
-                        <span className={styles.practice_card__row_value}>{created_at}</span>
+                        <span className={styles.practice_card__row_value}>{formatDate(created_at)}</span>
                     </div>
 
                     <div className={styles.practice_card__row}>
                         <span className={styles.practice_card__row_label}>Дедлайн:</span>
-                        <span className={styles.practice_card__row_value}>{deadline}</span>
+                        <span className={styles.practice_card__row_value}>{formatDate(deadline)}</span>
                     </div>
                 </div>
 

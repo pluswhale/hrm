@@ -1,11 +1,13 @@
 @import '../../../assets/styles/variables';
 
-.wrapper_autors_notifications .autors_notifications {
+.wrapper_authors_notifications {
+    width: 90%;
+}
+
+.authors_notifications {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 24px;
-    margin-left: 11px;
 
     &:last-child {
         margin-bottom: 20px;
@@ -27,11 +29,9 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 61px;
-    margin-left: 14px;
-    margin-top: -3px;
 }
 
-.notification_autor_name {
+.notification_author_name {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -66,7 +66,7 @@
 }
 
 .notification_message_time,
-.notification_message_time__readed {
+.notification_message_time__seen {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -75,23 +75,7 @@
     color: $purple;
 }
 
-.notification_message_time__readed {
+.notification_message_time__seen {
     color: #a9aeb2;
-}
-
-.dot,
-.dot__readed {
-    margin-right: 15px;
-    width: 12px;
-    height: 12px;
-}
-
-.dot__readed {
-    filter: brightness(0) saturate(100%) invert(100%) sepia(6%) saturate(2538%) hue-rotate(177deg) brightness(98%)
-        contrast(85%);
-}
-
-.notification_message_long {
-    cursor: pointer;
 }
 
