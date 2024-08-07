@@ -15,11 +15,12 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { setFilters, setToggleCheckboxInFilter } from '../../../redux/slices/filter';
 import { fetchAllRequests } from 'shared/api/requests/thunks';
+import { Request } from 'shared/types/request.type';
 
 const RequestsList = () => {
     const isLaptop = useMediaQuery({ maxWidth: '1500px' });
     const dispatch = useAppDispatch();
-    const [currentRequestObjectForModal, setCurrentRequestObjectForModal] = useState<string>('');
+    const [currentRequestObjectForModal, setCurrentRequestObjectForModal] = useState<Request>({} as Request);
     const [searchValue, setSearchValue] = useState<string>('');
     const [isModalCreateRequestOpened, setIsModalCreateRequestOpened] = useState<boolean>(false);
 
@@ -47,7 +48,7 @@ const RequestsList = () => {
                 themes: getCurrentActiveThemes(),
             },
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Request[]>;
 
     const requestsQuery = useFetchData(queryParameters);
 
@@ -130,12 +131,14 @@ const RequestsList = () => {
                         onToggleCheckboxInFilter={onToggleCheckboxInFilter}
                     />
                 )}
-                <RequestTable
-                    currentRequestObjectForModal={currentRequestObjectForModal}
-                    requests={requestsQuery?.data}
-                    onOpenCreateRequestModal={onOpenCreateRequestModal}
-                    setCurrentRequestObjectForModal={setCurrentRequestObjectForModal}
-                />
+                {requestsQuery?.data && (
+                    <RequestTable
+                        currentRequestObjectForModal={currentRequestObjectForModal}
+                        requests={requestsQuery?.data}
+                        onOpenCreateRequestModal={onOpenCreateRequestModal}
+                        setCurrentRequestObjectForModal={setCurrentRequestObjectForModal}
+                    />
+                )}
 
                 {!isLaptop && (
                     <Filter

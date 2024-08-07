@@ -3,15 +3,15 @@ import { AppealCandidatesBlockProps } from './types';
 
 import styles from './appeal-candidates-block.module.scss';
 
-import { columnsFromBackend } from './canban/constants';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { VacancyCandidateCard } from 'entities/vacancy-items/vacancy-candidate-card';
 import { useMoveCandidateInStage } from 'shared/api/appeals/mutations';
 import { useParams } from 'react-router-dom';
+import { Stage } from 'shared/types/stage.type';
 
 export const AppealCandidatesBlock: FC<AppealCandidatesBlockProps> = ({ stages }): ReactElement => {
     const { id: appealId } = useParams();
-    const [columns, setColumns] = useState(stages);
+    const [columns, setColumns] = useState<Stage[]>(stages);
     const moveCandidateInStageMutation = useMoveCandidateInStage();
 
     useEffect(() => {

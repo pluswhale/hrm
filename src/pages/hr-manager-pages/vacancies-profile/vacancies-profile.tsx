@@ -1,7 +1,6 @@
 import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-content-wrapper';
 import { VacancyInfo } from 'features/vacancy-info';
 import { HorizontalNavigation } from 'shared/components/horizontal-navigation';
-import { CANDIDATES_ROWS } from './contants';
 import { Button } from 'shared/components/button/button';
 
 import { VacancyCandidates } from 'features/vacancy-candidates';
@@ -10,6 +9,7 @@ import styles from './vacancy-profile.module.scss';
 import { useNavigate, useParams } from 'react-router';
 import { fetchVacancyById } from 'shared/api/vacancies/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { Vacancy } from 'shared/types/vacancy.type';
 
 const VacanciesProfile = () => {
     const { id: vacancyId } = useParams();
@@ -20,7 +20,7 @@ const VacanciesProfile = () => {
         queryThunkOptions: {
             vacancyId,
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Vacancy>;
 
     const vacancyByIdQuery = useFetchData(queryParameters);
 
@@ -32,7 +32,7 @@ const VacanciesProfile = () => {
             url: '/vacancies',
         },
         {
-            title: vacancyByIdQuery?.data?.name,
+            title: vacancyByIdQuery?.data?.name || '',
             url: '/vacancies',
         },
     ];
@@ -47,8 +47,8 @@ const VacanciesProfile = () => {
                 <HorizontalNavigation navigation={navigation} />
                 <Button onClick={onNavigateToEditVacancy} text="Редактировать" view="default_bg_white" />
             </div>
-            <VacancyInfo vacancy={vacancyByIdQuery?.data} />
-            <VacancyCandidates stages={vacancyByIdQuery?.data?.stages} />
+            <> {vacancyByIdQuery?.data && <VacancyInfo vacancy={vacancyByIdQuery?.data} />} </>
+            <VacancyCandidates stages={vacancyByIdQuery?.data?.stages || []} />
         </DefaultContentWrapper>
     );
 };

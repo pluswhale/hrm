@@ -5,9 +5,10 @@ import { OneOption } from './question-types/one-option';
 import { MultipleOption } from './question-types/multiple-option';
 
 import styles from './question-type-hr-manager.module.scss';
+import { Question } from 'shared/types/question.type';
 
 type Props = {
-    question: any;
+    question: Question;
 };
 
 export const QuestionTypeHrManager: FC<Props> = ({ question }): ReactElement => {

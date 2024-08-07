@@ -7,6 +7,7 @@ import { useDeleteAppeal, useSetAppealStatus } from 'shared/api/appeals/mutation
 import { fetchAppealById } from 'shared/api/appeals/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { Button } from 'shared/components/button/button';
+import { Appeal } from 'shared/types/appeal.type';
 
 const EditAppeal = () => {
     const { id: appealId } = useParams();
@@ -19,13 +20,13 @@ const EditAppeal = () => {
         queryThunkOptions: {
             appealId,
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Appeal>;
 
     const appealByIdQuery = useFetchData(queryParameters);
 
     const navigation = [
         {
-            title: appealByIdQuery?.data?.name,
+            title: appealByIdQuery?.data?.name || '',
             url: `/appeals/${appealId}`,
         },
         {
@@ -42,7 +43,7 @@ const EditAppeal = () => {
                     <Button
                         onClick={() =>
                             setAppealStatusMutation.mutate({
-                                appealId: appealByIdQuery?.data?.id,
+                                appealId: String(appealByIdQuery?.data?.id),
                                 status: !appealByIdQuery?.data?.is_active,
                             })
                         }
@@ -50,13 +51,14 @@ const EditAppeal = () => {
                         text={appealByIdQuery?.data?.is_active ? 'Остановить' : 'Активировать'}
                     />
                     <Button
-                        onClick={() => deleteAppealMutation.mutate(appealByIdQuery?.data?.id)}
+                        onClick={() => deleteAppealMutation.mutate(String(appealByIdQuery?.data?.id))}
                         view="default_bg_white"
                         text="Удалить"
                     />
                 </div>
             </div>
-            <EditAppealForm appeal={appealByIdQuery?.data} />
+
+            <>{appealByIdQuery?.data && <EditAppealForm appeal={appealByIdQuery?.data} />} </>
         </DefaultContentWrapper>
     );
 };

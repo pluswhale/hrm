@@ -26,7 +26,7 @@ export const VacancyAboutBlock: FC<VacancyAboutBlockProps> = ({ vacancyData }): 
                         <span className={styles.vacancy_about__row_title}>План поиска:</span>
                         <span className={styles.vacancy_about__row_value}>
                             {vacancyData?.desired_count_candidates}{' '}
-                            {vacancyData?.desired_count_candidates > 1 ? 'человека' : 'человек'}
+                            {(vacancyData?.desired_count_candidates as never as number) > 1 ? 'человека' : 'человек'}
                         </span>
                     </div>
 

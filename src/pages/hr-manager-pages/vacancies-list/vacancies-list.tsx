@@ -8,6 +8,7 @@ import { Filter } from 'features/filter';
 import { useNavigate } from 'react-router';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { fetchAllVacancies } from 'shared/api/vacancies/thunks';
+import { Vacancy } from 'shared/types/vacancy.type';
 
 const VacanciesList = () => {
     const navigate = useNavigate();
@@ -21,7 +22,8 @@ const VacanciesList = () => {
             name: searchValue,
             isActive: activeTab === 0 ? true : false,
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Vacancy[]>;
+
     const vacanciesQuery = useFetchData(queryParameters);
 
     const tabs = [{ label: 'Активные вакансии' }, { label: 'Архив' }];
@@ -48,7 +50,7 @@ const VacanciesList = () => {
                 </div>
                 <div className={styles.vacancies__main_content}>
                     <div className={styles.vacancies__items}>
-                        <VacanciesDataContainer vacancies={vacanciesQuery?.data} />
+                        {vacanciesQuery?.data && <VacanciesDataContainer vacancies={vacanciesQuery?.data} />}
                     </div>
                     <Filter
                         searchValue={searchValue}

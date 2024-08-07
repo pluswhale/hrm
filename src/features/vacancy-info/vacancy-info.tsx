@@ -9,9 +9,9 @@ import { VacancyCompetencesBlock } from 'entities/vacancy-items/vacancy-competen
 
 export const VacancyInfo: FC<VacancyInfoProps> = ({ vacancy }): ReactElement => {
     const vacancyDescriptionRows = [
-        { id: 1, title: 'Обязанности', data: vacancy?.responsibilities?.split(';') },
-        { id: 2, title: 'Требования', data: vacancy?.requirements?.split(';') },
-        { id: 3, title: 'Условия', data: vacancy?.description?.split(';') },
+        { id: 1, title: 'Обязанности', data: vacancy?.responsibilities?.split(';') || [] },
+        { id: 2, title: 'Требования', data: vacancy?.requirements?.split(';') || [] },
+        { id: 3, title: 'Условия', data: vacancy?.description?.split(';') || [] },
     ];
 
     return (

@@ -15,11 +15,12 @@ import { fetchAllCompetences } from 'shared/api/candidates/thunks';
 import { InfoAboutAppeal } from 'entities/create-appeal-form/info-about-appeal/info-about-appeal';
 import { Competences } from 'entities/create-appeal-form/competences/competences';
 import { Stages } from 'entities/create-appeal-form/stages/stages';
+import { Competence } from 'shared/types/competence.type';
 
 const queryParametersForFetchAllCompetences = {
     queryKey: 'fetchAllCompetencesForUpdatingAppeal',
     queryThunk: fetchAllCompetences,
-} as QueryParameters<any>;
+} as QueryParameters<Competence[]>;
 
 export const EditAppealForm: FC<EditAppealProps> = ({ appeal }): ReactElement => {
     const dispatch = useAppDispatch();
@@ -34,17 +35,22 @@ export const EditAppealForm: FC<EditAppealProps> = ({ appeal }): ReactElement =>
 
     for (const key in appeal) {
         if (
+            //@ts-ignore
             appeal[key] !== null &&
+            //@ts-ignore
             appeal[key] !== undefined &&
+            //@ts-ignore
             appeal[key] !== '' &&
             key !== 'stages' &&
             key !== 'competences' &&
             key !== 'candidates'
         ) {
             if (key === 'deadline') {
+                //@ts-ignore
                 const mirroredDate = appeal?.[key]?.split('-')?.reverse()?.join('.');
                 formState[key] = mirroredDate;
             } else {
+                //@ts-ignore
                 formState[key] = appeal[key];
             }
         }
@@ -94,15 +100,6 @@ export const EditAppealForm: FC<EditAppealProps> = ({ appeal }): ReactElement =>
         updateAppealMutation.mutate(body);
     };
 
-    const onAddStage = () => {
-        dispatch(addNewStage({ stageName: newStage }));
-        setNewStage('');
-    };
-
-    const onRemoveStage = (stageId: string) => {
-        dispatch(removeStage({ stageId }));
-    };
-
     const addCompetence = (newCompetence: any) => {
         if (typeof newCompetence === 'string') {
             //@ts-ignore
@@ -118,11 +115,13 @@ export const EditAppealForm: FC<EditAppealProps> = ({ appeal }): ReactElement =>
                 <div className={styles.create_appeal__container}>
                     <div className={styles.create_appeal__vertical_block}>
                         <InfoAboutAppeal />
-                        <Competences
-                            competence={competence}
-                            competencesOptions={competencesQuery?.data}
-                            addCompetence={addCompetence}
-                        />
+                        {competencesQuery?.data && (
+                            <Competences
+                                competence={competence}
+                                competencesOptions={competencesQuery?.data}
+                                addCompetence={addCompetence}
+                            />
+                        )}
                     </div>
                     <div className={styles.create_appeal__vertical_block}>
                         <Stages stages={stages} />

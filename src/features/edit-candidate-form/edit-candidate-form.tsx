@@ -14,6 +14,8 @@ import { Experience } from 'entities/create-candidate-form/experiences/experienc
 import { Education } from 'entities/create-candidate-form/educations/educations';
 import { useAppDispatch } from '../../redux/store';
 import { setCurrentEducations, setCurrentExperience } from '../../redux/slices/create-candidate';
+import { Candidate } from 'shared/types/candidate.type';
+import { Competence } from 'shared/types/competence.type';
 
 function processFormState(formState: any) {
     const experiences: any[] = [];
@@ -61,10 +63,10 @@ function processFormState(formState: any) {
 const queryParametersForFetchAllCompetences = {
     queryKey: 'fetchAllCompetencesForCreatingCandidate',
     queryThunk: fetchAllCompetences,
-} as QueryParameters<any>;
+} as QueryParameters<Competence[]>;
 
 type Props = {
-    candidateData: any;
+    candidateData: Candidate;
 };
 
 export const EditCandidateForm: FC<Props> = ({ candidateData }): ReactElement => {
@@ -74,7 +76,7 @@ export const EditCandidateForm: FC<Props> = ({ candidateData }): ReactElement =>
     const educations = useSelector(educationsSelector);
     const experiences = useSelector(experiencesSelector);
 
-    const [competence, setCompetence] = useState([]);
+    const [competence, setCompetence] = useState<Competence[]>([]);
 
     const competencesQuery = useFetchData(queryParametersForFetchAllCompetences);
 
@@ -83,25 +85,36 @@ export const EditCandidateForm: FC<Props> = ({ candidateData }): ReactElement =>
             const { experiences, educations, birthday_date, home_address, ...rest } = candidateData;
             const formattedValues = { ...rest };
 
+            //@ts-ignore
             formattedValues.birth_day = birthday_date;
+            //@ts-ignore
             formattedValues.location = home_address;
 
             experiences.forEach((experience: any, index: number) => {
                 Object.keys(experience).forEach((_) => {
+                    //@ts-ignore
                     formattedValues[`company-name-${index + 1}`] = experience.company_name;
+                    //@ts-ignore
                     formattedValues[`job-title-${index + 1}`] = experience.position;
+                    //@ts-ignore
                     formattedValues[`responsibilities-and-achievements-${index + 1}`] =
                         experience.responsibilities_achievements;
+                    //@ts-ignore
                     formattedValues[`start-job-date-${index + 1}`] = experience.work_start_date;
+                    //@ts-ignore
                     formattedValues[`end-job-date-${index + 1}`] = experience.work_end_date;
                 });
             });
 
             educations.forEach((education: any, index: number) => {
                 Object.keys(education).forEach((_) => {
+                    //@ts-ignore
                     formattedValues[`university-name-${index + 1}`] = education.institution_name;
+                    //@ts-ignore
                     formattedValues[`faculty-${index + 1}`] = education.faculty;
+                    //@ts-ignore
                     formattedValues[`specialization-${index + 1}`] = education.specialisation;
+                    //@ts-ignore
                     formattedValues[`end-date-${index + 1}`] = education.end_date;
                 });
             });
@@ -120,13 +133,13 @@ export const EditCandidateForm: FC<Props> = ({ candidateData }): ReactElement =>
         if (candidateData?.experiences) {
             dispatch(setCurrentExperience({ experiencesLength: candidateData.experiences.length }));
         }
-    }, [candidateData?.experiences]);
+    }, [candidateData.experiences, dispatch]);
 
     useEffect(() => {
         if (candidateData?.educations) {
             dispatch(setCurrentEducations({ educationsLength: candidateData.educations.length }));
         }
-    }, [candidateData?.educations]);
+    }, [candidateData.educations, dispatch]);
 
     const addCompetence = (newCompetence: any) => {
         if (typeof newCompetence === 'string') {
@@ -177,11 +190,13 @@ export const EditCandidateForm: FC<Props> = ({ candidateData }): ReactElement =>
                     <Education educations={educations} />
                     <Experience experiences={experiences} />
                 </div>
-                <Competences
-                    competence={competence}
-                    competencesOptions={competencesQuery?.data}
-                    addCompetence={addCompetence}
-                />
+                {competencesQuery?.data && (
+                    <Competences
+                        competence={competence}
+                        competencesOptions={competencesQuery?.data}
+                        addCompetence={addCompetence}
+                    />
+                )}
                 <Button type={'submit'} styles={{ width: '189px' }} view={'default_bg'} text="Создать" />
             </form>
         </FormProvider>

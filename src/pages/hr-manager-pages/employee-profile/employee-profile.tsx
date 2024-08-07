@@ -15,6 +15,8 @@ import { useSelector } from 'react-redux';
 import { userDataSelector } from '../../../redux/selectors/auth';
 import { CreateCommentBody } from 'shared/api/comments/types';
 import { fetchCommentsByUser } from 'shared/api/comments/thunks';
+import { Employee } from 'shared/types/employee.type';
+import { Comment } from 'shared/types/comment.type';
 
 const EmployeeProfile: FC = (): ReactElement => {
     const params = parseUriParams(window.location.href);
@@ -32,7 +34,7 @@ const EmployeeProfile: FC = (): ReactElement => {
         queryThunkOptions: {
             id,
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Employee>;
 
     const employeeQuery = useFetchData(queryParameters);
 
@@ -43,7 +45,7 @@ const EmployeeProfile: FC = (): ReactElement => {
             id: targetUserId,
             typeUser: 'employee',
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Comment[]>;
 
     const commentsQuery = useFetchData(queryParametersForComment);
 
@@ -88,14 +90,16 @@ const EmployeeProfile: FC = (): ReactElement => {
                     <div className={style.container__wrapper_left}>
                         <EmployeeProfileInfo employeeData={employeeQuery?.data} />
                     </div>
-                    <div className={style.container__wrapper}>
-                        <CommentAndHistoryTemplate
-                            commentsList={commentsQuery?.data}
-                            onCreateComment={onCreateComment}
-                            onDeleteComment={onDeleteComment}
-                            onEditComment={onEditComment}
-                        />
-                    </div>
+                    {commentsQuery?.data && (
+                        <div className={style.container__wrapper}>
+                            <CommentAndHistoryTemplate
+                                commentsList={commentsQuery?.data}
+                                onCreateComment={onCreateComment}
+                                onDeleteComment={onDeleteComment}
+                                onEditComment={onEditComment}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
         </DefaultContentWrapper>

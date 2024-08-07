@@ -8,11 +8,12 @@ import AddImage from './../../assets/Vector.svg';
 import { Button } from '../../shared/components/button/button';
 
 import style from './comment-and-history-template.module.scss';
+import { Comment } from 'shared/types/comment.type';
 
 const tabs = [{ label: 'Комментарии' }, { label: 'История' }];
 
 type Props = {
-    commentsList: any[];
+    commentsList: Comment[];
     onCreateComment: (comment: string) => void;
     onDeleteComment: (commentId: number) => void;
     onEditComment: (commentId: number, comment: string) => void;
@@ -25,7 +26,6 @@ export const CommentAndHistoryTemplate: FC<Props> = ({
     onEditComment,
 }): ReactElement => {
     const [activeTab, setActiveTab] = useState<number>(0);
-
     const [commentText, setCommentText] = useState<string>('');
 
     const handleTabClick = (index: number) => {
@@ -62,7 +62,7 @@ export const CommentAndHistoryTemplate: FC<Props> = ({
                             />
                         </div>
                     </div>
-                    {commentsList?.map((comment: any) => (
+                    {commentsList?.map((comment) => (
                         <CommentItem
                             onEditComment={onEditComment}
                             onDeleteComment={onDeleteComment}

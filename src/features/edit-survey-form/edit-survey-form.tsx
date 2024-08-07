@@ -1,7 +1,6 @@
 import { FC, ReactElement, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import styles from './edit-survey-form.module.scss';
 import { Input } from 'shared/components/input';
 import { Textarea } from 'shared/components/textarea';
 import { Option } from 'shared/components/selector/types';
@@ -18,10 +17,12 @@ import { CreateSurveyEmployeesList } from 'entities/survey-items/create-survey-e
 import { PopupWithDarkOverlay } from 'shared/components/portal/popup-with-dark-overlay';
 import { AddParticipant } from 'entities/add-participant/add-participant';
 import { useUpdateSurvey } from 'shared/api/surveys/mutations';
-import { Question_SURVEY } from 'redux/slices/create-survey';
+import { Survey } from 'shared/types/survey.type';
+
+import styles from './edit-survey-form.module.scss';
 
 type Props = {
-    surveyData: any;
+    surveyData: Survey;
 };
 
 export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
@@ -29,8 +30,11 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
 
     for (const key in surveyData) {
         if (
+            //@ts-ignore
             surveyData[key] !== null &&
+            //@ts-ignore
             surveyData[key] !== undefined &&
+            //@ts-ignore
             surveyData[key] !== '' &&
             key !== 'stages' &&
             key !== 'competences' &&
@@ -38,6 +42,7 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
         ) {
             if (key === 'deadlineFrom' || key === 'deadlineTo') {
                 const dateStr = surveyData[key];
+                //@ts-ignore
                 const date = new Date(dateStr);
 
                 const formattedDate = date.toLocaleDateString('ru-RU', {
@@ -47,6 +52,7 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
                 });
                 formState[key] = formattedDate;
             } else {
+                //@ts-ignore
                 formState[key] = surveyData[key];
             }
         }
@@ -58,7 +64,6 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
     const [addedEmployeesIds, setAddedEmployeesIds] = useState<number[]>([]);
     const [addedEmployees, setAddedEmployees] = useState<any[]>([]);
     const questions = useSelector(questionsInCreateSurveySelector);
-    const userId = useSelector(userDataSelector)?.id;
     const updateSurveyMutation = useUpdateSurvey();
 
     useEffect(() => {

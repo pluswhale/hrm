@@ -1,15 +1,15 @@
 import { FC, ReactElement, useEffect, useState } from 'react';
 import style from './surveys-people.module.scss';
 import { Button } from '../../shared/components/button/button';
-import { Filter } from '../filter';
 import logo from '../../assets/Ellipse 1.svg';
 import { PopupWithDarkOverlay } from '../../shared/components/portal/popup-with-dark-overlay';
 import { AddParticipant } from '../../entities/add-participant/add-participant';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { fetchAllEmployees } from 'shared/api/employees/thunks';
+import { Employee } from 'shared/types/employee.type';
 
 type Props = {
-    participants: any[];
+    participants: Employee[];
 };
 
 const SurveysPeople: FC<Props> = ({ participants }): ReactElement => {
@@ -103,7 +103,7 @@ const SurveysPeople: FC<Props> = ({ participants }): ReactElement => {
                                         <h2
                                             className={style.container__title}
                                         >{`${participant?.last_name} ${participant?.first_name} ${participant?.sur_name}`}</h2>
-                                        <span className={style.container__name}>{participant?.sub_position}</span>
+                                        <span className={style.container__name}>{participant?.sub_position.title}</span>
                                     </div>
                                 </div>
                                 {displayStatus('Новый')}

@@ -1,6 +1,6 @@
-import { CandidatesRow } from 'features/vacancy-candidates/types';
+import { Stage } from 'shared/types/stage.type';
 
 export type AppealCandidatesBlockProps = {
-    stages: any[];
+    stages: Stage[];
 };
 

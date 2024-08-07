@@ -1,5 +1,4 @@
 import { FC, ReactElement } from 'react';
-import { VacancyCardProps } from './types';
 
 import styles from './vacancy-card.module.scss';
 import { Link } from 'react-router-dom';
@@ -18,7 +17,7 @@ export const VacancyCard: FC<any> = ({
         let color = '#6362E7';
         let text = 'В работе';
 
-        switch (status) {
+        switch (isActive) {
             case false: {
                 color = '#DD5555';
                 text = 'Закрыта';

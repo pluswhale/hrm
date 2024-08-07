@@ -8,6 +8,7 @@ import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 
 import styles from './edit-vacancy.module.scss';
 import { useDeleteVacancy, useSetVacancyStatus } from 'shared/api/vacancies/mutations';
+import { Vacancy } from 'shared/types/vacancy.type';
 
 const EditVacancy = () => {
     const { id: vacancyId } = useParams();
@@ -20,7 +21,7 @@ const EditVacancy = () => {
         queryThunkOptions: {
             vacancyId,
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Vacancy>;
 
     const vacancyByIdQuery = useFetchData(queryParameters);
 
@@ -30,7 +31,7 @@ const EditVacancy = () => {
             url: '/vacancies',
         },
         {
-            title: vacancyByIdQuery?.data?.name,
+            title: vacancyByIdQuery?.data?.name || '',
             url: `/vacancies/${vacancyByIdQuery?.data?.id}`,
         },
         {
@@ -47,7 +48,7 @@ const EditVacancy = () => {
                     <Button
                         onClick={() =>
                             setVacancyStatusMutation.mutate({
-                                vacancyId: vacancyByIdQuery?.data?.id,
+                                vacancyId: String(vacancyByIdQuery?.data?.id),
                                 status: !vacancyByIdQuery?.data?.is_active,
                             })
                         }
@@ -55,13 +56,13 @@ const EditVacancy = () => {
                         text={vacancyByIdQuery?.data?.is_active ? 'Остановить' : 'Активировать'}
                     />
                     <Button
-                        onClick={() => deleteVacancyMutation.mutate(vacancyByIdQuery?.data?.id)}
+                        onClick={() => deleteVacancyMutation.mutate(String(vacancyByIdQuery?.data?.id))}
                         view="default_bg_white"
                         text="Удалить"
                     />
                 </div>
             </div>
-            <EditVacancyForm vacancy={vacancyByIdQuery?.data} />
+            <>{vacancyByIdQuery?.data ? <EditVacancyForm vacancy={vacancyByIdQuery?.data} /> : null}</>
         </DefaultContentWrapper>
     );
 };

@@ -1,7 +1,6 @@
 import { HorizontalNavigation } from '../../../shared/components/horizontal-navigation';
 import { DefaultContentWrapper } from '../../../entities/default-content-wrapper/default-content-wrapper';
 import styles from './edit-survey.module.scss';
-import { Button } from '../../../shared/components/button/button';
 import { EditSurveyForm } from 'features/edit-survey-form';
 import { EditSurveyRightForm } from 'features/edit-survey-form/edit-survey-right-form';
 import { fetchSurveyByIdForHR } from 'shared/api/surveys/thunks';
@@ -10,6 +9,7 @@ import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { setQuestions } from '../../../redux/slices/create-survey';
+import { Survey } from 'shared/types/survey.type';
 
 const EditSurvey = () => {
     const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ const EditSurvey = () => {
         queryThunkOptions: {
             surveyId,
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Survey>;
 
     const surveyQuery = useFetchData(queryParameters);
 
@@ -31,7 +31,7 @@ const EditSurvey = () => {
 
     const navigation = [
         {
-            title: surveyQuery?.data?.name,
+            title: surveyQuery?.data?.name || '',
             url: `/survey/${surveyQuery?.data?.id}`,
         },
         {
@@ -44,7 +44,7 @@ const EditSurvey = () => {
         <DefaultContentWrapper>
             <HorizontalNavigation navigation={navigation} />
             <div className={styles.container}>
-                <EditSurveyForm surveyData={surveyQuery?.data} />
+                {surveyQuery?.data && <EditSurveyForm surveyData={surveyQuery?.data} />}
                 <div className={styles.container__wrapper}>
                     <EditSurveyRightForm />
                 </div>

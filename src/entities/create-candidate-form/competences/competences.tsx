@@ -1,16 +1,12 @@
 import { FC } from 'react';
 import styles from '../../../features/create-candidate-form/create-candidate-form.module.scss';
 import { Autocomplete, Chip, TextField } from '@mui/material';
+import { Competence } from 'shared/types/competence.type';
 
 type CompetencesProps = {
-    competence: any;
+    competence: Competence[];
     competencesOptions: Competence[];
     addCompetence: (competence: Competence) => void;
-};
-
-type Competence = {
-    id: number;
-    name: string;
 };
 
 export const Competences: FC<CompetencesProps> = ({ competence, competencesOptions, addCompetence }) => {

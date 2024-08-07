@@ -25,7 +25,7 @@ export const Stages: FC<Props> = ({ stages }): ReactElement => {
         setNewStage('');
     };
 
-    const onRemoveStage = (stageId: string) => {
+    const onRemoveStage = (stageId: number | string) => {
         dispatch(removeStage({ stageId }));
     };
 

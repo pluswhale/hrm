@@ -16,21 +16,20 @@ import {
     queryParametersForCompetencesInCandidatesFilterSet,
     queryParametersForCountByTypeInCandidatesFilterSet,
 } from 'shared/api/filters/filters.queries';
+import { Candidate } from 'shared/types/candidate.type';
 
 const CandidatesList: FC = (): ReactElement => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    // const tabs = [{ label: 'Текущие сотрудники' }, { label: 'Бывшие сотрудники' }];
+    // const [activeTab, setActiveTab] = useState<number>(0);
 
-    const tabs = [{ label: 'Текущие сотрудники' }, { label: 'Бывшие сотрудники' }];
-
-    const [activeTab, setActiveTab] = useState<number>(0);
     const [searchValue, setSearchValue] = useState<string>('');
     const competencesForFilter = useSelector(skillsInFilterSelector);
     const typesForFilter = useSelector(rolesInFilterSelector);
     const competencesFilterSet = useFetchData(queryParametersForCompetencesInCandidatesFilterSet);
     const countByTypeFilterSet = useFetchData(queryParametersForCountByTypeInCandidatesFilterSet);
 
-    //query for candidates list
     const queryParameters = {
         queryKey: 'fetchAllCandidates',
         queryThunk: fetchAllCandidates,
@@ -39,7 +38,7 @@ const CandidatesList: FC = (): ReactElement => {
             competences: getCurrentActiveCompetencesIds(),
             type: getCurrentType(),
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Candidate[]>;
 
     const candidatesQuery = useFetchData(queryParameters);
 
@@ -110,7 +109,7 @@ const CandidatesList: FC = (): ReactElement => {
                     />
                 </div>
                 <div className={style.container__wrapper}>
-                    <CandidatesDataContainer candidates={candidatesQuery?.data} />
+                    {candidatesQuery?.data && <CandidatesDataContainer candidates={candidatesQuery?.data} />}
                     <Filter
                         searchValue={searchValue}
                         onChangeSearchValue={setSearchValue}

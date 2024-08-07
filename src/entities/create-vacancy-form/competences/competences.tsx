@@ -36,7 +36,13 @@ export const Competences: FC<CompetencesProps> = ({ competence, competencesOptio
                         placeholder="Добавьте новый навык"
                         name={'new_competence'}
                     />
-                    <Button type="button" view="default_bg" text="Добавить" onClick={onAddNewCompetence} />
+                    <Button
+                        styles={{ width: 'fix-content' }}
+                        type="button"
+                        view="default_bg"
+                        text="Добавить"
+                        onClick={onAddNewCompetence}
+                    />
                 </div>
                 <Autocomplete
                     value={competence}

@@ -12,6 +12,7 @@ import { Competences } from 'entities/create-candidate-form/competences/competen
 import { InfoAboutCandidate } from 'entities/create-candidate-form/info-about-candidate/info-about-candidate';
 import { Experience } from 'entities/create-candidate-form/experiences/experiences';
 import { Education } from 'entities/create-candidate-form/educations/educations';
+import { Competence } from 'shared/types/competence.type';
 
 function processFormState(formState: any) {
     const experiences: any[] = [];
@@ -59,7 +60,7 @@ function processFormState(formState: any) {
 const queryParametersForFetchAllCompetences = {
     queryKey: 'fetchAllCompetencesForCreatingCandidate',
     queryThunk: fetchAllCompetences,
-} as QueryParameters<any>;
+} as QueryParameters<Competence[]>;
 
 export const CreateCandidateForm = () => {
     const methods = useForm();
@@ -119,11 +120,13 @@ export const CreateCandidateForm = () => {
                     <Education educations={educations} />
                     <Experience experiences={experiences} />
                 </div>
-                <Competences
-                    competence={competence}
-                    competencesOptions={competencesQuery?.data}
-                    addCompetence={addCompetence}
-                />
+                {competencesQuery?.data && (
+                    <Competences
+                        competence={competence}
+                        competencesOptions={competencesQuery?.data}
+                        addCompetence={addCompetence}
+                    />
+                )}
                 <Button type={'submit'} styles={{ width: '189px' }} view={'default_bg'} text="Создать" />
             </form>
         </FormProvider>

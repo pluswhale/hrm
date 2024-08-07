@@ -12,6 +12,7 @@ import { useNavigate, useParams } from 'react-router';
 import { fetchSurveyByIdForHR } from 'shared/api/surveys/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { SurveysPeople } from 'features/surveys-peolple';
+import { Survey } from 'shared/types/survey.type';
 
 const SurveysProfile = () => {
     const { id: surveyId } = useParams();
@@ -24,7 +25,7 @@ const SurveysProfile = () => {
         queryThunkOptions: {
             surveyId,
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Survey>;
 
     const surveyQuery = useFetchData(queryParameters);
 
@@ -36,7 +37,7 @@ const SurveysProfile = () => {
             url: '/survey',
         },
         {
-            title: surveyQuery?.data?.name,
+            title: surveyQuery?.data?.name || '',
             url: undefined,
         },
     ];
@@ -54,15 +55,15 @@ const SurveysProfile = () => {
             <div className={styles.survey_navigation__container}>
                 <h2 className={styles.survey_navigation__container__title}>{surveyQuery?.data?.name}</h2>
                 <div className={styles.survey_navigation__wrap}>
-                    <SurveyInfo surveyData={surveyQuery?.data} />
-                    <SurveyDescription title="Описание" content={surveyQuery?.data?.description} />
+                    {surveyQuery?.data && <SurveyInfo surveyData={surveyQuery?.data} />}
+                    <SurveyDescription title="Описание" content={surveyQuery?.data?.description || ''} />
                 </div>
             </div>
             <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
             <div>
-                {activeTab === 0 && <SurveysQuestions questions={surveyQuery?.data?.questions} />}
-                {activeTab === 1 && <SurveysResult questions={surveyQuery?.data?.questions} />}
-                {activeTab === 2 && <SurveysPeople participants={surveyQuery?.data?.targetedEmployees} />}
+                {activeTab === 0 && <SurveysQuestions questions={surveyQuery?.data?.questions || []} />}
+                {activeTab === 1 && <SurveysResult questions={surveyQuery?.data?.questions || []} />}
+                {activeTab === 2 && <SurveysPeople participants={surveyQuery?.data?.targetedEmployees || []} />}
             </div>
         </DefaultContentWrapper>
     );

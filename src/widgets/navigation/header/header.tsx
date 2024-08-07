@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { userDataSelector } from '../../../redux/selectors/auth';
 import Notifications from 'widgets/notifications/notifications';
 import { useState } from 'react';
+import fakeAvatar from '../../../assets/Ellipse 1.svg';
 
 type HeaderProps = {
     toggleSidebar: () => void;
@@ -85,7 +86,7 @@ export const Header = ({ toggleSidebar, isMobile, isOpen, closeSidebar }: Header
                         </button>
                         <a href="#" className={style.container__img}>
                             <img
-                                src={'https://github.com/mdo.png'}
+                                src={fakeAvatar}
                                 style={{ borderRadius: '100px', height: '58px', width: '58px∂' }}
                                 alt="avatar"
                             />

@@ -4,16 +4,12 @@ import { Input } from 'shared/components/input/input';
 import { Button } from 'shared/components/button/button';
 import { Autocomplete, Chip, TextField } from '@mui/material';
 import { useAddNewCompetence } from 'shared/api/candidates/mutations';
+import { Competence } from 'shared/types/competence.type';
 
 type CompetencesProps = {
-    competence: any;
+    competence: Competence[];
     competencesOptions: Competence[];
     addCompetence: (competence: Competence) => void;
-};
-
-type Competence = {
-    id: number;
-    name: string;
 };
 
 export const Competences: FC<CompetencesProps> = ({ competence, competencesOptions, addCompetence }) => {

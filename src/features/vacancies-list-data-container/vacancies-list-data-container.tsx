@@ -16,7 +16,7 @@ export const VacanciesDataContainer: FC<VacanciesDataContainerProps> = ({ vacanc
                         deadline={vacancy?.deadline}
                         candidatesCount={vacancy?.candidates?.length}
                         id={vacancy?.id}
-                        status={vacancy?.status}
+                        status={vacancy?.is_active}
                     />
                 ))
             ) : (

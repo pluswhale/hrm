@@ -7,25 +7,25 @@ import { useSelector } from 'react-redux';
 
 import { stagesSelector } from '../../redux/selectors/create-appeal';
 import { useAppDispatch } from '../../redux/store';
-import { addNewStage, removeStage, setStages } from '../../redux/slices/create-appeal';
+import { setStages } from '../../redux/slices/create-appeal';
 import { useCreateAppeal } from 'shared/api/appeals/mutations';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { fetchAllCompetences } from 'shared/api/candidates/thunks';
 import { Stages } from 'entities/create-appeal-form/stages/stages';
 import { Competences } from 'entities/create-appeal-form/competences/competences';
 import { InfoAboutAppeal } from 'entities/create-appeal-form/info-about-appeal/info-about-appeal';
+import { Competence } from 'shared/types/competence.type';
 
 const queryParametersForFetchAllCompetences = {
     queryKey: 'fetchAllCompetencesForCreatingAppeal',
     queryThunk: fetchAllCompetences,
-} as QueryParameters<any>;
+} as QueryParameters<Competence[]>;
 
 export const CreateAppealForm = () => {
     const dispatch = useAppDispatch();
-    const [newStage, setNewStage] = useState<string>('');
     const methods = useForm({ mode: 'onChange' });
     const createAppealMutation = useCreateAppeal();
-    const [competence, setCompetence] = useState<any[]>([]);
+    const [competence, setCompetence] = useState<Competence[]>([]);
     const stages = useSelector(stagesSelector);
 
     const competencesQuery = useFetchData(queryParametersForFetchAllCompetences);
@@ -69,26 +69,19 @@ export const CreateAppealForm = () => {
         createAppealMutation.mutate(body);
     };
 
-    const onAddStage = () => {
-        dispatch(addNewStage({ stageName: newStage }));
-        setNewStage('');
-    };
-
-    const onRemoveStage = (stageId: string) => {
-        dispatch(removeStage({ stageId }));
-    };
-
     return (
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_appeal}>
                 <div className={styles.create_appeal__container}>
                     <div className={styles.create_appeal__vertical_block}>
                         <InfoAboutAppeal />
-                        <Competences
-                            competence={competence}
-                            competencesOptions={competencesQuery?.data}
-                            addCompetence={addCompetence}
-                        />
+                        {competencesQuery?.data && (
+                            <Competences
+                                competence={competence}
+                                competencesOptions={competencesQuery?.data}
+                                addCompetence={addCompetence}
+                            />
+                        )}
                     </div>
                     <div className={styles.create_appeal__vertical_block}>
                         <Stages stages={stages} />

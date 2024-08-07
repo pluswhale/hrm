@@ -19,6 +19,7 @@ import {
     queryParametersForKeySkillsEmployeeFilterSet,
     queryParametersForPositionsEmployeeFilterSet,
 } from 'shared/api/filters/filters.queries';
+import { Employee } from 'shared/types/employee.type';
 
 export const EmployeesList: FC = (): ReactElement => {
     const dispatch = useAppDispatch();
@@ -46,7 +47,7 @@ export const EmployeesList: FC = (): ReactElement => {
             keySkills: getCurrentActiveKeySkillsIds(),
             positions: getCurrentActivePositionsIds(),
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Employee[]>;
 
     const employeesQuery = useFetchData(queryParameters);
 
@@ -91,7 +92,7 @@ export const EmployeesList: FC = (): ReactElement => {
         <DefaultContentWrapper>
             <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
             <div className={style.main_content}>
-                <EmployeesDataContainer employees={employeesQuery?.data} />
+                {employeesQuery?.data && <EmployeesDataContainer employees={employeesQuery?.data} />}
                 <Filter
                     searchValue={searchValue}
                     onChangeSearchValue={setSearchValue}

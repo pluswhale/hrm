@@ -9,6 +9,7 @@ import { fetchAllSurveysForHR } from 'shared/api/surveys/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { useSelector } from 'react-redux';
 import { userDataSelector } from '../../../redux/selectors/auth';
+import { Survey } from 'shared/types/survey.type';
 
 const SurveyList = () => {
     const [activeTab, setActiveTab] = useState<number>(0);
@@ -25,7 +26,7 @@ const SurveyList = () => {
             search: searchValue,
             sort: activeTab === 0 ? 'current' : 'completed',
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Survey[]>;
 
     const surveysQuery = useFetchData(queryParameters);
 
@@ -47,7 +48,7 @@ const SurveyList = () => {
                 </div>
                 <div className={styles.survey__main_content}>
                     <div className={styles.survey__items}>
-                        <SurveyListContainer surveys={surveysQuery?.data} />
+                        {surveysQuery?.data && <SurveyListContainer surveys={surveysQuery?.data} />}
                     </div>
                     <Filter
                         searchValue={searchValue}

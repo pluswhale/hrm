@@ -1,13 +1,6 @@
+import { Survey } from 'shared/types/survey.type';
+
 export type SurveyListContainerProps = {
-    surveys: any[];
+    surveys: Survey[];
 };
 
-type Survey = {
-    id: number;
-    title: string;
-    navigationUrl: string;
-    candidatesCount: string;
-    created_at: string;
-    deadline: string;
-    status: string;
-};

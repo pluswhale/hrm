@@ -1,10 +1,10 @@
-import { KeySkill, SubPosition } from 'features/employees-list-data-container/types';
+import { KeySkill } from 'shared/types/key-skill.type';
+import { SubPosition } from 'shared/types/sub-position.type';
 
 export type PersonCardProps = {
-    imageSrc: string;
     name: string;
     navigationUrl: string;
-    role: SubPosition;
+    role?: SubPosition;
     skills: KeySkill[];
 };
 

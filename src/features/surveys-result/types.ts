@@ -1,3 +1,5 @@
+import { Question } from 'shared/types/question.type';
+
 export interface SurveyResult {
     id: string;
     percent: number;
@@ -5,5 +7,6 @@ export interface SurveyResult {
 }
 
 export interface Props {
-    questions: any[];
+    questions: Question[];
 }
+

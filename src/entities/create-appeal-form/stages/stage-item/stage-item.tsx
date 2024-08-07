@@ -2,16 +2,11 @@ import { FC } from 'react';
 import deleteIcon from '../../../../assets/DeleteOutlined.svg';
 
 import styles from '../../../../features/create-appeal-form/create-appeal-form.module.scss';
+import { StageAppeal } from 'shared/types/stage-appeal.type';
 
 export type StageItemProps = {
-    stage: StageItem;
-    onDelete: (stageId: string) => void;
-};
-
-export type StageItem = {
-    id: string;
-    name: string;
-    position: number;
+    stage: StageAppeal;
+    onDelete: (stageId: string | number) => void;
 };
 
 export const StageItem: FC<StageItemProps> = ({ stage, onDelete }) => {

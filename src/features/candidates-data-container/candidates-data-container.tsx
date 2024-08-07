@@ -12,9 +12,7 @@ export const CandidatesDataContainer: FC<CandidatesDataContainerProps> = ({ cand
                     <PersonCard
                         key={candidate?.id}
                         navigationUrl={`/candidates/${candidate?.id}`}
-                        imageSrc={''}
                         name={`${candidate?.last_name} ${candidate?.first_name}`}
-                        role={candidate?.role as any}
                         skills={candidate?.competences as any}
                     />
                 ))

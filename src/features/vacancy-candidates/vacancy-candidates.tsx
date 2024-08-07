@@ -26,7 +26,9 @@ export const VacancyCandidates: FC<VacancyCandidatesProps> = ({ stages }): React
 
     const candidatesQuery = useFetchData(queryParameters);
 
+    //@ts-ignore
     const candidatesCount = stages ? stages.reduce((acc, row) => row.candidates?.length + acc, 0) : 0;
+    //@ts-ignore
     const candidateIdsInStages = stages?.flatMap((stage) => stage.candidates)?.map((candidate) => candidate.id);
     const availableCandidates = candidatesQuery?.data?.filter(
         (candidate: any) => !candidateIdsInStages?.includes(candidate.id),

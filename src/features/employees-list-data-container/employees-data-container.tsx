@@ -12,7 +12,6 @@ export const EmployeesDataContainer: FC<EmployeesDataContainerProps> = ({ employ
                     <PersonCard
                         key={employee?.id}
                         navigationUrl={`/employees/${employee.id}/?status=${employee?.is_dismissed ? 'dismissed' : 'current'}`}
-                        imageSrc={employee?.imageSrc}
                         name={employee?.last_name + ' ' + employee.first_name}
                         role={employee?.sub_position}
                         skills={employee?.key_skills}

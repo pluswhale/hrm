@@ -4,8 +4,10 @@ import { RequestTableProps } from './types';
 import { PopupWithDarkOverlay } from '../../../shared/components/portal/popup-with-dark-overlay';
 import { RequestModal } from '../request-modal/request-modal';
 import fakeAvatar from '../../../assets/Ellipse 1.svg';
+import { Request } from 'shared/types/request.type';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
+import { formatDate } from 'shared/libs/dateFormater';
 dayjs.locale('ru');
 
 const RequestTable: FC<RequestTableProps> = ({
@@ -15,10 +17,6 @@ const RequestTable: FC<RequestTableProps> = ({
     setCurrentRequestObjectForModal,
 }): ReactElement => {
     const [isModalRecruitingFunnelOpened, setIsModalRecruitingFunnelOpened] = useState(false);
-
-    const formatDate = (date: string) => {
-        return dayjs(date).format('D MMMM YYYY HH:mm');
-    };
 
     const displayStatus = (status: string) => {
         let color;
@@ -65,7 +63,7 @@ const RequestTable: FC<RequestTableProps> = ({
         }
     };
 
-    const onOpenModalRequest = (request: any) => {
+    const onOpenModalRequest = (request: Request) => {
         setIsModalRecruitingFunnelOpened(true);
         setCurrentRequestObjectForModal(request);
     };
@@ -89,7 +87,7 @@ const RequestTable: FC<RequestTableProps> = ({
                             </div>
                         </div>
                         <span className={style.container__meeting}>{displayType(request?.type)}</span>
-                        <span className={style.container__data}>{formatDate(request.data)}</span>
+                        <span className={style.container__data}>{formatDate(request.created_at)}</span>
                         {displayStatus(request.status)}
                     </div>
                     {index < requests.length - 1 && <hr className={style.container__divider} />}

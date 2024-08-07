@@ -1,5 +1,7 @@
+import { Stage } from 'shared/types/stage.type';
+
 export type VacancyCandidatesProps = {
-    stages: any[];
+    stages: Stage[];
 };
 
 export type CandidatesRow = {

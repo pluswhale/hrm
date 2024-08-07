@@ -1,3 +1,5 @@
+import { Appeal } from 'shared/types/appeal.type';
+
 export type StageItemProps = {
     stage: StageItem;
     onDelete: (stageId: string) => void;
@@ -10,19 +12,6 @@ export type StageItem = {
 };
 
 export type EditAppealProps = {
-    appeal: any;
-};
-
-type Appeal = {
-    id: number;
-    title: string;
-    created_at: string;
-    navigationUrl: string;
-    deadline: string;
-    status: string;
-    seats: string;
-    accepted: string;
-    description: string[];
-    requirements: string[];
+    appeal: Appeal;
 };
 

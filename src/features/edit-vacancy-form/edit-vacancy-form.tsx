@@ -15,11 +15,12 @@ import { DescriptionVacancy } from 'entities/create-vacancy-form/description-vac
 import { Stages } from 'entities/create-vacancy-form/stages/stages';
 import { stagesSelector } from '../../redux/selectors/create-vacancy';
 import { useSelector } from 'react-redux';
+import { Competence } from 'shared/types/competence.type';
 
 const queryParametersForFetchAllCompetences = {
     queryKey: 'fetchAllCompetencesForCreatingVacancy',
     queryThunk: fetchAllCompetences,
-} as QueryParameters<any>;
+} as QueryParameters<Competence[]>;
 
 export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactElement => {
     const dispatch = useAppDispatch();
@@ -33,17 +34,22 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
 
     for (const key in vacancy) {
         if (
+            //@ts-ignore
             vacancy[key] !== null &&
+            //@ts-ignore
             vacancy[key] !== undefined &&
+            //@ts-ignore
             vacancy[key] !== '' &&
             key !== 'stages' &&
             key !== 'competences' &&
             key !== 'candidates'
         ) {
             if (key === 'deadline') {
+                //@ts-ignore
                 const mirroredDate = vacancy?.[key]?.split('-')?.reverse()?.join('.');
                 formState[key] = mirroredDate;
             } else {
+                //@ts-ignore
                 formState[key] = vacancy[key];
             }
         }
@@ -102,11 +108,13 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
                 <div className={styles.create_vacancy__container}>
                     <div className={styles.create_vacancy__vertical_block}>
                         <InfoAboutVacancy />
-                        <Competences
-                            competence={competence}
-                            competencesOptions={competencesQuery?.data}
-                            addCompetence={addCompetence}
-                        />
+                        {competencesQuery?.data && (
+                            <Competences
+                                competence={competence}
+                                competencesOptions={competencesQuery?.data}
+                                addCompetence={addCompetence}
+                            />
+                        )}
                     </div>
 
                     <div className={styles.create_vacancy__vertical_block}>

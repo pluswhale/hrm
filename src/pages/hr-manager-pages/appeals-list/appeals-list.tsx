@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router';
 import { AppealsDataContainer } from 'features/appeals-list-data-container';
 import { fetchAllAppeals } from 'shared/api/appeals/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { Appeal } from 'shared/types/appeal.type';
 
 const AppealsList = () => {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ const AppealsList = () => {
             name: searchValue,
             isActive: activeTab === 0 ? true : false,
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Appeal[]>;
     const appealsQuery = useFetchData(queryParameters);
 
     const tabs = [{ label: 'Набор на практику' }, { label: 'Архив' }];
@@ -48,7 +49,7 @@ const AppealsList = () => {
                 </div>
                 <div className={styles.vacancies__main_content}>
                     <div className={styles.vacancies__items}>
-                        <AppealsDataContainer appeals={appealsQuery?.data} />
+                        {appealsQuery?.data && <AppealsDataContainer appeals={appealsQuery?.data} />}
                     </div>
                     <Filter
                         searchValue={searchValue}

@@ -15,8 +15,8 @@ export const VacancyCandidateInfo = () => {
             <StandardInfoBlock title="Контанты" rows={mockUser?.info?.contacts} />
             <VacanciesBlock vacancies={VACANCIES_DATA} />
             <PractiesBlock practies={PRACTICES_DATA} />
-            <VacanciesExperience experiences={EXPERIENCES_DATA} />
-            <SkillsBlock skills={mockUser?.skills} />
+            {/* <VacanciesExperience experiences={EXPERIENCES_DATA} /> */}
+            {/* <SkillsBlock skills={mockUser?.skills} /> */}
         </>
     );
 };

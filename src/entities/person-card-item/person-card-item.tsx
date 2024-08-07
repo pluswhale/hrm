@@ -6,10 +6,10 @@ import fakeAvatar from '../../assets/Ellipse 1.svg';
 
 import styles from './person-card-item.module.scss';
 
-export const PersonCard: FC<PersonCardProps> = ({ imageSrc, navigationUrl, name, role, skills }): ReactElement => {
+export const PersonCard: FC<PersonCardProps> = ({ navigationUrl, name, role, skills }): ReactElement => {
     return (
         <div className={styles.person_card}>
-            <img className={styles.person_card__avatar} src={imageSrc || fakeAvatar} alt="avatar∂" />
+            <img className={styles.person_card__avatar} src={fakeAvatar} alt="avatar∂" />
             <div className={styles.person_card__container}>
                 <div className={styles.person_card__name_and_role}>
                     <Link to={navigationUrl} className={styles.person_card__name}>

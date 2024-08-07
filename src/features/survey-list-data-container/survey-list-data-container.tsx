@@ -13,10 +13,10 @@ export const SurveyListContainer: FC<SurveyListContainerProps> = ({ surveys }): 
                         title={survey?.name}
                         deadlineFrom={survey?.deadlineFrom}
                         deadlineTo={survey?.deadlineTo}
-                        totalParticipants={survey?.totalParticipants}
-                        completedParticipants={survey?.completedParticipants}
+                        totalParticipants={survey?.participantsCount}
+                        completedParticipants={survey?.takenCount}
                         id={survey?.id}
-                        status={survey?.status}
+                        status={''}
                     />
                 ))
             ) : (

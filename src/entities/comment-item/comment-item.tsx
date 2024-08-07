@@ -4,10 +4,17 @@ import Redact from './../../assets/Редактировать.svg';
 import avatar from '../../assets/Ellipse 1.svg';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
-import { useState } from 'react';
+import { FC, useState } from 'react';
+import { Comment } from 'shared/types/comment.type';
 dayjs.locale('ru');
 
-export const CommentItem = ({ comment, onDeleteComment, onEditComment }: any) => {
+type Props = {
+    comment: Comment;
+    onDeleteComment: (commentId: number) => void;
+    onEditComment: (commentId: number, text: string) => void;
+};
+
+export const CommentItem: FC<Props> = ({ comment, onDeleteComment, onEditComment }) => {
     const [isEditMode, setIsEditMode] = useState<boolean>(false);
     const [editedCommentText, setEditCommentText] = useState<string>('');
     const { id, author, text, created_at } = comment;
@@ -26,7 +33,7 @@ export const CommentItem = ({ comment, onDeleteComment, onEditComment }: any) =>
     };
 
     return (
-        <div className={style.comment} key={author}>
+        <div className={style.comment} key={id}>
             <div className={style.comment__wrapper}>
                 <div>
                     <img

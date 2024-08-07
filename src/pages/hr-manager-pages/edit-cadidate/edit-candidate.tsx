@@ -6,6 +6,7 @@ import styles from './edit-candidate.module.scss';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { fetchCandidateById } from 'shared/api/candidates/thunks';
 import { useParams } from 'react-router';
+import { Candidate } from 'shared/types/candidate.type';
 
 const EditCandidate = () => {
     const { id: candidateId } = useParams();
@@ -16,7 +17,7 @@ const EditCandidate = () => {
         queryThunkOptions: {
             id: candidateId,
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Candidate>;
 
     const candidateQuery = useFetchData(queryParametersForFetchCandidate);
 
@@ -42,7 +43,7 @@ const EditCandidate = () => {
             <div className={styles.vacancy_navigation}>
                 <HorizontalNavigation navigation={navigation} />
             </div>
-            <EditCandidateForm candidateData={candidateQuery?.data} />
+            <>{candidateQuery?.data && <EditCandidateForm candidateData={candidateQuery?.data} />}</>
         </DefaultContentWrapper>
     );
 };

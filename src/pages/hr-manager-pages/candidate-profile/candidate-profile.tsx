@@ -2,7 +2,6 @@ import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-
 import { Button } from 'shared/components/button/button';
 import { HorizontalNavigation } from 'shared/components/horizontal-navigation';
 
-import styles from './candidate-profile.module.scss';
 import { useNavigate, useParams } from 'react-router';
 import { CommentAndHistoryTemplate } from 'features/comment-and-history-template';
 import { CandidateProfileInfo } from 'features/candidate-profile-info';
@@ -13,6 +12,9 @@ import { useSelector } from 'react-redux';
 import { userDataSelector } from '../../../redux/selectors/auth';
 import { fetchCommentsByUser } from 'shared/api/comments/thunks';
 import { CreateCommentBody } from 'shared/api/comments/types';
+import { Candidate } from 'shared/types/candidate.type';
+
+import styles from './candidate-profile.module.scss';
 
 const CandidateProfile = () => {
     const navigate = useNavigate();
@@ -28,7 +30,7 @@ const CandidateProfile = () => {
         queryThunkOptions: {
             id,
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Candidate>;
 
     const candidateByIdQuery = useFetchData(queryParameters);
 
@@ -88,7 +90,7 @@ const CandidateProfile = () => {
             </div>
             <div className={styles.main_content}>
                 <div className={styles.candidate_info}>
-                    <CandidateProfileInfo candidateData={candidateByIdQuery?.data} />
+                    {candidateByIdQuery?.data && <CandidateProfileInfo candidateData={candidateByIdQuery?.data} />}
                 </div>
 
                 <CommentAndHistoryTemplate

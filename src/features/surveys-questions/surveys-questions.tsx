@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import style from './surveys-questions.module.scss';
 import { QuestionTypeHrManager } from 'entities/survey-items/question-type-hr-manager/question-type-hr-manager';
+import { Question } from 'shared/types/question.type';
 
 type Props = {
-    questions: any[];
+    questions: Question[];
 };
 
 const SurveysQuestions: FC<Props> = ({ questions }) => {

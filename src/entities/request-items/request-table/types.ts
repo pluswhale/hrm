@@ -1,17 +1,9 @@
-export interface Request {
-    id: number;
-    name: string;
-    profession: string;
-    status: string;
-    meeting: string;
-    data: string;
-    imageUrl: string;
-}
+import { Request } from 'shared/types/request.type';
 
 export interface RequestTableProps {
-    requests: any[];
-    currentRequestObjectForModal: any;
-    onOpenCreateRequestModal: any;
-    setCurrentRequestObjectForModal: any;
+    requests: Request[];
+    currentRequestObjectForModal: Request;
+    onOpenCreateRequestModal: () => void;
+    setCurrentRequestObjectForModal: (request: Request) => void;
 }
 

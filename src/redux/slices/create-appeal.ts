@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { StageAppeal } from 'shared/types/stage-appeal.type';
 import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
@@ -6,13 +7,7 @@ const initialState = {
 } as initialStateType;
 
 type initialStateType = {
-    stages: Stage[];
-};
-
-type Stage = {
-    id: string;
-    name: string;
-    position: number;
+    stages: StageAppeal[];
 };
 
 const createAppealSlice = createSlice({
@@ -32,14 +27,11 @@ const createAppealSlice = createSlice({
                 position: state.stages.length + 1,
             });
         },
-        removeStage: (state, action: PayloadAction<{ stageId: string }>) => {
+        removeStage: (state, action: PayloadAction<{ stageId: number | string }>) => {
             state.stages = state.stages.filter((stage) => stage.id !== action.payload.stageId);
         },
 
-        setStages: (
-            state,
-            action: PayloadAction<{ stages: Array<{ id: string; name: string; position: number }> }>,
-        ) => {
+        setStages: (state, action: PayloadAction<{ stages: StageAppeal[] }>) => {
             state.stages = action.payload.stages;
         },
     },

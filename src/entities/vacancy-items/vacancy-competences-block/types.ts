@@ -1,4 +1,6 @@
+import { Competence } from 'shared/types/competence.type';
+
 export type VacancyCompetencesBlockProps = {
-    competences: any;
+    competences: Competence[];
 };
 

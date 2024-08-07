@@ -2,10 +2,10 @@ import { FC, ReactElement } from 'react';
 
 import styles from './question-types.module.scss';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { Question } from 'shared/types/question.type';
 
 type Props = {
-    question: any;
+    question: Question;
 };
 
 export const OneOption: FC<Props> = ({ question }): ReactElement => {

@@ -1,14 +1,6 @@
-export type VacanciesDataContainerProps = {
-    vacancies: any[];
-};
+import { Vacancy } from 'shared/types/vacancy.type';
 
-type Vacancy = {
-    id: number;
-    title: string;
-    navigationUrl: string;
-    candidateCount: number;
-    createdAt: string;
-    deadline: string;
-    status: string;
+export type VacanciesDataContainerProps = {
+    vacancies: Vacancy[];
 };
 

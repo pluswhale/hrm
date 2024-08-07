@@ -9,6 +9,7 @@ import styles from './appeals-profile.module.scss';
 import { AppealCandidates } from 'features/appeal-candidates';
 import { fetchAppealById } from 'shared/api/appeals/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { Appeal } from 'shared/types/appeal.type';
 
 const AppealsProfile = () => {
     const { id: appealId } = useParams();
@@ -20,7 +21,7 @@ const AppealsProfile = () => {
         queryThunkOptions: {
             appealId,
         },
-    } as QueryParameters<any>;
+    } as QueryParameters<Appeal>;
 
     const appealByIdQuery = useFetchData(queryParameters);
 
@@ -30,7 +31,7 @@ const AppealsProfile = () => {
             url: '/appeals',
         },
         {
-            title: appealByIdQuery?.data?.name,
+            title: appealByIdQuery?.data?.name || '',
             url: undefined,
         },
     ];
@@ -46,7 +47,7 @@ const AppealsProfile = () => {
                 <Button onClick={onNavigateToEditAppeal} text="Редактировать" view="default_bg_white" />
             </div>
             <AppealInfo appeal={appealByIdQuery?.data} />
-            {appealByIdQuery?.data?.stages && <AppealCandidates stages={appealByIdQuery?.data?.stages} />}
+            <> {appealByIdQuery?.data && <AppealCandidates stages={appealByIdQuery?.data?.stages} />}</>
         </DefaultContentWrapper>
     );
 };
