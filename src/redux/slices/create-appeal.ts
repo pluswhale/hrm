@@ -32,6 +32,7 @@ const createAppealSlice = createSlice({
         },
 
         setStages: (state, action: PayloadAction<{ stages: StageAppeal[] }>) => {
+            //@ts-ignore
             state.stages = action.payload.stages;
         },
     },
