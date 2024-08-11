@@ -32,6 +32,7 @@ const createVacancySlice = createSlice({
         },
 
         setStages: (state, action: PayloadAction<{ stages: Stage[] }>) => {
+            //@ts-ignore
             state.stages = action.payload.stages;
         },
     },
