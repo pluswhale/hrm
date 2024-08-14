@@ -6,8 +6,8 @@ import { CreateCandidateForm } from 'features/create-candidate-form';
 const CreateCandidate = () => {
     const navigation = [
         {
-            title: 'Активные вакансии',
-            url: '/vacancies',
+            title: 'Кандидаты',
+            url: '/candidates',
         },
         {
             title: 'Создание кандидата',

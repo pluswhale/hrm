@@ -29,6 +29,7 @@ export const CandidateProfileInfo: FC<Props> = ({ candidateData }): ReactElement
                 birthday_date={candidateData?.birthday_date}
                 home_address={candidateData?.home_address}
                 avatar={mockUser?.avatar}
+                gender={candidateData?.gender}
             />
             <StandardInfoBlock title="Контанты" rows={contacts} />
             <VacanciesBlock vacancies={candidateData?.stages} />

@@ -17,10 +17,12 @@ import { CreateCommentBody } from 'shared/api/comments/types';
 import { fetchCommentsByUser } from 'shared/api/comments/thunks';
 import { Employee } from 'shared/types/employee.type';
 import { Comment } from 'shared/types/comment.type';
+import { useMediaQuery } from 'react-responsive';
 
 const EmployeeProfile: FC = (): ReactElement => {
     const params = parseUriParams(window.location.href);
     const { id } = useParams();
+    const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
     const createCommentMutation = useCreateComment();
     const deleteCommentMutation = useDeleteComment();
     const updateCommentMutation = useUpdateComment();
@@ -51,7 +53,14 @@ const EmployeeProfile: FC = (): ReactElement => {
 
     const navigation = [
         {
-            title: params?.status === 'current' ? 'Текущие сотрудники' : 'Бывшие сотрудники',
+            title:
+                params?.status === 'current'
+                    ? isMobile
+                        ? 'Cотрудники'
+                        : 'Текущие сотрудники'
+                    : isMobile
+                      ? 'Сотрудники'
+                      : 'Бывшие сотрудники',
             url: `/employees?status=${params?.status}`,
         },
         {

@@ -20,11 +20,16 @@
         padding: 20px;
         width: 317px;
         height: 235px;
+        overflow: hidden;
 
         &_container {
             display: flex;
             flex-direction: column;
             gap: 15px;
+
+            overflow-x: scroll;
+            max-height: 300px;
+            padding-bottom: 100px;
         }
     }
 }

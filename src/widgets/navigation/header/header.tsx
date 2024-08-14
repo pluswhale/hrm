@@ -54,7 +54,7 @@ export const Header = ({ toggleSidebar, isMobile, isOpen, closeSidebar }: Header
         <>
             <nav className={`${style.container} ${isOpen ? style.container__with_sidebar : ''}`}>
                 <div className={style.container__wrapper}>
-                    {isMobile && <List className={style.container__burger} onClick={handleBurgerClick} />}
+                    {/* {isMobile && <List className={style.container__burger} onClick={handleBurgerClick} />} */}
                     <div className={style.container__burger}>
                         <img
                             className={style.container__burger_icon}

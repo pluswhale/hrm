@@ -45,7 +45,7 @@ export const VacancyItem: FC<VacancyItemProps> = ({ vacancy }): ReactElement => 
 
             <div className={styles.vacancy_item__row}>
                 <span className={styles.vacancy_item__row_label}>Занятость:</span>
-                <span className={styles.vacancy_item__row_value}>полная занятость</span>
+                <span className={styles.vacancy_item__row_value}>полный день</span>
             </div>
 
             <div className={styles.vacancy_item__row}>

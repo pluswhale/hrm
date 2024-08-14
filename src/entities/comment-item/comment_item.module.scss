@@ -24,6 +24,17 @@
         font-size: 16px;
         color: $header;
         line-height: 18.75px;
+
+        &_span {
+            font-weight: 400;
+            font-size: 16px;
+            color: $header;
+            line-height: 18.75px;
+
+            @media screen and (max-width: 760px) {
+                font-size: 14px;
+            }
+        }
     }
 
     &__title {

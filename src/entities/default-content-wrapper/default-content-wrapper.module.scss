@@ -22,15 +22,13 @@
 
     @media (max-width: 1660px) {
         min-width: unset;
-        .wrapper {
-            padding: 30px;
-        }
+        width: 100%;
+        padding: 30px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 15px;
+        padding-top: 30px;
     }
 }
 
-@media (max-width: 1660px) {
-    .wrapper {
-        padding: 30px;
-        width: 100%;
-    }
-}

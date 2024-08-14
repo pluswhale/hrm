@@ -46,14 +46,7 @@ const ExperienceItem: FC<ExperienceItemProps> = ({ experience }) => {
                 {formattedDateRange} ({formattedDifference})
             </span>
             <span className={styles.experience_item__company_name}>{experience.company_name}</span>
-            <a
-                className={styles.experience_item__link}
-                href={experience?.company_name}
-                target="_blank"
-                rel="noreferrer"
-            >
-                {experience.company_name}
-            </a>
+
             <div className={styles.experience_item__row}>
                 <span className={styles.experience_item__row_label}>Должность:</span>
                 <span className={styles.experience_item__row_value}>{experience?.position}</span>

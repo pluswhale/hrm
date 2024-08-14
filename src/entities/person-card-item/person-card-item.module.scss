@@ -4,9 +4,15 @@
     position: relative;
     background-color: $white;
     width: 302.67px;
-    height: 239px;
+
     border-radius: 10px;
     padding: 55px 30px 0;
+
+    @media screen and (max-width: 768px) {
+        height: unset;
+        padding: 10px;
+        width: 100%;
+    }
 
     &__avatar {
         position: absolute;
@@ -15,16 +21,27 @@
         transform: translate(-50%, -50%);
         border-radius: 50%;
         border: 4px solid $white;
-        z-index: 2;
         object-fit: cover;
         width: 87px;
         height: 87px;
+
+        @media screen and (max-width: 768px) {
+            position: relative;
+            transform: none;
+            height: 50px;
+            left: 0;
+            width: 50px;
+        }
     }
 
     &__container {
         display: flex;
         flex-direction: column;
         gap: 15px;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: row;
+        }
     }
 
     &__name_and_role {
@@ -32,6 +49,10 @@
         flex-direction: column;
         align-items: center;
         gap: 5px;
+
+        @media screen and (max-width: 768px) {
+            align-items: flex-start;
+        }
     }
 
     &__name {
@@ -42,6 +63,10 @@
         text-align: center;
         color: $purple;
         text-decoration: none;
+
+        @media screen and (max-width: 768px) {
+            font-size: 16px;
+        }
     }
 
     &__role {
@@ -51,6 +76,10 @@
         line-height: 17.58px;
         text-align: left;
         color: $icons;
+
+        @media screen and (max-width: 768px) {
+            font-size: 14px;
+        }
     }
 
     &__decor_line {

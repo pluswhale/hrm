@@ -20,11 +20,18 @@ import {
     queryParametersForPositionsEmployeeFilterSet,
 } from 'shared/api/filters/filters.queries';
 import { Employee } from 'shared/types/employee.type';
+import { useMediaQuery } from 'react-responsive';
+import { MobilePageHeader } from 'widgets/mobile-page-header/mobile-page-header';
 
 export const EmployeesList: FC = (): ReactElement => {
     const dispatch = useAppDispatch();
+    const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
+
     const params = parseUriParams(window.location.href);
-    const tabs = [{ label: 'Текущие сотрудники' }, { label: 'Бывшие сотрудники' }];
+    const tabs = [
+        { label: isMobile ? 'Текущие' : 'Текущие сотрудники' },
+        { label: isMobile ? 'Бывшие' : 'Бывшие сотрудники' },
+    ];
     const [activeTab, setActiveTab] = useState<number>(0);
     const [searchValue, setSearchValue] = useState<string>('');
     const skillsForFilter = useSelector(skillsInFilterSelector);
@@ -90,17 +97,42 @@ export const EmployeesList: FC = (): ReactElement => {
 
     return (
         <DefaultContentWrapper>
-            <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
-            <div className={style.main_content}>
-                {employeesQuery?.data && <EmployeesDataContainer employees={employeesQuery?.data} />}
-                <Filter
-                    searchValue={searchValue}
-                    onChangeSearchValue={setSearchValue}
-                    onToggleCheckboxInFilter={onToggleCheckboxInFilter}
-                    title="Поиск кандидата"
-                    filterSet={filterRowsData}
-                />
-            </div>
+            <>
+                {!isMobile ? (
+                    <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
+                ) : null}
+                {isMobile ? (
+                    <MobilePageHeader
+                        titlePage={'Cотрудники'}
+                        filter={
+                            <Filter
+                                searchValue={searchValue}
+                                onChangeSearchValue={setSearchValue}
+                                onToggleCheckboxInFilter={onToggleCheckboxInFilter}
+                                title="Поиск кандидата"
+                                filterSet={filterRowsData}
+                            />
+                        }
+                        switchTabs={
+                            <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
+                        }
+                        searchValue={searchValue}
+                        onChangeSearchValue={setSearchValue}
+                    />
+                ) : null}
+                <div className={style.main_content}>
+                    {employeesQuery?.data && <EmployeesDataContainer employees={employeesQuery?.data} />}
+                    {!isMobile ? (
+                        <Filter
+                            searchValue={searchValue}
+                            onChangeSearchValue={setSearchValue}
+                            onToggleCheckboxInFilter={onToggleCheckboxInFilter}
+                            title="Поиск кандидата"
+                            filterSet={filterRowsData}
+                        />
+                    ) : null}
+                </div>
+            </>
         </DefaultContentWrapper>
     );
 };

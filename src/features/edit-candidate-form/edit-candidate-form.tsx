@@ -16,6 +16,7 @@ import { useAppDispatch } from '../../redux/store';
 import { setCurrentEducations, setCurrentExperience } from '../../redux/slices/create-candidate';
 import { Candidate } from 'shared/types/candidate.type';
 import { Competence } from 'shared/types/competence.type';
+import { Option } from 'shared/components/selector/types';
 
 function processFormState(formState: any) {
     const experiences: any[] = [];
@@ -75,6 +76,7 @@ export const EditCandidateForm: FC<Props> = ({ candidateData }): ReactElement =>
     const updateCandidateMutation = useUpdateCandidate();
     const educations = useSelector(educationsSelector);
     const experiences = useSelector(experiencesSelector);
+    const [genderValue, setGenderValue] = useState<Option | null>({ value: 'male', label: 'Мужчина' });
 
     const [competence, setCompetence] = useState<Competence[]>([]);
 
@@ -82,8 +84,16 @@ export const EditCandidateForm: FC<Props> = ({ candidateData }): ReactElement =>
 
     useEffect(() => {
         if (candidateData) {
-            const { experiences, educations, birthday_date, home_address, ...rest } = candidateData;
+            const { experiences, educations, birthday_date, home_address, gender, ...rest } = candidateData;
             const formattedValues = { ...rest };
+
+            if (gender) {
+                if (gender === 'male') {
+                    setGenderValue({ value: 'male', label: 'Мужчина' });
+                } else {
+                    setGenderValue({ value: 'female', label: 'Женщина' });
+                }
+            }
 
             //@ts-ignore
             formattedValues.birth_day = birthday_date;
@@ -150,6 +160,10 @@ export const EditCandidateForm: FC<Props> = ({ candidateData }): ReactElement =>
         }
     };
 
+    const handleChangeGenderValue = (value: Option) => {
+        setGenderValue(value);
+    };
+
     const onSubmit = (data: any) => {
         // Отпралвять запрос на сервер для сохранения
         const body = {
@@ -186,7 +200,7 @@ export const EditCandidateForm: FC<Props> = ({ candidateData }): ReactElement =>
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_candidate}>
                 <div className={styles.create_candidate__container}>
-                    <InfoAboutCandidate />
+                    <InfoAboutCandidate genderValue={genderValue} handleChangeGenderValue={handleChangeGenderValue} />
                     <Education educations={educations} />
                     <Experience experiences={experiences} />
                 </div>
@@ -197,7 +211,7 @@ export const EditCandidateForm: FC<Props> = ({ candidateData }): ReactElement =>
                         addCompetence={addCompetence}
                     />
                 )}
-                <Button type={'submit'} styles={{ width: '189px' }} view={'default_bg'} text="Создать" />
+                <Button type={'submit'} styles={{ width: '189px' }} view={'default_bg'} text="Сохранить" />
             </form>
         </FormProvider>
     );

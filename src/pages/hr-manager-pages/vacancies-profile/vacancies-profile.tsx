@@ -48,7 +48,12 @@ const VacanciesProfile = () => {
                 <Button onClick={onNavigateToEditVacancy} text="Редактировать" view="default_bg_white" />
             </div>
             <> {vacancyByIdQuery?.data && <VacancyInfo vacancy={vacancyByIdQuery?.data} />} </>
-            <VacancyCandidates stages={vacancyByIdQuery?.data?.stages || []} />
+            <>
+                {' '}
+                {vacancyByIdQuery?.data?.stages && (
+                    <VacancyCandidates stages={vacancyByIdQuery?.data?.stages || []} />
+                )}{' '}
+            </>
         </DefaultContentWrapper>
     );
 };

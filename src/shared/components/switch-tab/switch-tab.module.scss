@@ -17,6 +17,12 @@
     background: none;
     border: none;
     cursor: pointer;
+
+    @media screen and (max-width: 760px) {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 18.96px;
+    }
 }
 
 .tab {
@@ -31,6 +37,10 @@
     width: 1px;
     height: 29px;
     background-color: $header;
+
+    @media screen and (max-width: 760px) {
+        height: 20px;
+    }
 }
 
 .alternative .tab {

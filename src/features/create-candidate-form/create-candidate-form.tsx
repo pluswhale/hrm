@@ -14,6 +14,8 @@ import { Experience } from 'entities/create-candidate-form/experiences/experienc
 import { Education } from 'entities/create-candidate-form/educations/educations';
 import { Competence } from 'shared/types/competence.type';
 
+import { Option } from 'shared/components/selector/types';
+
 function processFormState(formState: any) {
     const experiences: any[] = [];
     const educations: any[] = [];
@@ -67,6 +69,7 @@ export const CreateCandidateForm = () => {
     const createCandidateMutation = useCreateCandidate();
     const educations = useSelector(educationsSelector);
     const experiences = useSelector(experiencesSelector);
+    const [genderValue, setGenderValue] = useState<Option | null>({ value: 'male', label: 'Мужчина' });
 
     const [competence, setCompetence] = useState([]);
 
@@ -79,6 +82,10 @@ export const CreateCandidateForm = () => {
         } else {
             setCompetence(newCompetence);
         }
+    };
+
+    const handleChangeGenderValue = (value: Option) => {
+        setGenderValue(value);
     };
 
     const onSubmit = (data: any) => {
@@ -94,6 +101,7 @@ export const CreateCandidateForm = () => {
         if (data.birth_day) body.birthday_date = data.birth_day;
         if (data.location) body.home_address = data.location;
         if (data.phone_number) body.phone_number = data.phone_number;
+        if (genderValue?.value) body.gender = genderValue?.value;
 
         const { experiences, educations } = processFormState(data);
 
@@ -116,7 +124,7 @@ export const CreateCandidateForm = () => {
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_candidate}>
                 <div className={styles.create_candidate__container}>
-                    <InfoAboutCandidate />
+                    <InfoAboutCandidate genderValue={genderValue} handleChangeGenderValue={handleChangeGenderValue} />
                     <Education educations={educations} />
                     <Experience experiences={experiences} />
                 </div>

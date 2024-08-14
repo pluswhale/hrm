@@ -13,6 +13,10 @@
         color: $header;
         font-size: 20px;
         line-height: 21px;
+
+        @media screen and (max-width: 760px) {
+            font-size: 16px;
+        }
     }
 
     &__container {
@@ -28,6 +32,10 @@
         line-height: 18.75px;
         color: $text;
         gap: 10px;
+
+        @media screen and (max-width: 760px) {
+            font-size: 14px;
+        }
     }
 
     &__row_value {
@@ -39,6 +47,10 @@
         display: flex;
         line-height: 18.75px;
         color: $header;
+
+        @media screen and (max-width: 760px) {
+            font-size: 14px;
+        }
     }
 }
 
