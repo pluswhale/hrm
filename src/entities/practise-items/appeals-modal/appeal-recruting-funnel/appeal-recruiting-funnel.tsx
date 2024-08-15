@@ -1,18 +1,18 @@
 import { FC, ReactElement } from 'react';
 import closeIcon from '../../../../assets/close_icon.svg';
-import { VacancyRecruitingFunnelProps } from './types';
+import { AppealRecruitingFunnelProps } from './types';
 
-import styles from './vacancy-recruiting-funnel.module.scss';
-import { colorPalette, RECRUITING_FUNNEL_DATA } from './constants';
+import styles from './appeal-recruiting-funnel.module.scss';
+import { colorPalette } from './constants';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
-import { fetchConversionByVacancyId } from 'shared/api/vacancies/thunks';
+import { fetchConversionByAppealId } from 'shared/api/appeals/thunks';
 
-export const VacancyRecruitingFunnel: FC<VacancyRecruitingFunnelProps> = ({ vacancyId, onClose }): ReactElement => {
+export const AppealRecruitingFunnel: FC<AppealRecruitingFunnelProps> = ({ appealId, onClose }): ReactElement => {
     const queryParameters = {
-        queryKey: 'fetchConversionForVacancy',
-        queryThunk: fetchConversionByVacancyId,
+        queryKey: 'fetchConversionForAppeal',
+        queryThunk: fetchConversionByAppealId,
         queryThunkOptions: {
-            vacancyId,
+            appealId,
         },
     } as QueryParameters<any>;
 

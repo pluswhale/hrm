@@ -26,6 +26,7 @@ import { useEffect } from 'react';
 import { RequestsListEmployee } from 'pages/employee-pages/requests-list-employee';
 import SurveyListEmployee from 'pages/employee-pages/survey-list-employee/survey-list-employee';
 import SurveyByIdEmployee from 'pages/employee-pages/survey-by-id-employee/survey-by-id-employee';
+import { RequestById } from 'pages/hr-manager-pages/requests-by-id';
 
 export const Routing = () => {
     const navigate = useNavigate();
@@ -59,6 +60,7 @@ export const Routing = () => {
                         <Route path="create/appeal" element={<CreateAppeal />} />
                         <Route path="edit/appeal/:id" element={<EditAppeal />} />
                         <Route path="request" element={<RequestsList />} />
+                        <Route path="request/:id" element={<RequestById />} />
                         <Route path="survey" element={<SurveyList />} />
                         <Route path="survey/create" element={<CreateSurvey />} />
                         <Route path="survey/edit/:id" element={<EditSurvey />} />

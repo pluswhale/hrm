@@ -1,0 +1,106 @@
+@import '../../../../assets/styles/variables';
+
+.vacancy_recruiting_funnel {
+    max-width: 1027px;
+    width: 1027px;
+    background-color: $white;
+    padding: 50px;
+    border-radius: 10px;
+
+    &__container {
+        width: 100%;
+    }
+
+    &__title_and_close {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    &__title {
+        font-size: 25px;
+        font-weight: 500;
+        line-height: 29.63px;
+        text-align: left;
+        color: $header;
+    }
+
+    &__close {
+        cursor: pointer;
+    }
+}
+
+.recruitment_funnel {
+    width: 100%;
+    font-family: Arial, sans-serif; // or any other font you prefer
+
+    .header,
+    .row {
+        display: flex;
+        text-align: center;
+
+        .stage_value {
+            min-width: 118px;
+            margin-bottom: 0px !important;
+        }
+
+        .color_bg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 501px;
+            height: 40px;
+            background-color: $text;
+        }
+
+        .column {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 18.75px;
+            text-align: center;
+            padding: 8px;
+            min-width: 118px;
+            flex-grow: 1; // Default flex-grow for all columns
+
+            &:first-child {
+                margin-left: 16px;
+            }
+
+            &:not(:first-child) {
+                max-width: 118px;
+            }
+        }
+
+        .value {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 18.75px;
+            text-align: center;
+            min-width: 118px;
+            flex-grow: 1; // Default flex-grow for all columns
+
+            &:not(:first-child) {
+                max-width: 118px;
+            }
+        }
+
+        .large {
+            // Ensuring the first column is wider both in header and rows
+            flex-grow: 3;
+            text-align: left;
+        }
+    }
+
+    .header {
+        font-weight: bold;
+    }
+}
+

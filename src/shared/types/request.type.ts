@@ -10,6 +10,7 @@ export interface Request {
     status: RequestStatus;
     author: Employee;
     managed_by: HRManager;
+    comment: string;
 }
 
 export type RequestType = 'meeting with management' | 'vacation' | 'compensation' | 'offer' | 'other';
