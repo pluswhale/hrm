@@ -9,9 +9,12 @@ import { AppealsDataContainer } from 'features/appeals-list-data-container';
 import { fetchAllAppeals } from 'shared/api/appeals/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { Appeal } from 'shared/types/appeal.type';
+import { useMediaQuery } from 'react-responsive';
+import { MobilePageHeader } from 'widgets/mobile-page-header/mobile-page-header';
 
 const AppealsList = () => {
     const navigate = useNavigate();
+    const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
     const [activeTab, setActiveTab] = useState<number>(0);
     const [searchValue, setSearchValue] = useState<string>('');
 
@@ -38,15 +41,34 @@ const AppealsList = () => {
     return (
         <DefaultContentWrapper>
             <div className={styles.vacancies}>
-                <div className={styles.vacancies__action_buttons}>
-                    <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
-                    <Button
-                        onClick={onNavigateToCreateVacancy}
-                        styles={{ width: 'fit-content' }}
-                        text="Новое направление"
-                        view="default_bg_white"
+                {!isMobile ? (
+                    <div className={styles.vacancies__action_buttons}>
+                        <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
+                        <Button
+                            onClick={onNavigateToCreateVacancy}
+                            styles={{ width: 'fit-content' }}
+                            text="Новое направление"
+                            view="default_bg_white"
+                        />
+                    </div>
+                ) : null}
+                {isMobile ? (
+                    <MobilePageHeader
+                        titlePage={'Практика'}
+                        filter={
+                            <Filter
+                                searchValue={searchValue}
+                                onChangeSearchValue={setSearchValue}
+                                title="Поиск кандидата"
+                            />
+                        }
+                        switchTabs={
+                            <SwitchTab tabs={tabs} onTabClick={setActiveTab} activeTab={activeTab} design="default" />
+                        }
+                        searchValue={searchValue}
+                        onChangeSearchValue={setSearchValue}
                     />
-                </div>
+                ) : null}
                 <div className={styles.vacancies__main_content}>
                     <div className={styles.vacancies__items}>
                         {appealsQuery?.data && <AppealsDataContainer appeals={appealsQuery?.data} />}

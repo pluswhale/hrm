@@ -17,7 +17,10 @@ export const MultipleOption: FC<Props> = ({ question }): ReactElement => {
                 {question?.options &&
                     question.options.map((option: any) => (
                         <FormControlLabel
-                            control={<Checkbox disabled={disabled} checked={option.checked} />}
+                            sx={{ '& .MuiFormControlLabel-label': { fontSize: '16px' } }}
+                            control={
+                                <Checkbox sx={{ fontSize: '16px' }} disabled={disabled} checked={option.checked} />
+                            }
                             label={option?.optionName}
                         />
                     ))}

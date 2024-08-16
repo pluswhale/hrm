@@ -5,6 +5,10 @@
     display: flex;
     gap: 20px;
 
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+
     &__wrapper {
         width: 100%;
     }
@@ -15,3 +19,4 @@
         padding-top: 30px;
     }
 }
+

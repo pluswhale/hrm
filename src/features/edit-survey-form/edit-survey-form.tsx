@@ -23,9 +23,10 @@ import styles from './edit-survey-form.module.scss';
 
 type Props = {
     surveyData: Survey;
+    formRef: any;
 };
 
-export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
+export const EditSurveyForm: FC<Props> = ({ surveyData, formRef }): ReactElement => {
     const formState: any = {};
 
     for (const key in surveyData) {
@@ -177,10 +178,14 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
     return (
         <div className={styles.create_survey}>
             <div className={styles.create_survey__form_wrapper}>
-                <h2>Информация об опросе</h2>
+                <h2 className={styles.create_survey__title}>Информация об опросе</h2>
 
                 <FormProvider {...methods}>
-                    <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_survey__form}>
+                    <form
+                        ref={formRef}
+                        onSubmit={methods.handleSubmit(onSubmit)}
+                        className={styles.create_survey__form}
+                    >
                         <Input
                             width={'100%'}
                             isRequired={true}
@@ -265,11 +270,6 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
                                 onClose={onCloseModalAddParticipants}
                             />
                         </PopupWithDarkOverlay>
-                        <Button
-                            styles={{ width: 'fit-content', height: '40px' }}
-                            text="Отредактировать опрос"
-                            view="default_bg"
-                        />
                     </form>
                 </FormProvider>
             </div>

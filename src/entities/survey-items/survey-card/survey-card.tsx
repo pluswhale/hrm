@@ -38,7 +38,7 @@ export const SurveyCard: FC<SurveyCardProps> = ({
                     <div className={styles.survey_card__row}>
                         <span className={styles.survey_card__row_label}>Прошедшие опрос:</span>
                         <span className={styles.survey_card__row_value}>
-                            {completedParticipants} из {totalParticipants}
+                            {String(completedParticipants)} из {totalParticipants}
                         </span>
                     </div>
                 </div>

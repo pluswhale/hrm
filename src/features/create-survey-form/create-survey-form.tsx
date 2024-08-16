@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux';
 import { questionsInCreateSurveySelector } from '../../redux/selectors/create-survey';
 import { useCreateSurvey } from 'shared/api/surveys/mutations';
 import { userDataSelector } from '../../redux/selectors/auth';
+import { useMediaQuery } from 'react-responsive';
 
 type Props = {
     formRef: any;
@@ -26,6 +27,7 @@ type Props = {
 
 export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
     const methods = useForm();
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const [surveyType, setSurveyType] = useState<Option | null>({ value: 'general', label: 'Общий' });
     const [checkedAnonymous, setCheckedAnonymous] = useState<boolean>(false);
     const [isModalAddParticipantsOpened, setIsModalAddParticipantsOpened] = useState<boolean>(false);
@@ -126,7 +128,7 @@ export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
     return (
         <div className={styles.create_survey}>
             <div className={styles.create_survey__form_wrapper}>
-                <h2>Информация об опросе</h2>
+                <h2 className={styles.create_survey__title}>Информация об опросе</h2>
 
                 <FormProvider {...methods}>
                     <form
@@ -143,7 +145,7 @@ export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
                         />
                         <div className={styles.create_survey__wrapper_imput}>
                             <Input
-                                width={'50%'}
+                                width={isMobile ? '100%' : '50%'}
                                 isRequired={true}
                                 name={'deadlineFrom'}
                                 pattern={{
@@ -154,7 +156,7 @@ export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
                                 label="Дата начала"
                             />
                             <Input
-                                width={'50%'}
+                                width={isMobile ? '100%' : '50%'}
                                 isRequired={true}
                                 name={'deadlineTo'}
                                 pattern={{
@@ -177,6 +179,7 @@ export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
                             value="top"
                             control={
                                 <Switch
+                                    sx={{ fontSize: isMobile ? '14px' : '16px' }}
                                     checked={checkedAnonymous}
                                     onChange={handleChangeAnonymousSwitch}
                                     inputProps={{ 'aria-label': 'controlled' }}
