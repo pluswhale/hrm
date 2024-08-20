@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 import { stagesSelector } from '../../redux/selectors/create-appeal';
 import { useAppDispatch } from '../../redux/store';
-import { addNewStage, removeStage, setStages } from '../../redux/slices/create-appeal';
+import { setStages } from '../../redux/slices/create-appeal';
 import { EditAppealProps } from './types';
 import { useUpdateAppeal } from 'shared/api/appeals/mutations';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
@@ -16,6 +16,7 @@ import { InfoAboutAppeal } from 'entities/create-appeal-form/info-about-appeal/i
 import { Competences } from 'entities/create-appeal-form/competences/competences';
 import { Stages } from 'entities/create-appeal-form/stages/stages';
 import { Competence } from 'shared/types/competence.type';
+import { format } from 'date-fns/format';
 
 const queryParametersForFetchAllCompetences = {
     queryKey: 'fetchAllCompetencesForUpdatingAppeal',
@@ -24,10 +25,10 @@ const queryParametersForFetchAllCompetences = {
 
 export const EditAppealForm: FC<EditAppealProps> = ({ appeal }): ReactElement => {
     const dispatch = useAppDispatch();
-    const [newStage, setNewStage] = useState<string>('');
     const stages = useSelector(stagesSelector);
     const [competence, setCompetence] = useState<any[]>([]);
     const updateAppealMutation = useUpdateAppeal();
+    const [dateEnd, setDateEnd] = useState<Date | null>(null);
 
     const competencesQuery = useFetchData(queryParametersForFetchAllCompetences);
 
@@ -43,16 +44,11 @@ export const EditAppealForm: FC<EditAppealProps> = ({ appeal }): ReactElement =>
             appeal[key] !== '' &&
             key !== 'stages' &&
             key !== 'competences' &&
-            key !== 'candidates'
+            key !== 'candidates' &&
+            key !== 'deadline'
         ) {
-            if (key === 'deadline') {
-                //@ts-ignore
-                const mirroredDate = appeal?.[key]?.split('-')?.reverse()?.join('.');
-                formState[key] = mirroredDate;
-            } else {
-                //@ts-ignore
-                formState[key] = appeal[key];
-            }
+            //@ts-ignore
+            formState[key] = appeal[key];
         }
     }
 
@@ -66,6 +62,12 @@ export const EditAppealForm: FC<EditAppealProps> = ({ appeal }): ReactElement =>
             dispatch(setStages({ stages: [] as any }));
         };
     }, []);
+
+    useEffect(() => {
+        if (appeal?.deadline) {
+            setDateEnd(appeal?.deadline);
+        }
+    }, [appeal]);
 
     useEffect(() => {
         if (appeal?.competences) {
@@ -82,9 +84,13 @@ export const EditAppealForm: FC<EditAppealProps> = ({ appeal }): ReactElement =>
             appealId: appeal?.id,
         };
         for (const key in data) {
-            if (data[key] !== null && data[key] !== undefined && data[key] !== '') {
+            if (data[key] !== null && data[key] !== undefined && data[key] !== '' && key !== 'deadline') {
                 body[key] = data[key];
             }
+        }
+
+        if (dateEnd) {
+            body.deadline = format(dateEnd, 'dd.MM.yyyy');
         }
 
         if (competence?.length) {
@@ -114,7 +120,7 @@ export const EditAppealForm: FC<EditAppealProps> = ({ appeal }): ReactElement =>
             <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_appeal}>
                 <div className={styles.create_appeal__container}>
                     <div className={styles.create_appeal__vertical_block}>
-                        <InfoAboutAppeal />
+                        <InfoAboutAppeal dateEnd={dateEnd} setDateEnd={setDateEnd} />
                         {competencesQuery?.data && (
                             <Competences
                                 competence={competence}
@@ -131,7 +137,7 @@ export const EditAppealForm: FC<EditAppealProps> = ({ appeal }): ReactElement =>
                     type={'submit'}
                     styles={{ width: '189px', alignSelf: 'flex-end' }}
                     view={'default_bg'}
-                    text="Создать направление"
+                    text="Сохранить"
                 />
             </form>
         </FormProvider>

@@ -2,8 +2,17 @@ import { FC, ReactElement } from 'react';
 import styles from '../../../features/create-appeal-form/create-appeal-form.module.scss';
 import { Input } from 'shared/components/input/input';
 import { Textarea } from 'shared/components/textarea/textarea';
+import { useMediaQuery } from 'react-responsive';
+import DatePickerComponent from 'shared/components/date-picker/date-picker';
 
-export const InfoAboutAppeal: FC = (): ReactElement => {
+type Props = {
+    dateEnd: Date | null;
+    setDateEnd: (date: Date | null) => void;
+};
+
+export const InfoAboutAppeal: FC<Props> = ({ dateEnd, setDateEnd }): ReactElement => {
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+
     return (
         <div className={styles.create_appeal__form_wrapper}>
             <h2 className={styles.create_appeal__title}>Информация о направлении практики</h2>
@@ -15,7 +24,7 @@ export const InfoAboutAppeal: FC = (): ReactElement => {
                     placeholder={'Название направления практики'}
                     label="Название направления практики"
                 />
-                <Input
+                {/* <Input
                     width={'100%'}
                     isRequired={false}
                     name={'deadline'}
@@ -25,6 +34,15 @@ export const InfoAboutAppeal: FC = (): ReactElement => {
                     }}
                     placeholder={'Дата завершения'}
                     label="Дата завершения"
+                /> */}
+
+                <DatePickerComponent
+                    customStyles={{ width: isMobile ? '100%' : '50%' }}
+                    isRequired={false}
+                    selectedDate={dateEnd}
+                    setSelectedDate={setDateEnd}
+                    labelText="Дата завершения"
+                    placeholder="Дата завершения"
                 />
                 <Input
                     width={'45%'}

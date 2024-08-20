@@ -15,6 +15,7 @@ import { Stages } from 'entities/create-appeal-form/stages/stages';
 import { Competences } from 'entities/create-appeal-form/competences/competences';
 import { InfoAboutAppeal } from 'entities/create-appeal-form/info-about-appeal/info-about-appeal';
 import { Competence } from 'shared/types/competence.type';
+import { format } from 'date-fns/format';
 
 const queryParametersForFetchAllCompetences = {
     queryKey: 'fetchAllCompetencesForCreatingAppeal',
@@ -27,6 +28,7 @@ export const CreateAppealForm = () => {
     const createAppealMutation = useCreateAppeal();
     const [competence, setCompetence] = useState<Competence[]>([]);
     const stages = useSelector(stagesSelector);
+    const [dateEnd, setDateEnd] = useState<Date | null>(null);
 
     const competencesQuery = useFetchData(queryParametersForFetchAllCompetences);
 
@@ -51,9 +53,13 @@ export const CreateAppealForm = () => {
         let body: any = {};
 
         for (const key in data) {
-            if (data[key] !== null && data[key] !== undefined && data[key] !== '') {
+            if (data[key] !== null && data[key] !== undefined && data[key] !== '' && key !== 'deadline') {
                 body[key] = data[key];
             }
+        }
+
+        if (dateEnd) {
+            body.deadline = format(dateEnd, 'dd.MM.yyyy');
         }
 
         if (competence?.length) {
@@ -74,7 +80,7 @@ export const CreateAppealForm = () => {
             <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_appeal}>
                 <div className={styles.create_appeal__container}>
                     <div className={styles.create_appeal__vertical_block}>
-                        <InfoAboutAppeal />
+                        <InfoAboutAppeal dateEnd={dateEnd} setDateEnd={setDateEnd} />
                         {competencesQuery?.data && (
                             <Competences
                                 competence={competence}

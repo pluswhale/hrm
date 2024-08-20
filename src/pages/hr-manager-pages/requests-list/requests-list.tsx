@@ -67,7 +67,7 @@ const RequestsList = () => {
                         case 'approved':
                             return { ...status, name: 'Подтвержден' };
                         case 'seen':
-                            return { ...status, name: 'Просмотреть' };
+                            return { ...status, name: 'Просмотрен' };
 
                         default:
                             return status;
