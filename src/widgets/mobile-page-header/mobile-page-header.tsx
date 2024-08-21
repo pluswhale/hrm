@@ -21,7 +21,7 @@ export const MobilePageHeader: FC<Props> = ({
     onChangeSearchValue,
 }): ReactElement => {
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
-    const isNeedOpenFilter = Boolean(filter?.props?.filterSet) || true;
+    const isNeedOpenFilter = Boolean(filter?.props?.filterSet);
 
     return (
         <div className={styles.mobile_page_header}>
