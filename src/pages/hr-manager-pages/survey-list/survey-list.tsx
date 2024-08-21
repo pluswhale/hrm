@@ -53,8 +53,7 @@ const SurveyList = () => {
                             href="survey/create"
                         />
                     </div>
-                ) : null}
-                {isMobile ? (
+                ) : (
                     <MobilePageHeader
                         titlePage={'Опросы'}
                         filter={
@@ -70,7 +69,8 @@ const SurveyList = () => {
                         searchValue={searchValue}
                         onChangeSearchValue={setSearchValue}
                     />
-                ) : null}
+                )}
+
                 <div className={styles.survey__main_content}>
                     <div className={styles.survey__items}>
                         {isMobile && (

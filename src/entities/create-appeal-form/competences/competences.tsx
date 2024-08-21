@@ -25,7 +25,7 @@ export const Competences: FC<CompetencesProps> = ({ competence, competencesOptio
         <div className={styles.create_appeal__form_wrapper}>
             <h2 className={styles.create_appeal__title}>Ключевые навыки</h2>
             <div className={styles.create_appeal__form}>
-                <div className={styles.create_appeal__horizontal_block}>
+                <div className={styles.create_appeal__vertical_block}>
                     <Input
                         value={newCompetence}
                         onChange={setNewCompetence}

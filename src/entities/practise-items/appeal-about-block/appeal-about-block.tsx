@@ -8,7 +8,7 @@ export const AppealAboutBlock: FC<AppealAboutBlockProps> = ({ appealData }): Rea
     return (
         <div className={styles.appeal_about}>
             <div className={styles.appeal_about__card_wrapper}>
-                <h4 className={styles.appeal_about__title}>О вакансии</h4>
+                <h4 className={styles.appeal_about__title}>О практике</h4>
                 <div className={styles.appeal_about__card_wrapper__content}>
                     <div className={styles.appeal_about__row}>
                         <span className={styles.appeal_about__row_title}>Создана:</span>

@@ -2,15 +2,17 @@ import { DefaultContentWrapper } from 'entities/default-content-wrapper/default-
 import { HorizontalNavigation } from 'shared/components/horizontal-navigation';
 import styles from './create-appeal.module.scss';
 import { CreateAppealForm } from 'features/create-appeal-form';
+import { useMediaQuery } from 'react-responsive';
 
 const CreateAppeal = () => {
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const navigation = [
         {
-            title: 'Набор на практику',
+            title: isMobile ? 'Практика' : 'Набор на практику',
             url: '/appeals',
         },
         {
-            title: 'Создание направления практики',
+            title: isMobile ? 'Создание практики' : 'Создание направления практики',
             url: undefined,
         },
     ];

@@ -59,7 +59,7 @@ const AppealsList = () => {
                             <Filter
                                 searchValue={searchValue}
                                 onChangeSearchValue={setSearchValue}
-                                title="Поиск кандидата"
+                                title="Поиск практики"
                             />
                         }
                         switchTabs={
@@ -70,17 +70,27 @@ const AppealsList = () => {
                     />
                 ) : null}
                 <div className={styles.vacancies__main_content}>
+                    {isMobile ? (
+                        <Button
+                            onClick={onNavigateToCreateVacancy}
+                            styles={{ width: 'fit-content' }}
+                            text="Новое направление"
+                            view="default_bg_white"
+                        />
+                    ) : null}
                     <div className={styles.vacancies__items}>
                         {appealsQuery?.data && <AppealsDataContainer appeals={appealsQuery?.data} />}
                     </div>
-                    <Filter
-                        searchValue={searchValue}
-                        onChangeSearchValue={onSearchData}
-                        title="Поиск практик"
-                        onToggleCheckboxInFilter={function (filterSetName: string, checkboxId: number): void {
-                            throw new Error('Function not implemented.');
-                        }}
-                    />
+                    {!isMobile ? (
+                        <Filter
+                            searchValue={searchValue}
+                            onChangeSearchValue={onSearchData}
+                            title="Поиск практик"
+                            onToggleCheckboxInFilter={function (filterSetName: string, checkboxId: number): void {
+                                throw new Error('Function not implemented.');
+                            }}
+                        />
+                    ) : null}
                 </div>
             </div>
         </DefaultContentWrapper>

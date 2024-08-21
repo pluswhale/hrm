@@ -14,6 +14,10 @@
 
         color: $header;
         margin-bottom: 25px;
+
+        @media screen and (max-width: 768px) {
+            font-size: 16px;
+        }
     }
 
     &__card_wrapper {
@@ -23,6 +27,13 @@
         max-width: 658px;
         min-width: 658px;
         height: fit-content;
+
+        @media screen and (max-width: 768px) {
+            min-width: unset;
+            width: 100%;
+            padding: 15px;
+        }
+
         &__content {
             display: flex;
             flex-direction: column;

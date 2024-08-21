@@ -5,6 +5,7 @@ import styles from '../../../../features/create-vacancy-form/create-vacancy-form
 
 export type StageItemProps = {
     stage: StageItem;
+    order: number;
     onDelete: (stageId: string) => void;
 };
 
@@ -14,12 +15,12 @@ export type StageItem = {
     position: number;
 };
 
-export const StageItem: FC<StageItemProps> = ({ stage, onDelete }) => {
+export const StageItem: FC<StageItemProps> = ({ stage, order, onDelete }) => {
     return (
         <div className={styles.create_vacancy__stage}>
             <div className={styles.create_vacancy__stage__container}>
                 <span className={styles.create_vacancy__stage__name}>
-                    {stage.position}.{stage.name}
+                    {order + 1}.{stage.name}
                 </span>
                 <img
                     onClick={() => onDelete(stage.id)}

@@ -36,7 +36,9 @@ export const Stages: FC<Props> = ({ stages }): ReactElement => {
                 <span className={styles.create_vacancy__stages__title}>Этапы</span>
                 <div className={styles.create_vacancy__stages__list}>
                     {stages?.length ? (
-                        stages.map((stage) => <StageItem onDelete={onRemoveStage} stage={stage} />)
+                        stages.map((stage, index: number) => (
+                            <StageItem order={index} onDelete={onRemoveStage} stage={stage} />
+                        ))
                     ) : (
                         <p>Добавьте новые этапы</p>
                     )}
