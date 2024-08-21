@@ -25,10 +25,12 @@ export const RequestModal: FC<RequestModalProps> = ({
     const [answerValue, setAnswerValue] = useState<string>('');
 
     useEffect(() => {
-        if (requestData?.status === 'new') {
-            makeSeenMutation.mutate(requestData?.id);
-            setCurrentRequestObjectForModal((prev: any) => ({ ...prev, status: 'seen' }));
-        }
+        return () => {
+            if (requestData?.status === 'new') {
+                makeSeenMutation.mutate(requestData?.id);
+                setCurrentRequestObjectForModal((prev: any) => ({ ...prev, status: 'seen' }));
+            }
+        };
     }, [requestData?.id, requestData?.status]);
 
     const displayStatus = (status: string) => {

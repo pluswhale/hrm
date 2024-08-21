@@ -10,9 +10,11 @@ import { useNavigate, useParams } from 'react-router';
 import { fetchVacancyById } from 'shared/api/vacancies/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { Vacancy } from 'shared/types/vacancy.type';
+import { useMediaQuery } from 'react-responsive';
 
 const VacanciesProfile = () => {
     const { id: vacancyId } = useParams();
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
     const queryParameters = {
         queryKey: 'fetchVacancyById',
@@ -45,10 +47,10 @@ const VacanciesProfile = () => {
         <DefaultContentWrapper>
             <div className={styles.vacancy_navigation}>
                 <HorizontalNavigation navigation={navigation} />
-                <Button onClick={onNavigateToEditVacancy} text="Редактировать" view="default_bg_white" />
+                {!isMobile && <Button onClick={onNavigateToEditVacancy} text="Редактировать" view="default_bg_white" />}
             </div>
             <> {vacancyByIdQuery?.data && <VacancyInfo vacancy={vacancyByIdQuery?.data} />} </>
-            <VacancyCandidates stages={vacancyByIdQuery?.data?.stages || []} />
+            <>{vacancyByIdQuery?.data?.stages && <VacancyCandidates stages={vacancyByIdQuery?.data?.stages || []} />}</>
         </DefaultContentWrapper>
     );
 };

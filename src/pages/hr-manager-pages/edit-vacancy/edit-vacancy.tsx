@@ -9,11 +9,13 @@ import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import styles from './edit-vacancy.module.scss';
 import { useDeleteVacancy, useSetVacancyStatus } from 'shared/api/vacancies/mutations';
 import { Vacancy } from 'shared/types/vacancy.type';
+import { useMediaQuery } from 'react-responsive';
 
 const EditVacancy = () => {
     const { id: vacancyId } = useParams();
     const deleteVacancyMutation = useDeleteVacancy();
     const setVacancyStatusMutation = useSetVacancyStatus();
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
     const queryParameters = {
         queryKey: 'fetchVacancyById',
@@ -40,10 +42,21 @@ const EditVacancy = () => {
         },
     ];
 
+    const navigationMobile = [
+        {
+            title: vacancyByIdQuery?.data?.name || '',
+            url: `/vacancies/${vacancyByIdQuery?.data?.id}`,
+        },
+        {
+            title: 'Редактирование',
+            url: undefined,
+        },
+    ];
+
     return (
         <DefaultContentWrapper>
             <div className={styles.vacancy_navigation}>
-                <HorizontalNavigation navigation={navigation} />
+                <HorizontalNavigation navigation={isMobile ? navigationMobile : navigation} />
                 <div className={styles.vacancy_navigation__buttons}>
                     <Button
                         onClick={() =>

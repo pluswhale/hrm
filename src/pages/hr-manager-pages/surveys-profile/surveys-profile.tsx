@@ -13,9 +13,12 @@ import { fetchSurveyByIdForHR } from 'shared/api/surveys/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { SurveysPeople } from 'features/surveys-peolple';
 import { Survey } from 'shared/types/survey.type';
+import { useMediaQuery } from 'react-responsive';
+import editIcon from '../../../assets/Редактировать.svg';
 
 const SurveysProfile = () => {
     const { id: surveyId } = useParams();
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState(0);
 
@@ -50,10 +53,19 @@ const SurveysProfile = () => {
         <DefaultContentWrapper>
             <div className={styles.survey_navigation}>
                 <HorizontalNavigation navigation={navigation} />
-                <Button onClick={onNavigateToEditSurveyPage} text="Редактировать" view="default_bg_white" />
+                {!isMobile ? (
+                    <Button onClick={onNavigateToEditSurveyPage} text="Редактировать" view="default_bg_white" />
+                ) : null}
             </div>
             <div className={styles.survey_navigation__container}>
-                <h2 className={styles.survey_navigation__container__title}>{surveyQuery?.data?.name}</h2>
+                {isMobile ? (
+                    <div className={styles.survey_navigation__title_and_edit}>
+                        <h2 className={styles.survey_navigation__container__title}>{surveyQuery?.data?.name}</h2>
+                        <img onClick={onNavigateToEditSurveyPage} src={editIcon} alt="edit icon" />
+                    </div>
+                ) : (
+                    <h2 className={styles.survey_navigation__container__title}>{surveyQuery?.data?.name}</h2>
+                )}
                 <div className={styles.survey_navigation__wrap}>
                     {surveyQuery?.data && <SurveyInfo surveyData={surveyQuery?.data} />}
                     <SurveyDescription title="Описание" content={surveyQuery?.data?.description || ''} />

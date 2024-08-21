@@ -3,6 +3,7 @@ import { Search } from 'react-bootstrap-icons';
 import { FilterProps } from './types';
 
 import styles from './filter.module.scss';
+import { useMediaQuery } from 'react-responsive';
 
 export const Filter: FC<FilterProps> = ({
     title,
@@ -11,6 +12,8 @@ export const Filter: FC<FilterProps> = ({
     onToggleCheckboxInFilter,
     onChangeSearchValue,
 }) => {
+    const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
+
     const renderedInput = () => {
         if (!onChangeSearchValue) {
             return <input className={styles.filter__input} placeholder="Поиск" />;
@@ -31,10 +34,12 @@ export const Filter: FC<FilterProps> = ({
             <div className={styles.filter__container}>
                 <h3 className={styles.filter__title}>{title}</h3>
 
-                <div className={styles.filter__input_wrapper}>
-                    {renderedInput()}
-                    <Search />
-                </div>
+                {!isMobile ? (
+                    <div className={styles.filter__input_wrapper}>
+                        {renderedInput()}
+                        <Search />
+                    </div>
+                ) : null}
 
                 {filterSet && (
                     <div className={styles.filter__sets}>

@@ -1,12 +1,16 @@
 @import '../../../assets/styles/variables.scss';
 
 .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
     padding: 30px;
-    z-index: 999;
-    display: none;
+    display: flex;
     justify-content: space-between;
     flex-direction: column;
-    position: absolute;
     background-color: $white;
     height: 100vh;
     width: 275px;
@@ -55,7 +59,33 @@
     }
 }
 
-.open {
-    display: flex;
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.blurOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 900;
+    transition: opacity 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .blurOverlay {
+        display: block;
+    }
 }
 

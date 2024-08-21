@@ -1,8 +1,17 @@
 import { FC, ReactElement } from 'react';
 import styles from '../../../features/create-vacancy-form/create-vacancy-form.module.scss';
 import { Input } from 'shared/components/input/input';
+import DatePickerComponent from 'shared/components/date-picker/date-picker';
+import { useMediaQuery } from 'react-responsive';
 
-export const InfoAboutVacancy: FC = (): ReactElement => {
+type Props = {
+    dateEnd: Date | null;
+    setDateEnd: (date: Date | null) => void;
+};
+
+export const InfoAboutVacancy: FC<Props> = ({ dateEnd, setDateEnd }): ReactElement => {
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+
     return (
         <div className={styles.create_vacancy__form_wrapper}>
             <h2 className={styles.create_vacancy__title}>Информация о вакансии</h2>
@@ -36,7 +45,7 @@ export const InfoAboutVacancy: FC = (): ReactElement => {
                         label="План поиска"
                     />
                     <span className={styles.create_vacancy__deli}>-</span>
-                    <Input
+                    {/* <Input
                         width={'50%'}
                         isRequired={false}
                         name={'deadline'}
@@ -46,6 +55,14 @@ export const InfoAboutVacancy: FC = (): ReactElement => {
                         }}
                         placeholder={'Дата завершения'}
                         label="Дата завершения"
+                    /> */}
+                    <DatePickerComponent
+                        customStyles={{ width: isMobile ? '100%' : '50%' }}
+                        isRequired={false}
+                        selectedDate={dateEnd}
+                        setSelectedDate={setDateEnd}
+                        labelText="Дата завершения"
+                        placeholder="Дата завершения"
                     />
                 </div>
                 <div className={styles.create_vacancy__income}>

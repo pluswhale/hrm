@@ -35,33 +35,23 @@ export const Sidebar = ({ isOpen, setOpen, isMobile, closeSidebar }: SidebarProp
     };
 
     return (
-        <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
-            <div className={styles.sidebar__wrapper}>
-                <div className={styles.sidebar__container}>
-                    <div className={styles.sidebar__wrapper_btn}>
-                        {isMobile && (
-                            <button className={styles.sidebar__closeButton} onClick={handleCloseClick}>
-                                <X className={styles.sidebar__closeIcon} />
-                            </button>
-                        )}
+        <>
+            <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
+                <div className={styles.sidebar__wrapper}>
+                    <div className={styles.sidebar__container}>
+                        <Link to="/" className={styles.sidebar__logo}>
+                            <h2 className={styles.sidebar__logo_text}>HRM</h2>
+                        </Link>
+
+                        {userRole === 'HRManager' ? <HRManagerSet /> : <EmployeeSet />}
                     </div>
-
-                    <Link to="/" className={styles.sidebar__logo}>
-                        <h2 className={styles.sidebar__logo_text}>HRM</h2>
-                    </Link>
-
-                    {userRole === 'HRManager' ? <HRManagerSet /> : <EmployeeSet />}
-
-                    <Button
-                        styles={{ marginTop: '10%' }}
-                        text="Выйти"
-                        onClick={onLogoutFromProfile}
-                        view="default_bg"
-                    />
                 </div>
+                <button onClick={onLogoutFromProfile} className={styles.sidebar__button}>
+                    Перейти в Astrum
+                </button>
             </div>
-            <button className={styles.sidebar__button}>Перейти в Astrum</button>
-        </div>
+            {isOpen && isMobile && <div className={styles.blurOverlay} onClick={handleCloseClick}></div>}
+        </>
     );
 };
 

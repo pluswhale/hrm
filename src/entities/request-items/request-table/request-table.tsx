@@ -8,6 +8,9 @@ import { Request } from 'shared/types/request.type';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import { formatDate } from 'shared/libs/dateFormater';
+import { useMediaQuery } from 'react-responsive';
+import { RequestCardMobile } from '../request-card-mobile/request-card-mobile';
+import { RequestCard } from '../request-card/request-card';
 dayjs.locale('ru');
 
 const RequestTable: FC<RequestTableProps> = ({
@@ -16,6 +19,7 @@ const RequestTable: FC<RequestTableProps> = ({
     currentRequestObjectForModal,
     setCurrentRequestObjectForModal,
 }): ReactElement => {
+    const isMobile = useMediaQuery({ query: '(max-width:768px)' });
     const [isModalRecruitingFunnelOpened, setIsModalRecruitingFunnelOpened] = useState(false);
 
     const displayStatus = (status: string) => {
@@ -75,23 +79,20 @@ const RequestTable: FC<RequestTableProps> = ({
     return (
         <div className={style.container}>
             {requests?.map((request, index) => (
-                <React.Fragment key={request.id}>
-                    <div className={style.container__card} onClick={() => onOpenModalRequest(request)}>
-                        <img className={style.container__img} src={fakeAvatar} alt="" />
-                        <div className={style.container__head}>
-                            <div className={style.container__name_prof}>
-                                <span className={style.container__name}>
-                                    {request?.author?.last_name + ' ' + request?.author?.first_name + ' '}
-                                </span>
-                                <span className={style.container__prof}>{request?.author?.sub_position?.title}</span>
-                            </div>
-                        </div>
-                        <span className={style.container__meeting}>{displayType(request?.type)}</span>
-                        <span className={style.container__data}>{formatDate(request.created_at)}</span>
-                        {displayStatus(request.status)}
-                    </div>
-                    {index < requests.length - 1 && <hr className={style.container__divider} />}
-                </React.Fragment>
+                <>
+                    {isMobile ? (
+                        <RequestCardMobile request={request} />
+                    ) : (
+                        <RequestCard
+                            key={request.id}
+                            request={request}
+                            index={index}
+                            requestLength={requests?.length}
+                            setIsModalRecruitingFunnelOpened={setIsModalRecruitingFunnelOpened}
+                            setCurrentRequestObjectForModal={setCurrentRequestObjectForModal}
+                        />
+                    )}
+                </>
             ))}
             <PopupWithDarkOverlay onClose={onCloseModalRequest} isOpened={isModalRecruitingFunnelOpened}>
                 <RequestModal

@@ -6,6 +6,10 @@
     gap: 38px;
     justify-content: center;
 
+    @media screen and (max-width: 760px) {
+        gap: 20px;
+    }
+
     &__backLink {
         align-items: center;
         display: flex;
@@ -24,6 +28,10 @@
     &__wrap {
         display: flex;
         gap: 28px;
+
+        @media screen and (max-width: 760px) {
+            flex-direction: column;
+        }
     }
 
     &__wrapper_left {

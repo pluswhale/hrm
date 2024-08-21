@@ -15,9 +15,11 @@ import { CreateCommentBody } from 'shared/api/comments/types';
 import { Candidate } from 'shared/types/candidate.type';
 
 import styles from './candidate-profile.module.scss';
+import { useMediaQuery } from 'react-responsive';
 
 const CandidateProfile = () => {
     const navigate = useNavigate();
+    const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
     const { id } = useParams();
     const createCommentMutation = useCreateComment();
     const deleteCommentMutation = useDeleteComment();
@@ -86,19 +88,23 @@ const CandidateProfile = () => {
         <DefaultContentWrapper>
             <div className={styles.candidate_profile_navigation}>
                 <HorizontalNavigation navigation={navigation} />
-                <Button onClick={onNavigateToEditCandidate} text="Редактировать" view="default_bg_white" />
+                {!isMobile ? (
+                    <Button onClick={onNavigateToEditCandidate} text="Редактировать" view="default_bg_white" />
+                ) : null}
             </div>
             <div className={styles.main_content}>
                 <div className={styles.candidate_info}>
                     {candidateByIdQuery?.data && <CandidateProfileInfo candidateData={candidateByIdQuery?.data} />}
                 </div>
 
-                <CommentAndHistoryTemplate
-                    commentsList={commentsQuery?.data}
-                    onCreateComment={onCreateComment}
-                    onDeleteComment={onDeleteComment}
-                    onEditComment={onEditComment}
-                />
+                <div className={styles.right_block}>
+                    <CommentAndHistoryTemplate
+                        commentsList={commentsQuery?.data}
+                        onCreateComment={onCreateComment}
+                        onDeleteComment={onDeleteComment}
+                        onEditComment={onEditComment}
+                    />
+                </div>
             </div>
         </DefaultContentWrapper>
     );

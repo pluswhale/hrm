@@ -10,6 +10,10 @@
         font-weight: 500;
         line-height: 18.96px;
         text-align: left;
+
+        @media (max-width: 768px) {
+            font-size: 14px;
+        }
     }
 
     &__title_and_status {
@@ -49,6 +53,10 @@
             line-height: 18.75px;
             text-align: left;
             text-decoration: none;
+
+            @media (max-width: 768px) {
+                font-size: 14px;
+            }
         }
 
         &_value {
@@ -58,6 +66,10 @@
             font-weight: 400;
             line-height: 18.75px;
             text-align: left;
+
+            @media (max-width: 768px) {
+                font-size: 14px;
+            }
         }
     }
 
@@ -74,6 +86,10 @@
             font-weight: 400;
             line-height: 18.75px;
             text-align: left;
+
+            @media (max-width: 768px) {
+                font-size: 14px;
+            }
         }
     }
 

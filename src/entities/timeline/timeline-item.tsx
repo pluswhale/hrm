@@ -19,14 +19,14 @@ export const TimelineItemBase: FC<Props> = ({ position, items }): ReactElement =
                 items.map((timelineItem, index: number) => {
                     return (
                         <TimelineItem key={index}>
-                            <TimelineOppositeContent color="text.secondary">
+                            <TimelineOppositeContent sx={{ fontSize: '16px' }} color="text.secondary">
                                 {timelineItem.value}
                             </TimelineOppositeContent>
                             <TimelineSeparator>
                                 <TimelineDot />
                                 <TimelineConnector />
                             </TimelineSeparator>
-                            <TimelineContent>{timelineItem.label}</TimelineContent>
+                            <TimelineContent sx={{ fontSize: '16px' }}>{timelineItem.label}</TimelineContent>
                         </TimelineItem>
                     );
                 })}

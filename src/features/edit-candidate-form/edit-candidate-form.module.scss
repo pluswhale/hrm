@@ -20,6 +20,10 @@
         font-weight: 500;
         line-height: 23.7px;
         text-align: left;
+
+        @media screen and (max-width: 768px) {
+            font-size: 16px;
+        }
     }
 
     &__form_wrapper {

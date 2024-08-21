@@ -9,6 +9,12 @@
         gap: 20px;
     }
 
+    &__title_and_edit {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
     &__container {
         padding-top: 10px;
         display: flex;
@@ -22,6 +28,10 @@
             font-family: 'Rubik', sans-serif;
             text-decoration: none;
             font-weight: 500;
+
+            @media screen and (max-width: 768px) {
+                font-size: 20px;
+            }
         }
     }
 }

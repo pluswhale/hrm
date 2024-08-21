@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import { FC, useState } from 'react';
 import { Comment } from 'shared/types/comment.type';
+import { useMediaQuery } from 'react-responsive';
 dayjs.locale('ru');
 
 type Props = {
@@ -15,6 +16,9 @@ type Props = {
 };
 
 export const CommentItem: FC<Props> = ({ comment, onDeleteComment, onEditComment }) => {
+    const isMobile = useMediaQuery({
+        query: '(max-width: 768px)',
+    });
     const [isEditMode, setIsEditMode] = useState<boolean>(false);
     const [editedCommentText, setEditCommentText] = useState<string>('');
     const { id, author, text, created_at } = comment;
@@ -52,7 +56,9 @@ export const CommentItem: FC<Props> = ({ comment, onDeleteComment, onEditComment
                             </div>
                         </span>
                         <span className={style.comment__data}>
-                            <span className={style.comment__data}>написала комментарий {date}</span>
+                            <span className={style.comment__data}>
+                                {isMobile ? '' : 'написала комментарий'} {date}
+                            </span>
                         </span>
                     </div>
                 </div>

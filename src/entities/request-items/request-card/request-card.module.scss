@@ -1,0 +1,83 @@
+@import '../../../assets/styles/variables.scss';
+
+.container {
+    background-color: $white;
+    border-radius: 10px;
+    width: 100%;
+    padding: 5px 20px;
+    display: grid;
+    height: fit-content;
+
+    &__card {
+        cursor: pointer;
+        padding: 15px 0;
+        align-items: center;
+        display: grid;
+        grid-template-columns: minmax(60px, auto) repeat(3, minmax(0, 1fr)) minmax(112px, auto);
+        gap: 10px;
+    }
+
+    &__head {
+        display: grid;
+        gap: 15px;
+        align-items: center;
+        // grid-template-columns: auto 1fr;
+    }
+
+    &__img {
+        width: 60px;
+        height: 60px;
+        border-radius: 100px;
+    }
+
+    &__name_prof {
+        width: 200px;
+        align-items: flex-start;
+        display: grid;
+        gap: 5px;
+    }
+
+    &__name {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 17px;
+        color: $header;
+    }
+
+    &__prof {
+        align-items: flex-start;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: $text;
+    }
+
+    &__status {
+        display: flex;
+        justify-content: center;
+        border-radius: 24px;
+        padding: 5px 15px;
+        height: 26px;
+        font-size: 14px;
+        font-weight: 500;
+        min-width: 112px; /* Minimum width to prevent content from overlapping */
+    }
+
+    &__meeting {
+        align-items: flex-start;
+        font-weight: 400;
+        font-size: 16px;
+        color: $header;
+    }
+    &__data {
+        justify-content: center;
+        font-weight: 400;
+        font-size: 16px;
+        color: $header;
+    }
+
+    &__divider {
+        height: 0.5px !important;
+        background-color: $header;
+    }
+}

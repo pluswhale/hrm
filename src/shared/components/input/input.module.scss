@@ -8,6 +8,10 @@
         line-height: 18.75px;
         text-align: left;
         color: $text;
+
+        @media screen and (max-width: 768px) {
+            font-size: 14px;
+        }
     }
 
     .label {
@@ -37,6 +41,10 @@
         text-align: left;
         color: $header;
 
+        @media screen and (max-width: 768px) {
+            font-size: 14px;
+        }
+
         &::placeholder {
             font-family: 'Roboto', sans-serif;
             font-size: 16px;
@@ -44,6 +52,10 @@
             line-height: 18.75px;
             text-align: left;
             color: $border;
+
+            @media screen and (max-width: 768px) {
+                font-size: 14px;
+            }
         }
 
         &__error {

@@ -21,7 +21,7 @@ export const AppealInfo: FC<AppealInfoProps> = ({ appeal }): ReactElement => {
                     <AppealAboutBlock appealData={appeal} />
                     <AppealCompetencesBlock competences={appeal?.competences} />
                 </div>
-                <AppealDescriptionCard title="Описание вакансии для кандидата" content={appealDescriptionRows} />
+                <AppealDescriptionCard title="Описание практики для кандидата" content={appealDescriptionRows} />
             </div>
         </>
     );

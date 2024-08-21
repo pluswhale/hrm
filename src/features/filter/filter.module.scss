@@ -63,25 +63,7 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        overflow-y: scroll;
         height: 100%;
-
-        &::-webkit-scrollbar {
-            width: 4px; /* Width of the scrollbar */
-        }
-
-        &::-webkit-scrollbar-track {
-            background: $bgColor; /* Light gray background for the scrollbar track */
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background: $bgColor; /* Darker gray for the scrollbar thumb */
-            border-radius: 10px; /* Rounded corners for the scrollbar thumb */
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-            background: #555; /* Darker gray when hovered */
-        }
 
         &_name {
             font-family: 'Roboto', sans-serif;
@@ -99,6 +81,25 @@
             flex-direction: column;
             align-items: flex-start;
             gap: 15px;
+            overflow-y: scroll;
+            max-height: 250px;
+
+            &::-webkit-scrollbar {
+                width: 4px; /* Width of the scrollbar */
+            }
+
+            &::-webkit-scrollbar-track {
+                background: $bgColor; /* Light gray background for the scrollbar track */
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: $bgColor; /* Darker gray for the scrollbar thumb */
+                border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+                background: #555; /* Darker gray when hovered */
+            }
         }
 
         &_row {

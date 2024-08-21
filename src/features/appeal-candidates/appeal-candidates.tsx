@@ -13,6 +13,7 @@ import { useBindCandidateToAppeal } from 'shared/api/appeals/mutations';
 import { AddParticipant } from 'entities/add-participant/add-participant';
 import { fetchAllCandidates } from 'shared/api/candidates/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
+import { AppealRecruitingFunnel } from 'entities/practise-items/appeals-modal/appeal-recruting-funnel/appeal-recruiting-funnel';
 
 export const AppealCandidates: FC<VacancyCandidatesProps> = ({ stages }): ReactElement => {
     const { id: appealId } = useParams();
@@ -70,7 +71,7 @@ export const AppealCandidates: FC<VacancyCandidatesProps> = ({ stages }): ReactE
                 </div>
             </div>
             <PopupWithDarkOverlay onClose={onCloseModalRecruitingFunnel} isOpened={isModalRecruitingFunnelOpened}>
-                <VacancyRecruitingFunnel onClose={onCloseModalRecruitingFunnel} vacancyId={appealId || ''} />
+                <AppealRecruitingFunnel onClose={onCloseModalRecruitingFunnel} appealId={appealId || ''} />
             </PopupWithDarkOverlay>
             <PopupWithDarkOverlay onClose={onCloseModalAddParticipants} isOpened={isModalAddParticipantsOpened}>
                 <AddParticipant

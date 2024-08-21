@@ -16,6 +16,7 @@ import { Stages } from 'entities/create-vacancy-form/stages/stages';
 import { stagesSelector } from '../../redux/selectors/create-vacancy';
 import { useSelector } from 'react-redux';
 import { Competence } from 'shared/types/competence.type';
+import { format } from 'date-fns/format';
 
 const queryParametersForFetchAllCompetences = {
     queryKey: 'fetchAllCompetencesForCreatingVacancy',
@@ -27,6 +28,7 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
     const updateVacancyMutation = useUpdateVacancy();
     const [competence, setCompetence] = useState<any[]>([]);
     const stages = useSelector(stagesSelector);
+    const [dateEnd, setDateEnd] = useState<Date | null>(null);
 
     const competencesQuery = useFetchData(queryParametersForFetchAllCompetences);
 
@@ -42,22 +44,23 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
             vacancy[key] !== '' &&
             key !== 'stages' &&
             key !== 'competences' &&
-            key !== 'candidates'
+            key !== 'candidates' &&
+            key !== 'deadline'
         ) {
-            if (key === 'deadline') {
-                //@ts-ignore
-                const mirroredDate = vacancy?.[key]?.split('-')?.reverse()?.join('.');
-                formState[key] = mirroredDate;
-            } else {
-                //@ts-ignore
-                formState[key] = vacancy[key];
-            }
+            //@ts-ignore
+            formState[key] = vacancy[key];
         }
     }
 
     const methods = useForm({
         values: formState,
     });
+
+    useEffect(() => {
+        if (vacancy?.deadline) {
+            setDateEnd(vacancy?.deadline);
+        }
+    }, [vacancy]);
 
     useEffect(() => {
         if (vacancy?.competences) {
@@ -75,9 +78,13 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
         };
 
         for (const key in data) {
-            if (data[key] !== null && data[key] !== undefined && data[key] !== '') {
+            if (data[key] !== null && data[key] !== undefined && data[key] !== '' && key !== 'deadline') {
                 body[key] = data[key];
             }
+        }
+
+        if (dateEnd) {
+            body.deadline = format(dateEnd, 'dd.MM.yyyy');
         }
 
         if (competence?.length) {
@@ -107,7 +114,7 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
             <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_vacancy}>
                 <div className={styles.create_vacancy__container}>
                     <div className={styles.create_vacancy__vertical_block}>
-                        <InfoAboutVacancy />
+                        <InfoAboutVacancy dateEnd={dateEnd} setDateEnd={setDateEnd} />
                         {competencesQuery?.data && (
                             <Competences
                                 competence={competence}
@@ -122,12 +129,7 @@ export const EditVacancyForm: FC<EditVacancyFormProps> = ({ vacancy }): ReactEle
                         <Stages stages={stages} />
                     </div>
                 </div>
-                <Button
-                    type={'submit'}
-                    styles={{ width: '250px' }}
-                    view={'default_bg'}
-                    text="Отредактировать вакансию"
-                />
+                <Button type={'submit'} styles={{ width: '250px' }} view={'default_bg'} text="Сохранить" />
             </form>
         </FormProvider>
     );

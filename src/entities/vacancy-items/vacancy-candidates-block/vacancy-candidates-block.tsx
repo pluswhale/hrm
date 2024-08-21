@@ -3,7 +3,6 @@ import { VacancyCandidatesBlockProps } from './types';
 
 import styles from './vacancy-candidates-block.module.scss';
 import { VacancyCandidateCard } from '../vacancy-candidate-card';
-import { columnsFromBackend } from './canban/constants';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useMoveCandidateInStage } from 'shared/api/vacancies/mutations';
 import { useParams } from 'react-router';

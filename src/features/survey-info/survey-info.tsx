@@ -11,7 +11,11 @@ const SurveyInfo: React.FC<Props> = ({ surveyData }) => {
     ];
 
     const rightColumnData = [
-        { id: 4, title: 'Прошедшие опрос', value: `${surveyData?.takenCount} из ${surveyData?.participantsCount}` },
+        {
+            id: 4,
+            title: 'Прошедшие опрос',
+            value: `${surveyData?.completedParticipants} из ${surveyData?.participantsCount}`,
+        },
         { id: 5, title: 'Тип опроса', value: surveyData?.type === 'personal' ? 'персональный' : 'общий' },
         { id: 6, title: 'Анонинмный', value: surveyData?.anonymous ? 'да' : 'нет' },
     ];

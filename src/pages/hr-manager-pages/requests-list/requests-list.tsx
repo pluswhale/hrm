@@ -16,9 +16,10 @@ import { useAppDispatch } from '../../../redux/store';
 import { setFilters, setToggleCheckboxInFilter } from '../../../redux/slices/filter';
 import { fetchAllRequests } from 'shared/api/requests/thunks';
 import { Request } from 'shared/types/request.type';
+import { MobilePageHeader } from 'widgets/mobile-page-header/mobile-page-header';
 
 const RequestsList = () => {
-    const isLaptop = useMediaQuery({ maxWidth: '1500px' });
+    const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
     const dispatch = useAppDispatch();
     const [currentRequestObjectForModal, setCurrentRequestObjectForModal] = useState<Request>({} as Request);
     const [searchValue, setSearchValue] = useState<string>('');
@@ -65,7 +66,7 @@ const RequestsList = () => {
                         case 'approved':
                             return { ...status, name: 'Подтвержден' };
                         case 'seen':
-                            return { ...status, name: 'Просмотреть' };
+                            return { ...status, name: 'Просмотрен' };
 
                         default:
                             return status;
@@ -120,33 +121,30 @@ const RequestsList = () => {
 
     return (
         <DefaultContentWrapper>
-            <h2 className={style.container__title}>Запросы</h2>
             <div className={style.container}>
-                {isLaptop && (
-                    <Filter
+                {!isMobile ? <h2 className={style.container__title}>Запросы</h2> : null}
+                {isMobile ? (
+                    <MobilePageHeader
+                        titlePage={'Запросы'}
+                        filter={
+                            <Filter
+                                searchValue={searchValue}
+                                onChangeSearchValue={setSearchValue}
+                                onToggleCheckboxInFilter={onToggleCheckboxInFilter}
+                                title="Поиск кандидата"
+                                filterSet={filterRowsData}
+                            />
+                        }
                         searchValue={searchValue}
                         onChangeSearchValue={setSearchValue}
-                        filterSet={filterRowsData}
-                        title="Найти запрос"
-                        onToggleCheckboxInFilter={onToggleCheckboxInFilter}
                     />
-                )}
+                ) : null}
                 {requestsQuery?.data && (
                     <RequestTable
                         currentRequestObjectForModal={currentRequestObjectForModal}
                         requests={requestsQuery?.data}
                         onOpenCreateRequestModal={onOpenCreateRequestModal}
                         setCurrentRequestObjectForModal={setCurrentRequestObjectForModal}
-                    />
-                )}
-
-                {!isLaptop && (
-                    <Filter
-                        searchValue={searchValue}
-                        onChangeSearchValue={setSearchValue}
-                        filterSet={filterRowsData}
-                        title="Найти запрос"
-                        onToggleCheckboxInFilter={onToggleCheckboxInFilter}
                     />
                 )}
             </div>

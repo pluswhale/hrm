@@ -14,6 +14,7 @@ import { DescriptionVacancy } from 'entities/create-vacancy-form/description-vac
 
 import styles from './create-vacancy-form.module.scss';
 import { Stages } from 'entities/create-vacancy-form/stages/stages';
+import { format } from 'date-fns/format';
 
 const queryParametersForFetchAllCompetences = {
     queryKey: 'fetchAllCompetencesForCreatingVacancy',
@@ -25,6 +26,7 @@ export const CreateVacancyForm = () => {
     const createVacancyMutation = useCreateVacancy();
     const [competence, setCompetence] = useState<any[]>([]);
     const stages = useSelector(stagesSelector);
+    const [dateEnd, setDateEnd] = useState<Date | null>(null);
 
     const competencesQuery = useFetchData(queryParametersForFetchAllCompetences);
 
@@ -41,9 +43,13 @@ export const CreateVacancyForm = () => {
         const body: any = {};
 
         for (const key in data) {
-            if (data[key] !== null && data[key] !== undefined && data[key] !== '') {
+            if (data[key] !== null && data[key] !== undefined && data[key] !== '' && key !== 'deadline') {
                 body[key] = data[key];
             }
+        }
+
+        if (dateEnd) {
+            body.deadline = format(dateEnd, 'dd.MM.yyyy');
         }
 
         if (competence?.length) {
@@ -64,7 +70,7 @@ export const CreateVacancyForm = () => {
             <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_vacancy}>
                 <div className={styles.create_vacancy__container}>
                     <div className={styles.create_vacancy__vertical_block}>
-                        <InfoAboutVacancy />
+                        <InfoAboutVacancy dateEnd={dateEnd} setDateEnd={setDateEnd} />
                         <Competences
                             competence={competence}
                             competencesOptions={competencesQuery?.data}

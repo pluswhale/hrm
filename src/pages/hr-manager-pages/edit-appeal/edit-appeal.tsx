@@ -8,11 +8,13 @@ import { fetchAppealById } from 'shared/api/appeals/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { Button } from 'shared/components/button/button';
 import { Appeal } from 'shared/types/appeal.type';
+import { useMediaQuery } from 'react-responsive';
 
 const EditAppeal = () => {
     const { id: appealId } = useParams();
     const deleteAppealMutation = useDeleteAppeal();
     const setAppealStatusMutation = useSetAppealStatus();
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
     const queryParameters = {
         queryKey: 'fetchAppealById',
@@ -35,10 +37,21 @@ const EditAppeal = () => {
         },
     ];
 
+    const navigationMobile = [
+        {
+            title: appealByIdQuery?.data?.name || '',
+            url: `/appeals/${appealId}`,
+        },
+        {
+            title: 'Редактирование',
+            url: undefined,
+        },
+    ];
+
     return (
         <DefaultContentWrapper>
             <div className={styles.appeal_navigation}>
-                <HorizontalNavigation navigation={navigation} />
+                <HorizontalNavigation navigation={isMobile ? navigationMobile : navigation} />
                 <div className={styles.appeal_navigation__buttons}>
                     <Button
                         onClick={() =>

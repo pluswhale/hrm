@@ -103,7 +103,9 @@ const SurveysPeople: FC<Props> = ({ participants }): ReactElement => {
                                         <h2
                                             className={style.container__title}
                                         >{`${participant?.last_name} ${participant?.first_name} ${participant?.sur_name}`}</h2>
-                                        <span className={style.container__name}>{participant?.sub_position.title}</span>
+                                        <span className={style.container__name}>
+                                            {participant?.sub_position?.title}
+                                        </span>
                                     </div>
                                 </div>
                                 {displayStatus('Новый')}

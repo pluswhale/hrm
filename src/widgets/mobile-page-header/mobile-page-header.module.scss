@@ -1,0 +1,52 @@
+@import '../../assets/styles/variables';
+
+.mobile_page_header {
+    width: 100%;
+    &__title_wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__filter_icon {
+        filter: brightness(0) saturate(100%) invert(47%) sepia(11%) saturate(13%) hue-rotate(85deg) brightness(89%)
+            contrast(87%);
+    }
+
+    &__input_wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        border: 1px solid $text;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 25px;
+        background-color: $white;
+        margin-bottom: 25px;
+    }
+
+    &__input {
+        outline: none;
+        border: none;
+        width: 90%;
+        height: 100%;
+
+        font-family: 'Rubik', sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 17.78px;
+        text-align: left;
+        color: $text;
+    }
+
+    &__title {
+        font-family: Rubik;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 28.44px;
+        text-align: left;
+        color: $header;
+    }
+}
+

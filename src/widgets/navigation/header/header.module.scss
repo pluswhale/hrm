@@ -52,6 +52,10 @@
         align-items: center;
         min-height: 70px;
         padding: 11px 50px 11px 30px;
+
+        @media screen and (max-width: 760px) {
+            padding: 10px 15px;
+        }
     }
 
     &__profile {

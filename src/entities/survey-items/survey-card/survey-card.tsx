@@ -1,7 +1,7 @@
 import { FC, ReactElement } from 'react';
 import { SurveyCardProps } from './types';
 import styles from './survey-card.module.scss';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { formatDate } from 'shared/libs/dateFormater';
 
 export const SurveyCard: FC<SurveyCardProps> = ({
@@ -13,6 +13,7 @@ export const SurveyCard: FC<SurveyCardProps> = ({
     deadlineTo,
     navigationUrl,
 }): ReactElement => {
+    const location = useLocation();
     return (
         <div className={styles.survey_card}>
             <div className={styles.survey_card__container}>
@@ -34,14 +35,16 @@ export const SurveyCard: FC<SurveyCardProps> = ({
                     </div>
                 </div>
 
-                <div className={styles.survey_card__count}>
-                    <div className={styles.survey_card__row}>
-                        <span className={styles.survey_card__row_label}>Прошедшие опрос:</span>
-                        <span className={styles.survey_card__row_value}>
-                            {completedParticipants} из {totalParticipants}
-                        </span>
+                {!location.pathname.includes('employee') && (
+                    <div className={styles.survey_card__count}>
+                        <div className={styles.survey_card__row}>
+                            <span className={styles.survey_card__row_label}>Прошедшие опрос:</span>
+                            <span className={styles.survey_card__row_value}>
+                                {String(completedParticipants)} из {totalParticipants}
+                            </span>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );

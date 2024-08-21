@@ -11,7 +11,9 @@ type Props = {
 export const ShortText: FC<Props> = ({ question, onTypeTextQuestion }): ReactElement => {
     const { sort } = useParams();
 
-    const disabled = sort === 'passed' ? true : false;
+    console.log(sort);
+
+    const disabled = sort === 'passed' && !sort ? true : false;
 
     return (
         <div className={styles.question}>

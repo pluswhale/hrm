@@ -56,8 +56,8 @@ export const VacancyRecruitingFunnel: FC<VacancyRecruitingFunnelProps> = ({ vaca
                                     {item?.candidateCount}
                                 </span>
                             </div>
-                            <div className={styles.value}>{item.absoluteConversion}</div>
-                            <div className={styles.value}>{item.relativeConversion}</div>
+                            <div className={styles.value}>{Math.floor(item.absoluteConversion)}%</div>
+                            <div className={styles.value}>{Math.floor(item.relativeConversion)}%</div>
                         </div>
                     ))}
                 </div>

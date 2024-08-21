@@ -11,6 +11,10 @@
         display: flex;
         gap: 24px;
         width: 100%;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+        }
     }
 
     &__vertical_block {
@@ -18,6 +22,10 @@
         flex-direction: column;
         gap: 24px;
         width: 50%;
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+        }
     }
 
     &__title {
@@ -26,6 +34,10 @@
         font-weight: 500;
         line-height: 23.7px;
         text-align: left;
+
+        @media screen and (max-width: 768px) {
+            font-size: 16px;
+        }
     }
 
     &__form_wrapper {
@@ -34,6 +46,10 @@
         border-radius: 10px;
         padding: 25px;
         height: fit-content;
+
+        @media screen and (max-width: 768px) {
+            padding: 15px;
+        }
     }
 
     &__form {

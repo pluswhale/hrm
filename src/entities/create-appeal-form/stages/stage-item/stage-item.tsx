@@ -6,15 +6,16 @@ import { StageAppeal } from 'shared/types/stage-appeal.type';
 
 export type StageItemProps = {
     stage: StageAppeal;
+    order: number;
     onDelete: (stageId: string | number) => void;
 };
 
-export const StageItem: FC<StageItemProps> = ({ stage, onDelete }) => {
+export const StageItem: FC<StageItemProps> = ({ stage, order, onDelete }) => {
     return (
         <div className={styles.create_appeal__stage}>
             <div className={styles.create_appeal__stage__container}>
                 <span className={styles.create_appeal__stage__name}>
-                    {stage.position}.{stage.name}
+                    {order + 1}.{stage.name}
                 </span>
                 <img
                     onClick={() => onDelete(stage.id)}

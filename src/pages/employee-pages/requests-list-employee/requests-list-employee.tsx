@@ -19,15 +19,18 @@ import RequestTableEmployee from 'entities/request-items/request-table-employee/
 import { Button } from 'shared/components/button/button';
 import { PopupWithDarkOverlay } from 'shared/components/portal/popup-with-dark-overlay';
 import { RequestModalCreate } from 'entities/request-items/request-modal-create-employee/request-modal-create';
+import { MobilePageHeader } from 'widgets/mobile-page-header/mobile-page-header';
+import { useNavigate } from 'react-router';
 
 const RequestsListEmployee = () => {
     const dispatch = useAppDispatch();
     const isLaptop = useMediaQuery({ maxWidth: '1500px' });
+    const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
+    const navigate = useNavigate();
     const userId = useSelector(userDataSelector)?.id;
     const [currentRequestObjectForModal, setCurrentRequestObjectForModal] = useState<string>('');
     const [searchValue, setSearchValue] = useState<string>('');
     const [isModalCreateRequestOpened, setIsModalCreateRequestOpened] = useState<boolean>(false);
-
     const themesForFilter = useSelector(themesInFilterSelector);
     const statusesForFilter = useSelector(statusesInFilterSelector);
     const themesFilterSetQuery = useFetchData(queryParametersForThemesRequestsFilterSet);
@@ -120,7 +123,11 @@ const RequestsListEmployee = () => {
     };
 
     const onOpenCreateRequestModal = () => {
-        setIsModalCreateRequestOpened(true);
+        if (isMobile) {
+            navigate('/request/employee/create/undefined');
+        } else {
+            setIsModalCreateRequestOpened(true);
+        }
     };
     const onCloseModalCreateRequest = () => {
         setIsModalCreateRequestOpened(false);
@@ -128,23 +135,51 @@ const RequestsListEmployee = () => {
 
     return (
         <DefaultContentWrapper>
-            <div className={style.action_buttons}>
-                <h2 className={style.container__title}>Запросы</h2>
-                <Button
-                    onClick={onOpenCreateRequestModal}
-                    styles={{ width: 'fit-content' }}
-                    text="Новый запрос"
-                    view="default_bg_white"
-                />
-            </div>
+            <>
+                {isMobile ? (
+                    <MobilePageHeader
+                        titlePage={'Запросы'}
+                        filter={
+                            <Filter
+                                searchValue={searchValue}
+                                onChangeSearchValue={setSearchValue}
+                                onToggleCheckboxInFilter={onToggleCheckboxInFilter}
+                                title="Поиск запроса"
+                                filterSet={filterRowsData}
+                            />
+                        }
+                        searchValue={searchValue}
+                        onChangeSearchValue={setSearchValue}
+                    />
+                ) : (
+                    <div className={style.action_buttons}>
+                        <h2 className={style.container__title}>Запросы</h2>
+                        <Button
+                            onClick={onOpenCreateRequestModal}
+                            styles={{ width: 'fit-content' }}
+                            text="Новый запрос"
+                            view="default_bg_white"
+                        />
+                    </div>
+                )}
+            </>
+
             <div className={style.container}>
-                {isLaptop && (
+                {!isMobile && (
                     <Filter
                         searchValue={searchValue}
                         onChangeSearchValue={setSearchValue}
                         filterSet={filterRowsData}
                         title="Найти запрос"
                         onToggleCheckboxInFilter={onToggleCheckboxInFilter}
+                    />
+                )}
+                {isMobile && (
+                    <Button
+                        onClick={onOpenCreateRequestModal}
+                        styles={{ width: 'fit-content' }}
+                        text="Новый запрос"
+                        view="default_bg_white"
                     />
                 )}
                 <RequestTableEmployee

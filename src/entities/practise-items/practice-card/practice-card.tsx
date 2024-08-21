@@ -59,7 +59,7 @@ export const PracticeCard: FC<PracticeCardProps> = ({
 
                     <div className={styles.practice_card__row}>
                         <span className={styles.practice_card__row_label}>Дедлайн:</span>
-                        <span className={styles.practice_card__row_value}>{formatDate(deadline)}</span>
+                        <span className={styles.practice_card__row_value}>{formatDate(deadline as Date)}</span>
                     </div>
                 </div>
 

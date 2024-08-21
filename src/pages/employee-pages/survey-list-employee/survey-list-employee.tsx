@@ -9,12 +9,15 @@ import { useSelector } from 'react-redux';
 import { userDataSelector } from '../../../redux/selectors/auth';
 import { SurveyListEmployeeContainer } from 'features/survey-list-employee-data-container/survey-list-data-container';
 import { useNavigate, useParams } from 'react-router';
+import { MobilePageHeader } from 'widgets/mobile-page-header/mobile-page-header';
+import { useMediaQuery } from 'react-responsive';
 
 const SurveyListEmployee = () => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<number>(0);
     const [searchValue, setSearchValue] = useState<string>('');
     const userId = useSelector(userDataSelector)?.id;
+    const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
     const { sort } = useParams();
 
     const tabs = [{ label: 'Новые опросы' }, { label: 'Пройденные опросы' }];
@@ -51,21 +54,40 @@ const SurveyListEmployee = () => {
     return (
         <DefaultContentWrapper>
             <div className={styles.survey}>
-                <div className={styles.survey__action_buttons}>
-                    <SwitchTab tabs={tabs} onTabClick={onPickTab} activeTab={activeTab} design="default" />
-                </div>
+                <>
+                    {isMobile ? (
+                        <MobilePageHeader
+                            titlePage={'Опросы'}
+                            filter={
+                                <Filter
+                                    searchValue={searchValue}
+                                    onChangeSearchValue={setSearchValue}
+                                    title="Поиск опроса"
+                                />
+                            }
+                            searchValue={searchValue}
+                            onChangeSearchValue={setSearchValue}
+                        />
+                    ) : (
+                        <div className={styles.survey__action_buttons}>
+                            <SwitchTab tabs={tabs} onTabClick={onPickTab} activeTab={activeTab} design="default" />
+                        </div>
+                    )}
+                </>
                 <div className={styles.survey__main_content}>
                     <div className={styles.survey__items}>
                         <SurveyListEmployeeContainer surveys={surveysQuery?.data} />
                     </div>
-                    <Filter
-                        searchValue={searchValue}
-                        onChangeSearchValue={onSearchData}
-                        title="Найти опрос"
-                        onToggleCheckboxInFilter={function (filterSetName: string, checkboxId: number): void {
-                            throw new Error('Function not implemented.');
-                        }}
-                    />
+                    {!isMobile && (
+                        <Filter
+                            searchValue={searchValue}
+                            onChangeSearchValue={onSearchData}
+                            title="Найти опрос"
+                            onToggleCheckboxInFilter={function (filterSetName: string, checkboxId: number): void {
+                                throw new Error('Function not implemented.');
+                            }}
+                        />
+                    )}
                 </div>
             </div>
         </DefaultContentWrapper>

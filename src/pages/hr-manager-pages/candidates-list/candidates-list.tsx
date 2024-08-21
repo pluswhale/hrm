@@ -17,12 +17,13 @@ import {
     queryParametersForCountByTypeInCandidatesFilterSet,
 } from 'shared/api/filters/filters.queries';
 import { Candidate } from 'shared/types/candidate.type';
+import { useMediaQuery } from 'react-responsive';
+import { MobilePageHeader } from 'widgets/mobile-page-header/mobile-page-header';
 
 const CandidatesList: FC = (): ReactElement => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    // const tabs = [{ label: 'Текущие сотрудники' }, { label: 'Бывшие сотрудники' }];
-    // const [activeTab, setActiveTab] = useState<number>(0);
+    const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
 
     const [searchValue, setSearchValue] = useState<string>('');
     const competencesForFilter = useSelector(skillsInFilterSelector);
@@ -86,8 +87,6 @@ const CandidatesList: FC = (): ReactElement => {
         return activeType?.length ? activeType : null;
     }
 
-    console.log('getCurrentType', getCurrentType());
-
     const onToggleCheckboxInFilter = (filterSetName: string, checkboxId: number) => {
         dispatch(setToggleCheckboxInFilter({ filterSetName, checkboxId }));
     };
@@ -99,24 +98,52 @@ const CandidatesList: FC = (): ReactElement => {
     return (
         <DefaultContentWrapper>
             <div className={style.container}>
-                <div className={style.action_buttons}>
-                    <h5 className={style.container__title}>Кандидаты</h5>
-                    <Button
-                        onClick={onNavigateToCreateVacancy}
-                        styles={{ width: 'fit-content' }}
-                        text="Создать кандидата"
-                        view="default_bg"
-                    />
-                </div>
-                <div className={style.container__wrapper}>
-                    {candidatesQuery?.data && <CandidatesDataContainer candidates={candidatesQuery?.data} />}
-                    <Filter
+                {!isMobile ? (
+                    <div className={style.action_buttons}>
+                        <h5 className={style.container__title}>Кандидаты</h5>
+                        <Button
+                            onClick={onNavigateToCreateVacancy}
+                            styles={{ width: 'fit-content' }}
+                            text="Создать кандидата"
+                            view="default_bg"
+                        />
+                    </div>
+                ) : null}
+                {isMobile ? (
+                    <MobilePageHeader
+                        titlePage={'Кандидаты'}
+                        filter={
+                            <Filter
+                                searchValue={searchValue}
+                                onChangeSearchValue={setSearchValue}
+                                onToggleCheckboxInFilter={onToggleCheckboxInFilter}
+                                title="Поиск кандидата"
+                                filterSet={filterRowsData}
+                            />
+                        }
                         searchValue={searchValue}
                         onChangeSearchValue={setSearchValue}
-                        onToggleCheckboxInFilter={onToggleCheckboxInFilter}
-                        title="Поиск кандидата"
-                        filterSet={filterRowsData}
                     />
+                ) : null}
+                <div className={style.container__wrapper}>
+                    {isMobile ? (
+                        <Button
+                            onClick={onNavigateToCreateVacancy}
+                            styles={{ width: 'fit-content' }}
+                            text="Создать кандидата"
+                            view="default_bg"
+                        />
+                    ) : null}
+                    {candidatesQuery?.data && <CandidatesDataContainer candidates={candidatesQuery?.data} />}
+                    {!isMobile ? (
+                        <Filter
+                            searchValue={searchValue}
+                            onChangeSearchValue={setSearchValue}
+                            onToggleCheckboxInFilter={onToggleCheckboxInFilter}
+                            title="Поиск кандидата"
+                            filterSet={filterRowsData}
+                        />
+                    ) : null}
                 </div>
             </div>
         </DefaultContentWrapper>

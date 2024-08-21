@@ -18,7 +18,7 @@ export const Competences: FC<CompetencesProps> = ({ competence, competencesOptio
                 onChange={(event, newValue: any) => {
                     addCompetence(newValue);
                 }}
-                sx={{ width: '100%', marginTop: '30px' }}
+                sx={{ width: '100%', marginTop: '30px', fontSize: '16px' }}
                 multiple
                 id="tags-filled"
                 options={competencesOptions}
@@ -26,11 +26,22 @@ export const Competences: FC<CompetencesProps> = ({ competence, competencesOptio
                 freeSolo
                 renderTags={(value, getTagProps) =>
                     value.map((option, index) => (
-                        <Chip variant="outlined" label={option.name || option} {...getTagProps({ index })} />
+                        <Chip
+                            sx={{ fontSize: '16px' }}
+                            variant="outlined"
+                            label={option.name || option}
+                            {...getTagProps({ index })}
+                        />
                     ))
                 }
                 renderInput={(params) => (
-                    <TextField {...params} variant="filled" label="Комптенции" placeholder="Поиск" />
+                    <TextField
+                        sx={{ fontSize: '16px' }}
+                        {...params}
+                        variant="filled"
+                        label="Комптенции"
+                        placeholder="Поиск"
+                    />
                 )}
             />
         </div>

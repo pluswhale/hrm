@@ -5,7 +5,6 @@ import { EmployeeProfile } from 'pages/hr-manager-pages/employee-profile';
 import { CandidatesList } from 'pages/hr-manager-pages/candidates-list';
 import { VacanciesList } from 'pages/hr-manager-pages/vacancies-list';
 import { VacanciesProfile } from 'pages/hr-manager-pages/vacancies-profile';
-import { VacanciesCandidate } from 'pages/hr-manager-pages/vacancies-candidate';
 import { RequestsList } from '../hr-manager-pages/requests-list';
 import SurveyList from '../hr-manager-pages/survey-list/survey-list';
 import { CreateVacancy } from 'pages/hr-manager-pages/create-vacancy';
@@ -26,6 +25,8 @@ import { useEffect } from 'react';
 import { RequestsListEmployee } from 'pages/employee-pages/requests-list-employee';
 import SurveyListEmployee from 'pages/employee-pages/survey-list-employee/survey-list-employee';
 import SurveyByIdEmployee from 'pages/employee-pages/survey-by-id-employee/survey-by-id-employee';
+import { RequestById } from 'pages/hr-manager-pages/requests-by-id';
+import { RequestCreateEmployee } from 'pages/employee-pages/request-create-employee/request-create-employee';
 
 export const Routing = () => {
     const navigate = useNavigate();
@@ -59,6 +60,7 @@ export const Routing = () => {
                         <Route path="create/appeal" element={<CreateAppeal />} />
                         <Route path="edit/appeal/:id" element={<EditAppeal />} />
                         <Route path="request" element={<RequestsList />} />
+                        <Route path="request/:id" element={<RequestById />} />
                         <Route path="survey" element={<SurveyList />} />
                         <Route path="survey/create" element={<CreateSurvey />} />
                         <Route path="survey/edit/:id" element={<EditSurvey />} />
@@ -69,6 +71,8 @@ export const Routing = () => {
                 {userRole === 'Employee' ? (
                     <>
                         <Route path="request/employee" element={<RequestsListEmployee />} />
+                        <Route path="request/employee/:id" element={<RequestById />} />
+                        <Route path="request/employee/create/:id" element={<RequestCreateEmployee />} />
                         <Route path="survey/employee/:sort" element={<SurveyListEmployee />} />
                         <Route path="survey/employee/:sort/:id" element={<SurveyByIdEmployee />} />
                     </>

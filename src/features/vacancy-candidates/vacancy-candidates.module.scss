@@ -9,6 +9,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
 
     &__count {
@@ -17,12 +22,22 @@
         line-height: 29.63px;
         text-align: left;
         color: $header;
+
+        @media screen and (max-width: 768px) {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
     }
 
     &__buttons {
         display: flex;
         align-items: center;
         gap: 15px;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
 
     &__list {
@@ -30,6 +45,12 @@
         flex-wrap: wrap;
         gap: 24px;
         margin-top: 24px;
+
+        @media screen and (max-width: 768px) {
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            width: 100%;
+        }
     }
 }
 

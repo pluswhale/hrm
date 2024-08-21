@@ -8,7 +8,7 @@ export interface Appeal {
     is_active: boolean;
     desired_count_candidates?: string;
     test_task_link?: string;
-    deadline?: Date | string;
+    deadline?: Date | null;
     competences: Competence[];
     responsibilities?: string;
     requirements?: string;

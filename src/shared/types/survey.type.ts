@@ -9,8 +9,10 @@ export interface Survey {
     deadlineFrom: Date | string | undefined;
     deadlineTo: Date | string | undefined;
     author: HRManager;
-    participantsCount: number;
+    totalParticipants: number;
     takenCount: number;
+    participantsCount: number;
+    completedParticipants: number;
     description: string;
     type: 'personal' | 'general';
     anonymous: boolean;

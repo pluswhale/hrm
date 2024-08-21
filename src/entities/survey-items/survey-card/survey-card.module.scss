@@ -7,6 +7,11 @@
     background: $white;
     border-radius: 10px;
 
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        max-width: unset;
+    }
+
     &__count {
         padding-top: 15px;
     }
@@ -29,6 +34,10 @@
         font-size: 20px;
         text-decoration: none;
         font-weight: 500;
+
+        @media screen and (max-width: 768px) {
+            font-size: 16px;
+        }
     }
 
     &__status {
@@ -55,6 +64,10 @@
             font-weight: 400;
             line-height: 18.96px;
             text-align: left;
+
+            @media screen and (max-width: 768px) {
+                font-size: 14px;
+            }
         }
 
         &_label {

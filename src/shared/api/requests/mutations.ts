@@ -74,6 +74,9 @@ export const useUpdateRequestByHRManager = () => {
                 qc.invalidateQueries({
                     queryKey: ['fetchAllRequests'],
                 }),
+                qc.invalidateQueries({
+                    queryKey: ['fetchRequestById'],
+                }),
                 qc.invalidateQueries({ queryKey: ['fetchThemesForRequestFilterSet'] }),
                 qc.invalidateQueries({ queryKey: ['fetchStatusesForRequestFilterSet'] }),
             ]);

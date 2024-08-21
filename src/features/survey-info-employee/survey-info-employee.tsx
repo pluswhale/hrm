@@ -1,11 +1,12 @@
 import React from 'react';
 import style from './survey-info-employee.module.scss';
 import { Props } from './types';
+import { formatDate } from 'shared/libs/dateFormater';
 
 const SurveyInfoEmployee: React.FC<Props> = ({ surveyData }) => {
     const leftColumnData = [
-        { id: 1, title: 'Дата начала', value: surveyData?.deadlineFrom },
-        { id: 2, title: 'Дата завершения', value: surveyData?.deadlineTo },
+        { id: 1, title: 'Дата начала', value: formatDate(surveyData?.deadlineFrom) },
+        { id: 2, title: 'Дата завершения', value: formatDate(surveyData?.deadlineTo) },
     ];
 
     const rightColumnData = [

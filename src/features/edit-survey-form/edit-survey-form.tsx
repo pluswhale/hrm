@@ -10,7 +10,6 @@ import { Button } from 'shared/components/button/button';
 import { FormControlLabel, Switch } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { questionsInCreateSurveySelector } from '../../redux/selectors/create-survey';
-import { userDataSelector } from '../../redux/selectors/auth';
 import { fetchAllEmployees } from 'shared/api/employees/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { CreateSurveyEmployeesList } from 'entities/survey-items/create-survey-employees-list/create-survey-employees-list';
@@ -20,12 +19,16 @@ import { useUpdateSurvey } from 'shared/api/surveys/mutations';
 import { Survey } from 'shared/types/survey.type';
 
 import styles from './edit-survey-form.module.scss';
+import DatePickerComponent from 'shared/components/date-picker/date-picker';
+import { useMediaQuery } from 'react-responsive';
+import { format } from 'date-fns/format';
 
 type Props = {
     surveyData: Survey;
+    formRef: any;
 };
 
-export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
+export const EditSurveyForm: FC<Props> = ({ surveyData, formRef }): ReactElement => {
     const formState: any = {};
 
     for (const key in surveyData) {
@@ -38,7 +41,9 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
             surveyData[key] !== '' &&
             key !== 'stages' &&
             key !== 'competences' &&
-            key !== 'candidates'
+            key !== 'candidates' &&
+            key !== 'deadlineTo' &&
+            key !== 'deadlineFrom'
         ) {
             if (key === 'deadlineFrom' || key === 'deadlineTo') {
                 const dateStr = surveyData[key];
@@ -57,6 +62,7 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
             }
         }
     }
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const methods = useForm({ values: formState });
     const [surveyType, setSurveyType] = useState<Option | null>({ value: 'general', label: 'Общий' });
     const [checkedAnonymous, setCheckedAnonymous] = useState<boolean>(false);
@@ -65,6 +71,10 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
     const [addedEmployees, setAddedEmployees] = useState<any[]>([]);
     const questions = useSelector(questionsInCreateSurveySelector);
     const updateSurveyMutation = useUpdateSurvey();
+    const [dateStart, setDateStart] = useState<Date | null>(null);
+    const [dateEnd, setDateEnd] = useState<Date | null>(null);
+
+    console.log('dateStart: ', dateStart);
 
     useEffect(() => {
         if (surveyData) {
@@ -75,6 +85,9 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
                     setSurveyType(SURVEY_TYPE_OPTIONS?.[0]?.options?.[0]);
                 }
             }
+
+            if (surveyData.deadlineTo) setDateEnd(new Date(surveyData.deadlineTo));
+            if (surveyData.deadlineFrom) setDateStart(new Date(surveyData.deadlineFrom));
 
             setCheckedAnonymous(surveyData?.anonymous);
 
@@ -146,6 +159,14 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
 
         body.anonymous = checkedAnonymous;
 
+        if (dateStart) {
+            body.deadlineFrom = format(dateStart, 'dd.MM.yyyy');
+        }
+
+        if (dateEnd) {
+            body.deadlineTo = format(dateEnd, 'dd.MM.yyyy');
+        }
+
         if (surveyType?.value === 'personal' && addedEmployeesIds?.length) {
             body.targetedEmployeeIds = addedEmployeesIds;
         }
@@ -177,10 +198,14 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
     return (
         <div className={styles.create_survey}>
             <div className={styles.create_survey__form_wrapper}>
-                <h2>Информация об опросе</h2>
+                <h2 className={styles.create_survey__title}>Информация об опросе</h2>
 
                 <FormProvider {...methods}>
-                    <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.create_survey__form}>
+                    <form
+                        ref={formRef}
+                        onSubmit={methods.handleSubmit(onSubmit)}
+                        className={styles.create_survey__form}
+                    >
                         <Input
                             width={'100%'}
                             isRequired={true}
@@ -189,7 +214,23 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
                             label="Название опроса"
                         />
                         <div className={styles.create_survey__wrapper_imput}>
-                            <Input
+                            <DatePickerComponent
+                                customStyles={{ width: isMobile ? '100%' : '50%' }}
+                                isRequired={true}
+                                selectedDate={dateStart}
+                                setSelectedDate={setDateStart}
+                                labelText="Дата начала"
+                                placeholder="Дата начала"
+                            />
+                            <DatePickerComponent
+                                customStyles={{ width: isMobile ? '100%' : '50%' }}
+                                isRequired={true}
+                                selectedDate={dateEnd}
+                                setSelectedDate={setDateEnd}
+                                labelText="Дата завершения"
+                                placeholder="Дата завершения"
+                            />
+                            {/* <Input
                                 width={'50%'}
                                 isRequired={false}
                                 name={'deadlineFrom'}
@@ -210,7 +251,7 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
                                 }}
                                 placeholder={'Дата завершения'}
                                 label="Дата завершения"
-                            />
+                            /> */}
                         </div>
 
                         <Textarea
@@ -265,11 +306,6 @@ export const EditSurveyForm: FC<Props> = ({ surveyData }): ReactElement => {
                                 onClose={onCloseModalAddParticipants}
                             />
                         </PopupWithDarkOverlay>
-                        <Button
-                            styles={{ width: 'fit-content', height: '40px' }}
-                            text="Отредактировать опрос"
-                            view="default_bg"
-                        />
                     </form>
                 </FormProvider>
             </div>

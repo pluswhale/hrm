@@ -8,6 +8,7 @@ export interface Candidate {
     last_name: string;
     first_name: string;
     email: string;
+    gender: 'male' | 'female';
     phone_number: string;
     sur_name?: string;
     birthday_date?: Date;

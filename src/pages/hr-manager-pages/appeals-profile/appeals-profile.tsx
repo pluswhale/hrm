@@ -10,10 +10,12 @@ import { AppealCandidates } from 'features/appeal-candidates';
 import { fetchAppealById } from 'shared/api/appeals/thunks';
 import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { Appeal } from 'shared/types/appeal.type';
+import { useMediaQuery } from 'react-responsive';
 
 const AppealsProfile = () => {
     const { id: appealId } = useParams();
     const navigate = useNavigate();
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
     const queryParameters = {
         queryKey: 'fetchAppealById',
@@ -44,10 +46,10 @@ const AppealsProfile = () => {
         <DefaultContentWrapper>
             <div className={styles.vacancy_navigation}>
                 <HorizontalNavigation navigation={navigation} />
-                <Button onClick={onNavigateToEditAppeal} text="Редактировать" view="default_bg_white" />
+                {!isMobile && <Button onClick={onNavigateToEditAppeal} text="Редактировать" view="default_bg_white" />}
             </div>
             <AppealInfo appeal={appealByIdQuery?.data} />
-            <> {appealByIdQuery?.data && <AppealCandidates stages={appealByIdQuery?.data?.stages} />}</>
+            <> {appealByIdQuery?.data?.stages && <AppealCandidates stages={appealByIdQuery?.data?.stages || []} />}</>
         </DefaultContentWrapper>
     );
 };

@@ -7,8 +7,10 @@ import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { fetchCandidateById } from 'shared/api/candidates/thunks';
 import { useParams } from 'react-router';
 import { Candidate } from 'shared/types/candidate.type';
+import { useMediaQuery } from 'react-responsive';
 
 const EditCandidate = () => {
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const { id: candidateId } = useParams();
 
     const queryParametersForFetchCandidate = {
@@ -25,15 +27,26 @@ const EditCandidate = () => {
 
     const navigation = [
         {
-            title: 'Активные вакансии',
-            url: '/vacancies',
+            title: 'Кандидаты',
+            url: '/candidates',
         },
         {
             title: candidateName,
-            url: '/vacancies/1/1',
+            url: `candidates/${candidateId}`,
         },
         {
-            title: 'Редактирование кандидата',
+            title: 'Редактирование',
+            url: undefined,
+        },
+    ];
+
+    const navigationMobile = [
+        {
+            title: 'Кандидаты',
+            url: '/candidates',
+        },
+        {
+            title: 'Редактирование',
             url: undefined,
         },
     ];
@@ -41,7 +54,7 @@ const EditCandidate = () => {
     return (
         <DefaultContentWrapper>
             <div className={styles.vacancy_navigation}>
-                <HorizontalNavigation navigation={navigation} />
+                <HorizontalNavigation navigation={isMobile ? navigationMobile : navigation} />
             </div>
             <>{candidateQuery?.data && <EditCandidateForm candidateData={candidateQuery?.data} />}</>
         </DefaultContentWrapper>

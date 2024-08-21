@@ -19,6 +19,10 @@ import { useSelector } from 'react-redux';
 import { questionsInCreateSurveySelector } from '../../redux/selectors/create-survey';
 import { useCreateSurvey } from 'shared/api/surveys/mutations';
 import { userDataSelector } from '../../redux/selectors/auth';
+import { useMediaQuery } from 'react-responsive';
+import DatePickerComponent from 'shared/components/date-picker/date-picker';
+import { Dayjs } from 'dayjs';
+import { format } from 'date-fns';
 
 type Props = {
     formRef: any;
@@ -26,6 +30,7 @@ type Props = {
 
 export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
     const methods = useForm();
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const [surveyType, setSurveyType] = useState<Option | null>({ value: 'general', label: 'Общий' });
     const [checkedAnonymous, setCheckedAnonymous] = useState<boolean>(false);
     const [isModalAddParticipantsOpened, setIsModalAddParticipantsOpened] = useState<boolean>(false);
@@ -34,6 +39,8 @@ export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
     const questions = useSelector(questionsInCreateSurveySelector);
     const createSurveyMutation = useCreateSurvey();
     const userId = useSelector(userDataSelector)?.id;
+    const [dateStart, setDateStart] = useState<Date | null>(null);
+    const [dateEnd, setDateEnd] = useState<Date | null>(null);
 
     const queryParameters = {
         queryKey: 'fetchAllEmployees',
@@ -77,6 +84,14 @@ export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
             if (data[key] !== null && data[key] !== undefined && data[key] !== '') {
                 body[key] = data[key];
             }
+        }
+
+        if (dateStart) {
+            body.deadlineFrom = format(dateStart, 'dd.MM.yyyy');
+        }
+
+        if (dateEnd) {
+            body.deadlineTo = format(dateEnd, 'dd.MM.yyyy');
         }
 
         body.anonymous = checkedAnonymous;
@@ -126,7 +141,7 @@ export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
     return (
         <div className={styles.create_survey}>
             <div className={styles.create_survey__form_wrapper}>
-                <h2>Информация об опросе</h2>
+                <h2 className={styles.create_survey__title}>Информация об опросе</h2>
 
                 <FormProvider {...methods}>
                     <form
@@ -142,8 +157,9 @@ export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
                             label="Название опроса"
                         />
                         <div className={styles.create_survey__wrapper_imput}>
-                            <Input
-                                width={'50%'}
+                            {/* <BasicDatePicker label="Дата начала" value={dateStart} setValue={setDateStart} /> */}
+                            {/* <Input
+                                width={isMobile ? '100%' : '50%'}
                                 isRequired={true}
                                 name={'deadlineFrom'}
                                 pattern={{
@@ -152,9 +168,25 @@ export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
                                 }}
                                 placeholder={'Дата начала'}
                                 label="Дата начала"
+                            /> */}
+                            <DatePickerComponent
+                                customStyles={{ width: isMobile ? '100%' : '50%' }}
+                                isRequired={true}
+                                selectedDate={dateStart}
+                                setSelectedDate={setDateStart}
+                                labelText="Дата начала"
+                                placeholder="Дата начала"
                             />
-                            <Input
-                                width={'50%'}
+                            <DatePickerComponent
+                                customStyles={{ width: isMobile ? '100%' : '50%' }}
+                                isRequired={true}
+                                selectedDate={dateEnd}
+                                setSelectedDate={setDateEnd}
+                                labelText="Дата завершения"
+                                placeholder="Дата завершения"
+                            />
+                            {/* <Input
+                                width={isMobile ? '100%' : '50%'}
                                 isRequired={true}
                                 name={'deadlineTo'}
                                 pattern={{
@@ -163,7 +195,7 @@ export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
                                 }}
                                 placeholder={'Дата завершения'}
                                 label="Дата завершения"
-                            />
+                            /> */}
                         </div>
 
                         <Textarea
@@ -177,6 +209,7 @@ export const CreateSurveyForm: FC<Props> = ({ formRef }): ReactElement => {
                             value="top"
                             control={
                                 <Switch
+                                    sx={{ fontSize: isMobile ? '14px' : '16px' }}
                                     checked={checkedAnonymous}
                                     onChange={handleChangeAnonymousSwitch}
                                     inputProps={{ 'aria-label': 'controlled' }}
