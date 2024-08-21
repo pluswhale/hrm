@@ -1,9 +1,9 @@
 import { FC, ReactElement, useState } from 'react';
 import filterIcon from '../../assets/filter_mobile.svg';
-
-import styles from './mobile-page-header.module.scss';
 import { PopupWithDarkOverlay } from 'shared/components/portal/popup-with-dark-overlay';
 import { Search } from '@mui/icons-material';
+
+import styles from './mobile-page-header.module.scss';
 
 type Props = {
     titlePage: string;
@@ -21,11 +21,18 @@ export const MobilePageHeader: FC<Props> = ({
     onChangeSearchValue,
 }): ReactElement => {
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+    const isNeedOpenFilter = Boolean(filter?.props?.filterSet) || true;
+
     return (
         <div className={styles.mobile_page_header}>
             <div className={styles.mobile_page_header__title_wrapper}>
                 <span className={styles.mobile_page_header__title}>{titlePage}</span>
-                <img onClick={() => setIsFilterOpen(true)} src={filterIcon} alt="filter icon" />
+                <img
+                    className={!isNeedOpenFilter ? styles.mobile_page_header__filter_icon : undefined}
+                    onClick={!isNeedOpenFilter ? () => undefined : () => setIsFilterOpen(true)}
+                    src={filterIcon}
+                    alt="filter icon"
+                />
             </div>
 
             <div className={styles.mobile_page_header__input_wrapper}>

@@ -9,6 +9,7 @@ import { useMakeSeenRequest, useUpdateRequestByHRManager } from 'shared/api/requ
 import { UpdateRequestByHRManagerBody } from 'shared/api/requests/types';
 import { useSelector } from 'react-redux';
 import { userDataSelector } from '../../../redux/selectors/auth';
+import { useLocation } from 'react-router';
 
 type Props = {
     requestData: Request;
@@ -16,13 +17,14 @@ type Props = {
 
 export const SendAnswerToRequest: FC<Props> = ({ requestData }): ReactElement => {
     const userId = useSelector(userDataSelector)?.id;
+    const location = useLocation();
     const makeSeenMutation = useMakeSeenRequest();
     const updateRequestByHRManagerMutation = useUpdateRequestByHRManager();
     const [answerValue, setAnswerValue] = useState<string>('');
 
     useEffect(() => {
         return () => {
-            if (requestData?.status === 'new') {
+            if (requestData?.status === 'new' && !location.pathname.includes('employee')) {
                 makeSeenMutation.mutate(requestData?.id);
             }
         };

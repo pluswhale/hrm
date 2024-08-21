@@ -19,7 +19,6 @@ import { Request } from 'shared/types/request.type';
 import { MobilePageHeader } from 'widgets/mobile-page-header/mobile-page-header';
 
 const RequestsList = () => {
-    const isLaptop = useMediaQuery({ maxWidth: '1500px' });
     const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
     const dispatch = useAppDispatch();
     const [currentRequestObjectForModal, setCurrentRequestObjectForModal] = useState<Request>({} as Request);

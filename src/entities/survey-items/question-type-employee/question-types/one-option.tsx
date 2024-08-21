@@ -3,6 +3,7 @@ import { FC, ReactElement } from 'react';
 import styles from './question-types.module.scss';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 type Props = {
     question: any;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export const OneOption: FC<Props> = ({ question, onAnswerOptionQuestion }): ReactElement => {
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const { sort } = useParams();
 
     const disabled = sort === 'passed' ? true : false;
@@ -24,8 +26,10 @@ export const OneOption: FC<Props> = ({ question, onAnswerOptionQuestion }): Reac
                     name="radio-buttons-group"
                 >
                     {question?.options &&
-                        question.options?.map((option: any) => (
+                        question.options?.map((option: any, index: number) => (
                             <FormControlLabel
+                                key={index}
+                                sx={{ '& .MuiFormControlLabel-label': { fontSize: isMobile ? '14px' : '16px' } }}
                                 value={option?.optionName}
                                 checked={option?.checked}
                                 disabled={disabled}

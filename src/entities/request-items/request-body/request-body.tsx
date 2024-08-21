@@ -4,12 +4,19 @@ import { Request } from 'shared/types/request.type';
 
 import styles from './request-body.module.scss';
 import { formatDate } from 'shared/libs/dateFormater';
+import { useMediaQuery } from 'react-responsive';
+import editIcon from '../../../assets/Редактировать.svg';
+import { useLocation, useNavigate } from 'react-router';
 
 type Props = {
     requestData: Request;
 };
 
 export const RequestBody: FC<Props> = ({ requestData }): ReactElement => {
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const displayStatus = (status: string) => {
         let color;
         let text;
@@ -55,12 +62,19 @@ export const RequestBody: FC<Props> = ({ requestData }): ReactElement => {
         }
     };
 
+    const onNavigateToEditRequest = () => {
+        navigate(`/request/employee/create/${requestData?.id}`);
+    };
+
     return (
         <div className={styles.request_modal__container}>
             <div className={styles.request_modal__title_and_close}>
                 <span className={styles.request_modal__title}>
                     <h2 className={styles.request_modal__titles}>Информация о запросе</h2>
                     {displayStatus(requestData?.status)}
+                    {isMobile && location.pathname.includes('employee') && (
+                        <img onClick={onNavigateToEditRequest} src={editIcon} />
+                    )}
                 </span>
             </div>
             <div className={styles.request_modal__content}>

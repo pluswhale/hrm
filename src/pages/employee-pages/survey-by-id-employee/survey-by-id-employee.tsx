@@ -1,8 +1,6 @@
 import styles from './surveys-by-id-employee.module.scss';
 import { DefaultContentWrapper } from '../../../entities/default-content-wrapper/default-content-wrapper';
 import { HorizontalNavigation } from '../../../shared/components/horizontal-navigation';
-import SurveyInfo from '../../../features/survey-info/survey-info';
-import { leftColumnData, rightColumnData, SURVEY_DESCRIPTION_DATA } from './constants';
 import { SurveyDescription } from 'entities/survey-items/survey-description/survey-description';
 import { useParams } from 'react-router';
 import { fetchSurveyByIdForEmployee } from 'shared/api/surveys/thunks';

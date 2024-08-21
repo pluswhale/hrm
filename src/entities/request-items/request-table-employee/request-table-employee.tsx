@@ -5,6 +5,9 @@ import { PopupWithDarkOverlay } from '../../../shared/components/portal/popup-wi
 import { RequestModalViewEmployee } from '../request-modal-view-employee/request-modal-view-employee';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
+import { useMediaQuery } from 'react-responsive';
+import { RequestCard } from '../request-card/request-card';
+import { RequestCardMobile } from '../request-card-mobile/request-card-mobile';
 dayjs.locale('ru');
 
 const RequestTableEmployee: FC<RequestTableProps> = ({
@@ -13,61 +16,8 @@ const RequestTableEmployee: FC<RequestTableProps> = ({
     currentRequestObjectForModal,
     setCurrentRequestObjectForModal,
 }): ReactElement => {
+    const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
     const [isModalRecruitingFunnelOpened, setIsModalRecruitingFunnelOpened] = useState(false);
-
-    const formatDate = (date: string) => {
-        return dayjs(date).format('D MMMM YYYY HH:mm');
-    };
-
-    const displayStatus = (status: string) => {
-        let color;
-        let text;
-
-        switch (status) {
-            case 'new':
-                color = '$purple';
-                text = 'Новый';
-                break;
-            case 'approved':
-                color = '#81C314';
-                text = 'Одобрен';
-                break;
-            case 'rejected':
-                color = '#DD5555';
-                text = 'Отклонен';
-                break;
-            default:
-                color = '#E7D10D';
-                text = 'Просмотрен';
-        }
-
-        return (
-            <span style={{ backgroundColor: color, color: '$white' }} className={style.container__status}>
-                {text}
-            </span>
-        );
-    };
-
-    const displayType = (type: string) => {
-        switch (type) {
-            case 'meeting with management':
-                return 'Встреча с руководством';
-            case 'vacation':
-                return 'Отпуск';
-            case 'compensation':
-                return 'Компенсация';
-            case 'offer':
-                return 'Предложение';
-
-            default:
-                return 'Другое';
-        }
-    };
-
-    const onOpenModalRequest = (request: any) => {
-        setIsModalRecruitingFunnelOpened(true);
-        setCurrentRequestObjectForModal(request);
-    };
 
     const onCloseModalRequest = () => {
         setIsModalRecruitingFunnelOpened(false);
@@ -76,14 +26,20 @@ const RequestTableEmployee: FC<RequestTableProps> = ({
     return (
         <div className={style.container}>
             {requests?.map((request, index) => (
-                <React.Fragment key={request.id}>
-                    <div className={style.container__card} onClick={() => onOpenModalRequest(request)}>
-                        <span className={style.container__meeting}>{displayType(request?.type)}</span>
-                        <span className={style.container__data}>{formatDate(request.created_at)}</span>
-                        {displayStatus(request.status)}
-                    </div>
-                    {index < requests.length - 1 && <hr className={style.container__divider} />}
-                </React.Fragment>
+                <>
+                    {isMobile ? (
+                        <RequestCardMobile request={request} />
+                    ) : (
+                        <RequestCard
+                            key={request.id}
+                            request={request}
+                            index={index}
+                            requestLength={requests?.length}
+                            setIsModalRecruitingFunnelOpened={setIsModalRecruitingFunnelOpened}
+                            setCurrentRequestObjectForModal={setCurrentRequestObjectForModal}
+                        />
+                    )}
+                </>
             ))}
             <PopupWithDarkOverlay onClose={onCloseModalRequest} isOpened={isModalRecruitingFunnelOpened}>
                 <RequestModalViewEmployee

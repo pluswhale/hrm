@@ -8,6 +8,11 @@
         align-items: center;
     }
 
+    &__filter_icon {
+        filter: brightness(0) saturate(100%) invert(47%) sepia(11%) saturate(13%) hue-rotate(85deg) brightness(89%)
+            contrast(87%);
+    }
+
     &__input_wrapper {
         display: flex;
         align-items: center;

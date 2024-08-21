@@ -5,12 +5,13 @@ import { QueryParameters, useFetchData } from 'shared/hooks/useFetchData';
 import { fetchRequestById } from 'shared/api/requests/thunks';
 import { Request } from 'shared/types/request.type';
 import { HorizontalNavigation } from 'shared/components/horizontal-navigation';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { RequestBody } from 'entities/request-items/request-body/request-body';
 import { SendAnswerToRequest } from 'entities/request-items/send-answer-request/send-answer-request';
 
 const RequestById = () => {
     const { id: requestId } = useParams();
+    const location = useLocation();
 
     const queryParameters = {
         queryKey: 'fetchRequestById',
@@ -55,7 +56,9 @@ const RequestById = () => {
             <div className={style.container}>
                 <HorizontalNavigation navigation={navigation} />
                 {requestByIdQuery?.data && <RequestBody requestData={requestByIdQuery?.data} />}
-                {requestByIdQuery?.data && <SendAnswerToRequest requestData={requestByIdQuery?.data} />}
+                {requestByIdQuery?.data && !location.pathname.includes('employee') && (
+                    <SendAnswerToRequest requestData={requestByIdQuery?.data} />
+                )}
             </div>
         </DefaultContentWrapper>
     );

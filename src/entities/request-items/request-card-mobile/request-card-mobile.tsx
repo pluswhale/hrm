@@ -3,7 +3,7 @@ import { FC, ReactElement } from 'react';
 import { Request } from 'shared/types/request.type';
 import fakeAvatar from '../../../assets/Ellipse 1.svg';
 import style from './request-card-mobile.module.scss';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 type Props = {
     request: Request;
@@ -11,6 +11,7 @@ type Props = {
 
 export const RequestCardMobile: FC<Props> = ({ request }): ReactElement => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const displayStatus = (status: string) => {
         let color;
@@ -58,7 +59,11 @@ export const RequestCardMobile: FC<Props> = ({ request }): ReactElement => {
     };
 
     const onNavigateToMobileRequest = () => {
-        navigate(`/request/${request.id}`);
+        if (location.pathname.includes('employee')) {
+            navigate(`/request/employee/${request.id}`);
+        } else {
+            navigate(`/request/${request.id}`);
+        }
     };
 
     return (
