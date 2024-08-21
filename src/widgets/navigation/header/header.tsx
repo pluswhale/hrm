@@ -29,7 +29,7 @@ export const Header = ({ toggleSidebar, isMobile, isOpen, closeSidebar }: Header
             type: userData?.role === 'HRManager' ? 'hrManager' : 'employee',
             id: userData?.id,
         },
-        // refetchInterval: 1000,
+        refetchInterval: 1000,
     } as QueryParameters<any>;
 
     const notificationsQuery = useFetchData(queryParams);
